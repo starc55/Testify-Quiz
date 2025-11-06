@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import WelcomeScreen from './components/WelcomeScreen';
 import RulesModal from './components/RulesModal';
@@ -34,6 +35,7 @@ export default function App() {
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<number | null>(null);
   const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
+  const [resultsSubmitted, setResultsSubmitted] = useState<boolean>(false);
 
   const startQuiz = useCallback(() => {
     setShuffledQuestions(shuffleArray(QUIZ_QUESTIONS));
@@ -41,6 +43,7 @@ export default function App() {
     setCurrentQuestionIndex(0);
     setScore(0);
     setUserAnswers([]);
+    setResultsSubmitted(false); // Reset submission status for new quiz
     setGameState('quiz');
     setIsQuizActive(true);
   }, []);
@@ -93,7 +96,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (gameState === 'completed') {
+    // The submission should only be attempted once when the quiz is completed.
+    if (gameState === 'completed' && !resultsSubmitted) {
       const submitResults = async () => {
         // This function sends the quiz results to a form handling service, which then emails them.
         const accessKey = '4938d15a-c907-4b5b-9b76-9229d8a0f47c'; 
@@ -138,13 +142,12 @@ export default function App() {
           console.error('An error occurred during submission:', error);
         }
       };
-
-      // Ensure submission only happens once and with data
-      if (userAnswers.length > 0 || score === 0) {
-          submitResults();
-      }
+      
+      // Set the flag to true immediately to prevent re-submission attempts
+      setResultsSubmitted(true);
+      submitResults();
     }
-  }, [gameState, studentName, score, userAnswers, shuffledQuestions.length]);
+  }, [gameState, studentName, score, userAnswers, shuffledQuestions.length, resultsSubmitted]);
 
 
   useEffect(() => {

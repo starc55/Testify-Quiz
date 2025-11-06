@@ -165,9 +165,16 @@ export default function App() {
     return () => clearInterval(timerId);
   }, [isQuizActive, timeLeft, finishQuiz, isPaused]);
 
-  const handleAnswer = useCallback((selectedOption: string) => {
+  const handleAnswer = useCallback((userAnswer: string) => {
     const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    const isCorrect = currentQuestion.correctAnswer === selectedOption;
+    const processedUserAnswer = userAnswer.trim().toLowerCase();
+    let isCorrect = false;
+
+    if (Array.isArray(currentQuestion.correctAnswer)) {
+      isCorrect = currentQuestion.correctAnswer.map(ans => ans.toLowerCase()).includes(processedUserAnswer);
+    } else {
+      isCorrect = processedUserAnswer === (currentQuestion.correctAnswer as string).toLowerCase();
+    }
     
     if (isCorrect) {
       setScore(prevScore => prevScore + 1);
@@ -177,8 +184,10 @@ export default function App() {
       ...prevAnswers,
       {
         question: currentQuestion.question,
-        selectedAnswer: selectedOption,
-        correctAnswer: currentQuestion.correctAnswer,
+        selectedAnswer: userAnswer,
+        correctAnswer: Array.isArray(currentQuestion.correctAnswer) 
+            ? currentQuestion.correctAnswer.join(' / ') 
+            : currentQuestion.correctAnswer,
         isCorrect: isCorrect,
       },
     ]);

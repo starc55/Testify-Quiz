@@ -1,0 +1,5 @@
+{
+  "name": "Testify Quiz",
+  "description": "A visually stunning and interactive quiz application designed to test knowledge with a timed, animated interface. Features include a pre-quiz rules modal, one-by-one question display, and a sleek, modern UI with blur and gradient effects.",
+  "requestFramePermissions": []
+}

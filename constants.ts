@@ -1,7 +1,6 @@
 import type { QuizQuestion } from './types';
 
-// 30 questions * 30 seconds per question = 900 seconds
-export const QUIZ_DURATION_SECONDS = 900; 
+export const QUIZ_DURATION_SECONDS = 30 * 30; // 900 seconds (30s per question)
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
@@ -46,7 +45,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     question: "Present Continuous zamonining yasalish formulasi qanday?",
-    options: ["Subject + V1", "Subject + to be + ing", "Subject + V2", "Subject + have/has + V3"],
+    options: ["Subject + V1", "Subject + to be + Ving", "Subject + V2", "Subject + have/has + V3"],
     correctAnswer: "Subject + to be + Ving"
   },
   {

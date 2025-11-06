@@ -3,8 +3,9 @@ import WelcomeScreen from './components/WelcomeScreen';
 import RulesModal from './components/RulesModal';
 import QuizScreen from './components/QuizScreen';
 import CompletionScreen from './components/CompletionScreen';
+import PauseModal from './components/PauseModal';
 import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS } from './constants';
-import type { GameState } from './types';
+import type { GameState, QuizQuestion } from './types';
 
 interface AnswerRecord {
   question: string;
@@ -12,6 +13,15 @@ interface AnswerRecord {
   correctAnswer: string;
   isCorrect: boolean;
 }
+
+const shuffleArray = (array: any[]) => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
 
 export default function App() {
   const [gameState, setGameState] = useState<GameState>('welcome');
@@ -21,8 +31,16 @@ export default function App() {
   const [timeLeft, setTimeLeft] = useState<number>(QUIZ_DURATION_SECONDS);
   const [isQuizActive, setIsQuizActive] = useState<boolean>(false);
   const [userAnswers, setUserAnswers] = useState<AnswerRecord[]>([]);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
 
   const startQuiz = useCallback(() => {
+    setShuffledQuestions(shuffleArray(QUIZ_QUESTIONS));
+    setTimeLeft(QUIZ_DURATION_SECONDS);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setUserAnswers([]);
     setGameState('quiz');
     setIsQuizActive(true);
   }, []);
@@ -40,6 +58,41 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const handleBlur = () => {
+      // Pause only if the quiz is active and not already paused/completed
+      if (gameState === 'quiz' && !isPaused) {
+        setIsPaused(true);
+      }
+    };
+
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      window.removeEventListener('blur', handleBlur);
+    };
+  }, [gameState, isPaused]);
+
+  useEffect(() => {
+    if (countdown === null) return;
+
+    if (countdown === 0) {
+      setIsPaused(false);
+      setCountdown(null);
+      return;
+    }
+
+    const timerId = setTimeout(() => {
+      setCountdown(prev => (prev !== null ? prev - 1 : null));
+    }, 1000);
+
+    return () => clearTimeout(timerId);
+  }, [countdown]);
+  
+  const handleResumeRequest = useCallback(() => {
+    setCountdown(3);
+  }, []);
+
+  useEffect(() => {
     if (gameState === 'completed') {
       const submitResults = async () => {
         // This function sends the quiz results to a form handling service, which then emails them.
@@ -53,14 +106,14 @@ export default function App() {
         )).join('\n\n----------------------------------------\n\n');
 
         const emailBody = `Student Name: ${studentName}\n` +
-                          `Final Score: ${score} / ${QUIZ_QUESTIONS.length}\n\n` +
+                          `Final Score: ${score} / ${shuffledQuestions.length}\n\n` +
                           `--- ANSWERS ---\n\n` +
                           detailedReport;
 
         const formData = new FormData();
         formData.append("access_key", accessKey);
         formData.append("student_name", studentName);
-        formData.append("score", `${score} / ${QUIZ_QUESTIONS.length}`);
+        formData.append("score", `${score} / ${shuffledQuestions.length}`);
         formData.append("subject", `New Quiz Submission from ${studentName}`);
         formData.append("from_name", "Testify Quiz");
         formData.append("email_to", "orziyevogabek67@gmail.com");
@@ -91,11 +144,11 @@ export default function App() {
           submitResults();
       }
     }
-  }, [gameState, studentName, score, userAnswers]);
+  }, [gameState, studentName, score, userAnswers, shuffledQuestions.length]);
 
 
   useEffect(() => {
-    if (!isQuizActive) return;
+    if (!isQuizActive || isPaused) return;
 
     if (timeLeft === 0) {
       finishQuiz();
@@ -107,10 +160,10 @@ export default function App() {
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, [isQuizActive, timeLeft, finishQuiz]);
+  }, [isQuizActive, timeLeft, finishQuiz, isPaused]);
 
   const handleAnswer = useCallback((selectedOption: string) => {
-    const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
+    const currentQuestion = shuffledQuestions[currentQuestionIndex];
     const isCorrect = currentQuestion.correctAnswer === selectedOption;
     
     if (isCorrect) {
@@ -127,13 +180,13 @@ export default function App() {
       },
     ]);
 
-    const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
+    const isLastQuestion = currentQuestionIndex === shuffledQuestions.length - 1;
     if (isLastQuestion) {
       finishQuiz();
     } else {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     }
-  }, [currentQuestionIndex, finishQuiz]);
+  }, [currentQuestionIndex, finishQuiz, shuffledQuestions]);
 
   const renderContent = () => {
     switch (gameState) {
@@ -142,13 +195,15 @@ export default function App() {
       case 'rules':
         return <RulesModal onStartQuiz={startQuiz} />;
       case 'quiz':
+        if (shuffledQuestions.length === 0) return null;
         return (
           <QuizScreen
-            question={QUIZ_QUESTIONS[currentQuestionIndex]}
+            question={shuffledQuestions[currentQuestionIndex]}
             questionNumber={currentQuestionIndex + 1}
-            totalQuestions={QUIZ_QUESTIONS.length}
+            totalQuestions={shuffledQuestions.length}
             onAnswer={handleAnswer}
             timeLeft={timeLeft}
+            isPaused={isPaused}
           />
         );
       case 'completed':
@@ -168,6 +223,8 @@ export default function App() {
       <div className="z-10 w-full max-w-2xl">
         {renderContent()}
       </div>
+
+      {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
 
       <style>{`
         .animate-blob {

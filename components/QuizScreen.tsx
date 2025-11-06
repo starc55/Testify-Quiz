@@ -8,6 +8,7 @@ interface QuizScreenProps {
   totalQuestions: number;
   onAnswer: (selectedOption: string) => void;
   timeLeft: number;
+  isPaused: boolean;
 }
 
 const QuizScreen: React.FC<QuizScreenProps> = ({
@@ -16,6 +17,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   totalQuestions,
   onAnswer,
   timeLeft,
+  isPaused,
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -54,7 +56,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   };
 
   const handleSelect = (option: string) => {
-    if (selected) return;
+    if (selected || isPaused) return;
     setSelected(option);
 
     const isCorrect = option === question.correctAnswer;
@@ -86,7 +88,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const progressPercentage = (questionNumber / totalQuestions) * 100;
 
   return (
-    <div className={`p-6 md:p-8 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg text-white transition-opacity duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+    <div className={`p-6 md:p-8 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg text-white transition-all duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'} ${isPaused ? 'filter blur-sm pointer-events-none' : ''}`}>
       <div className="flex justify-between items-center mb-4">
         <p className="text-gray-300 font-medium">
           Savol {questionNumber} / {totalQuestions}
@@ -118,7 +120,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           <button
             key={option}
             onClick={() => handleSelect(option)}
-            disabled={!!selected}
+            disabled={!!selected || isPaused}
             role="radio"
             aria-checked={selected === option}
             className={`p-4 rounded-lg border text-left font-semibold transition-all duration-300 transform hover:scale-105 disabled:transform-none ${getOptionClasses(option)}`}

@@ -1,4 +1,3 @@
-
 export type GameState = 'welcome' | 'rules' | 'quiz' | 'completed';
 
 export interface QuizQuestion {

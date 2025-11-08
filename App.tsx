@@ -1,10 +1,11 @@
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import WelcomeScreen from './components/WelcomeScreen';
 import RulesModal from './components/RulesModal';
 import QuizScreen from './components/QuizScreen';
 import CompletionScreen from './components/CompletionScreen';
 import PauseModal from './components/PauseModal';
+import VolumeControl from './components/VolumeControl';
 import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS } from './constants';
 import type { GameState, QuizQuestion } from './types';
 
@@ -37,13 +38,26 @@ export default function App() {
   const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
   const [resultsSubmitted, setResultsSubmitted] = useState<boolean>(false);
 
+  const [volume, setVolume] = useState<number>(0.2);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audioElement = document.getElementById('background-music') as HTMLAudioElement;
+    if (audioElement) {
+      audioRef.current = audioElement;
+      audioRef.current.volume = volume;
+      audioRef.current.muted = isMuted;
+    }
+  }, []);
+
   const startQuiz = useCallback(() => {
     setShuffledQuestions(shuffleArray(QUIZ_QUESTIONS));
     setTimeLeft(QUIZ_DURATION_SECONDS);
     setCurrentQuestionIndex(0);
     setScore(0);
     setUserAnswers([]);
-    setResultsSubmitted(false); // Reset submission status for new quiz
+    setResultsSubmitted(false);
     setGameState('quiz');
     setIsQuizActive(true);
   }, []);
@@ -52,6 +66,11 @@ export default function App() {
     if (name.trim()) {
       setStudentName(name.trim());
       setGameState('rules');
+      if (audioRef.current && audioRef.current.paused) {
+        audioRef.current.play().catch(error => {
+          console.warn("Background music autoplay was prevented by the browser.", error);
+        });
+      }
     }
   }, []);
 
@@ -62,7 +81,6 @@ export default function App() {
 
   useEffect(() => {
     const handleBlur = () => {
-      // Pause only if the quiz is active and not already paused/completed
       if (gameState === 'quiz' && !isPaused) {
         setIsPaused(true);
       }
@@ -96,10 +114,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // The submission should only be attempted once when the quiz is completed.
     if (gameState === 'completed' && !resultsSubmitted) {
       const submitResults = async () => {
-        // This function sends the quiz results to a form handling service, which then emails them.
         const accessKey = '4938d15a-c907-4b5b-9b76-9229d8a0f47c'; 
         const submissionEndpoint = 'https://api.web3forms.com/submit';
 
@@ -129,21 +145,17 @@ export default function App() {
             method: 'POST',
             body: formData,
           });
-
           const data = await response.json();
-
           if (data.success) {
             console.log('Results submitted successfully!');
           } else {
             console.error('Submission failed:', data.message);
-            // In a real app, you might want to show an error message to the user.
           }
         } catch (error) {
           console.error('An error occurred during submission:', error);
         }
       };
       
-      // Set the flag to true immediately to prevent re-submission attempts
       setResultsSubmitted(true);
       submitResults();
     }
@@ -200,6 +212,27 @@ export default function App() {
     }
   }, [currentQuestionIndex, finishQuiz, shuffledQuestions]);
 
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume);
+    const newMutedState = newVolume === 0;
+    if (isMuted !== newMutedState) {
+      setIsMuted(newMutedState);
+    }
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+      audioRef.current.muted = newMutedState;
+    }
+  };
+
+  const handleMuteToggle = () => {
+    const newMutedState = !isMuted;
+    setIsMuted(newMutedState);
+    if (audioRef.current) {
+      audioRef.current.muted = newMutedState;
+    }
+  };
+
   const renderContent = () => {
     switch (gameState) {
       case 'welcome':
@@ -237,6 +270,13 @@ export default function App() {
       </div>
 
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
+
+      <VolumeControl
+        volume={volume}
+        isMuted={isMuted}
+        onVolumeChange={handleVolumeChange}
+        onMuteToggle={handleMuteToggle}
+      />
 
       <style>{`
         .animate-blob {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import HighScores from './HighScores';
-import type { HighScore, ThemeName } from '../types';
+import type { ThemeName } from '../types';
 import { THEMES } from '../constants';
 
 interface WelcomeScreenProps {
@@ -12,17 +11,6 @@ interface WelcomeScreenProps {
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentTheme, onThemeChange }) => {
   const [name, setName] = useState('');
   const [isExiting, setIsExiting] = useState(false);
-  const [highScores, setHighScores] = useState<HighScore[]>([]);
-
-  useEffect(() => {
-    try {
-      const savedScores = JSON.parse(localStorage.getItem('quizHighScores') || '[]');
-      setHighScores(savedScores);
-    } catch (error) {
-      console.error("Failed to load high scores:", error);
-      setHighScores([]);
-    }
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +51,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
         </form>
       </div>
       
-      <div className="p-6 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg mb-6">
+      <div className="p-6 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg">
         <h3 className="text-lg font-semibold mb-4 text-center text-gray-200">Mavzuni tanlang</h3>
         <div className="flex justify-center items-center gap-4">
           {Object.values(THEMES).map((theme) => (
@@ -76,8 +64,6 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
           ))}
         </div>
       </div>
-
-      <HighScores scores={highScores} />
 
        <style>{`
         @keyframes fade-in {

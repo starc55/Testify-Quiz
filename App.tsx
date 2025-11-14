@@ -7,7 +7,7 @@ import CompletionScreen from './components/CompletionScreen';
 import PauseModal from './components/PauseModal';
 import VocabularyScreen from './components/VocabularyScreen';
 import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS, THEMES } from './constants';
-import type { GameState, QuizQuestion, HighScore, ThemeName } from './types';
+import type { GameState, QuizQuestion, ThemeName } from './types';
 
 interface AnswerRecord {
   question: string;
@@ -86,6 +86,7 @@ export default function App() {
     setIsQuizActive(false);
     setGameState('completed');
   }, []);
+  
 
   useEffect(() => {
     const handleBlur = () => {
@@ -123,27 +124,6 @@ export default function App() {
 
   useEffect(() => {
     if (gameState === 'completed' && !resultsSubmitted) {
-      const saveHighScore = () => {
-        try {
-          const highScores: HighScore[] = JSON.parse(localStorage.getItem('quizHighScores') || '[]');
-          
-          const newScoreEntry: HighScore = {
-            name: studentName,
-            score: score,
-          };
-
-          const updatedScores = [...highScores, newScoreEntry]
-            .sort((a, b) => b.score - a.score) // Sort descending by score
-            .slice(0, 5); // Keep only top 5
-
-          localStorage.setItem('quizHighScores', JSON.stringify(updatedScores));
-        } catch (error) {
-          console.error("Failed to save high score:", error);
-        }
-      };
-
-      saveHighScore();
-
       const submitResults = async () => {
         const accessKey = '4938d15a-c907-4b5b-9b76-9229d8a0f47c'; 
         const submissionEndpoint = 'https://api.web3forms.com/submit';
@@ -265,7 +245,7 @@ export default function App() {
           />
         );
       case 'completed':
-        return <CompletionScreen name={studentName} score={score} totalQuestions={shuffledQuestions.length} />;
+        return <CompletionScreen name={studentName} />;
       default:
         return <WelcomeScreen onNameSubmit={handleNameSubmit} currentTheme={theme} onThemeChange={handleThemeChange} />;
     }

@@ -7,14 +7,15 @@ export interface QuizQuestion {
   correctAnswer: string | string[];
 }
 
-export interface HighScore {
-  name: string;
-  score: number;
-}
-
 export interface VocabularyItem {
   term: string;
   definition: string;
+}
+
+// FIX: Added missing HighScore interface.
+export interface HighScore {
+  name: string;
+  score: number;
 }
 
 export type ThemeName = 'default' | 'ocean' | 'sunset' | 'forest';

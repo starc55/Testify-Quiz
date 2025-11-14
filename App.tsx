@@ -5,9 +5,9 @@ import RulesModal from './components/RulesModal';
 import QuizScreen from './components/QuizScreen';
 import CompletionScreen from './components/CompletionScreen';
 import PauseModal from './components/PauseModal';
-import VolumeControl from './components/VolumeControl';
-import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS } from './constants';
-import type { GameState, QuizQuestion } from './types';
+import VocabularyScreen from './components/VocabularyScreen';
+import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS, THEMES } from './constants';
+import type { GameState, QuizQuestion, HighScore, ThemeName } from './types';
 
 interface AnswerRecord {
   question: string;
@@ -37,18 +37,31 @@ export default function App() {
   const [countdown, setCountdown] = useState<number | null>(null);
   const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
   const [resultsSubmitted, setResultsSubmitted] = useState<boolean>(false);
-
-  const [volume, setVolume] = useState<number>(0.2);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  const [theme, setTheme] = useState<ThemeName>('default');
 
   useEffect(() => {
-    const audioElement = document.getElementById('background-music') as HTMLAudioElement;
-    if (audioElement) {
-      audioRef.current = audioElement;
-      audioRef.current.volume = volume;
-      audioRef.current.muted = isMuted;
+    try {
+      const savedTheme = localStorage.getItem('quizTheme') as ThemeName | null;
+      if (savedTheme && THEMES[savedTheme]) {
+        setTheme(savedTheme);
+      }
+    } catch (error) {
+      console.error("Failed to load theme:", error);
     }
+  }, []);
+
+  const handleThemeChange = useCallback((newTheme: ThemeName) => {
+    setTheme(newTheme);
+    try {
+      localStorage.setItem('quizTheme', newTheme);
+    } catch (error) {
+      console.error("Failed to save theme:", error);
+    }
+  }, []);
+
+  const handleAcceptRules = useCallback(() => {
+    setGameState('vocabulary');
   }, []);
 
   const startQuiz = useCallback(() => {
@@ -66,11 +79,6 @@ export default function App() {
     if (name.trim()) {
       setStudentName(name.trim());
       setGameState('rules');
-      if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.play().catch(error => {
-          console.warn("Background music autoplay was prevented by the browser.", error);
-        });
-      }
     }
   }, []);
 
@@ -115,6 +123,27 @@ export default function App() {
 
   useEffect(() => {
     if (gameState === 'completed' && !resultsSubmitted) {
+      const saveHighScore = () => {
+        try {
+          const highScores: HighScore[] = JSON.parse(localStorage.getItem('quizHighScores') || '[]');
+          
+          const newScoreEntry: HighScore = {
+            name: studentName,
+            score: score,
+          };
+
+          const updatedScores = [...highScores, newScoreEntry]
+            .sort((a, b) => b.score - a.score) // Sort descending by score
+            .slice(0, 5); // Keep only top 5
+
+          localStorage.setItem('quizHighScores', JSON.stringify(updatedScores));
+        } catch (error) {
+          console.error("Failed to save high score:", error);
+        }
+      };
+
+      saveHighScore();
+
       const submitResults = async () => {
         const accessKey = '4938d15a-c907-4b5b-9b76-9229d8a0f47c'; 
         const submissionEndpoint = 'https://api.web3forms.com/submit';
@@ -212,33 +241,16 @@ export default function App() {
     }
   }, [currentQuestionIndex, finishQuiz, shuffledQuestions]);
 
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume);
-    const newMutedState = newVolume === 0;
-    if (isMuted !== newMutedState) {
-      setIsMuted(newMutedState);
-    }
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-      audioRef.current.muted = newMutedState;
-    }
-  };
-
-  const handleMuteToggle = () => {
-    const newMutedState = !isMuted;
-    setIsMuted(newMutedState);
-    if (audioRef.current) {
-      audioRef.current.muted = newMutedState;
-    }
-  };
+  const currentThemeData = THEMES[theme];
 
   const renderContent = () => {
     switch (gameState) {
       case 'welcome':
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
+        return <WelcomeScreen onNameSubmit={handleNameSubmit} currentTheme={theme} onThemeChange={handleThemeChange} />;
       case 'rules':
-        return <RulesModal onStartQuiz={startQuiz} />;
+        return <RulesModal onAccept={handleAcceptRules} />;
+      case 'vocabulary':
+        return <VocabularyScreen onStartQuiz={startQuiz} />;
       case 'quiz':
         if (shuffledQuestions.length === 0) return null;
         return (
@@ -249,34 +261,28 @@ export default function App() {
             onAnswer={handleAnswer}
             timeLeft={timeLeft}
             isPaused={isPaused}
+            theme={currentThemeData}
           />
         );
       case 'completed':
-        return <CompletionScreen name={studentName} />;
+        return <CompletionScreen name={studentName} score={score} totalQuestions={shuffledQuestions.length} />;
       default:
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
+        return <WelcomeScreen onNameSubmit={handleNameSubmit} currentTheme={theme} onThemeChange={handleThemeChange} />;
     }
   };
 
   return (
     <main className="relative min-h-screen w-full flex items-center justify-center bg-gray-900 overflow-hidden p-4">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 opacity-30"></div>
-      <div className="absolute top-0 left-0 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      <div className={`absolute inset-0 bg-gradient-to-br ${currentThemeData.mainGradient} opacity-30 transition-all duration-500`}></div>
+      <div className={`absolute top-0 left-0 w-72 h-72 ${currentThemeData.blob1} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob transition-all duration-500`}></div>
+      <div className={`absolute top-0 right-0 w-72 h-72 ${currentThemeData.blob2} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 transition-all duration-500`}></div>
+      <div className={`absolute bottom-0 left-1/4 w-72 h-72 ${currentThemeData.blob3} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 transition-all duration-500`}></div>
       
       <div className="z-10 w-full max-w-2xl">
         {renderContent()}
       </div>
 
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
-
-      <VolumeControl
-        volume={volume}
-        isMuted={isMuted}
-        onVolumeChange={handleVolumeChange}
-        onMuteToggle={handleMuteToggle}
-      />
 
       <style>{`
         .animate-blob {

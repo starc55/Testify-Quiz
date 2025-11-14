@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface RulesModalProps {
-  onStartQuiz: () => void;
+  onAccept: () => void;
 }
 
-const RulesModal: React.FC<RulesModalProps> = ({ onStartQuiz }) => {
+const RulesModal: React.FC<RulesModalProps> = ({ onAccept }) => {
+  const [isExiting, setIsExiting] = useState(false);
+
   const playStartSound = () => {
     // For a real app, you might use: new Audio('/sounds/start.mp3').play();
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -28,12 +30,15 @@ const RulesModal: React.FC<RulesModalProps> = ({ onStartQuiz }) => {
 
   const handleStart = () => {
     playStartSound();
-    onStartQuiz();
+    setIsExiting(true);
+    setTimeout(() => {
+        onAccept();
+    }, 500);
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="w-full max-w-lg bg-black/30 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl text-white p-8 transform transition-all duration-500 animate-fade-in-up">
+    <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-500 ${isExiting ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`w-full max-w-lg bg-black/30 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl text-white p-8 transform transition-all duration-500 ${isExiting ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}>
         <h2 className="text-3xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-400">
           Test Qoidalari
         </h2>
@@ -57,15 +62,28 @@ const RulesModal: React.FC<RulesModalProps> = ({ onStartQuiz }) => {
         @keyframes fade-in-up {
           0% {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(20px) scale(0.98);
           }
           100% {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
           }
         }
         .animate-fade-in-up {
           animation: fade-in-up 0.5s ease-out forwards;
+        }
+        @keyframes fade-out-down {
+          0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+          }
+        }
+        .animate-fade-out-down {
+          animation: fade-out-down 0.5s ease-out forwards;
         }
       `}</style>
     </div>

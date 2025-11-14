@@ -1,6 +1,6 @@
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 30 * 30; // 900 seconds (30s per question for 30 questions)
+export const QUIZ_DURATION_SECONDS = 25 * 60; // 1500 seconds (25 minutes)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
   {

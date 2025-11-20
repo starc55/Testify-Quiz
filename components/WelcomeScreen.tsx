@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import type { ThemeName } from '../types';
 import { THEMES } from '../constants';
@@ -43,7 +44,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
 
           <button
             type="submit"
-            className={`${currentThemeData.button} disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105`}
+            className={`${currentThemeData.button} disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95`}
             disabled={!name.trim()}
           >
             Boshladik!
@@ -58,7 +59,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
             <button
               key={theme.id}
               onClick={() => onThemeChange(theme.id)}
-              className={`w-12 h-12 rounded-full transition-all duration-300 ${theme.preview} border-2 ${currentTheme === theme.id ? 'border-white scale-110' : 'border-transparent hover:scale-110'}`}
+              className={`w-12 h-12 rounded-full transition-all duration-300 ${theme.preview} border-2 ${currentTheme === theme.id ? 'border-white scale-110 shadow-xl' : 'border-transparent hover:scale-110 opacity-70 hover:opacity-100'}`}
               aria-label={`Select ${theme.name} theme`}
             />
           ))}
@@ -71,7 +72,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
           to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
-          animation: fade-in 0.5s ease-out forwards;
+          animation: fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
       `}</style>
     </div>

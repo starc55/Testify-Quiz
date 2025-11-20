@@ -14,10 +14,10 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name }) => {
           <path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
       </div>
-      <h1 className="text-4xl font-bold mb-4 animate-text-fade-in">
+      <h1 className="text-4xl font-bold mb-4 animate-text-fade-in" style={{ animationDelay: '1.2s' }}>
         Tabriklaymiz, {name}!
       </h1>
-      <p className="text-lg text-gray-300 mb-8 animate-text-fade-in">
+      <p className="text-lg text-gray-300 mb-8 animate-text-fade-in" style={{ animationDelay: '1.4s' }}>
         Test muvaffaqiyatli yakunlandi va javoblaringiz qabul qilindi.
       </p>
 
@@ -29,7 +29,7 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name }) => {
           margin: 0 auto;
           transform: scale(0.8);
           opacity: 0;
-          animation: scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+          animation: scale-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
         }
 
         .checkmark__circle {
@@ -39,7 +39,7 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name }) => {
           stroke-miterlimit: 10;
           stroke: #4ade80;
           fill: transparent;
-          animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+          animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
         }
 
         .checkmark__check {
@@ -47,23 +47,16 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name }) => {
           stroke-dasharray: 48;
           stroke-dashoffset: 48;
           stroke-width: 3;
-          animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1.2s forwards;
+          animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 1.3s forwards;
         }
 
         .animate-container-fade-in-up {
-          animation: container-fade-in-up 0.6s ease-out forwards;
+          animation: container-fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
         
         .animate-text-fade-in {
           opacity: 0;
-          animation: text-fade-in 0.5s ease-out forwards;
-        }
-
-        h1.animate-text-fade-in {
-          animation-delay: 1.5s;
-        }
-        p.animate-text-fade-in {
-          animation-delay: 1.7s;
+          animation: text-fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
         @keyframes stroke {

@@ -16,7 +16,7 @@ interface AnswerRecord {
   isCorrect: boolean;
 }
 
-const shuffleArray = (array: any[]) => {
+const shuffleArray = <T,>(array: T[]): T[] => {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -65,7 +65,20 @@ export default function App() {
   }, []);
 
   const startQuiz = useCallback(() => {
-    setShuffledQuestions(shuffleArray(QUIZ_QUESTIONS));
+    // Randomize options for each question so correct answer isn't always first
+    const questionsWithRandomizedOptions = QUIZ_QUESTIONS.map(q => {
+      if (q.type === 'multiple-choice' && q.options) {
+        return {
+          ...q,
+          options: shuffleArray(q.options)
+        };
+      }
+      return q;
+    });
+
+    // Shuffle the order of the questions themselves
+    setShuffledQuestions(shuffleArray(questionsWithRandomizedOptions));
+    
     setTimeLeft(QUIZ_DURATION_SECONDS);
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -253,10 +266,10 @@ export default function App() {
 
   return (
     <main className="relative min-h-screen w-full flex items-center justify-center bg-gray-900 overflow-hidden p-4">
-      <div className={`absolute inset-0 bg-gradient-to-br ${currentThemeData.mainGradient} opacity-30 transition-all duration-500`}></div>
-      <div className={`absolute top-0 left-0 w-72 h-72 ${currentThemeData.blob1} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob transition-all duration-500`}></div>
-      <div className={`absolute top-0 right-0 w-72 h-72 ${currentThemeData.blob2} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 transition-all duration-500`}></div>
-      <div className={`absolute bottom-0 left-1/4 w-72 h-72 ${currentThemeData.blob3} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 transition-all duration-500`}></div>
+      <div className={`absolute inset-0 bg-gradient-to-br ${currentThemeData.mainGradient} opacity-30 transition-all duration-1000 ease-in-out`}></div>
+      <div className={`absolute top-0 left-0 w-72 h-72 ${currentThemeData.blob1} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob will-change-transform transition-colors duration-1000`}></div>
+      <div className={`absolute top-0 right-0 w-72 h-72 ${currentThemeData.blob2} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 will-change-transform transition-colors duration-1000`}></div>
+      <div className={`absolute bottom-0 left-1/4 w-72 h-72 ${currentThemeData.blob3} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 will-change-transform transition-colors duration-1000`}></div>
       
       <div className="z-10 w-full max-w-2xl">
         {renderContent()}
@@ -266,13 +279,16 @@ export default function App() {
 
       <style>{`
         .animate-blob {
-          animation: blob 7s infinite;
+          animation: blob 10s infinite;
         }
         .animation-delay-2000 {
           animation-delay: 2s;
         }
         .animation-delay-4000 {
           animation-delay: 4s;
+        }
+        .will-change-transform {
+          will-change: transform;
         }
         @keyframes blob {
           0% {

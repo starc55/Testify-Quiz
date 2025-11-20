@@ -1,47 +1,61 @@
+
+
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
 export const QUIZ_DURATION_SECONDS = 25 * 60; // 1500 seconds (25 minutes)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
   {
-    term: "Book",
-    definition: "Kitob. Misol: 'He is reading a book.' (U kitob o'qiyapti)."
+    term: "Auxiliary Verb",
+    definition: "Yordamchi fe'l. So'roq va inkor gaplarni yasashda hamda zamonlarni hosil qilishda ishlatiladi (do, have, be)."
   },
   {
-    term: "Teacher",
-    definition: "O'qituvchi. Misol: 'My mother is a teacher.' (Mening onam o'qituvchi)."
+    term: "Modal Verb",
+    definition: "Modal fe'l. Ish-harakatga munosabat (imkoniyat, majburiyat, zaruriyat) bildiradi."
   },
   {
-    term: "School",
-    definition: "Maktab. Misol: 'I go to school.' (Men maktabga boraman)."
+    term: "Bare Infinitive",
+    definition: "\"To\" yuklamasisiz keladigan fe'lning o'zak shakli (masalan: go, eat)."
   },
   {
-    term: "Child / Children",
-    definition: "Bola / Bolalar. 'Child' so'zi noto'g'ri ko'plik shakliga ega ('children' bo'ladi)."
+    term: "State Verbs",
+    definition: "Holat fe'llari. Odatda davomiy zamonlarda (Continuous) ishlatilmaydi (know, like, understand)."
   },
   {
-    term: "Reading",
-    definition: "O'qish (jarayon). 'Read' (o'qimoq) fe'lining davomli zamon shakli."
+    term: "Arrangements",
+    definition: "Kelajakdagi rejalashtirilgan va kelishilgan ish-harakatlar."
   },
   {
-    term: "Go",
-    definition: "Bormoq. Misol: 'I go to school every day.' (Men har kuni maktabga boraman)."
+    term: "Prediction",
+    definition: "Bashorat. Kelajakda sodir bo'lishi mumkin bo'lgan voqea haqida taxmin."
   },
   {
-    term: "Play",
-    definition: "O'ynamoq. Misol: 'They are playing football.' (Ular futbol o'ynashyapti)."
+    term: "Obligation",
+    definition: "Majburiyat. Biror ishni bajarish shartligi."
   },
   {
-    term: "Work",
-    definition: "Ishlamoq. Misol: 'She is working now.' (U hozir ishlayapti)."
+    term: "Prohibition",
+    definition: "Taqiq. Biror ishni qilish mumkin emasligi."
   },
   {
-    term: "Now / Right now",
-    definition: "Hozir / Ayni hozir. Ko'pincha Present Continuous zamoni bilan ishlatiladigan signal so'z."
+    term: "Past Participle",
+    definition: "Fe'lning uchinchi shakli (V3). Perfect zamonlarda va majhul nisbatda (Passive Voice) ishlatiladi."
   },
   {
-    term: "Every day",
-    definition: "Har kuni. Ko'pincha Present Simple zamoni bilan ishlatiladigan signal so'z."
+    term: "Gerund",
+    definition: "Fe'lning -ing qo'shimchasi bilan yasalgan shakli. Ot vazifasida yoki davomiy zamonlarda kelishi mumkin."
+  },
+  {
+    term: "Time Expressions",
+    definition: "Payt ravishlari. Zamonni aniqlashda yordam beruvchi so'zlar (masalan: since, for, ago, yet)."
+  },
+  {
+    term: "Deduction",
+    definition: "Mantiqiy xulosa. Mavjud dalillarga asoslanib biror narsaning to'g'riligini taxmin qilish (must be, can't be)."
+  },
+  {
+    term: "Habitual Action",
+    definition: "Odat tusiga kirgan ish-harakat. O'tmishda yoki hozirda doimiy ravishda bajariladigan ishlar."
   }
 ];
 
@@ -113,182 +127,334 @@ export const THEMES: Record<ThemeName, Theme> = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // Rule-based Multiple Choice (25 questions)
   {
     type: 'multiple-choice',
-    question: "'a' artikli qaysi turdagi otlar oldidan ishlatiladi?",
-    options: ["Unli tovush bilan boshlanadigan sanaladigan otlar oldidan", "Undosh tovush bilan boshlanadigan sanaladigan otlar oldidan", "Ko'plikdagi barcha otlar oldidan", "Sanalmaydigan otlar oldidan"],
-    correctAnswer: "Undosh tovush bilan boshlanadigan sanaladigan otlar oldidan"
-  },
-  {
-    type: 'multiple-choice',
-    question: "'an' artikli qaysi turdagi otlar oldidan ishlatiladi?",
-    options: ["Faqat ko'plikdagi otlar bilan", "Undosh tovush bilan boshlanadigan sanaladigan otlar oldidan", "Unli tovush bilan boshlanadigan sanaladigan otlar oldidan", "Barcha otlar bilan"],
-    correctAnswer: "Unli tovush bilan boshlanadigan sanaladigan otlar oldidan"
+    question: "Present Simple zamoni asosan nima uchun ishlatiladi?",
+    options: [
+      "Doimiy va takrorlanuvchi ish-harakatlar uchun",
+      "Ayni paytda davom etayotgan ish-harakatlar uchun",
+      "O'tmishda tugallangan ish-harakatlar uchun",
+      "Kelajakdagi aniq rejalar uchun"
+    ],
+    correctAnswer: "Doimiy va takrorlanuvchi ish-harakatlar uchun"
   },
   {
     type: 'multiple-choice',
-    question: "'I' olmoshi uchun 'to be' fe'lining to'g'ri shakli qaysi?",
-    options: ["is", "are", "be", "am"],
-    correctAnswer: "am"
+    question: "Past Continuous zamoni qanday yasaladi?",
+    options: [
+      "was / were + Verb + ing",
+      "have / has + Verb 3",
+      "had + Verb 3",
+      "am / is / are + Verb + ing"
+    ],
+    correctAnswer: "was / were + Verb + ing"
   },
   {
     type: 'multiple-choice',
-    question: "'He', 'She', 'It' olmoshlari uchun 'to be' fe'lining to'g'ri shakli qaysi?",
-    options: ["am", "is", "are", "be"],
-    correctAnswer: "is"
+    question: "Present Perfect zamoni qachon ishlatiladi?",
+    options: [
+      "Natijasi hozir bilan bog'liq bo'lgan o'tgan ish-harakatda",
+      "O'tmishdagi aniq vaqtda sodir bo'lgan ish-harakatda",
+      "Kelajakdagi rejalashtirilgan ish-harakatda",
+      "Hozir davom etayotgan jarayonda"
+    ],
+    correctAnswer: "Natijasi hozir bilan bog'liq bo'lgan o'tgan ish-harakatda"
   },
   {
     type: 'multiple-choice',
-    question: "'We', 'You', 'They' olmoshlari uchun 'to be' fe'lining to'g'ri shakli qaysi?",
-    options: ["am", "is", "are", "be"],
-    correctAnswer: "are"
+    question: "\"Had better\" iborasi qanday ma'noni bildiradi?",
+    options: [
+      "Kuchli maslahat yoki ogohlantirish (yaxshisi...)",
+      "O'tmishdagi majburiyat",
+      "Jismoniy qobiliyat",
+      "Kelajakdagi ehtimollik"
+    ],
+    correctAnswer: "Kuchli maslahat yoki ogohlantirish (yaxshisi...)"
   },
   {
     type: 'multiple-choice',
-    question: "Ko'plikdagi otlar mavjudligini aytish uchun qaysi konstruksiya ishlatiladi?",
-    options: ["There is", "There are", "It is", "He is"],
-    correctAnswer: "There are"
+    question: "\"Dare\" fe'li modal fe'l sifatida qanday ishlatiladi?",
+    options: [
+      "So'roq va inkor gaplarda yordamchi fe'lsiz (Daren't)",
+      "Faqat darak gaplarda",
+      "Har doim \"to\" yuklamasi bilan",
+      "Faqat o'tgan zamonda"
+    ],
+    correctAnswer: "So'roq va inkor gaplarda yordamchi fe'lsiz (Daren't)"
   },
   {
     type: 'multiple-choice',
-    question: "Birlikdagi ot mavjudligini aytish uchun qaysi konstruksiya ishlatiladi?",
-    options: ["There is", "There are", "They are", "It are"],
-    correctAnswer: "There is"
+    question: "Future Continuous zamoni qanday yasaladi?",
+    options: [
+      "will be + Verb + ing",
+      "will + Verb",
+      "will have + Verb 3",
+      "is going to + Verb"
+    ],
+    correctAnswer: "will be + Verb + ing"
   },
   {
     type: 'multiple-choice',
-    question: "Aksariyat otlarning ko'plik shakli qanday yasaladi?",
-    options: ["Oxiriga -ing qo'shish orqali", "Oxiriga -es qo'shish orqali", "Oxiriga -s qo'shimchasini qo'shish orqali", "O'zagi o'zgaradi"],
-    correctAnswer: "Oxiriga -s qo'shimchasini qo'shish orqali"
+    question: "Qaysi turdagi fe'llar odatda Continuous (davomiy) zamonlarda ishlatilmaydi?",
+    options: [
+      "State verbs (Holat fe'llari: know, like, believe)",
+      "Action verbs (Harakat fe'llari: run, eat)",
+      "Yordamchi fe'llar",
+      "Barcha fe'llar ishlatilishi mumkin"
+    ],
+    correctAnswer: "State verbs (Holat fe'llari: know, like, believe)"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi so'z 'child' (bola) so'zining ko'plik shakli hisoblanadi?",
-    options: ["childs", "childrens", "childes", "children"],
-    correctAnswer: "children"
+    question: "\"Can\" modal fe'li asosan nimani ifodalaydi?",
+    options: [
+      "Jismoniy yoki aqliy qobiliyat va imkoniyatni",
+      "Qat'iy majburiyatni",
+      "O'tmishdagi odatni",
+      "Kelajakdagi rejaning aniqligini"
+    ],
+    correctAnswer: "Jismoniy yoki aqliy qobiliyat va imkoniyatni"
   },
   {
     type: 'multiple-choice',
-    question: "'Uning' (qiz bolaga nisbatan) degan ma'noni qaysi so'z bildiradi?",
-    options: ["his", "her", "him", "she"],
-    correctAnswer: "her"
+    question: "Past Perfect zamoni qachon ishlatiladi?",
+    options: [
+      "O'tgan zamondagi boshqa bir ish-harakatdan oldin sodir bo'lgan ishda",
+      "O'tgan zamonda davom etib turgan ish-harakatda",
+      "Hozirgina tugagan ish-harakatda",
+      "Kelajakdagi tugallangan ish-harakatda"
+    ],
+    correctAnswer: "O'tgan zamondagi boshqa bir ish-harakatdan oldin sodir bo'lgan ishda"
   },
   {
     type: 'multiple-choice',
-    question: "'Bizning' degan ma'noni qaysi egalik olmoshi bildiradi?",
-    options: ["we", "us", "our", "ours"],
-    correctAnswer: "our"
+    question: "\"Need\" fe'li qachon modal fe'l hisoblanadi?",
+    options: [
+      "Inkor va so'roq gaplarda \"s\" qo'shimchasisiz va \"do\"siz kelganda",
+      "Har doim modal fe'l hisoblanadi",
+      "Faqat darak gapda \"to\" bilan kelganda",
+      "O'tgan zamon shaklida"
+    ],
+    correctAnswer: "Inkor va so'roq gaplarda \"s\" qo'shimchasisiz va \"do\"siz kelganda"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple zamoni qanday holatlarni ifodalash uchun ishlatiladi?",
-    options: ["Ayni damda bo'layotgan ish-harakatlarni", "O'tgan zamondagi voqealarni", "Doimiy, takrorlanuvchi odatlarni", "Kelajakdagi rejalarni"],
-    correctAnswer: "Doimiy, takrorlanuvchi odatlarni"
+    question: "Present Perfect Continuous nimaga urg'u beradi?",
+    options: [
+      "Ish-harakatning davomiyligiga va qancha vaqt davom etganiga",
+      "Ish-harakatning faqat natijasiga",
+      "Ish-harakatning aniq vaqtda tugaganiga",
+      "Kelajakdagi rejalarga"
+    ],
+    correctAnswer: "Ish-harakatning davomiyligiga va qancha vaqt davom etganiga"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple zamonida 'He', 'She', 'It' bilan fe'lga qanday qo'shimcha qo'shiladi?",
-    options: ["-ing", "-ed", "-s yoki -es", "hech qanday qo'shimcha qo'shilmaydi"],
-    correctAnswer: "-s yoki -es"
+    question: "\"Needn't have done\" qurilmasi qanday ma'noni anglatadi?",
+    options: [
+      "Qilish shart emas edi, lekin bajarildi",
+      "Qilish shart emas edi va bajarilmadi",
+      "Qilish kerak edi, lekin bajarilmadi",
+      "Qilish mumkin emas edi"
+    ],
+    correctAnswer: "Qilish shart emas edi, lekin bajarildi"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple zamonida 'I', 'You', 'We', 'They' uchun inkor shakl qanday yasaladi?",
-    options: ["doesn't + fe'l", "don't + fe'l", "isn't + fe'l", "am not + fe'l"],
-    correctAnswer: "don't + fe'l"
+    question: "Future Perfect zamoni (will have V3) nimani bildiradi?",
+    options: [
+      "Kelajakdagi ma'lum bir vaqtgacha tugallanadigan ish-harakatni",
+      "Kelajakda davom etadigan jarayonni",
+      "Hozirgi paytdagi natijani",
+      "O'tmishdagi tugallangan ishni"
+    ],
+    correctAnswer: "Kelajakdagi ma'lum bir vaqtgacha tugallanadigan ish-harakatni"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple zamonida 'He' olmoshi bilan so'roq gap qanday yasaladi?",
-    options: ["Do he...?", "Is he...?", "Does he...?", "Are he...?"],
-    correctAnswer: "Does he...?"
+    question: "\"Had better\" dan keyin fe'l qaysi shaklda keladi?",
+    options: [
+      "Bare Infinitive (\"to\" siz)",
+      "To + Infinitive",
+      "Gerund (V-ing)",
+      "Past Participle (V3)"
+    ],
+    correctAnswer: "Bare Infinitive (\"to\" siz)"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous zamoni qanday holatlarni ifodalash uchun ishlatiladi?",
-    options: ["Tugallangan ish-harakatlarni", "Doimiy odatlarni", "Ayni nutq paytida sodir bo'layotgan harakatlarni", "O'tmishdagi voqealarni"],
-    correctAnswer: "Ayni nutq paytida sodir bo'layotgan harakatlarni"
+    question: "Present Continuous zamoni kelajak ma'nosida qachon ishlatiladi?",
+    options: [
+      "Oldindan rejalashtirilgan va kelishilgan ish-harakatlar (Arrangements) uchun",
+      "Ob-havo bashorati uchun",
+      "Jadval asosidagi ish-harakatlar uchun",
+      "Qaror qabul qilinmagan ishlar uchun"
+    ],
+    correctAnswer: "Oldindan rejalashtirilgan va kelishilgan ish-harakatlar (Arrangements) uchun"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous zamonining to'g'ri formulasi qaysi?",
-    options: ["Subject + fe'l", "Subject + to be + Ving", "Subject + fe'l + ed", "Subject + will + fe'l"],
-    correctAnswer: "Subject + to be + Ving"
+    question: "\"Going to\" qurilmasi asosan nima uchun ishlatiladi?",
+    options: [
+      "Niyat qilish va aniq dalilga asoslangan bashorat uchun",
+      "Ayni damda qabul qilingan qarorlar uchun",
+      "Jadval bo'yicha sodir bo'ladigan ishlar uchun",
+      "O'tmishdagi odatlar uchun"
+    ],
+    correctAnswer: "Niyat qilish va aniq dalilga asoslangan bashorat uchun"
   },
   {
     type: 'multiple-choice',
-    question: "'Now', 'at the moment', 'Listen!' kabi signal so'zlar qaysi zamonga ishora qiladi?",
-    options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"],
-    correctAnswer: "Present Continuous"
+    question: "\"Since\" va \"For\" kalit so'zlari asosan qaysi zamon guruhiga xos?",
+    options: [
+      "Perfect tenses (Tugallangan zamonlar)",
+      "Continuous tenses (Davomiy zamonlar)",
+      "Simple tenses (Oddiy zamonlar)",
+      "Future tenses (Kelajak zamonlar)"
+    ],
+    correctAnswer: "Perfect tenses (Tugallangan zamonlar)"
   },
   {
     type: 'multiple-choice',
-    question: "'They are playing' gapining so'roq shakli qanday?",
-    options: ["Do they playing?", "Does they play?", "Are they playing?", "Is they playing?"],
-    correctAnswer: "Are they playing?"
+    question: "Modal fe'llardan (can, must, should) keyin fe'l qanday shaklda bo'ladi?",
+    options: [
+      "Base form (O'zak shakl, \"to\" siz)",
+      "Infinitive with to (\"to\" bilan)",
+      "Gerund (V-ing)",
+      "Past form (O'tgan zamon)"
+    ],
+    correctAnswer: "Base form (O'zak shakl, \"to\" siz)"
   },
   {
     type: 'multiple-choice',
-    question: "'She is working' gapining inkor shakli qanday?",
-    options: ["She don't working", "She isn't working", "She doesn't working", "She not is working"],
-    correctAnswer: "She isn't working"
+    question: "Past Simple va Present Perfect o'rtasidagi asosiy farq nima?",
+    options: [
+      "Past Simple'da vaqt aniq (finished time), Present Perfect'da vaqt noma'lum (unfinished time)",
+      "Farqi yo'q, ikkisi ham bir xil",
+      "Past Simple kelajakni, Present Perfect o'tmishni bildiradi",
+      "Present Perfect faqat inkor gaplarda ishlatiladi"
+    ],
+    correctAnswer: "Past Simple'da vaqt aniq (finished time), Present Perfect'da vaqt noma'lum (unfinished time)"
   },
   {
     type: 'multiple-choice',
-    question: "Qobiliyatni ifodalash uchun qaysi modal fe'l ishlatiladi?",
-    options: ["may", "must", "can", "should"],
-    correctAnswer: "can"
+    question: "\"Be to\" (I am to go...) qurilmasi modal ma'noda nimani anglatadi?",
+    options: [
+      "Rasmiy reja yoki buyruqni",
+      "Jismoniy qobiliyatni",
+      "O'tgan zamondagi odatni",
+      "Maslahatni"
+    ],
+    correctAnswer: "Rasmiy reja yoki buyruqni"
   },
   {
     type: 'multiple-choice',
-    question: "So'roq va inkor gaplarda miqdorni ifodalash uchun odatda qaysi so'z ishlatiladi?",
-    options: ["some", "any", "no", "a lot of"],
-    correctAnswer: "any"
+    question: "\"Used to\" va \"Would\" o'rtasidagi asosiy farq nima?",
+    options: [
+      "\"Used to\" ham holat, ham harakat uchun, \"Would\" faqat harakat uchun ishlatiladi",
+      "\"Used to\" faqat kelajakda ishlatiladi, \"Would\" esa o'tmishda",
+      "\"Would\" faqat holat fe'llari bilan keladi",
+      "Ikkala ibora o'rtasida hech qanday farq yo'q"
+    ],
+    correctAnswer: "\"Used to\" ham holat, ham harakat uchun, \"Would\" faqat harakat uchun ishlatiladi"
   },
   {
     type: 'multiple-choice',
-    question: "'Menga' degan ma'noni bildiruvchi obyekt olmoshini toping.",
-    options: ["I", "my", "mine", "me"],
-    correctAnswer: "me"
+    question: "Future Perfect Continuous zamoni qanday yasaladi?",
+    options: [
+      "will have been + Verb + ing",
+      "will be + Verb + ing",
+      "will have + Verb 3",
+      "am / is / are + going to + have + V3"
+    ],
+    correctAnswer: "will have been + Verb + ing"
   },
   {
     type: 'multiple-choice',
-    question: "Biror narsaning 'ustida' ekanligini bildirish uchun qaysi predlog ishlatiladi?",
-    options: ["in", "at", "on", "under"],
-    correctAnswer: "on"
+    question: "\"Must\" va \"Have to\" o'rtasidagi farq qaysi javobda to'g'ri ko'rsatilgan?",
+    options: [
+      "\"Must\" so'zlovchining shaxsiy fikri, \"Have to\" tashqi qoida yoki majburiyat",
+      "\"Must\" faqat o'tmishda ishlatiladi",
+      "\"Have to\" faqat taklif bildirish uchun ishlatiladi",
+      "\"Must\" rasmiy, \"Have to\" esa norasmiy uslubda qo'llanadi"
+    ],
+    correctAnswer: "\"Must\" so'zlovchining shaxsiy fikri, \"Have to\" tashqi qoida yoki majburiyat"
   },
   {
     type: 'multiple-choice',
-    question: "'hour' so'zi oldidan qaysi artikl ishlatiladi? (Talaffuziga e'tibor bering)",
-    options: ["a", "an", "the", "artikl kerak emas"],
-    correctAnswer: "an"
-  },
-
-  // Fill in the Blank (5 questions)
-  {
-    type: 'fill-in-the-blank',
-    question: "Gapni to'ldiring: 'He is ___ a book right now.'",
-    correctAnswer: "reading"
+    question: "\"Dare\" fe'li darak gaplarda asosiy fe'l sifatida kelganda qanday ishlatiladi?",
+    options: [
+      "\"To\" yuklamasi bilan va shaxsda tuslanib (He dares to go...)",
+      "Har doim yordamchi fe'l sifatida \"to\" siz",
+      "Faqat -ing shaklida keladi",
+      "Faqat o'tgan zamonda qo'llanadi"
+    ],
+    correctAnswer: "\"To\" yuklamasi bilan va shaxsda tuslanib (He dares to go...)"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Gapni to'ldiring: 'My mother ___ a teacher.'",
-    correctAnswer: "is"
+    type: 'multiple-choice',
+    question: "Third Conditional (Uchinchi shart ergash gap) qanday yasaladi?",
+    options: [
+      "If + Past Perfect, ... would have + V3",
+      "If + Past Simple, ... would + V1",
+      "If + Present Simple, ... will + V1",
+      "If + Past Perfect, ... would + V1"
+    ],
+    correctAnswer: "If + Past Perfect, ... would have + V3"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Gapni to'ldiring: 'I ___ to school every day.'",
-    correctAnswer: "go"
+    type: 'multiple-choice',
+    question: "Present Simple zamonida Majhul nisbat (Passive Voice) qanday yasaladi?",
+    options: [
+      "am / is / are + Verb 3 (Past Participle)",
+      "have / has + been + V3",
+      "was / were + V3",
+      "will be + V3"
+    ],
+    correctAnswer: "am / is / are + Verb 3 (Past Participle)"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Sonning ko'plik shaklini yozing: 'one child, two ___.'",
-    correctAnswer: "children"
+    type: 'multiple-choice',
+    question: "\"May\" va \"Might\" o'rtasidagi ehtimollik darajasidagi farq qanday?",
+    options: [
+      "\"Might\" sodir bo'lish ehtimoli \"May\"ga qaraganda kamroq bo'lganda ishlatiladi",
+      "\"Might\" ancha kuchliroq ehtimolni bildiradi",
+      "Ikkisi faqat o'tmishda ishlatiladi",
+      "Hech qanday farq yo'q"
+    ],
+    correctAnswer: "\"Might\" sodir bo'lish ehtimoli \"May\"ga qaraganda kamroq bo'lganda ishlatiladi"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Gapni to'ldiring: 'They ___ from Uzbekistan.'",
-    correctAnswer: "are"
+    type: 'multiple-choice',
+    question: "Zero Conditional (Nolinchi shart gap) qachon ishlatiladi?",
+    options: [
+      "Umumiy haqiqatlar va ilmiy faktlar uchun (har doim to'g'ri bo'lgan narsalar)",
+      "Kelajakdagi ehtimollar uchun",
+      "O'tmishdagi afsuslanish uchun",
+      "Xayoliy va imkonsiz vaziyatlar uchun"
+    ],
+    correctAnswer: "Umumiy haqiqatlar va ilmiy faktlar uchun (har doim to'g'ri bo'lgan narsalar)"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Perfect Continuous zamoni nimani ifodalaydi?",
+    options: [
+      "O'tmishdagi bir vaqtdan oldin boshlanib, o'sha vaqtgacha davom etgan ish-harakatni",
+      "Hozir tugagan ish-harakatni",
+      "Kelajakdagi davomiy ishni",
+      "O'tmishdagi juda qisqa harakatni"
+    ],
+    correctAnswer: "O'tmishdagi bir vaqtdan oldin boshlanib, o'sha vaqtgacha davom etgan ish-harakatni"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Can\" modal fe'lining o'tgan zamon shakli qaysi?",
+    options: [
+      "Could",
+      "Caned",
+      "Must",
+      "Should"
+    ],
+    correctAnswer: "Could"
   }
 ];

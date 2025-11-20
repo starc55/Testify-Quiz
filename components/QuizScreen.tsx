@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, FormEvent } from 'react';
 import type { QuizQuestion, Theme } from '../types';
 import ClockIcon from './icons/ClockIcon';
@@ -26,7 +27,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const [writtenAnswer, setWrittenAnswer] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [animationClass, setAnimationClass] = useState('');
+  const [isExiting, setIsExiting] = useState(false);
 
   // Constants for the circular progress bar
   const CIRCLE_RADIUS = 26;
@@ -38,9 +39,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     setWrittenAnswer('');
     setIsAnswered(false);
     setIsCorrect(null);
-    setAnimationClass('animate-slide-in-from-right');
-    const timer = setTimeout(() => setAnimationClass(''), 500);
-    return () => clearTimeout(timer);
+    setIsExiting(false);
   }, [question]);
 
   const playAnswerSound = (isCorrect: boolean) => {
@@ -88,7 +87,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     playAnswerSound(correct);
     
     setTimeout(() => {
-      setAnimationClass('animate-slide-out-to-left');
+      setIsExiting(true);
     }, 800);
 
     setTimeout(() => {
@@ -142,7 +141,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const progressPercentage = (questionNumber / totalQuestions) * 100;
 
   return (
-    <div className={`relative bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg text-white overflow-hidden ${isPaused ? 'filter blur-sm pointer-events-none' : ''}`}>
+    <div className={`relative bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg text-white overflow-hidden transition-colors duration-300 ${isPaused ? 'filter blur-sm pointer-events-none' : ''}`}>
       <div className="relative z-10 p-6 md:p-8">
         <div className="flex justify-between items-center mb-4">
           <p className="text-gray-300 font-medium">
@@ -190,27 +189,28 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           aria-valuenow={questionNumber}
           aria-valuemin={1}
           aria-valuemax={totalQuestions}
-          className="w-full bg-white/10 rounded-full h-2.5 mb-6"
+          className="w-full bg-white/10 rounded-full h-2.5 mb-6 overflow-hidden"
         >
           <div
-            className={`bg-gradient-to-r ${theme.progressBar} h-2.5 rounded-full transition-all duration-500 ease-out`}
-            style={{ width: `${progressPercentage}%` }}
+            className={`h-full rounded-full bg-gradient-to-r ${theme.progressBar} transition-transform duration-700 ease-out origin-left`}
+            style={{ transform: `scaleX(${progressPercentage / 100})` }}
           ></div>
         </div>
 
-        <div className={animationClass}>
-          <h2 id="question-heading" className="text-2xl md:text-3xl font-semibold mb-8 h-24 flex items-center">{question.question}</h2>
+        <div key={question.question} className={isExiting ? 'animate-slide-out-to-left' : 'animate-slide-in-from-right'}>
+          <h2 id="question-heading" className="text-2xl md:text-3xl font-semibold mb-8 h-24 flex items-center leading-tight">{question.question}</h2>
 
           {question.type === 'multiple-choice' && question.options && (
             <div role="radiogroup" aria-labelledby="question-heading" className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {question.options.map((option) => (
+              {question.options.map((option, index) => (
                 <button
                   key={option}
                   onClick={() => handleSubmit(option)}
                   disabled={isAnswered || isPaused}
                   role="radio"
                   aria-checked={selected === option}
-                  className={`p-4 rounded-lg border text-left font-semibold transition-all duration-300 transform hover:scale-105 disabled:transform-none ${getOptionClasses(option)}`}
+                  className={`p-4 rounded-lg border text-left font-semibold transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none animate-option-fade-in opacity-0 fill-mode-forwards ${getOptionClasses(option)}`}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {option}
                 </button>
@@ -219,7 +219,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           )}
 
           {question.type === 'fill-in-the-blank' && (
-            <form onSubmit={handleWrittenSubmit} className="flex flex-col sm:flex-row gap-4 items-center">
+            <form onSubmit={handleWrittenSubmit} className="flex flex-col sm:flex-row gap-4 items-center animate-option-fade-in">
               <input
                   type="text"
                   value={writtenAnswer}
@@ -242,18 +242,31 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
       </div>
        <style>{`
         @keyframes slide-in-from-right {
-          from { transform: translateX(50px); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
+          0% { transform: translateX(20px); opacity: 0; }
+          100% { transform: translateX(0); opacity: 1; }
         }
         .animate-slide-in-from-right {
-          animation: slide-in-from-right 0.5s ease-out forwards;
+          animation: slide-in-from-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        
         @keyframes slide-out-to-left {
-          from { transform: translateX(0); opacity: 1; }
-          to { transform: translateX(-50px); opacity: 0; }
+          0% { transform: translateX(0); opacity: 1; }
+          100% { transform: translateX(-20px); opacity: 0; }
         }
         .animate-slide-out-to-left {
-          animation: slide-out-to-left 0.4s ease-in forwards;
+          animation: slide-out-to-left 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+        }
+
+        @keyframes option-fade-in {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-option-fade-in {
+            animation: option-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .fill-mode-forwards {
+          animation-fill-mode: forwards;
         }
       `}</style>
     </div>

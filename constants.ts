@@ -127,334 +127,319 @@ export const THEMES: Record<ThemeName, Theme> = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
+  // --- LEVEL 1: Zero / Basic Concepts ---
   {
     type: 'multiple-choice',
-    question: "Present Simple zamoni asosan nima uchun ishlatiladi?",
+    question: "Ingliz tilida gapning odatiy so'z tartibi qanday?",
     options: [
-      "Doimiy va takrorlanuvchi ish-harakatlar uchun",
-      "Ayni paytda davom etayotgan ish-harakatlar uchun",
-      "O'tmishda tugallangan ish-harakatlar uchun",
-      "Kelajakdagi aniq rejalar uchun"
+      "Ega + Kesim + To'ldiruvchi (Subject + Verb + Object)",
+      "Kesim + Ega + To'ldiruvchi",
+      "To'ldiruvchi + Ega + Kesim",
+      "Ega + To'ldiruvchi + Kesim"
     ],
-    correctAnswer: "Doimiy va takrorlanuvchi ish-harakatlar uchun"
+    correctAnswer: "Ega + Kesim + To'ldiruvchi (Subject + Verb + Object)"
   },
   {
     type: 'multiple-choice',
-    question: "Past Continuous zamoni qanday yasaladi?",
+    question: "\"To be\" (am, is, are) fe'li asosan nima uchun ishlatiladi?",
+    options: [
+      "Shaxs yoki narsaning holati, kimligi yoki qayerdaligini bildirish uchun",
+      "Doimiy takrorlanadigan harakatni bildirish uchun",
+      "O'tgan zamondagi ishni bildirish uchun",
+      "Kelajakdagi rejani bildirish uchun"
+    ],
+    correctAnswer: "Shaxs yoki narsaning holati, kimligi yoki qayerdaligini bildirish uchun"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Aniq artikl (The) va noaniq artikl (A/An) o'rtasidagi asosiy farq nima?",
+    options: [
+      "\"A/An\" umumiy, \"The\" esa aniq narsalar uchun ishlatiladi",
+      "\"A/An\" ko'plikda, \"The\" birlikda ishlatiladi",
+      "Hech qanday farq yo'q",
+      "\"The\" faqat odam ismlari oldidan keladi"
+    ],
+    correctAnswer: "\"A/An\" umumiy, \"The\" esa aniq narsalar uchun ishlatiladi"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Otlar ko'pligi (Plurals) qaysi qo'shimcha bilan yasaladi?",
+    options: [
+      "-s yoki -es",
+      "-ing",
+      "-ed",
+      "-er"
+    ],
+    correctAnswer: "-s yoki -es"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Olmoshlardan (Pronouns) qaysi biri egadan keyin, ya'ni to'ldiruvchi o'rnida keladi?",
+    options: [
+      "Object Pronouns (me, him, her, us)",
+      "Subject Pronouns (I, he, she, we)",
+      "Possessive Adjectives (my, his, her)",
+      "Reflexive Pronouns (myself, himself)"
+    ],
+    correctAnswer: "Object Pronouns (me, him, her, us)"
+  },
+  
+  // --- LEVEL 2: Present Simple ---
+  {
+    type: 'multiple-choice',
+    question: "Present Simple (Hozirgi oddiy zamon) qachon ishlatiladi?",
+    options: [
+      "Doimiy, takrorlanuvchi harakatlar va umumiy haqiqatlar uchun",
+      "Ayni paytda sodir bo'layotgan ishlar uchun",
+      "Tugallangan ishlar uchun",
+      "Kelajakdagi aniq rejalar uchun"
+    ],
+    correctAnswer: "Doimiy, takrorlanuvchi harakatlar va umumiy haqiqatlar uchun"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Simple da inkor gap qaysi yordamchi fe'llar bilan yasaladi?",
+    options: [
+      "don't / doesn't",
+      "am not / isn't / aren't",
+      "didn't",
+      "won't"
+    ],
+    correctAnswer: "don't / doesn't"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Simple da qachon fe'lga \"-s\" yoki \"-es\" qo'shiladi?",
+    options: [
+      "Faqat 3-shaxs birlikda (He, She, It) darak gapda",
+      "Barcha shaxslarda (I, You, We, They)",
+      "Faqat so'roq gaplarda",
+      "Ko'plikdagi otlar bilan"
+    ],
+    correctAnswer: "Faqat 3-shaxs birlikda (He, She, It) darak gapda"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Qaysi payt ravishlari (Time expressions) Present Simple ga xos?",
+    options: [
+      "Always, usually, often, sometimes, every day",
+      "Now, at the moment, right now",
+      "Yesterday, last week, ago",
+      "Tomorrow, next year"
+    ],
+    correctAnswer: "Always, usually, often, sometimes, every day"
+  },
+
+  // --- LEVEL 3: Present Continuous ---
+  {
+    type: 'multiple-choice',
+    question: "Present Continuous (Hozirgi davomiy zamon) qanday yasaladi?",
+    options: [
+      "am / is / are + Verb + ing",
+      "Subject + Verb + s/es",
+      "have / has + Verb 3",
+      "will + Verb"
+    ],
+    correctAnswer: "am / is / are + Verb + ing"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Continuous asosan nima uchun ishlatiladi?",
+    options: [
+      "Nutq paytida sodir bo'layotgan ayni vaqtdagi ish-harakatlar uchun",
+      "O'tgan zamondagi odatlar uchun",
+      "Doimiy takrorlanadigan faktlar uchun",
+      "Tugallangan natijalar uchun"
+    ],
+    correctAnswer: "Nutq paytida sodir bo'layotgan ayni vaqtdagi ish-harakatlar uchun"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Stative Verbs (Holat fe'llari: love, hate, know) Continuous zamonda ishlatiladimi?",
+    options: [
+      "Yo'q, ular odatda Simple zamonlarda ishlatiladi",
+      "Ha, har doim ishlatiladi",
+      "Faqat kelajak zamonda ishlatiladi",
+      "Farqi yo'q"
+    ],
+    correctAnswer: "Yo'q, ular odatda Simple zamonlarda ishlatiladi"
+  },
+
+  // --- LEVEL 4: Past Simple ---
+  {
+    type: 'multiple-choice',
+    question: "Past Simple (O'tgan oddiy zamon) da to'g'ri fe'llar (Regular verbs) qanday yasaladi?",
+    options: [
+      "Fe'lga \"-ed\" qo'shimchasi qo'shish orqali",
+      "Fe'lning o'zagi o'zgaradi",
+      "Fe'l oldiga \"will\" qo'yiladi",
+      "Fe'lga \"-ing\" qo'shiladi"
+    ],
+    correctAnswer: "Fe'lga \"-ed\" qo'shimchasi qo'shish orqali"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple da so'roq va inkor gaplar qaysi yordamchi fe'l bilan yasaladi?",
+    options: [
+      "Did",
+      "Do / Does",
+      "Have / Has",
+      "Will"
+    ],
+    correctAnswer: "Did"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"To be\" fe'lining o'tgan zamon shakllari qaysilar?",
+    options: [
+      "Was / Were",
+      "Been",
+      "Being",
+      "Am / Is / Are"
+    ],
+    correctAnswer: "Was / Were"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Irregular Verbs (Noto'g'ri fe'llar) Past Simple da qanday o'zgaradi?",
+    options: [
+      "Ular maxsus shaklga ega (yodlash kerak), -ed qo'shilmaydi",
+      "Har doim -ed qo'shiladi",
+      "O'zgarmaydi",
+      "-ing qo'shimchasi oladi"
+    ],
+    correctAnswer: "Ular maxsus shaklga ega (yodlash kerak), -ed qo'shilmaydi"
+  },
+
+  // --- LEVEL 5: Past Continuous ---
+  {
+    type: 'multiple-choice',
+    question: "Past Continuous (O'tgan davomiy zamon) qachon ishlatiladi?",
+    options: [
+      "O'tmishdagi ma'lum bir vaqtda davom etayotgan jarayon uchun",
+      "O'tmishda tugallangan qisqa ish uchun",
+      "Hozirgi natija uchun",
+      "Kelajakdagi reja uchun"
+    ],
+    correctAnswer: "O'tmishdagi ma'lum bir vaqtda davom etayotgan jarayon uchun"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Continuous formulasi qaysi?",
     options: [
       "was / were + Verb + ing",
-      "have / has + Verb 3",
+      "did + Verb",
       "had + Verb 3",
-      "am / is / are + Verb + ing"
+      "was / were + Verb 3"
     ],
     correctAnswer: "was / were + Verb + ing"
   },
+
+  // --- LEVEL 6: Future Simple ---
   {
     type: 'multiple-choice',
-    question: "Present Perfect zamoni qachon ishlatiladi?",
+    question: "Future Simple (Will) qachon ishlatiladi?",
     options: [
-      "Natijasi hozir bilan bog'liq bo'lgan o'tgan ish-harakatda",
-      "O'tmishdagi aniq vaqtda sodir bo'lgan ish-harakatda",
-      "Kelajakdagi rejalashtirilgan ish-harakatda",
-      "Hozir davom etayotgan jarayonda"
+      "Nutq paytida qabul qilingan spontan qarorlar va bashoratlar uchun",
+      "Oldindan rejalashtirilgan aniq ishlar uchun",
+      "Jadval asosidagi ishlar uchun",
+      "O'tgan zamondagi ishlar uchun"
     ],
-    correctAnswer: "Natijasi hozir bilan bog'liq bo'lgan o'tgan ish-harakatda"
+    correctAnswer: "Nutq paytida qabul qilingan spontan qarorlar va bashoratlar uchun"
   },
   {
     type: 'multiple-choice',
-    question: "\"Had better\" iborasi qanday ma'noni bildiradi?",
+    question: "\"Be going to\" qurilmasi kelajak uchun nimani ifodalaydi?",
     options: [
-      "Kuchli maslahat yoki ogohlantirish (yaxshisi...)",
-      "O'tmishdagi majburiyat",
-      "Jismoniy qobiliyat",
-      "Kelajakdagi ehtimollik"
+      "Oldindan qilingan niyat yoki rejalarni",
+      "Spontan qarorlarni",
+      "Doimiy haqiqatlarni",
+      "Majburiyatni"
     ],
-    correctAnswer: "Kuchli maslahat yoki ogohlantirish (yaxshisi...)"
+    correctAnswer: "Oldindan qilingan niyat yoki rejalarni"
+  },
+
+  // --- LEVEL 7: General Grammar & Modals ---
+  {
+    type: 'multiple-choice',
+    question: "Sanalmaydigan otlar (Uncountable nouns) bilan qaysi so'z ishlatiladi?",
+    options: [
+      "Much (ko'p) / A little (oz)",
+      "Many (ko'p) / A few (oz)",
+      "A / An",
+      "These / Those"
+    ],
+    correctAnswer: "Much (ko'p) / A little (oz)"
   },
   {
     type: 'multiple-choice',
-    question: "\"Dare\" fe'li modal fe'l sifatida qanday ishlatiladi?",
+    question: "\"There is\" iborasi qachon ishlatiladi?",
     options: [
-      "So'roq va inkor gaplarda yordamchi fe'lsiz (Daren't)",
-      "Faqat darak gaplarda",
-      "Har doim \"to\" yuklamasi bilan",
-      "Faqat o'tgan zamonda"
+      "Birlikdagi yoki sanalmaydigan otlar borligini aytishda",
+      "Faqat ko'plikdagi otlar uchun",
+      "O'tgan zamonda",
+      "Egalikni bildirish uchun"
     ],
-    correctAnswer: "So'roq va inkor gaplarda yordamchi fe'lsiz (Daren't)"
+    correctAnswer: "Birlikdagi yoki sanalmaydigan otlar borligini aytishda"
   },
   {
     type: 'multiple-choice',
-    question: "Future Continuous zamoni qanday yasaladi?",
+    question: "Sifatlarning qiyosiy darajasi (Comparative) qanday yasaladi?",
     options: [
-      "will be + Verb + ing",
-      "will + Verb",
-      "will have + Verb 3",
-      "is going to + Verb"
+      "Qisqa sifatlarga -er qo'shiladi, uzunlariga more qo'yiladi",
+      "Har doim -est qo'shiladi",
+      "Har doim most qo'yiladi",
+      "Sifat o'zgarmaydi"
     ],
-    correctAnswer: "will be + Verb + ing"
+    correctAnswer: "Qisqa sifatlarga -er qo'shiladi, uzunlariga more qo'yiladi"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi turdagi fe'llar odatda Continuous (davomiy) zamonlarda ishlatilmaydi?",
+    question: "\"Can\" modal fe'li nimani bildiradi?",
     options: [
-      "State verbs (Holat fe'llari: know, like, believe)",
-      "Action verbs (Harakat fe'llari: run, eat)",
-      "Yordamchi fe'llar",
-      "Barcha fe'llar ishlatilishi mumkin"
+      "Qobiliyat yoki imkoniyatni",
+      "Kelajakdagi rejani",
+      "O'tmishdagi ishni",
+      "Majburiyatni"
     ],
-    correctAnswer: "State verbs (Holat fe'llari: know, like, believe)"
+    correctAnswer: "Qobiliyat yoki imkoniyatni"
   },
   {
     type: 'multiple-choice',
-    question: "\"Can\" modal fe'li asosan nimani ifodalaydi?",
+    question: "Qaysi predlog (Preposition) soatlar bilan ishlatiladi (masalan: 5:00 da)?",
     options: [
-      "Jismoniy yoki aqliy qobiliyat va imkoniyatni",
-      "Qat'iy majburiyatni",
-      "O'tmishdagi odatni",
-      "Kelajakdagi rejaning aniqligini"
+      "At",
+      "In",
+      "On",
+      "To"
     ],
-    correctAnswer: "Jismoniy yoki aqliy qobiliyat va imkoniyatni"
+    correctAnswer: "At"
+  },
+
+  // --- WRITE-IN QUESTIONS (5 items) ---
+  {
+    type: 'fill-in-the-blank',
+    question: "Present Continuous (Hozirgi davomiy) zamon yasashda fe'lga qaysi qo'shimcha qo'shiladi?",
+    correctAnswer: "ing"
   },
   {
-    type: 'multiple-choice',
-    question: "Past Perfect zamoni qachon ishlatiladi?",
-    options: [
-      "O'tgan zamondagi boshqa bir ish-harakatdan oldin sodir bo'lgan ishda",
-      "O'tgan zamonda davom etib turgan ish-harakatda",
-      "Hozirgina tugagan ish-harakatda",
-      "Kelajakdagi tugallangan ish-harakatda"
-    ],
-    correctAnswer: "O'tgan zamondagi boshqa bir ish-harakatdan oldin sodir bo'lgan ishda"
+    type: 'fill-in-the-blank',
+    question: "Past Simple (O'tgan oddiy) zamonda so'roq va inkor gap yasovchi yordamchi fe'l nima?",
+    correctAnswer: "did"
   },
   {
-    type: 'multiple-choice',
-    question: "\"Need\" fe'li qachon modal fe'l hisoblanadi?",
-    options: [
-      "Inkor va so'roq gaplarda \"s\" qo'shimchasisiz va \"do\"siz kelganda",
-      "Har doim modal fe'l hisoblanadi",
-      "Faqat darak gapda \"to\" bilan kelganda",
-      "O'tgan zamon shaklida"
-    ],
-    correctAnswer: "Inkor va so'roq gaplarda \"s\" qo'shimchasisiz va \"do\"siz kelganda"
+    type: 'fill-in-the-blank',
+    question: "Kelajak zamonni yasovchi asosiy yordamchi fe'l (w harfi bilan boshlanadi).",
+    correctAnswer: "will"
   },
   {
-    type: 'multiple-choice',
-    question: "Present Perfect Continuous nimaga urg'u beradi?",
-    options: [
-      "Ish-harakatning davomiyligiga va qancha vaqt davom etganiga",
-      "Ish-harakatning faqat natijasiga",
-      "Ish-harakatning aniq vaqtda tugaganiga",
-      "Kelajakdagi rejalarga"
-    ],
-    correctAnswer: "Ish-harakatning davomiyligiga va qancha vaqt davom etganiga"
+    type: 'fill-in-the-blank',
+    question: "Ko'plikdagi otlarni yasash uchun so'z oxiriga qaysi harf qo'shiladi (asosiy qoida)?",
+    correctAnswer: "s"
   },
   {
-    type: 'multiple-choice',
-    question: "\"Needn't have done\" qurilmasi qanday ma'noni anglatadi?",
-    options: [
-      "Qilish shart emas edi, lekin bajarildi",
-      "Qilish shart emas edi va bajarilmadi",
-      "Qilish kerak edi, lekin bajarilmadi",
-      "Qilish mumkin emas edi"
-    ],
-    correctAnswer: "Qilish shart emas edi, lekin bajarildi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Future Perfect zamoni (will have V3) nimani bildiradi?",
-    options: [
-      "Kelajakdagi ma'lum bir vaqtgacha tugallanadigan ish-harakatni",
-      "Kelajakda davom etadigan jarayonni",
-      "Hozirgi paytdagi natijani",
-      "O'tmishdagi tugallangan ishni"
-    ],
-    correctAnswer: "Kelajakdagi ma'lum bir vaqtgacha tugallanadigan ish-harakatni"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Had better\" dan keyin fe'l qaysi shaklda keladi?",
-    options: [
-      "Bare Infinitive (\"to\" siz)",
-      "To + Infinitive",
-      "Gerund (V-ing)",
-      "Past Participle (V3)"
-    ],
-    correctAnswer: "Bare Infinitive (\"to\" siz)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Continuous zamoni kelajak ma'nosida qachon ishlatiladi?",
-    options: [
-      "Oldindan rejalashtirilgan va kelishilgan ish-harakatlar (Arrangements) uchun",
-      "Ob-havo bashorati uchun",
-      "Jadval asosidagi ish-harakatlar uchun",
-      "Qaror qabul qilinmagan ishlar uchun"
-    ],
-    correctAnswer: "Oldindan rejalashtirilgan va kelishilgan ish-harakatlar (Arrangements) uchun"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Going to\" qurilmasi asosan nima uchun ishlatiladi?",
-    options: [
-      "Niyat qilish va aniq dalilga asoslangan bashorat uchun",
-      "Ayni damda qabul qilingan qarorlar uchun",
-      "Jadval bo'yicha sodir bo'ladigan ishlar uchun",
-      "O'tmishdagi odatlar uchun"
-    ],
-    correctAnswer: "Niyat qilish va aniq dalilga asoslangan bashorat uchun"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Since\" va \"For\" kalit so'zlari asosan qaysi zamon guruhiga xos?",
-    options: [
-      "Perfect tenses (Tugallangan zamonlar)",
-      "Continuous tenses (Davomiy zamonlar)",
-      "Simple tenses (Oddiy zamonlar)",
-      "Future tenses (Kelajak zamonlar)"
-    ],
-    correctAnswer: "Perfect tenses (Tugallangan zamonlar)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Modal fe'llardan (can, must, should) keyin fe'l qanday shaklda bo'ladi?",
-    options: [
-      "Base form (O'zak shakl, \"to\" siz)",
-      "Infinitive with to (\"to\" bilan)",
-      "Gerund (V-ing)",
-      "Past form (O'tgan zamon)"
-    ],
-    correctAnswer: "Base form (O'zak shakl, \"to\" siz)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Simple va Present Perfect o'rtasidagi asosiy farq nima?",
-    options: [
-      "Past Simple'da vaqt aniq (finished time), Present Perfect'da vaqt noma'lum (unfinished time)",
-      "Farqi yo'q, ikkisi ham bir xil",
-      "Past Simple kelajakni, Present Perfect o'tmishni bildiradi",
-      "Present Perfect faqat inkor gaplarda ishlatiladi"
-    ],
-    correctAnswer: "Past Simple'da vaqt aniq (finished time), Present Perfect'da vaqt noma'lum (unfinished time)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Be to\" (I am to go...) qurilmasi modal ma'noda nimani anglatadi?",
-    options: [
-      "Rasmiy reja yoki buyruqni",
-      "Jismoniy qobiliyatni",
-      "O'tgan zamondagi odatni",
-      "Maslahatni"
-    ],
-    correctAnswer: "Rasmiy reja yoki buyruqni"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Used to\" va \"Would\" o'rtasidagi asosiy farq nima?",
-    options: [
-      "\"Used to\" ham holat, ham harakat uchun, \"Would\" faqat harakat uchun ishlatiladi",
-      "\"Used to\" faqat kelajakda ishlatiladi, \"Would\" esa o'tmishda",
-      "\"Would\" faqat holat fe'llari bilan keladi",
-      "Ikkala ibora o'rtasida hech qanday farq yo'q"
-    ],
-    correctAnswer: "\"Used to\" ham holat, ham harakat uchun, \"Would\" faqat harakat uchun ishlatiladi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Future Perfect Continuous zamoni qanday yasaladi?",
-    options: [
-      "will have been + Verb + ing",
-      "will be + Verb + ing",
-      "will have + Verb 3",
-      "am / is / are + going to + have + V3"
-    ],
-    correctAnswer: "will have been + Verb + ing"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Must\" va \"Have to\" o'rtasidagi farq qaysi javobda to'g'ri ko'rsatilgan?",
-    options: [
-      "\"Must\" so'zlovchining shaxsiy fikri, \"Have to\" tashqi qoida yoki majburiyat",
-      "\"Must\" faqat o'tmishda ishlatiladi",
-      "\"Have to\" faqat taklif bildirish uchun ishlatiladi",
-      "\"Must\" rasmiy, \"Have to\" esa norasmiy uslubda qo'llanadi"
-    ],
-    correctAnswer: "\"Must\" so'zlovchining shaxsiy fikri, \"Have to\" tashqi qoida yoki majburiyat"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Dare\" fe'li darak gaplarda asosiy fe'l sifatida kelganda qanday ishlatiladi?",
-    options: [
-      "\"To\" yuklamasi bilan va shaxsda tuslanib (He dares to go...)",
-      "Har doim yordamchi fe'l sifatida \"to\" siz",
-      "Faqat -ing shaklida keladi",
-      "Faqat o'tgan zamonda qo'llanadi"
-    ],
-    correctAnswer: "\"To\" yuklamasi bilan va shaxsda tuslanib (He dares to go...)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Third Conditional (Uchinchi shart ergash gap) qanday yasaladi?",
-    options: [
-      "If + Past Perfect, ... would have + V3",
-      "If + Past Simple, ... would + V1",
-      "If + Present Simple, ... will + V1",
-      "If + Past Perfect, ... would + V1"
-    ],
-    correctAnswer: "If + Past Perfect, ... would have + V3"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple zamonida Majhul nisbat (Passive Voice) qanday yasaladi?",
-    options: [
-      "am / is / are + Verb 3 (Past Participle)",
-      "have / has + been + V3",
-      "was / were + V3",
-      "will be + V3"
-    ],
-    correctAnswer: "am / is / are + Verb 3 (Past Participle)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"May\" va \"Might\" o'rtasidagi ehtimollik darajasidagi farq qanday?",
-    options: [
-      "\"Might\" sodir bo'lish ehtimoli \"May\"ga qaraganda kamroq bo'lganda ishlatiladi",
-      "\"Might\" ancha kuchliroq ehtimolni bildiradi",
-      "Ikkisi faqat o'tmishda ishlatiladi",
-      "Hech qanday farq yo'q"
-    ],
-    correctAnswer: "\"Might\" sodir bo'lish ehtimoli \"May\"ga qaraganda kamroq bo'lganda ishlatiladi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Zero Conditional (Nolinchi shart gap) qachon ishlatiladi?",
-    options: [
-      "Umumiy haqiqatlar va ilmiy faktlar uchun (har doim to'g'ri bo'lgan narsalar)",
-      "Kelajakdagi ehtimollar uchun",
-      "O'tmishdagi afsuslanish uchun",
-      "Xayoliy va imkonsiz vaziyatlar uchun"
-    ],
-    correctAnswer: "Umumiy haqiqatlar va ilmiy faktlar uchun (har doim to'g'ri bo'lgan narsalar)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Perfect Continuous zamoni nimani ifodalaydi?",
-    options: [
-      "O'tmishdagi bir vaqtdan oldin boshlanib, o'sha vaqtgacha davom etgan ish-harakatni",
-      "Hozir tugagan ish-harakatni",
-      "Kelajakdagi davomiy ishni",
-      "O'tmishdagi juda qisqa harakatni"
-    ],
-    correctAnswer: "O'tmishdagi bir vaqtdan oldin boshlanib, o'sha vaqtgacha davom etgan ish-harakatni"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Can\" modal fe'lining o'tgan zamon shakli qaysi?",
-    options: [
-      "Could",
-      "Caned",
-      "Must",
-      "Should"
-    ],
-    correctAnswer: "Could"
+    type: 'fill-in-the-blank',
+    question: "\"Have\" fe'lining 3-shaxs birlik (He/She/It) uchun shaklini yozing.",
+    correctAnswer: "has"
   }
 ];

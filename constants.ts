@@ -2,61 +2,51 @@
 
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 30 * 60; // 1800 seconds (30 minutes)
+export const QUIZ_DURATION_SECONDS = 40 * 60; // 2400 seconds (40 minutes)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  {
-    term: "Vowel",
-    definition: "Unli harf (a, e, i, o, u)."
-  },
-  {
-    term: "Consonant",
-    definition: "Undosh harf (b, c, d, f, g...)."
-  },
-  {
-    term: "Subject",
-    definition: "Ega. Gapda ish-harakatni bajaruvchi shaxs yoki narsa."
-  },
-  {
-    term: "Verb",
-    definition: "Fe'l. Ish-harakatni yoki holatni bildiruvchi so'z."
-  },
-  {
-    term: "Noun",
-    definition: "Ot. Shaxs, narsa, joy yoki tushuncha nomi."
-  },
-  {
-    term: "Adjective",
-    definition: "Sifat. Otning qandayligini (belgi, xususiyat) bildiruvchi so'z."
-  },
-  {
-    term: "Singular",
-    definition: "Birlik. Faqat bitta narsani bildiradi."
-  },
-  {
-    term: "Plural",
-    definition: "Ko'plik. Bitta dan ortiq narsani bildiradi."
-  },
-  {
-    term: "Auxiliary Verb",
-    definition: "Yordamchi fe'l (do, does, am, is, are). So'roq va inkor gap yasashda yordam beradi."
-  },
-  {
-    term: "Tense",
-    definition: "Zamon. Ish-harakatning bajarilish vaqtini ko'rsatadi."
-  },
-  {
-    term: "Affirmative",
-    definition: "Darak gap. Tasdiq ma'nosini bildiradi."
-  },
-  {
-    term: "Negative",
-    definition: "Inkor gap. 'Not' yuklamasi yoki inkor so'zlar qatnashgan gap."
-  },
-  {
-    term: "Interrogative",
-    definition: "So'roq gap. Ma'lumot olish uchun ishlatiladi."
-  }
+  { term: "Study hard", definition: "Qunt bilan o'qimoq" },
+  { term: "Clean the room", definition: "Xonani tozalamoq" },
+  { term: "Be happy", definition: "Baxtli bo'lmoq / Xursand bo'lmoq" },
+  { term: "Always", definition: "Har doim" },
+  { term: "For example", definition: "Masalan" },
+  { term: "Regularly", definition: "Muntazam" },
+  { term: "Continually", definition: "Uzluksiz" },
+  { term: "Everyday", definition: "Har kuni" },
+  { term: "On Mondays", definition: "Dushanbalarda" },
+  { term: "From time to time", definition: "Vaqt-vaqti bilan" },
+  { term: "Today", definition: "Bugun" },
+  { term: "Yesterday", definition: "Kecha" },
+  { term: "Often", definition: "Tez-tez, ko'pincha" },
+  { term: "The day before yesterday", definition: "Oldingi kuni" },
+  { term: "Next week", definition: "Keyingi hafta" },
+  { term: "Ago", definition: "Oldin" },
+  { term: "In the past", definition: "O'tmishda" },
+  { term: "During", definition: "Davomida" },
+  { term: "Just now", definition: "Endi / Hozir" },
+  { term: "At last", definition: "Oxiri, nihoyat" },
+  { term: "Let", definition: "Ruxsat bermoq" },
+  { term: "Try", definition: "Urinib ko'rmoq" },
+  { term: "I'm sure", definition: "Ishonchim komil" },
+  { term: "Prohibit", definition: "Taqiqlamoq" },
+  { term: "Believe", definition: "Ishonmoq" },
+  { term: "Expect", definition: "Kutmoq, umid qilmoq" },
+  { term: "Bet", definition: "Pul tikmoq" },
+  { term: "Promise", definition: "Va'da bermoq" },
+  { term: "Suppose", definition: "Taxmin qilmoq" },
+  { term: "Propose", definition: "Taklif qilmoq" },
+  { term: "Worry", definition: "Xavotirlanmoq" },
+  { term: "Hopefully", definition: "Umid bilan" },
+  { term: "Be at home", definition: "Uyda bo'lmoq" },
+  { term: "Be a student", definition: "Talaba bo'lmoq" },
+  { term: "Thank him politely", definition: "Unga xushmuomalalik bilan rahmat aytmoq" },
+  { term: "Go to master", definition: "Ustozga bormoq" },
+  { term: "Be interested in music", definition: "Musiqaga qiziqmoq" },
+  { term: "Go to class", definition: "Darsga bormoq" },
+  { term: "Be a good teacher", definition: "Yaxshi o'qituvchi bo'lmoq" },
+  { term: "Be on the table", definition: "Stol ustida bo'lmoq" },
+  { term: "Spend your money", definition: "Pulni sarflamoq" },
+  { term: "To tell the truth", definition: "Rostini aytmoq" }
 ];
 
 export const THEMES: Record<ThemeName, Theme> = {
@@ -127,317 +117,344 @@ export const THEMES: Record<ThemeName, Theme> = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- LEVEL 0: Alphabet & Basics ---
+  // --- PART 1: Grammar Theory MCQs (25 questions) ---
+  
+  // Alphabet & Basics
   {
     type: 'multiple-choice',
     question: "Ingliz alifbosida nechta unli harf (vowels) bor?",
-    options: [
-      "5 ta (a, e, i, o, u)",
-      "6 ta",
-      "21 ta",
-      "10 ta"
-    ],
+    options: ["5 ta (a, e, i, o, u)", "6 ta", "21 ta", "10 ta"],
     correctAnswer: "5 ta (a, e, i, o, u)"
   },
   {
     type: 'multiple-choice',
-    question: "Ingliz tilida gap asosan qanday tartibda tuziladi?",
+    question: "Consonants (Undoshlar) nima?",
     options: [
-      "Ega + Kesim + To'ldiruvchi (Subject + Verb + Object)",
-      "Kesim + Ega + To'ldiruvchi",
-      "To'ldiruvchi + Kesim + Ega",
-      "Ega + To'ldiruvchi + Kesim"
+      "Unli bo'lmagan barcha harflar (b, c, d...)",
+      "Faqat a, e, i, o, u harflari",
+      "Faqat raqamlar",
+      "Tinish belgilari"
     ],
-    correctAnswer: "Ega + Kesim + To'ldiruvchi (Subject + Verb + Object)"
+    correctAnswer: "Unli bo'lmagan barcha harflar (b, c, d...)"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi olmosh (Pronoun) jonsiz narsalar va hayvonlar uchun ishlatiladi?",
+    question: "Ingliz tilida gap qurilishi qanday tartibda bo'ladi?",
     options: [
-      "It",
-      "He",
-      "She",
-      "They"
+      "Subject + Verb + Object (Ega + Kesim + To'ldiruvchi)",
+      "Verb + Subject + Object",
+      "Object + Verb + Subject",
+      "Verb + Object + Subject"
     ],
-    correctAnswer: "It"
+    correctAnswer: "Subject + Verb + Object (Ega + Kesim + To'ldiruvchi)"
   },
   
-  // --- LEVEL 1: Articles & Plurals ---
+  // Articles & Plurals
   {
     type: 'multiple-choice',
-    question: "\"An\" artikli qanday so'zlar oldidan ishlatiladi?",
+    question: "\"A\" artikli qachon ishlatiladi?",
+    options: [
+      "Undosh tovush bilan boshlanadigan birlikdagi otlar oldidan",
+      "Unli tovush bilan boshlanadigan otlar oldidan",
+      "Ko'plikdagi otlar oldidan",
+      "Sanalmaydigan otlar oldidan"
+    ],
+    correctAnswer: "Undosh tovush bilan boshlanadigan birlikdagi otlar oldidan"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"An\" artikli qachon ishlatiladi?",
     options: [
       "Unli tovush bilan boshlanadigan birlikdagi otlar oldidan",
       "Undosh tovush bilan boshlanadigan otlar oldidan",
-      "Faqat ko'plikdagi otlar oldidan",
-      "Sanalmaydigan otlar oldidan"
+      "Faqat sifatlar oldidan",
+      "Odam ismlari oldidan"
     ],
     correctAnswer: "Unli tovush bilan boshlanadigan birlikdagi otlar oldidan"
   },
   {
     type: 'multiple-choice',
-    question: "\"The\" artikli nima uchun ishlatiladi?",
+    question: "Ko'plik yasashning umumiy qoidasi nima?",
     options: [
-      "Aniq, oldindan ma'lum bo'lgan narsalar uchun",
-      "Faqat yangi, noma'lum narsalar uchun",
-      "Faqat odam ismlari uchun",
-      "Hech qachon ishlatilmaydi"
+      "So'z oxiriga -s yoki -es qo'shish",
+      "So'z oxiriga -ing qo'shish",
+      "So'z oxiriga -ed qo'shish",
+      "So'zni butunlay o'zgartirish"
     ],
-    correctAnswer: "Aniq, oldindan ma'lum bo'lgan narsalar uchun"
+    correctAnswer: "So'z oxiriga -s yoki -es qo'shish"
   },
   {
     type: 'multiple-choice',
-    question: "Ko'pchilik otlarning ko'pligi (Plural) qanday yasaladi?",
-    options: [
-      "-s yoki -es qo'shish orqali",
-      "-ing qo'shish orqali",
-      "-ed qo'shish orqali",
-      "So'z o'zagini o'zgartirish orqali"
-    ],
-    correctAnswer: "-s yoki -es qo'shish orqali"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Qaysi so'z noto'g'ri ko'plik shaklida yozilgan? (Irregular Plurals)",
-    options: [
-      "Childs",
-      "Children",
-      "Men",
-      "Teeth"
-    ],
+    question: "Qaysi so'z noto'g'ri ko'plik shaklida yozilgan? (Irregular)",
+    options: ["Childs", "Children", "Men", "Feet"],
     correctAnswer: "Childs"
   },
-  
-  // --- LEVEL 2: To Be & Demonstratives ---
-  {
-    type: 'multiple-choice',
-    question: "\"I\" (Men) olmoshi bilan \"to be\" ning qaysi shakli ishlatiladi?",
-    options: [
-      "Am",
-      "Is",
-      "Are",
-      "Be"
-    ],
-    correctAnswer: "Am"
-  },
-  {
-    type: 'multiple-choice',
-    question: "He, She, It olmoshlari bilan \"to be\" ning qaysi shakli ishlatiladi?",
-    options: [
-      "Is",
-      "Am",
-      "Are",
-      "Do"
-    ],
-    correctAnswer: "Is"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Uzoqda joylashgan birlikdagi narsani ko'rsatish uchun qaysi so'z ishlatiladi?",
-    options: [
-      "That",
-      "This",
-      "These",
-      "Those"
-    ],
-    correctAnswer: "That"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"These\" va \"Those\" so'zlari nima uchun ishlatiladi?",
-    options: [
-      "Ko'plikdagi narsalarni ko'rsatish uchun",
-      "Birlikdagi narsalarni ko'rsatish uchun",
-      "Faqat odamlar uchun",
-      "Sanalmaydigan otlar uchun"
-    ],
-    correctAnswer: "Ko'plikdagi narsalarni ko'rsatish uchun"
-  },
 
-  // --- LEVEL 3: Possessives & Prepositions ---
+  // Pronouns & Possessives
   {
     type: 'multiple-choice',
-    question: "Egalikni bildirish uchun shaxs otlariga nima qo'shiladi?",
+    question: "\"Him, Her, Us, Them\" qanday olmoshlar hisoblanadi?",
     options: [
-      "'s (apostrof s)",
-      "-es",
-      "-ing",
-      "Of"
+      "Object Pronouns (To'ldiruvchi olmoshlar)",
+      "Subject Pronouns (Ega olmoshlar)",
+      "Possessive Adjectives (Egalik sifatlari)",
+      "Reflexive Pronouns (O'zlik olmoshlari)"
     ],
+    correctAnswer: "Object Pronouns (To'ldiruvchi olmoshlar)"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Egalikni bildirish uchun shaxs otlariga (masalan: John) nima qo'shiladi?",
+    options: ["'s (apostrof s)", "-s", "-es", "Of"],
     correctAnswer: "'s (apostrof s)"
   },
+
+  // To Be & Present Simple
   {
     type: 'multiple-choice',
-    question: "\"My, Your, His, Her\" bular qanday olmoshlar?",
-    options: [
-      "Egalik sifatlari (Possessive Adjectives)",
-      "Kishilik olmoshlari (Subject Pronouns)",
-      "Ko'rsatish olmoshlari (Demonstratives)",
-      "So'roq olmoshlari"
-    ],
-    correctAnswer: "Egalik sifatlari (Possessive Adjectives)"
+    question: "\"To be\" fe'lining hozirgi zamon shakllari qaysilar?",
+    options: ["Am, Is, Are", "Was, Were", "Do, Does", "Have, Has"],
+    correctAnswer: "Am, Is, Are"
   },
   {
     type: 'multiple-choice',
-    question: "Soat vaqtlari (masalan, 5:00) bilan qaysi predlog ishlatiladi?",
+    question: "Present Simple (Hozirgi oddiy) zamonda so'roq gap qanday yasaladi?",
     options: [
-      "At",
-      "In",
-      "On",
-      "To"
+      "Do / Does yordamchi fe'llari orqali",
+      "Am / Is / Are oldinga chiqishi orqali (fe'lli gapda)",
+      "Will yordamida",
+      "Did yordamida"
     ],
-    correctAnswer: "At"
+    correctAnswer: "Do / Does yordamchi fe'llari orqali"
   },
   {
     type: 'multiple-choice',
-    question: "Hafta kunlari (Monday, Tuesday) bilan qaysi predlog ishlatiladi?",
+    question: "Present Simple da 3-shaxs birlikda (He/She/It) fe'l qanday o'zgaradi?",
     options: [
-      "On",
-      "In",
-      "At",
-      "From"
+      "-s yoki -es qo'shimchasi qo'shiladi",
+      "-ing qo'shiladi",
+      "-ed qo'shiladi",
+      "O'zgarmaydi"
     ],
-    correctAnswer: "On"
+    correctAnswer: "-s yoki -es qo'shimchasi qo'shiladi"
   },
 
-  // --- LEVEL 4: Present Simple ---
+  // Present Continuous
   {
     type: 'multiple-choice',
-    question: "Present Simple (Hozirgi oddiy zamon) qachon ishlatiladi?",
+    question: "Present Continuous (Hozirgi davomiy) zamon formulasi qanday?",
     options: [
-      "Doimiy, takrorlanuvchi harakatlar va faktlar uchun",
-      "Ayni paytda bo'layotgan ishlar uchun",
-      "O'tgan zamondagi ishlar uchun",
-      "Kelajakdagi rejalar uchun"
-    ],
-    correctAnswer: "Doimiy, takrorlanuvchi harakatlar va faktlar uchun"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple da 3-shaxs birlikda (He/She/It) fe'lga nima qo'shiladi?",
-    options: [
-      "-s yoki -es",
-      "-ing",
-      "-ed",
-      "Hech narsa"
-    ],
-    correctAnswer: "-s yoki -es"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple da inkor gap qaysi yordamchi fe'llar bilan yasaladi?",
-    options: [
-      "Don't / Doesn't",
-      "Am not / Isn't / Aren't",
-      "Didn't",
-      "Won't"
-    ],
-    correctAnswer: "Don't / Doesn't"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"Have\" fe'li 3-shaxs birlikda (He/She/It) qanday o'zgaradi?",
-    options: [
-      "Has",
-      "Haves",
-      "Having",
-      "Had"
-    ],
-    correctAnswer: "Has"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple signal so'zlari qaysilar?",
-    options: [
-      "Always, usually, often, every day",
-      "Now, at the moment",
-      "Yesterday, ago",
-      "Tomorrow, next week"
-    ],
-    correctAnswer: "Always, usually, often, every day"
-  },
-
-  // --- LEVEL 5: Present Continuous ---
-  {
-    type: 'multiple-choice',
-    question: "Present Continuous (Hozirgi davomiy zamon) qanday yasaladi?",
-    options: [
-      "To be (am/is/are) + Verb + ing",
+      "Am/Is/Are + Verb + ing",
       "Subject + Verb + s",
       "Have/Has + Verb 3",
       "Will + Verb"
     ],
-    correctAnswer: "To be (am/is/are) + Verb + ing"
+    correctAnswer: "Am/Is/Are + Verb + ing"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous qachon ishlatiladi?",
+    question: "Present Continuous uchun signal so'zlar qaysilar?",
     options: [
-      "Ayni nutq paytida sodir bo'layotgan harakatlar uchun",
-      "Har doim bo'ladigan ishlar uchun",
-      "O'tmishdagi ishlar uchun",
-      "Tugallangan ishlar uchun"
+      "Now, at the moment, Listen!, Look!",
+      "Always, usually, often",
+      "Yesterday, last week",
+      "Tomorrow, next year"
     ],
-    correctAnswer: "Ayni nutq paytida sodir bo'layotgan harakatlar uchun"
+    correctAnswer: "Now, at the moment, Listen!, Look!"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous signal so'zlari qaysilar?",
+    question: "Stative Verbs (Holat fe'llari: like, love, know) Continuous zamonda ishlatiladimi?",
     options: [
-      "Now, at the moment, look!, listen!",
-      "Every day, sometimes",
-      "Last year, yesterday",
-      "Since, for"
-    ],
-    correctAnswer: "Now, at the moment, look!, listen!"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Stative Verbs (Holat fe'llari: like, know, want) Continuous zamonda ishlatiladimi?",
-    options: [
-      "Yo'q, ular odatda Simple zamonda ishlatiladi",
+      "Yo'q, ular odatda Simple zamonlarda ishlatiladi",
       "Ha, har doim",
-      "Faqat so'roq gapda",
-      "Farqi yo'q"
+      "Faqat kelasi zamonda",
+      "Faqat inkor gapda"
     ],
-    correctAnswer: "Yo'q, ular odatda Simple zamonda ishlatiladi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "\"There is / There are\" iborasi nimani bildiradi?",
-    options: [
-      "Biror joyda biror narsaning borligini",
-      "Egalikni (Menda bor)",
-      "Harakatni",
-      "Vaqtni"
-    ],
-    correctAnswer: "Biror joyda biror narsaning borligini"
+    correctAnswer: "Yo'q, ular odatda Simple zamonlarda ishlatiladi"
   },
 
-  // --- WRITE-IN QUESTIONS (5 items) ---
+  // Past Simple
+  {
+    type: 'multiple-choice',
+    question: "\"To be\" fe'lining o'tgan zamon shakllari qaysilar?",
+    options: ["Was, Were", "Am, Is, Are", "Been", "Being"],
+    correctAnswer: "Was, Were"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To'g'ri fe'llar (Regular verbs) o'tgan zamonda qanday tuslanadi?",
+    options: [
+      "-ed qo'shimchasi qo'shiladi",
+      "-ing qo'shiladi",
+      "Ikkinchi shakli (V2) yodlanadi",
+      "-s qo'shiladi"
+    ],
+    correctAnswer: "-ed qo'shimchasi qo'shiladi"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple da so'roq va inkor gaplar qaysi yordamchi fe'l bilan yasaladi?",
+    options: ["Did", "Do", "Does", "Will"],
+    correctAnswer: "Did"
+  },
+
+  // Past Continuous
+  {
+    type: 'multiple-choice',
+    question: "Past Continuous (O'tgan davomiy) zamon formulasi qanday?",
+    options: [
+      "Was/Were + Verb + ing",
+      "Am/Is/Are + Verb + ing",
+      "Had + Verb 3",
+      "Did + Verb"
+    ],
+    correctAnswer: "Was/Were + Verb + ing"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Continuous qachon ishlatiladi?",
+    options: [
+      "O'tmishdagi ma'lum bir vaqtda davom etayotgan harakat uchun",
+      "O'tmishda tugallangan qisqa harakat uchun",
+      "Kelajakdagi rejalar uchun",
+      "Doimiy haqiqatlar uchun"
+    ],
+    correctAnswer: "O'tmishdagi ma'lum bir vaqtda davom etayotgan harakat uchun"
+  },
+
+  // Future Simple
+  {
+    type: 'multiple-choice',
+    question: "Future Simple (Kelasi oddiy) zamon qaysi yordamchi fe'l bilan yasaladi?",
+    options: ["Will", "Did", "Do", "Are"],
+    correctAnswer: "Will"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Be going to\" iborasi nima uchun ishlatiladi?",
+    options: [
+      "Oldindan rejalashtirilgan ish-harakatlar uchun",
+      "Nutq paytida qilingan qarorlar uchun",
+      "O'tmishdagi ishlar uchun",
+      "Doimiy odatlar uchun"
+    ],
+    correctAnswer: "Oldindan rejalashtirilgan ish-harakatlar uchun"
+  },
+
+  // Future Continuous
+  {
+    type: 'multiple-choice',
+    question: "Future Continuous (Kelasi davomiy) zamon formulasi qanday?",
+    options: [
+      "Will be + Verb + ing",
+      "Will + Verb",
+      "Am/Is/Are going to + Verb",
+      "Will have + Verb 3"
+    ],
+    correctAnswer: "Will be + Verb + ing"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Continuous qachon ishlatiladi?",
+    options: [
+      "Kelajakdagi aniq bir vaqtda davom etayotgan bo'ladigan ishlar uchun",
+      "Kelajakda tugallanadigan ishlar uchun",
+      "Hozirgi paytdagi ishlar uchun",
+      "O'tmishdagi davomiy ishlar uchun"
+    ],
+    correctAnswer: "Kelajakdagi aniq bir vaqtda davom etayotgan bo'ladigan ishlar uchun"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Vaqt predloglaridan qaysi biri soatlar (masalan 5:00) bilan ishlatiladi?",
+    options: ["At", "In", "On", "To"],
+    correctAnswer: "At"
+  },
+
+  // --- PART 2: Grammar Fill-in-the-blank (5 questions) ---
   {
     type: 'fill-in-the-blank',
-    question: "Present Continuous zamonini yasash uchun fe'lga qaysi qo'shimcha qo'shiladi?",
+    question: "\"Go\" fe'lining o'tgan zamon shakli (V2) nima?",
+    correctAnswer: "went"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Present Continuous zamonini yasashda fe'lga qaysi qo'shimcha qo'shiladi?",
     correctAnswer: "ing"
   },
   {
     type: 'fill-in-the-blank',
-    question: "Unli tovush bilan boshlanadigan birlikdagi otlar oldidan qaysi artikl ishlatiladi (a yoki an)?",
+    question: "Future Continuous zamonida yordamchi fe'l qanday bo'ladi? (Will ...)",
+    correctAnswer: ["will be", "be"]
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Unli tovush bilan boshlanadigan birlikdagi otlar oldidan qaysi artikl (a/an) ishlatiladi?",
     correctAnswer: "an"
   },
   {
     type: 'fill-in-the-blank',
-    question: "Ko'plik yasash uchun so'z oxiriga odatda qaysi harf qo'shiladi?",
-    correctAnswer: "s"
+    question: "\"Man\" (erkak kishi) so'zining ko'plik shakli nima?",
+    correctAnswer: "men"
+  },
+
+  // --- PART 3: Vocabulary Multiple Choice (5 questions) ---
+  {
+    type: 'multiple-choice',
+    question: "\"Regularly\" so'zining tarjimasi nima?",
+    options: ["Muntazam", "Kamdan-kam", "Har doim", "Hech qachon"],
+    correctAnswer: "Muntazam"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Prohibit\" so'zining ma'nosi nima?",
+    options: ["Taqiqlamoq", "Ruxsat bermoq", "Taklif qilmoq", "Va'da bermoq"],
+    correctAnswer: "Taqiqlamoq"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Hopefully\" qanday tarjima qilinadi?",
+    options: ["Umid bilan", "Ishonch bilan", "Afsuski", "Tez orada"],
+    correctAnswer: "Umid bilan"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Spend your money\" iborasi nimani anglatadi?",
+    options: ["Pulni sarflamoq", "Pul topmoq", "Pulni tejamoq", "Pul yo'qotmoq"],
+    correctAnswer: "Pulni sarflamoq"
+  },
+  {
+    type: 'multiple-choice',
+    question: "\"Be interested in music\" nima degani?",
+    options: ["Musiqaga qiziqmoq", "Musiqa tinglamoq", "Musiqa chalmoq", "Musiqani yomon ko'rmoq"],
+    correctAnswer: "Musiqaga qiziqmoq"
+  },
+
+  // --- PART 4: Vocabulary Fill-in-the-blank (5 questions) ---
+  {
+    type: 'fill-in-the-blank',
+    question: "\"Har doim\" so'zining inglizcha tarjimasi nima?",
+    correctAnswer: "always"
   },
   {
     type: 'fill-in-the-blank',
-    question: "\"To be\" fe'lining \"He/She/It\" uchun shaklini yozing.",
-    correctAnswer: "is"
+    question: "\"Kecha\" (o'tgan kun) ingliz tilida nima bo'ladi?",
+    correctAnswer: "yesterday"
   },
   {
     type: 'fill-in-the-blank',
-    question: "Present Simple inkor gaplarini yasashda \"I/You/We/They\" uchun qaysi yordamchi so'z ishlatiladi (inkor shakli)?",
-    correctAnswer: "don't"
+    question: "\"Rostini aytmoq\" iborasini inglizchaga tarjima qiling. (To ...)",
+    correctAnswer: ["tell the truth", "to tell the truth"]
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "\"Ishonchim komil\" iborasi ingliz tilida qanday bo'ladi? (I'm ...)",
+    correctAnswer: ["sure", "i'm sure", "i am sure"]
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "\"Xavotirlanmoq\" fe'lining inglizcha tarjimasi nima?",
+    correctAnswer: "worry"
   }
 ];

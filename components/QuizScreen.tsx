@@ -28,6 +28,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isExiting, setIsExiting] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
 
   // Constants for the circular progress bar
   const CIRCLE_RADIUS = 26;
@@ -40,6 +41,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     setIsAnswered(false);
     setIsCorrect(null);
     setIsExiting(false);
+    setIsShaking(false);
   }, [question]);
 
   const playAnswerSound = (isCorrect: boolean) => {
@@ -99,6 +101,9 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     e.preventDefault();
     if (writtenAnswer.trim()) {
        handleSubmit(writtenAnswer.trim());
+    } else {
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
     }
   }
 
@@ -119,14 +124,18 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   
   const getInputClasses = () => {
     if (!isAnswered) {
-      return 'bg-white/10 border-white/20 focus:ring-purple-500';
+      return isShaking 
+        ? 'bg-white/10 border-red-500/50 ring-2 ring-red-500/20' 
+        : 'bg-white/10 border-white/20 focus:ring-purple-500';
     }
     return isCorrect
       ? 'bg-green-500/20 border-green-500 text-white ring-green-500'
       : 'bg-red-500/20 border-red-500 text-white ring-red-500';
   }
 
+  const isLowTime = timeLeft < 15;
   const timerColor = timeLeft <= 10 ? 'text-red-500' : 'text-gray-200';
+  const pulseClass = isLowTime && !isPaused ? 'animate-timer-pulse' : '';
   
   let progressCircleColor = theme.timerCircle.base;
   if (timeLeft <= QUIZ_DURATION_SECONDS * 0.25) {
@@ -147,7 +156,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           <p className="text-gray-300 font-medium">
             Savol {questionNumber} / {totalQuestions}
           </p>
-          <div className="relative w-16 h-16 flex items-center justify-center">
+          <div className={`relative w-16 h-16 flex items-center justify-center ${pulseClass}`}>
               <svg className="w-full h-full" viewBox="0 0 60 60">
                   <g transform="rotate(-90 30 30)">
                       <circle
@@ -226,12 +235,11 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
                   onChange={(e) => setWrittenAnswer(e.target.value)}
                   placeholder="Javobingizni yozing"
                   disabled={isAnswered || isPaused}
-                  required
-                  className={`w-full rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${getInputClasses()}`}
+                  className={`w-full rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${getInputClasses()} ${isShaking ? 'animate-shake' : ''}`}
                 />
                 <button
                   type="submit"
-                  disabled={!writtenAnswer.trim() || isAnswered || isPaused}
+                  disabled={isAnswered || isPaused}
                   className={`w-full sm:w-auto ${theme.button} disabled:cursor-not-allowed disabled:transform-none text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105`}
                 >
                   Tekshirish
@@ -263,6 +271,24 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
         }
         .animate-option-fade-in {
             animation: option-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes timer-pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+          100% { transform: scale(1); }
+        }
+        .animate-timer-pulse {
+          animation: timer-pulse 0.8s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20%, 60% { transform: translateX(-4px); }
+          40%, 80% { transform: translateX(4px); }
+        }
+        .animate-shake {
+          animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
         }
         
         .fill-mode-forwards {

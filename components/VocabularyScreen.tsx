@@ -9,7 +9,7 @@ interface VocabularyScreenProps {
 const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
   return (
     <div className="text-white p-6 md:p-8 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg animate-fade-in-up">
-      <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-400">
+      <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-400 animate-title-pop">
         <BookOpenIcon className="w-8 h-8" />
         Test Lug'atlari
       </h2>
@@ -46,6 +46,25 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
         .animate-fade-in-up {
           animation: fade-in-up 0.6s ease-out forwards;
         }
+
+        @keyframes title-pop {
+          0% { 
+            opacity: 0; 
+            transform: scale(0.8) translateY(-10px);
+          }
+          70% {
+            transform: scale(1.05) translateY(2px);
+          }
+          100% { 
+            opacity: 1; 
+            transform: scale(1) translateY(0);
+          }
+        }
+        .animate-title-pop {
+          animation: title-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+          opacity: 0;
+        }
+
         /* Custom scrollbar for vocabulary list */
         .overflow-y-auto::-webkit-scrollbar {
           width: 8px;

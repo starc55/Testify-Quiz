@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import type { ThemeName } from '../types';
 import { THEMES } from '../constants';
+import CheckCircleIcon from './icons/CheckCircleIcon';
 
 interface WelcomeScreenProps {
   onNameSubmit: (name: string) => void;
@@ -53,15 +54,32 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
       </div>
       
       <div className="p-6 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg">
-        <h3 className="text-lg font-semibold mb-4 text-center text-gray-200">Mavzuni tanlang</h3>
-        <div className="flex justify-center items-center gap-4">
+        <h3 className="text-sm font-bold mb-6 text-center text-gray-400 uppercase tracking-[0.2em]">Mavzuni tanlang</h3>
+        <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
           {Object.values(THEMES).map((theme) => (
-            <button
-              key={theme.id}
-              onClick={() => onThemeChange(theme.id)}
-              className={`w-12 h-12 rounded-full transition-all duration-300 ${theme.preview} border-2 ${currentTheme === theme.id ? 'border-white scale-110 shadow-xl' : 'border-transparent hover:scale-110 opacity-70 hover:opacity-100'}`}
-              aria-label={`Select ${theme.name} theme`}
-            />
+            <div key={theme.id} className="flex flex-col items-center gap-2">
+              <button
+                onClick={() => onThemeChange(theme.id)}
+                className={`relative w-14 h-14 rounded-2xl transition-all duration-500 ${theme.preview} border-2 overflow-hidden group ${
+                  currentTheme === theme.id 
+                    ? 'border-white scale-110 shadow-[0_0_20px_rgba(255,255,255,0.2)] ring-4 ring-white/5' 
+                    : 'border-white/10 opacity-60 hover:opacity-100 hover:scale-105'
+                }`}
+                aria-label={`Select ${theme.name} theme`}
+              >
+                {currentTheme === theme.id && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[1px] animate-scale-in">
+                    <CheckCircleIcon className="w-6 h-6 text-white drop-shadow-lg" />
+                  </div>
+                )}
+                {/* Visual texture for swatch to make them look "pro" */}
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-white/10 rounded-full blur-md group-hover:bg-white/20 transition-colors"></div>
+                <div className="absolute -bottom-2 -left-2 w-10 h-10 bg-black/20 rounded-full blur-lg"></div>
+              </button>
+              <span className={`text-[10px] font-bold uppercase tracking-wider transition-colors duration-300 ${currentTheme === theme.id ? 'text-white' : 'text-gray-500'}`}>
+                {theme.name}
+              </span>
+            </div>
           ))}
         </div>
       </div>
@@ -73,6 +91,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit, currentThem
         }
         .animate-fade-in {
           animation: fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes scale-in {
+          from { transform: scale(0.5); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        .animate-scale-in {
+          animation: scale-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
       `}</style>
     </div>

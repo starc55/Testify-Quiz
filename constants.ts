@@ -3,26 +3,36 @@ import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 export const QUIZ_DURATION_SECONDS = 40 * 60; // 40 minutes
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Believe", definition: "Ishonmoq (Stative Verb)" },
-  { term: "Understand", definition: "Tushunmoq (Stative Verb)" },
-  { term: "Experience", definition: "Tajriba" },
-  { term: "Environment", definition: "Atrof-muhit" },
-  { term: "Decision", definition: "Qaror" },
-  { term: "Improve", definition: "Yaxshilamoq / Rivojlantirmoq" },
-  { term: "Necessary", definition: "Zarur, kerakli" },
-  { term: "Delicious", definition: "Mazali" },
-  { term: "Journey", definition: "Sayohat" },
-  { term: "Furniture", definition: "Mebel" },
-  { term: "Knowledge", definition: "Bilim" },
-  { term: "Opportunity", definition: "Imkoniyat" },
-  { term: "Patient", definition: "Sabrli" },
-  { term: "Describe", definition: "Tasvirlamoq" },
-  { term: "Successful", definition: "Muvaffaqiyatli" },
-  { term: "Suggest", definition: "Taklif qilmoq" },
-  { term: "Complicated", definition: "Murakkab" },
-  { term: "Immediately", definition: "Darhol" },
-  { term: "Prefer", definition: "Afzal ko'rmoq (Stative Verb)" },
-  { term: "Recognize", definition: "Tanimoq" }
+  { term: "Beautiful", definition: "Chiroyli" },
+  { term: "Teacher", definition: "O'qituvchi" },
+  { term: "Friend", definition: "Do'st" },
+  { term: "Family", definition: "Oila" },
+  { term: "Market", definition: "Bozor" },
+  { term: "Happy", definition: "Baxtli" },
+  { term: "Difficult", definition: "Qiyin" },
+  { term: "Travel", definition: "Sayohat qilmoq" },
+  { term: "Learn", definition: "O'rganmoq" },
+  { term: "Work", definition: "Ishlamoq" },
+  { term: "Help", definition: "Yordam bermoq" },
+  { term: "Quickly", definition: "Tezda" },
+  { term: "Always", definition: "Har doim" },
+  { term: "Sometimes", definition: "Ba'zan" },
+  { term: "Important", definition: "Muhim" },
+  { term: "Answer", definition: "Javob" },
+  { term: "Question", definition: "Savol" },
+  { term: "Problem", definition: "Muammo" },
+  { term: "Easy", definition: "Oson" },
+  { term: "Strong", definition: "Kuchli" },
+  { term: "Early", definition: "Erta" },
+  { term: "Late", definition: "Kech" },
+  { term: "Buy", definition: "Sotib olmoq" },
+  { term: "Sell", definition: "Sotmoq" },
+  { term: "Open", definition: "Ochmoq" },
+  { term: "Close", definition: "Yopmoq" },
+  { term: "Clean", definition: "Toza" },
+  { term: "Dirty", definition: "Iflos" },
+  { term: "Quiet", definition: "Jim" },
+  { term: "Noise", definition: "Shovqin" }
 ];
 
 export const THEMES: Record<ThemeName, Theme> = {
@@ -96,178 +106,178 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   // --- GRAMMAR MCQs (15) ---
   {
     type: 'multiple-choice',
-    question: "Qaysi gapda 'Stative Verb' noto'g'ri ishlatilgan?",
-    options: ["I am knowing the answer.", "I know the answer.", "She wants a coffee.", "They believe you."],
-    correctAnswer: "I am knowing the answer."
+    question: "Ingliz alifbosida nechta unli (vowel) harf bor?",
+    options: ["5 ta", "21 ta", "26 ta", "10 ta"],
+    correctAnswer: "5 ta"
   },
   {
     type: 'multiple-choice',
-    question: "Hozirgi paytda davom etayotgan harakatni ko'rsating:",
-    options: ["She is reading a book now.", "She reads books every day.", "She read a book yesterday.", "She will read a book."],
-    correctAnswer: "She is reading a book now."
+    question: "Qaysi qatorda faqat unli harflar berilgan?",
+    options: ["A, E, I, O, U", "B, C, D, F, G", "X, Y, Z, Q, W", "M, N, L, R, S"],
+    correctAnswer: "A, E, I, O, U"
   },
   {
     type: 'multiple-choice',
-    question: "Past Continuous zamonining formulasini tanlang:",
-    options: ["Was/Were + Verb + ing", "Am/Is/Are + Verb + ing", "Have/Has + Verb 3", "Did + Verb"],
-    correctAnswer: "Was/Were + Verb + ing"
+    question: "Articles: '___ Apple' so'ziga qaysi artikl mos keladi?",
+    options: ["An", "A", "The", "No article"],
+    correctAnswer: "An"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi so'z 'uncountable' (sanalmaydigan) ot hisoblanadi?",
-    options: ["Water", "Apple", "Car", "Book"],
-    correctAnswer: "Water"
+    question: "Articles: '___ University' so'zi qaysi artikl bilan ishlatiladi?",
+    options: ["A", "An", "The", "No article"],
+    correctAnswer: "A"
   },
   {
     type: 'multiple-choice',
-    question: "Articles: '___ University is ___ big building.'",
-    options: ["A / a", "An / a", "The / an", "A / an"],
-    correctAnswer: "A / a"
+    question: "Pronouns: 'Men' olmoshining inglizcha tarjimasi (Subject):",
+    options: ["I", "Me", "My", "Mine"],
+    correctAnswer: "I"
   },
   {
     type: 'multiple-choice',
-    question: "Irregular Plural: 'Mouse' so'zining ko'plik shakli nima?",
-    options: ["Mice", "Mouses", "Meeses", "Mouse's"],
-    correctAnswer: "Mice"
+    question: "Pronouns: 'Meni / Menga' olmoshining inglizcha tarjimasi (Object):",
+    options: ["Me", "I", "My", "Mine"],
+    correctAnswer: "Me"
   },
   {
     type: 'multiple-choice',
-    question: "Past Simple: 'I ___ (see) him two days ago.'",
-    options: ["Saw", "See", "Seed", "Was see"],
-    correctAnswer: "Saw"
+    question: "Plurals: 'Child' (bola) so'zining ko'plik shakli nima?",
+    options: ["Children", "Childs", "Childrens", "Childes"],
+    correctAnswer: "Children"
   },
   {
     type: 'multiple-choice',
-    question: "Future: Nutq paytida to'satdan qabul qilingan qaror uchun nima ishlatiladi?",
-    options: ["Will", "Be going to", "Present Continuous", "Past Simple"],
-    correctAnswer: "Will"
+    question: "Verb Forms: 'Go' fe'lining V2 (Past Simple) shakli qaysi?",
+    options: ["Went", "Gone", "Going", "Goes"],
+    correctAnswer: "Went"
   },
   {
     type: 'multiple-choice',
-    question: "Prepositions: 'I was born ___ August.'",
-    options: ["In", "On", "At", "By"],
-    correctAnswer: "In"
+    question: "Verb Forms: 'Seen' fe'li qaysi shakl (V) hisoblanadi?",
+    options: ["V3", "V1", "V2", "V4"],
+    correctAnswer: "V3"
   },
   {
     type: 'multiple-choice',
-    question: "Stative Verb: 'Afzal ko'rmoq' fe'li qaysi?",
-    options: ["Prefer", "Run", "Eat", "Study"],
-    correctAnswer: "Prefer"
+    question: "Verb Forms: 'V4' shakli qanday yasaladi?",
+    options: ["Verb + ing", "Verb + ed", "Verb + s", "Verb + es"],
+    correctAnswer: "Verb + ing"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple: 'He ___ (not/work) on Sundays.'",
-    options: ["Doesn't work", "Don't work", "Isn't working", "Not works"],
-    correctAnswer: "Doesn't work"
+    question: "Stative Verbs: Qaysi fe'l holatni bildiradi?",
+    options: ["Understand", "Run", "Jump", "Eat"],
+    correctAnswer: "Understand"
   },
   {
     type: 'multiple-choice',
-    question: "Past Continuous: 'While I ___ (sleep), the phone rang.'",
-    options: ["Was sleeping", "Slept", "Am sleeping", "Were sleeping"],
-    correctAnswer: "Was sleeping"
+    question: "Stative Verbs: Qaysi fe'l 'ing' qo'shimchasini odatda olmaydi?",
+    options: ["Believe", "Dance", "Sing", "Study"],
+    correctAnswer: "Believe"
   },
   {
     type: 'multiple-choice',
-    question: "Pronouns: 'This is ___ (mening) bag.'",
-    options: ["My", "Mine", "Me", "I"],
-    correctAnswer: "My"
+    question: "Plurals: 'Man' so'zining ko'plik shaklini toping:",
+    options: ["Men", "Mans", "Mens", "Manes"],
+    correctAnswer: "Men"
   },
   {
     type: 'multiple-choice',
-    question: "Articles: 'Can you pass me ___ salt, please?' (aniq bitta tuzдон)",
-    options: ["The", "A", "An", "Some"],
-    correctAnswer: "The"
+    question: "Pronouns: 'Mine' (meniki) qaysi turdagi olmosh?",
+    options: ["Possessive Pronoun", "Subject Pronoun", "Object Pronoun", "Reflexive Pronoun"],
+    correctAnswer: "Possessive Pronoun"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi fe'l 'Stative verb' emas?",
-    options: ["Dance", "Hear", "Love", "Believe"],
-    correctAnswer: "Dance"
+    question: "Alphabet: Ingliz alifbosidagi oxirgi harf nima?",
+    options: ["Z", "X", "Y", "Q"],
+    correctAnswer: "Z"
   },
 
   // --- GRAMMAR WRITTEN (5) ---
   {
     type: 'fill-in-the-blank',
-    question: "'Buy' fe'lining o'tgan zamon (V2) shaklini yozing:",
-    correctAnswer: "bought"
+    question: "'Eat' fe'lining V3 (Past Participle) shaklini yozing:",
+    correctAnswer: "eaten"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Person' so'zining ko'plik shakli nima?",
-    correctAnswer: "people"
+    question: "'Write' fe'lining V2 (Past Simple) shaklini yozing:",
+    correctAnswer: "wrote"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'She ___ (like) chocolate.' (Present Simple)",
-    correctAnswer: "likes"
+    question: "'Run' fe'lining V4 (-ing) shaklini yozing:",
+    correctAnswer: "running"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'They ___ (be) at home yesterday.' (Past Simple)",
-    correctAnswer: "were"
+    question: "'Tooth' (tish) so'zining ko'plik shaklini yozing:",
+    correctAnswer: "teeth"
   },
   {
     type: 'fill-in-the-blank',
-    question: "Kelajakda rejalashtirilgan ish uchun ishlatiladigan ibora: 'Be ___ to'",
-    correctAnswer: "going"
+    question: "'Do' fe'lining V2 shaklini yozing:",
+    correctAnswer: "did"
   },
 
   // --- VOCABULARY MCQs (5) ---
   {
     type: 'multiple-choice',
-    question: "'Opportunity' so'zining tarjimasi nima?",
-    options: ["Imkoniyat", "Tajriba", "Qaror", "Mas'uliyat"],
-    correctAnswer: "Imkoniyat"
+    question: "PDF: 'Early' so'zining tarjimasi nima?",
+    options: ["Erta", "Kech", "Tezda", "Doim"],
+    correctAnswer: "Erta"
   },
   {
     type: 'multiple-choice',
-    question: "Kasalxonada ishlaydigan odamni toping:",
-    options: ["Nurse", "Lawyer", "Engineer", "Waiter"],
-    correctAnswer: "Nurse"
+    question: "PDF: 'Important' so'zining tarjimasi nima?",
+    options: ["Muhim", "Oson", "Qiyin", "Jim"],
+    correctAnswer: "Muhim"
   },
   {
     type: 'multiple-choice',
-    question: "'Delicious' so'ziga sinonim tanlang:",
-    options: ["Tasty", "Boring", "Expensive", "Crowded"],
-    correctAnswer: "Tasty"
+    question: "PDF: 'Market' so'zining tarjimasi nima?",
+    options: ["Bozor", "Oila", "Do'st", "Savol"],
+    correctAnswer: "Bozor"
   },
   {
     type: 'multiple-choice',
-    question: "'Furniture' deganda nima tushuniladi?",
-    options: ["Stol, stul, shkaf", "Mevalar", "Kiyimlar", "Transport"],
-    correctAnswer: "Stol, stul, shkaf"
+    question: "PDF: 'Noise' so'zining tarjimasi nima?",
+    options: ["Shovqin", "Jim", "Toza", "Iflos"],
+    correctAnswer: "Shovqin"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi so'z 'atrof-muhit' degani?",
-    options: ["Environment", "Development", "Equipment", "Movement"],
-    correctAnswer: "Environment"
+    question: "PDF: 'Problem' so'zining tarjimasi nima?",
+    options: ["Muammo", "Javob", "Savol", "Oson"],
+    correctAnswer: "Muammo"
   },
 
   // --- VOCABULARY WRITTEN (5) ---
   {
     type: 'fill-in-the-blank',
-    question: "'Muvaffaqiyatli' so'zining inglizcha tarjimasi nima?",
-    correctAnswer: "successful"
+    question: "PDF: 'Yordam bermoq' so'zini inglizcha yozing:",
+    correctAnswer: "help"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Sayohat' (uzoq davom etadigan) ingliz tilida nima bo'ladi?",
-    correctAnswer: "journey"
+    question: "PDF: 'Tezda' so'zini inglizcha yozing:",
+    correctAnswer: "quickly"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Tushunmoq' fe'lining inglizcha tarjimasi nima?",
-    correctAnswer: "understand"
+    question: "PDF: 'Sotib olmoq' so'zini inglizcha yozing:",
+    correctAnswer: "buy"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Zarur/Kerakli' so'zini inglizcha yozing:",
-    correctAnswer: "necessary"
+    question: "PDF: 'Har doim' so'zini inglizcha yozing:",
+    correctAnswer: "always"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Tajriba' so'zining inglizcha tarjimasi nima?",
-    correctAnswer: "experience"
+    question: "PDF: 'Sayohat qilmoq' so'zini inglizcha yozing:",
+    correctAnswer: "travel"
   }
 ];

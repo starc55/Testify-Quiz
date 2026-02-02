@@ -15,7 +15,7 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
       </h2>
       <p className="text-center text-gray-300 mb-6">Testni boshlashdan oldin unda uchraydigan ba'zi so'zlar bilan tanishib chiqing.</p>
       
-      <div className="space-y-4 max-h-64 overflow-y-auto pr-4 mb-8">
+      <div className="space-y-4 max-h-64 overflow-y-auto pr-4 mb-8 custom-scrollbar">
         {QUIZ_VOCABULARY.map((item) => (
           <div key={item.term} className="p-4 bg-white/5 rounded-lg border border-white/10">
             <h3 className="font-bold text-lg text-purple-300">{item.term}</h3>
@@ -65,19 +65,18 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
           opacity: 0;
         }
 
-        /* Custom scrollbar for vocabulary list */
-        .overflow-y-auto::-webkit-scrollbar {
+        .custom-scrollbar::-webkit-scrollbar {
           width: 8px;
         }
-        .overflow-y-auto::-webkit-scrollbar-track {
+        .custom-scrollbar::-webkit-scrollbar-track {
           background: rgba(255, 255, 255, 0.1);
           border-radius: 10px;
         }
-        .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: rgba(192, 132, 252, 0.5); /* purple-300 with opacity */
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(192, 132, 252, 0.5);
           border-radius: 10px;
         }
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: rgba(192, 132, 252, 0.7);
         }
       `}</style>

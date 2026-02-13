@@ -21,36 +21,36 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit }) => {
     <div className={`w-full max-w-xl mx-auto transition-all duration-700 ${isExiting ? 'opacity-0 scale-95 -translate-y-4' : 'animate-mount'}`}>
       <div className="relative group">
         <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-        <div className="relative p-10 md:p-14 bg-slate-900/60 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-2xl text-center">
+        <div className="relative p-8 sm:p-10 md:p-14 bg-slate-900/60 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-2xl text-center">
           
-          <div className="mb-10 inline-flex items-center justify-center w-20 h-20 bg-indigo-600/20 rounded-3xl border border-indigo-500/30 animate-float">
-             <svg className="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="mb-6 sm:mb-10 inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600/20 rounded-2xl sm:rounded-3xl border border-indigo-500/30 animate-float">
+             <svg className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
              </svg>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tighter text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 sm:mb-4 tracking-tighter text-white">
             Ingliz Tili <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-violet-400">Bilimdoni</span>
           </h1>
-          <p className="text-lg text-slate-400 mb-12 font-medium">
+          <p className="text-base sm:text-lg text-slate-400 mb-8 sm:mb-12 font-medium">
             Grammatika va lug'at bilimingizni sinab ko'ring.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="relative">
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="To'liq ismingizni kiriting"
-                className="w-full bg-slate-800/40 border border-white/10 rounded-2xl py-5 px-8 text-white text-xl font-bold placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300 text-center"
+                placeholder="Ismingizni kiriting"
+                className="w-full bg-slate-800/40 border border-white/10 rounded-xl sm:rounded-2xl py-4 sm:py-5 px-6 sm:px-8 text-white text-lg sm:text-xl font-bold placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300 text-center"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className={`${FIXED_THEME.button} w-full text-white text-lg font-black py-5 px-10 rounded-2xl transition-all duration-300 shadow-2xl transform hover:scale-[1.02] active:scale-95 disabled:opacity-20 uppercase tracking-widest`}
+              className={`${FIXED_THEME.button} w-full text-white text-base sm:text-lg font-black py-4 sm:py-5 px-8 sm:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl transform hover:scale-[1.02] active:scale-95 disabled:opacity-20 uppercase tracking-widest`}
               disabled={!name.trim()}
             >
               Testni boshlash

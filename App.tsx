@@ -109,26 +109,26 @@ export default function App() {
         const submissionEndpoint = 'https://api.web3forms.com/submit';
 
         const detailedReport = userAnswers.map((answer, index) => (
-          `Question ${index + 1}: ${answer.question}\n` +
-          `Your Answer: ${answer.selectedAnswer} ${answer.isCorrect ? '(Correct)' : '(Incorrect)'}\n` +
-          `Correct Answer: ${answer.correctAnswer}`
+          `Savol ${index + 1}: ${answer.question}\n` +
+          `Sizning javobingiz: ${answer.selectedAnswer} ${answer.isCorrect ? '(To\'g\'ri)' : '(Noto\'g\'ri)'}\n` +
+          `To'g'ri javob: ${answer.correctAnswer}`
         )).join('\n\n----------------------------------------\n\n');
 
-        const emailBody = `Student Name: ${studentName}\n` +
-                          `Final Score: ${score} / ${shuffledQuestions.length}\n\n` +
+        const emailBody = `O'quvchi ismi: ${studentName}\n` +
+                          `Yakuniy natija: ${score} / ${shuffledQuestions.length}\n\n` +
                           detailedReport;
 
         const formData = new FormData();
         formData.append("access_key", accessKey);
         formData.append("student_name", studentName);
         formData.append("score", `${score} / ${shuffledQuestions.length}`);
-        formData.append("subject", `New Quiz Submission: ${studentName}`);
+        formData.append("subject", `Yangi Quiz Natijasi: ${studentName}`);
         formData.append("message", emailBody);
 
         try {
           await fetch(submissionEndpoint, { method: 'POST', body: formData });
         } catch (error) {
-          console.error('Submission error:', error);
+          console.error('Yuborishda xatolik:', error);
         }
       };
       setResultsSubmitted(true);
@@ -220,7 +220,7 @@ export default function App() {
       </div>
 
       <footer className="z-10 w-full text-center py-4 text-slate-500 text-sm font-medium">
-        2026 © All Rights Reserved
+        2026 © Barcha huquqlar himoyalangan
       </footer>
 
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}

@@ -7,84 +7,54 @@ interface RulesModalProps {
 const RulesModal: React.FC<RulesModalProps> = ({ onAccept }) => {
   const [isExiting, setIsExiting] = useState(false);
 
-  const playStartSound = () => {
-    // For a real app, you might use: new Audio('/sounds/start.mp3').play();
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    if (!audioContext) return; // Web Audio API not supported
-
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.2);
-    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.2);
-
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.2);
-  };
-
   const handleStart = () => {
-    playStartSound();
     setIsExiting(true);
     setTimeout(() => {
         onAccept();
-    }, 500);
+    }, 600);
   };
 
   return (
-    <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-500 ${isExiting ? 'opacity-0' : 'opacity-100'}`}>
-      <div className={`w-full max-w-lg bg-black/30 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl text-white p-8 transform transition-all duration-500 ${isExiting ? 'animate-fade-out-down' : 'animate-fade-in-up'}`}>
-        <h2 className="text-3xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-400">
-          Test Qoidalari
-        </h2>
-        <ul className="space-y-3 text-gray-200 mb-8 list-disc list-inside">
-          <li>Barcha savollarga javob berish uchun sizga cheklangan vaqt beriladi.</li>
-          <li>Har bir savolning faqat bitta to'g'ri javobi bor.</li>
-          <li>Javobni tanlaganingizdan so'ng, uni o'zgartira olmaysiz.</li>
-          <li>Natijalaringiz test yakunlangach avtomatik tarzda yuboriladi.</li>
-          <li>Omad! Diqqatingizni jamlang va qo'lingizdan kelganicha harakat qiling.</li>
-        </ul>
-        <div className="text-center">
-          <button
-            onClick={handleStart}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-12 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
-          >
-            Testni Boshlash
-          </button>
+    <div className={`fixed inset-0 flex items-center justify-center z-50 p-6 transition-all duration-500 ${isExiting ? 'opacity-0 scale-110 blur-2xl' : 'opacity-100'}`}>
+      <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"></div>
+      
+      <div className={`relative w-full max-w-lg bg-slate-900/40 border border-white/10 rounded-[2.5rem] shadow-2xl p-10 md:p-14 text-white transform transition-all duration-700 ${isExiting ? 'translate-y-10' : 'animate-popup'}`}>
+        <div className="mb-8 flex justify-center">
+           <div className="w-16 h-1 bg-indigo-500 rounded-full opacity-50"></div>
         </div>
+        
+        <h2 className="text-4xl font-black mb-8 text-center tracking-tighter">
+          Asosiy Qoidalar
+        </h2>
+        
+        <div className="space-y-6 mb-12">
+          {[
+            "Barcha savollarga 40 daqiqa vaqt beriladi.",
+            "Har bir savol uchun faqat bitta to'g'ri javob mavjud.",
+            "Tanlangan javoblarni keyinchalik o'zgartirib bo'lmaydi.",
+            "Natijalar yakunda avtomatik ravishda yuboriladi."
+          ].map((rule, i) => (
+            <div key={i} className="flex items-start gap-4 group">
+              <span className="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-indigo-500 group-hover:scale-150 transition-transform duration-300"></span>
+              <p className="text-lg text-slate-300 font-medium group-hover:text-white transition-colors">{rule}</p>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={handleStart}
+          className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-5 rounded-2xl transition-all duration-300 shadow-2xl shadow-indigo-500/20 transform hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm"
+        >
+          Tayyorman
+        </button>
       </div>
+
       <style>{`
-        @keyframes fade-in-up {
-          0% {
-            opacity: 0;
-            transform: translateY(20px) scale(0.98);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
+        @keyframes popup {
+          from { opacity: 0; transform: translateY(40px) scale(0.9); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.5s ease-out forwards;
-        }
-        @keyframes fade-out-down {
-          0% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-          100% {
-            opacity: 0;
-            transform: translateY(20px) scale(0.98);
-          }
-        }
-        .animate-fade-out-down {
-          animation: fade-out-down 0.5s ease-out forwards;
-        }
+        .animate-popup { animation: popup 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
       `}</style>
     </div>
   );

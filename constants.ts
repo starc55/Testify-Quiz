@@ -1,3 +1,4 @@
+
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
 export const QUIZ_DURATION_SECONDS = 40 * 60; // 40 minutes
@@ -30,26 +31,24 @@ export const QUIZ_VOCABULARY: VocabularyItem[] = [
   { term: "Recently", definition: "Yaqinda" }
 ];
 
-// Fixed Theme as the theme selector is removed
 export const FIXED_THEME: Theme = {
-  id: 'default',
-  name: 'Default',
-  preview: 'bg-gradient-to-br from-indigo-500 to-pink-500',
-  mainGradient: 'from-slate-900 via-indigo-950 to-slate-900',
-  blob1: 'bg-indigo-600',
-  blob2: 'bg-purple-600',
-  blob3: 'bg-blue-600',
-  button: 'bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800',
-  progressBar: 'from-indigo-500 to-purple-500',
+  id: 'premium',
+  name: 'Premium Dark',
+  preview: 'bg-gradient-to-br from-indigo-600 to-violet-700',
+  mainGradient: 'from-[#0f172a] via-[#1e1b4b] to-[#0f172a]',
+  blob1: 'bg-indigo-500',
+  blob2: 'bg-fuchsia-500',
+  blob3: 'bg-blue-500',
+  button: 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-indigo-500/20',
+  progressBar: 'from-indigo-400 via-fuchsia-400 to-indigo-400',
   timerCircle: {
     base: 'text-indigo-400',
-    warn: 'text-yellow-400',
-    danger: 'text-red-500',
+    warn: 'text-amber-400',
+    danger: 'text-rose-500',
   },
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- GRAMMAR MCQs (25) ---
   {
     type: 'multiple-choice',
     question: "Ingliz alifbosida nechta harf bor?",
@@ -200,8 +199,6 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["5", "21", "26", "6"],
     correctAnswer: "5"
   },
-
-  // --- GRAMMAR WRITTEN (5) ---
   {
     type: 'fill-in-the-blank',
     question: "Write the V3 (Past Participle) of 'Do':",
@@ -227,8 +224,6 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     question: "Write the V1 (Base form) of 'Bought':",
     correctAnswer: "buy"
   },
-
-  // --- VOCABULARY (15) ---
   {
     type: 'multiple-choice',
     question: "PDF: 'Improve' so'zining tarjimasi?",

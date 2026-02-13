@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, FormEvent } from 'react';
 import type { QuizQuestion, Theme } from '../types';
 import ClockIcon from './icons/ClockIcon';
@@ -30,11 +29,13 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const [isExiting, setIsExiting] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
 
-  // Constants for the circular progress bar
-  const CIRCLE_RADIUS = 26;
+  const CIRCLE_RADIUS = 28;
   const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
-  const progressOffset = CIRCUMFERENCE - (timeLeft / QUIZ_DURATION_SECONDS) * CIRCUMFERENCE;
+  const progressPercentage = timeLeft / QUIZ_DURATION_SECONDS;
+  const progressOffset = CIRCUMFERENCE - progressPercentage * CIRCUMFERENCE;
   
+  const MAX_CHAR_HINT = 40;
+
   useEffect(() => {
     setSelected(null);
     setWrittenAnswer('');
@@ -52,17 +53,17 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     const gainNode = audioContext.createGain();
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.3);
 
     if (isCorrect) {
       oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-      oscillator.frequency.exponentialRampToValueAtTime(783.99, audioContext.currentTime + 0.1); // G5
+      oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(783.99, audioContext.currentTime + 0.1);
     } else {
-      oscillator.type = 'square';
-      oscillator.frequency.setValueAtTime(220, audioContext.currentTime); // A3
-      oscillator.frequency.exponentialRampToValueAtTime(110, audioContext.currentTime + 0.2); // A2
+      oscillator.type = 'triangle';
+      oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(110, audioContext.currentTime + 0.2);
     }
     
     oscillator.start(audioContext.currentTime);
@@ -90,11 +91,11 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     
     setTimeout(() => {
       setIsExiting(true);
-    }, 800);
+    }, 1000);
 
     setTimeout(() => {
       onAnswer(answer);
-    }, 800 + 400);
+    }, 1400);
   };
   
   const handleWrittenSubmit = (e: FormEvent) => {
@@ -109,33 +110,32 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const getOptionClasses = (option: string) => {
     if (!isAnswered) {
-      return 'bg-white/10 border-white/20 hover:bg-white/20';
+      return 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-indigo-500/50 hover:shadow-indigo-500/10 shadow-lg';
     }
     if (option === selected) {
       return isCorrect
-        ? 'bg-green-500/50 border-green-500 text-white'
-        : 'bg-red-500/50 border-red-500 text-white';
+        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]'
+        : 'bg-rose-500/20 border-rose-500 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.2)]';
     }
     if (checkAnswer(option)) {
-        return 'bg-green-500/50 border-green-500 text-white';
+        return 'bg-emerald-500/20 border-emerald-500 text-emerald-400';
     }
-    return 'bg-white/5 border-white/10 text-gray-400 cursor-not-allowed';
+    return 'bg-white/5 border-white/5 text-slate-500 cursor-not-allowed';
   };
   
   const getInputClasses = () => {
     if (!isAnswered) {
       return isShaking 
-        ? 'bg-white/10 border-red-500/50 ring-2 ring-red-500/20' 
-        : 'bg-white/10 border-white/20 focus:ring-purple-500';
+        ? 'bg-slate-800/50 border-rose-500 ring-2 ring-rose-500/20' 
+        : 'bg-slate-800/50 border-white/10 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10';
     }
     return isCorrect
-      ? 'bg-green-500/20 border-green-500 text-white ring-green-500'
-      : 'bg-red-500/20 border-red-500 text-white ring-red-500';
+      ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400'
+      : 'bg-rose-500/10 border-rose-500 text-rose-400';
   }
 
-  const isLowTime = timeLeft < 15;
-  const timerColor = timeLeft <= 10 ? 'text-red-500' : 'text-gray-200';
-  const pulseClass = isLowTime && !isPaused ? 'animate-timer-pulse' : '';
+  const isLowTime = timeLeft < 20;
+  const timerTextColor = timeLeft <= 10 ? 'text-rose-500' : 'text-slate-200';
   
   let progressCircleColor = theme.timerCircle.base;
   if (timeLeft <= QUIZ_DURATION_SECONDS * 0.25) {
@@ -147,153 +147,127 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  const progressPercentage = (questionNumber / totalQuestions) * 100;
+  const quizProgress = (questionNumber / totalQuestions) * 100;
+  const charProgress = Math.min((writtenAnswer.length / MAX_CHAR_HINT) * 100, 100);
 
   return (
-    <div className={`relative bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg text-white overflow-hidden transition-colors duration-300 ${isPaused ? 'filter blur-sm pointer-events-none' : ''}`}>
-      <div className="relative z-10 p-6 md:p-8">
-        <div className="flex justify-between items-center mb-4">
-          <p className="text-gray-300 font-medium">
-            Savol {questionNumber} / {totalQuestions}
-          </p>
-          <div className={`relative w-16 h-16 flex items-center justify-center ${pulseClass}`}>
-              <svg className="w-full h-full" viewBox="0 0 60 60">
-                  <g transform="rotate(-90 30 30)">
-                      <circle
-                          className="text-white/10"
-                          strokeWidth="4"
-                          stroke="currentColor"
-                          fill="transparent"
-                          r={CIRCLE_RADIUS}
-                          cx="30"
-                          cy="30"
-                      />
-                      <circle
-                          className={`${progressCircleColor}`}
-                          style={{
-                              strokeDasharray: CIRCUMFERENCE,
-                              strokeDashoffset: progressOffset,
-                              transition: 'stroke-dashoffset 1s linear, stroke 0.3s ease',
-                          }}
-                          strokeWidth="4"
-                          strokeLinecap="round"
-                          stroke="currentColor"
-                          fill="transparent"
-                          r={CIRCLE_RADIUS}
-                          cx="30"
-                          cy="30"
-                      />
-                  </g>
+    <div className={`relative w-full max-w-3xl mx-auto transition-all duration-500 ${isPaused ? 'scale-95 blur-md pointer-events-none' : 'scale-100 blur-0'}`}>
+      <div className="bg-[#1e293b]/40 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] overflow-hidden">
+        
+        {/* Header Section */}
+        <div className="p-6 md:p-10 border-b border-white/5 flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-xs font-bold tracking-widest text-indigo-400 uppercase">{questionNumber}-savol (jami {totalQuestions})</span>
+            <div className="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
+               <div className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-1000`} style={{ width: `${quizProgress}%` }}></div>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className={`absolute inset-0 bg-current opacity-20 blur-xl rounded-full transition-colors duration-500 ${progressCircleColor}`}></div>
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 72 72">
+                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="4" fill="transparent" className="text-white/5" />
+                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="4" fill="transparent"
+                  strokeDasharray={CIRCUMFERENCE}
+                  strokeDashoffset={progressOffset}
+                  strokeLinecap="round"
+                  className={`${progressCircleColor} transition-all duration-1000 ease-linear`}
+                />
               </svg>
-              <div className={`absolute flex flex-col items-center justify-center ${timerColor}`}>
-                  <ClockIcon className="w-5 h-5" />
-                  <span className="font-bold text-sm tracking-wide mt-0.5">{minutes}:{seconds.toString().padStart(2, '0')}</span>
+              <div className="absolute flex flex-col items-center justify-center leading-none">
+                <span className={`text-xl font-bold tracking-tighter ${timerTextColor}`}>
+                  {minutes}:{seconds.toString().padStart(2, '0')}
+                </span>
+                <span className="text-[10px] uppercase font-black text-slate-500 mt-0.5">Vaqt</span>
               </div>
+            </div>
           </div>
         </div>
-        
-        <div
-          role="progressbar"
-          aria-label="Quiz progress"
-          aria-valuenow={questionNumber}
-          aria-valuemin={1}
-          aria-valuemax={totalQuestions}
-          className="w-full bg-white/10 rounded-full h-2.5 mb-6 overflow-hidden"
-        >
-          <div
-            className={`h-full rounded-full bg-gradient-to-r ${theme.progressBar} transition-transform duration-700 ease-out origin-left`}
-            style={{ transform: `scaleX(${progressPercentage / 100})` }}
-          ></div>
-        </div>
 
-        <div key={question.question} className={isExiting ? 'animate-slide-out-to-left' : 'animate-slide-in-from-right'}>
-          <h2 id="question-heading" className="text-2xl md:text-3xl font-semibold mb-8 h-24 flex items-center leading-tight">{question.question}</h2>
+        {/* Question Body */}
+        <div className="p-8 md:p-12">
+          <div key={question.question} className={isExiting ? 'animate-slide-out' : 'animate-slide-in'}>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 leading-tight tracking-tight min-h-[5rem]">
+              {question.question}
+            </h2>
 
-          {question.type === 'multiple-choice' && question.options && (
-            <div role="radiogroup" aria-labelledby="question-heading" className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {question.options.map((option, index) => (
-                <button
-                  key={option}
-                  onClick={() => handleSubmit(option)}
-                  disabled={isAnswered || isPaused}
-                  role="radio"
-                  aria-checked={selected === option}
-                  className={`p-4 rounded-lg border text-left font-semibold transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none animate-option-fade-in opacity-0 fill-mode-forwards ${getOptionClasses(option)}`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          )}
+            {question.type === 'multiple-choice' && question.options && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {question.options.map((option, index) => (
+                  <button
+                    key={option}
+                    onClick={() => handleSubmit(option)}
+                    disabled={isAnswered || isPaused}
+                    className={`group relative p-5 rounded-2xl border text-left font-bold transition-all duration-300 transform active:scale-[0.98] animate-fade-up ${getOptionClasses(option)}`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-xs text-slate-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                        {String.fromCharCode(65 + index)}
+                      </span>
+                      <span className="text-lg">{option}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
 
-          {question.type === 'fill-in-the-blank' && (
-            <form onSubmit={handleWrittenSubmit} className="flex flex-col sm:flex-row gap-4 items-center animate-option-fade-in">
-              <input
-                  type="text"
-                  value={writtenAnswer}
-                  onChange={(e) => setWrittenAnswer(e.target.value)}
-                  placeholder="Javobingizni yozing"
-                  disabled={isAnswered || isPaused}
-                  className={`w-full rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${getInputClasses()} ${isShaking ? 'animate-shake' : ''}`}
-                />
-                <button
-                  type="submit"
-                  disabled={isAnswered || isPaused}
-                  className={`w-full sm:w-auto ${theme.button} disabled:cursor-not-allowed disabled:transform-none text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105`}
-                >
-                  Tekshirish
-                </button>
-            </form>
-          )}
+            {question.type === 'fill-in-the-blank' && (
+              <div className="max-w-xl">
+                <form onSubmit={handleWrittenSubmit} className="relative group">
+                   <input
+                    type="text"
+                    value={writtenAnswer}
+                    onChange={(e) => setWrittenAnswer(e.target.value)}
+                    placeholder="Javobni yozing..."
+                    disabled={isAnswered || isPaused}
+                    className={`w-full bg-slate-800/40 rounded-2xl p-6 text-xl font-bold text-white placeholder-slate-500 border-2 transition-all outline-none ${getInputClasses()} ${isShaking ? 'animate-shake' : ''}`}
+                    autoFocus
+                  />
+                  <div className="mt-4 flex items-center justify-between px-2">
+                    <div className="flex-grow max-w-xs h-1 bg-white/5 rounded-full overflow-hidden">
+                       <div className="h-full bg-indigo-500 transition-all duration-300" style={{ width: `${charProgress}%` }}></div>
+                    </div>
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{writtenAnswer.length} belgi</span>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    disabled={isAnswered || isPaused || !writtenAnswer.trim()}
+                    className={`mt-8 w-full ${theme.button} text-white font-black py-5 px-8 rounded-2xl transition-all duration-300 shadow-2xl disabled:opacity-30 transform hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm`}
+                  >
+                    Tasdiqlash
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-       <style>{`
-        @keyframes slide-in-from-right {
-          0% { transform: translateX(20px); opacity: 0; }
-          100% { transform: translateX(0); opacity: 1; }
-        }
-        .animate-slide-in-from-right {
-          animation: slide-in-from-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        
-        @keyframes slide-out-to-left {
-          0% { transform: translateX(0); opacity: 1; }
-          100% { transform: translateX(-20px); opacity: 0; }
-        }
-        .animate-slide-out-to-left {
-          animation: slide-out-to-left 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
-        }
 
-        @keyframes option-fade-in {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+      <style>{`
+        @keyframes slide-in {
+          from { opacity: 0; transform: translateY(20px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .animate-option-fade-in {
-            animation: option-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @keyframes slide-out {
+          from { opacity: 1; transform: translateY(0) scale(1); }
+          to { opacity: 0; transform: translateY(-20px) scale(0.95); }
         }
-
-        @keyframes timer-pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.08); }
-          100% { transform: scale(1); }
+        @keyframes fade-up {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        .animate-timer-pulse {
-          animation: timer-pulse 0.8s ease-in-out infinite;
-        }
-
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
-          20%, 60% { transform: translateX(-4px); }
-          40%, 80% { transform: translateX(4px); }
+          25% { transform: translateX(-8px); }
+          75% { transform: translateX(8px); }
         }
-        .animate-shake {
-          animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-        }
-        
-        .fill-mode-forwards {
-          animation-fill-mode: forwards;
-        }
+        .animate-slide-in { animation: slide-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-slide-out { animation: slide-out 0.4s cubic-bezier(0.4, 0, 1, 1) forwards; }
+        .animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
+        .animate-shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
       `}</style>
     </div>
   );

@@ -13,47 +13,63 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit }) => {
     e.preventDefault();
     if (name.trim() && !isExiting) {
       setIsExiting(true);
-      setTimeout(() => onNameSubmit(name), 500);
+      setTimeout(() => onNameSubmit(name), 600);
     }
   };
 
   return (
-    <div className={`text-center text-white transition-opacity duration-500 ${isExiting ? 'opacity-0' : 'animate-fade-in'}`}>
-      <div className="p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl mb-6">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-blue-400">
-          English Mastery Quiz
-        </h1>
-        <p className="text-lg text-slate-400 mb-8">
-          Grammatika va lug'at bo'yicha bilimlaringizni sinab ko'ring.
-        </p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Ismingizni kiriting"
-            className="w-full bg-slate-800/50 border border-white/10 rounded-xl py-4 px-6 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300"
-            required
-          />
+    <div className={`w-full max-w-xl mx-auto transition-all duration-700 ${isExiting ? 'opacity-0 scale-95 -translate-y-4' : 'animate-mount'}`}>
+      <div className="relative group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+        <div className="relative p-10 md:p-14 bg-slate-900/60 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-2xl text-center">
+          
+          <div className="mb-10 inline-flex items-center justify-center w-20 h-20 bg-indigo-600/20 rounded-3xl border border-indigo-500/30 animate-float">
+             <svg className="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+             </svg>
+          </div>
 
-          <button
-            type="submit"
-            className={`${FIXED_THEME.button} disabled:opacity-50 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-xl hover:shadow-indigo-500/20 transform hover:scale-[1.02] active:scale-95`}
-            disabled={!name.trim()}
-          >
-            Boshladik!
-          </button>
-        </form>
+          <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tighter text-white">
+            Ingliz Tili <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-violet-400">Bilimdoni</span>
+          </h1>
+          <p className="text-lg text-slate-400 mb-12 font-medium">
+            Grammatika va lug'at bilimingizni sinab ko'ring.
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="relative">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="To'liq ismingizni kiriting"
+                className="w-full bg-slate-800/40 border border-white/10 rounded-2xl py-5 px-8 text-white text-xl font-bold placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300 text-center"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className={`${FIXED_THEME.button} w-full text-white text-lg font-black py-5 px-10 rounded-2xl transition-all duration-300 shadow-2xl transform hover:scale-[1.02] active:scale-95 disabled:opacity-20 uppercase tracking-widest`}
+              disabled={!name.trim()}
+            >
+              Testni boshlash
+            </button>
+          </form>
+        </div>
       </div>
 
-       <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+      <style>{`
+        @keyframes mount {
+          from { opacity: 0; transform: translateY(30px) scale(0.95); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
+        .animate-mount { animation: mount 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
       `}</style>
     </div>
   );

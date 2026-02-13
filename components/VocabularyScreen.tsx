@@ -17,8 +17,8 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
       
       <div className="space-y-4 max-h-64 overflow-y-auto pr-4 mb-8 custom-scrollbar">
         {QUIZ_VOCABULARY.map((item) => (
-          <div key={item.term} className="p-4 bg-white/5 rounded-lg border border-white/10">
-            <h3 className="font-bold text-lg text-purple-300">{item.term}</h3>
+          <div key={item.term} className="p-4 bg-white/5 rounded-lg border border-white/10 transition-colors hover:bg-white/10">
+            <h3 className="font-bold text-lg text-indigo-400">{item.term}</h3>
             <p className="text-gray-200">{item.definition}</p>
           </div>
         ))}
@@ -27,9 +27,9 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
       <div className="text-center">
         <button
           onClick={onStartQuiz}
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-12 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+          className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
         >
-          Boshlash
+          Testni boshlash
         </button>
       </div>
       <style>{`

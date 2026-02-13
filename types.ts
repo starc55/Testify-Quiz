@@ -12,16 +12,15 @@ export interface VocabularyItem {
   definition: string;
 }
 
-// FIX: Added missing HighScore interface.
 export interface HighScore {
   name: string;
   score: number;
 }
 
-export type ThemeName = 'default' | 'ocean' | 'sunset' | 'forest';
+export type ThemeName = 'default';
 
 export interface Theme {
-  id: ThemeName;
+  id: string;
   name: string;
   preview: string;
   mainGradient: string;

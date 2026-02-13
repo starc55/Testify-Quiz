@@ -1,13 +1,12 @@
-
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import WelcomeScreen from './components/WelcomeScreen';
 import RulesModal from './components/RulesModal';
 import QuizScreen from './components/QuizScreen';
 import CompletionScreen from './components/CompletionScreen';
 import PauseModal from './components/PauseModal';
 import VocabularyScreen from './components/VocabularyScreen';
-import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS, THEMES } from './constants';
-import type { GameState, QuizQuestion, ThemeName } from './types';
+import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS, FIXED_THEME } from './constants';
+import type { GameState, QuizQuestion } from './types';
 
 interface AnswerRecord {
   question: string;
@@ -37,35 +36,12 @@ export default function App() {
   const [countdown, setCountdown] = useState<number | null>(null);
   const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
   const [resultsSubmitted, setResultsSubmitted] = useState<boolean>(false);
-  
-  const [theme, setTheme] = useState<ThemeName>('default');
-
-  useEffect(() => {
-    try {
-      const savedTheme = localStorage.getItem('quizTheme') as ThemeName | null;
-      if (savedTheme && THEMES[savedTheme]) {
-        setTheme(savedTheme);
-      }
-    } catch (error) {
-      console.error("Failed to load theme:", error);
-    }
-  }, []);
-
-  const handleThemeChange = useCallback((newTheme: ThemeName) => {
-    setTheme(newTheme);
-    try {
-      localStorage.setItem('quizTheme', newTheme);
-    } catch (error) {
-      console.error("Failed to save theme:", error);
-    }
-  }, []);
 
   const handleAcceptRules = useCallback(() => {
     setGameState('vocabulary');
   }, []);
 
   const startQuiz = useCallback(() => {
-    // Randomize options for each question so correct answer isn't always first
     const questionsWithRandomizedOptions = QUIZ_QUESTIONS.map(q => {
       if (q.type === 'multiple-choice' && q.options) {
         return {
@@ -76,7 +52,6 @@ export default function App() {
       return q;
     });
 
-    // Shuffle the order of the questions themselves
     setShuffledQuestions(shuffleArray(questionsWithRandomizedOptions));
     
     setTimeLeft(QUIZ_DURATION_SECONDS);
@@ -99,7 +74,6 @@ export default function App() {
     setIsQuizActive(false);
     setGameState('completed');
   }, []);
-  
 
   useEffect(() => {
     const handleBlur = () => {
@@ -107,27 +81,20 @@ export default function App() {
         setIsPaused(true);
       }
     };
-
     window.addEventListener('blur', handleBlur);
-
-    return () => {
-      window.removeEventListener('blur', handleBlur);
-    };
+    return () => window.removeEventListener('blur', handleBlur);
   }, [gameState, isPaused]);
 
   useEffect(() => {
     if (countdown === null) return;
-
     if (countdown === 0) {
       setIsPaused(false);
       setCountdown(null);
       return;
     }
-
     const timerId = setTimeout(() => {
       setCountdown(prev => (prev !== null ? prev - 1 : null));
     }, 1000);
-
     return () => clearTimeout(timerId);
   }, [countdown]);
   
@@ -149,53 +116,35 @@ export default function App() {
 
         const emailBody = `Student Name: ${studentName}\n` +
                           `Final Score: ${score} / ${shuffledQuestions.length}\n\n` +
-                          `--- ANSWERS ---\n\n` +
                           detailedReport;
 
         const formData = new FormData();
         formData.append("access_key", accessKey);
         formData.append("student_name", studentName);
         formData.append("score", `${score} / ${shuffledQuestions.length}`);
-        formData.append("subject", `New Quiz Submission from ${studentName}`);
-        formData.append("from_name", "Testify Quiz");
-        formData.append("email_to", "orziyevogabek67@gmail.com");
+        formData.append("subject", `New Quiz Submission: ${studentName}`);
         formData.append("message", emailBody);
 
-
         try {
-          const response = await fetch(submissionEndpoint, {
-            method: 'POST',
-            body: formData,
-          });
-          const data = await response.json();
-          if (data.success) {
-            console.log('Results submitted successfully!');
-          } else {
-            console.error('Submission failed:', data.message);
-          }
+          await fetch(submissionEndpoint, { method: 'POST', body: formData });
         } catch (error) {
-          console.error('An error occurred during submission:', error);
+          console.error('Submission error:', error);
         }
       };
-      
       setResultsSubmitted(true);
       submitResults();
     }
   }, [gameState, studentName, score, userAnswers, shuffledQuestions.length, resultsSubmitted]);
 
-
   useEffect(() => {
     if (!isQuizActive || isPaused) return;
-
     if (timeLeft === 0) {
       finishQuiz();
       return;
     }
-
     const timerId = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
-
     return () => clearInterval(timerId);
   }, [isQuizActive, timeLeft, finishQuiz, isPaused]);
 
@@ -210,9 +159,7 @@ export default function App() {
       isCorrect = processedUserAnswer === (currentQuestion.correctAnswer as string).toLowerCase();
     }
     
-    if (isCorrect) {
-      setScore(prevScore => prevScore + 1);
-    }
+    if (isCorrect) setScore(prevScore => prevScore + 1);
 
     setUserAnswers(prevAnswers => [
       ...prevAnswers,
@@ -226,20 +173,17 @@ export default function App() {
       },
     ]);
 
-    const isLastQuestion = currentQuestionIndex === shuffledQuestions.length - 1;
-    if (isLastQuestion) {
+    if (currentQuestionIndex === shuffledQuestions.length - 1) {
       finishQuiz();
     } else {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     }
   }, [currentQuestionIndex, finishQuiz, shuffledQuestions]);
 
-  const currentThemeData = THEMES[theme];
-
   const renderContent = () => {
     switch (gameState) {
       case 'welcome':
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} currentTheme={theme} onThemeChange={handleThemeChange} />;
+        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
       case 'rules':
         return <RulesModal onAccept={handleAcceptRules} />;
       case 'vocabulary':
@@ -254,55 +198,42 @@ export default function App() {
             onAnswer={handleAnswer}
             timeLeft={timeLeft}
             isPaused={isPaused}
-            theme={currentThemeData}
+            theme={FIXED_THEME}
           />
         );
       case 'completed':
         return <CompletionScreen name={studentName} />;
       default:
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} currentTheme={theme} onThemeChange={handleThemeChange} />;
+        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
     }
   };
 
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center bg-gray-900 overflow-hidden p-4">
-      <div className={`absolute inset-0 bg-gradient-to-br ${currentThemeData.mainGradient} opacity-30 transition-all duration-1000 ease-in-out`}></div>
-      <div className={`absolute top-0 left-0 w-72 h-72 ${currentThemeData.blob1} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob will-change-transform transition-colors duration-1000`}></div>
-      <div className={`absolute top-0 right-0 w-72 h-72 ${currentThemeData.blob2} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 will-change-transform transition-colors duration-1000`}></div>
-      <div className={`absolute bottom-0 left-1/4 w-72 h-72 ${currentThemeData.blob3} rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 will-change-transform transition-colors duration-1000`}></div>
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 overflow-hidden p-4">
+      <div className={`absolute inset-0 bg-gradient-to-br ${FIXED_THEME.mainGradient} opacity-50`}></div>
+      <div className={`absolute top-0 left-0 w-72 h-72 ${FIXED_THEME.blob1} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob`}></div>
+      <div className={`absolute top-0 right-0 w-72 h-72 ${FIXED_THEME.blob2} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000`}></div>
+      <div className={`absolute bottom-0 left-1/4 w-72 h-72 ${FIXED_THEME.blob3} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000`}></div>
       
-      <div className="z-10 w-full max-w-2xl">
+      <div className="z-10 w-full max-w-2xl flex-grow flex items-center justify-center">
         {renderContent()}
       </div>
+
+      <footer className="z-10 w-full text-center py-4 text-slate-500 text-sm font-medium">
+        2026 © All Rights Reserved
+      </footer>
 
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
 
       <style>{`
-        .animate-blob {
-          animation: blob 10s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        .will-change-transform {
-          will-change: transform;
-        }
+        .animate-blob { animation: blob 10s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
         @keyframes blob {
-          0% {
-            transform: translate(0px, 0px) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-          100% {
-            transform: translate(0px, 0px) scale(1);
-          }
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
         }
       `}</style>
     </main>

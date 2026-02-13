@@ -3,281 +3,315 @@ import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 export const QUIZ_DURATION_SECONDS = 40 * 60; // 40 minutes
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Beautiful", definition: "Chiroyli" },
-  { term: "Teacher", definition: "O'qituvchi" },
-  { term: "Friend", definition: "Do'st" },
-  { term: "Family", definition: "Oila" },
-  { term: "Market", definition: "Bozor" },
-  { term: "Happy", definition: "Baxtli" },
+  { term: "Improve", definition: "Yaxshilamoq" },
+  { term: "Decide", definition: "Qaror qilmoq" },
+  { term: "Explain", definition: "Tushuntirmoq" },
+  { term: "Continue", definition: "Davom etmoq" },
+  { term: "Prepare", definition: "Tayyorlanmoq" },
+  { term: "Increase", definition: "Oshirmoq" },
+  { term: "Reduce", definition: "Kamaytirmoq" },
+  { term: "Choose", definition: "Tanlamoq" },
+  { term: "Develop", definition: "Rivojlanmoq" },
+  { term: "Achieve", definition: "Erishmoq" },
+  { term: "Opportunity", definition: "Imkoniyat" },
+  { term: "Experience", definition: "Tajriba" },
+  { term: "Environment", definition: "Atrof-muhit" },
+  { term: "Situation", definition: "Vaziyat" },
+  { term: "Advice", definition: "Maslahat" },
+  { term: "Successful", definition: "Muvaffaqiyatli" },
+  { term: "Responsible", definition: "Mas'uliyatli" },
+  { term: "Independent", definition: "Mustaqil" },
+  { term: "Possible", definition: "Mumkin" },
   { term: "Difficult", definition: "Qiyin" },
-  { term: "Travel", definition: "Sayohat qilmoq" },
-  { term: "Learn", definition: "O'rganmoq" },
-  { term: "Work", definition: "Ishlamoq" },
-  { term: "Help", definition: "Yordam bermoq" },
-  { term: "Quickly", definition: "Tezda" },
-  { term: "Always", definition: "Har doim" },
-  { term: "Sometimes", definition: "Ba'zan" },
-  { term: "Important", definition: "Muhim" },
-  { term: "Answer", definition: "Javob" },
-  { term: "Question", definition: "Savol" },
-  { term: "Problem", definition: "Muammo" },
-  { term: "Easy", definition: "Oson" },
-  { term: "Strong", definition: "Kuchli" },
-  { term: "Early", definition: "Erta" },
-  { term: "Late", definition: "Kech" },
-  { term: "Buy", definition: "Sotib olmoq" },
-  { term: "Sell", definition: "Sotmoq" },
-  { term: "Open", definition: "Ochmoq" },
-  { term: "Close", definition: "Yopmoq" },
-  { term: "Clean", definition: "Toza" },
-  { term: "Dirty", definition: "Iflos" },
-  { term: "Quiet", definition: "Jim" },
-  { term: "Noise", definition: "Shovqin" }
+  { term: "Instead", definition: "O'rniga" },
+  { term: "Although", definition: "Garchi bo'lsa ham" },
+  { term: "However", definition: "Ammo, biroq" },
+  { term: "Finally", definition: "Nihoyat" },
+  { term: "Recently", definition: "Yaqinda" }
 ];
 
-export const THEMES: Record<ThemeName, Theme> = {
-  default: {
-    id: 'default',
-    name: 'Default',
-    preview: 'bg-gradient-to-br from-indigo-500 to-pink-500',
-    mainGradient: 'from-indigo-500 via-purple-500 to-pink-500',
-    blob1: 'bg-purple-400',
-    blob2: 'bg-indigo-400',
-    blob3: 'bg-pink-400',
-    button: 'bg-purple-600 hover:bg-purple-700 disabled:bg-purple-800',
-    progressBar: 'from-purple-500 to-pink-500',
-    timerCircle: {
-      base: 'text-purple-400',
-      warn: 'text-yellow-400',
-      danger: 'text-red-500',
-    },
-  },
-  ocean: {
-    id: 'ocean',
-    name: 'Ocean',
-    preview: 'bg-gradient-to-br from-blue-500 to-teal-400',
-    mainGradient: 'from-blue-500 via-cyan-500 to-teal-500',
-    blob1: 'bg-cyan-400',
-    blob2: 'bg-blue-400',
-    blob3: 'bg-teal-400',
-    button: 'bg-cyan-600 hover:bg-cyan-700 disabled:bg-cyan-800',
-    progressBar: 'from-blue-400 to-teal-400',
-    timerCircle: {
-      base: 'text-cyan-400',
-      warn: 'text-yellow-400',
-      danger: 'text-red-500',
-    },
-  },
-  sunset: {
-    id: 'sunset',
-    name: 'Sunset',
-    preview: 'bg-gradient-to-br from-yellow-500 to-red-500',
-    mainGradient: 'from-yellow-500 via-orange-500 to-red-500',
-    blob1: 'bg-orange-400',
-    blob2: 'bg-yellow-400',
-    blob3: 'bg-red-400',
-    button: 'bg-orange-600 hover:bg-orange-700 disabled:bg-orange-800',
-    progressBar: 'from-yellow-400 to-red-400',
-    timerCircle: {
-      base: 'text-orange-400',
-      warn: 'text-yellow-400',
-      danger: 'text-red-500',
-    },
-  },
-  forest: {
-    id: 'forest',
-    name: 'Forest',
-    preview: 'bg-gradient-to-br from-green-500 to-lime-400',
-    mainGradient: 'from-green-500 via-emerald-500 to-lime-500',
-    blob1: 'bg-emerald-400',
-    blob2: 'bg-green-400',
-    blob3: 'bg-lime-400',
-    button: 'bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-800',
-    progressBar: 'from-green-400 to-lime-400',
-    timerCircle: {
-      base: 'text-emerald-400',
-      warn: 'text-yellow-400',
-      danger: 'text-red-500',
-    },
+// Fixed Theme as the theme selector is removed
+export const FIXED_THEME: Theme = {
+  id: 'default',
+  name: 'Default',
+  preview: 'bg-gradient-to-br from-indigo-500 to-pink-500',
+  mainGradient: 'from-slate-900 via-indigo-950 to-slate-900',
+  blob1: 'bg-indigo-600',
+  blob2: 'bg-purple-600',
+  blob3: 'bg-blue-600',
+  button: 'bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-800',
+  progressBar: 'from-indigo-500 to-purple-500',
+  timerCircle: {
+    base: 'text-indigo-400',
+    warn: 'text-yellow-400',
+    danger: 'text-red-500',
   },
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- GRAMMAR MCQs (15) ---
+  // --- GRAMMAR MCQs (25) ---
   {
     type: 'multiple-choice',
-    question: "Ingliz alifbosida nechta unli (vowel) harf bor?",
-    options: ["5 ta", "21 ta", "26 ta", "10 ta"],
-    correctAnswer: "5 ta"
+    question: "Ingliz alifbosida nechta harf bor?",
+    options: ["26 ta", "21 ta", "5 ta", "28 ta"],
+    correctAnswer: "26 ta"
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi qatorda faqat unli harflar berilgan?",
-    options: ["A, E, I, O, U", "B, C, D, F, G", "X, Y, Z, Q, W", "M, N, L, R, S"],
-    correctAnswer: "A, E, I, O, U"
+    question: "Qaysi artikl to'g'ri: 'It is ___ umbrella.'",
+    options: ["an", "a", "the", "-"],
+    correctAnswer: "an"
   },
   {
     type: 'multiple-choice',
-    question: "Articles: '___ Apple' so'ziga qaysi artikl mos keladi?",
-    options: ["An", "A", "The", "No article"],
-    correctAnswer: "An"
+    question: "Present Simple: 'She ___ (like) chocolate.'",
+    options: ["likes", "like", "liking", "is like"],
+    correctAnswer: "likes"
   },
   {
     type: 'multiple-choice',
-    question: "Articles: '___ University' so'zi qaysi artikl bilan ishlatiladi?",
-    options: ["A", "An", "The", "No article"],
-    correctAnswer: "A"
+    question: "Present Continuous: 'They ___ (watch) TV now.'",
+    options: ["are watching", "is watching", "am watching", "watch"],
+    correctAnswer: "are watching"
   },
   {
     type: 'multiple-choice',
-    question: "Pronouns: 'Men' olmoshining inglizcha tarjimasi (Subject):",
-    options: ["I", "Me", "My", "Mine"],
-    correctAnswer: "I"
+    question: "Past Simple: 'I ___ (go) to the park yesterday.'",
+    options: ["went", "go", "gone", "goed"],
+    correctAnswer: "went"
   },
   {
     type: 'multiple-choice',
-    question: "Pronouns: 'Meni / Menga' olmoshining inglizcha tarjimasi (Object):",
-    options: ["Me", "I", "My", "Mine"],
-    correctAnswer: "Me"
+    question: "Past Continuous: 'We ___ (play) football when it started to rain.'",
+    options: ["were playing", "was playing", "are playing", "played"],
+    correctAnswer: "were playing"
   },
   {
     type: 'multiple-choice',
-    question: "Plurals: 'Child' (bola) so'zining ko'plik shakli nima?",
+    question: "Present Perfect: 'I ___ (finish) my homework already.'",
+    options: ["have finished", "has finished", "finish", "finished"],
+    correctAnswer: "have finished"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Simple: 'I think it ___ (rain) tomorrow.'",
+    options: ["will rain", "rains", "is raining", "rained"],
+    correctAnswer: "will rain"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Continuous: 'At this time tomorrow, I ___ (fly) to New York.'",
+    options: ["will be flying", "will fly", "am flying", "fly"],
+    correctAnswer: "will be flying"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Plural forms: What is the plural of 'Child'?",
     options: ["Children", "Childs", "Childrens", "Childes"],
     correctAnswer: "Children"
   },
   {
     type: 'multiple-choice',
-    question: "Verb Forms: 'Go' fe'lining V2 (Past Simple) shakli qaysi?",
-    options: ["Went", "Gone", "Going", "Goes"],
-    correctAnswer: "Went"
+    question: "Pronouns: 'This is ___ book' (Mening kitobim).",
+    options: ["my", "me", "I", "mine"],
+    correctAnswer: "my"
   },
   {
     type: 'multiple-choice',
-    question: "Verb Forms: 'Seen' fe'li qaysi shakl (V) hisoblanadi?",
-    options: ["V3", "V1", "V2", "V4"],
-    correctAnswer: "V3"
+    question: "To Be: 'My friends ___ very kind.'",
+    options: ["are", "is", "am", "be"],
+    correctAnswer: "are"
   },
   {
     type: 'multiple-choice',
-    question: "Verb Forms: 'V4' shakli qanday yasaladi?",
-    options: ["Verb + ing", "Verb + ed", "Verb + s", "Verb + es"],
-    correctAnswer: "Verb + ing"
+    question: "Past Simple (To Be): 'They ___ at home last night.'",
+    options: ["were", "was", "are", "been"],
+    correctAnswer: "were"
   },
   {
     type: 'multiple-choice',
-    question: "Stative Verbs: Qaysi fe'l holatni bildiradi?",
-    options: ["Understand", "Run", "Jump", "Eat"],
-    correctAnswer: "Understand"
+    question: "Present Perfect: 'She ___ (live) here for 5 years.'",
+    options: ["has lived", "have lived", "lived", "is living"],
+    correctAnswer: "has lived"
   },
   {
     type: 'multiple-choice',
-    question: "Stative Verbs: Qaysi fe'l 'ing' qo'shimchasini odatda olmaydi?",
-    options: ["Believe", "Dance", "Sing", "Study"],
-    correctAnswer: "Believe"
+    question: "Past Perfect: 'The train ___ (leave) before we arrived.'",
+    options: ["had left", "has left", "leaves", "left"],
+    correctAnswer: "had left"
   },
   {
     type: 'multiple-choice',
-    question: "Plurals: 'Man' so'zining ko'plik shaklini toping:",
-    options: ["Men", "Mans", "Mens", "Manes"],
-    correctAnswer: "Men"
+    question: "Comparison: 'Apple is ___ than lemon.'",
+    options: ["sweeter", "sweetest", "more sweet", "sweet"],
+    correctAnswer: "sweeter"
   },
   {
     type: 'multiple-choice',
-    question: "Pronouns: 'Mine' (meniki) qaysi turdagi olmosh?",
-    options: ["Possessive Pronoun", "Subject Pronoun", "Object Pronoun", "Reflexive Pronoun"],
-    correctAnswer: "Possessive Pronoun"
+    question: "Articles: 'I saw ___ elephant at the zoo.'",
+    options: ["an", "a", "the", "-"],
+    correctAnswer: "an"
   },
   {
     type: 'multiple-choice',
-    question: "Alphabet: Ingliz alifbosidagi oxirgi harf nima?",
-    options: ["Z", "X", "Y", "Q"],
-    correctAnswer: "Z"
+    question: "Prepositions: 'The cat is ___ the table.'",
+    options: ["under", "at", "in", "of"],
+    correctAnswer: "under"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Question forms: '___ do you live?'",
+    options: ["Where", "When", "What", "Who"],
+    correctAnswer: "Where"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Simple (Negative): 'He ___ like coffee.'",
+    options: ["doesn't", "don't", "isn't", "not"],
+    correctAnswer: "doesn't"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Simple: '___ you help me?'",
+    options: ["Will", "Do", "Are", "Have"],
+    correctAnswer: "Will"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Possessive: 'This is ___ bag' (Uning sumkasi - qiz bola).",
+    options: ["her", "hers", "his", "she"],
+    correctAnswer: "her"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple (Irregular): What is the V2 of 'Take'?",
+    options: ["Took", "Taken", "Takes", "Taked"],
+    correctAnswer: "Took"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Continuous: 'Listen! Someone ___ (sing).'",
+    options: ["is singing", "are singing", "sings", "singing"],
+    correctAnswer: "is singing"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Alphabet: How many vowels (unli) are in English?",
+    options: ["5", "21", "26", "6"],
+    correctAnswer: "5"
   },
 
   // --- GRAMMAR WRITTEN (5) ---
   {
     type: 'fill-in-the-blank',
-    question: "'Eat' fe'lining V3 (Past Participle) shaklini yozing:",
-    correctAnswer: "eaten"
+    question: "Write the V3 (Past Participle) of 'Do':",
+    correctAnswer: "done"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Write' fe'lining V2 (Past Simple) shaklini yozing:",
-    correctAnswer: "wrote"
+    question: "Write the V2 (Past Simple) of 'Speak':",
+    correctAnswer: "spoke"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Run' fe'lining V4 (-ing) shaklini yozing:",
-    correctAnswer: "running"
+    question: "Complete the Future Continuous sentence: 'I ___ (wait) for you.'",
+    correctAnswer: "will be waiting"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Tooth' (tish) so'zining ko'plik shaklini yozing:",
-    correctAnswer: "teeth"
+    question: "Write the plural of 'Foot':",
+    correctAnswer: "feet"
   },
   {
     type: 'fill-in-the-blank',
-    question: "'Do' fe'lining V2 shaklini yozing:",
-    correctAnswer: "did"
-  },
-
-  // --- VOCABULARY MCQs (5) ---
-  {
-    type: 'multiple-choice',
-    question: "PDF: 'Early' so'zining tarjimasi nima?",
-    options: ["Erta", "Kech", "Tezda", "Doim"],
-    correctAnswer: "Erta"
-  },
-  {
-    type: 'multiple-choice',
-    question: "PDF: 'Important' so'zining tarjimasi nima?",
-    options: ["Muhim", "Oson", "Qiyin", "Jim"],
-    correctAnswer: "Muhim"
-  },
-  {
-    type: 'multiple-choice',
-    question: "PDF: 'Market' so'zining tarjimasi nima?",
-    options: ["Bozor", "Oila", "Do'st", "Savol"],
-    correctAnswer: "Bozor"
-  },
-  {
-    type: 'multiple-choice',
-    question: "PDF: 'Noise' so'zining tarjimasi nima?",
-    options: ["Shovqin", "Jim", "Toza", "Iflos"],
-    correctAnswer: "Shovqin"
-  },
-  {
-    type: 'multiple-choice',
-    question: "PDF: 'Problem' so'zining tarjimasi nima?",
-    options: ["Muammo", "Javob", "Savol", "Oson"],
-    correctAnswer: "Muammo"
-  },
-
-  // --- VOCABULARY WRITTEN (5) ---
-  {
-    type: 'fill-in-the-blank',
-    question: "PDF: 'Yordam bermoq' so'zini inglizcha yozing:",
-    correctAnswer: "help"
-  },
-  {
-    type: 'fill-in-the-blank',
-    question: "PDF: 'Tezda' so'zini inglizcha yozing:",
-    correctAnswer: "quickly"
-  },
-  {
-    type: 'fill-in-the-blank',
-    question: "PDF: 'Sotib olmoq' so'zini inglizcha yozing:",
+    question: "Write the V1 (Base form) of 'Bought':",
     correctAnswer: "buy"
   },
+
+  // --- VOCABULARY (15) ---
   {
-    type: 'fill-in-the-blank',
-    question: "PDF: 'Har doim' so'zini inglizcha yozing:",
-    correctAnswer: "always"
+    type: 'multiple-choice',
+    question: "PDF: 'Improve' so'zining tarjimasi?",
+    options: ["Yaxshilamoq", "Oshirmoq", "Kamaytirmoq", "Tayyorlanmoq"],
+    correctAnswer: "Yaxshilamoq"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Achieve' so'zining tarjimasi?",
+    options: ["Erishmoq", "Tanlamoq", "Rivojlanmoq", "Tushuntirmoq"],
+    correctAnswer: "Erishmoq"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Environment' so'zining tarjimasi?",
+    options: ["Atrof-muhit", "Imkoniyat", "Vaziyat", "Tajriba"],
+    correctAnswer: "Atrof-muhit"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Successfull' so'zining tarjimasi?",
+    options: ["Muvaffaqiyatli", "Mas'uliyatli", "Mustaqil", "Mumkin"],
+    correctAnswer: "Muvaffaqiyatli"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Situation' so'zining tarjimasi?",
+    options: ["Vaziyat", "Maslahat", "Imkoniyat", "Tajriba"],
+    correctAnswer: "Vaziyat"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Instead' so'zining tarjimasi?",
+    options: ["O'rniga", "Ammo", "Garchi", "Yaqinda"],
+    correctAnswer: "O'rniga"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Difficult' so'zining tarjimasi?",
+    options: ["Qiyin", "Mumkin", "Mustaqil", "Maslahat"],
+    correctAnswer: "Qiyin"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Experience' so'zining tarjimasi?",
+    options: ["Tajriba", "Vaziyat", "Imkoniyat", "Nihoyat"],
+    correctAnswer: "Tajriba"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Recently' so'zining tarjimasi?",
+    options: ["Yaqinda", "Nihoyat", "Ammo", "Garchi"],
+    correctAnswer: "Yaqinda"
+  },
+  {
+    type: 'multiple-choice',
+    question: "PDF: 'Advice' so'zining tarjimasi?",
+    options: ["Maslahat", "Tajriba", "Vaziyat", "Imkoniyat"],
+    correctAnswer: "Maslahat"
   },
   {
     type: 'fill-in-the-blank',
-    question: "PDF: 'Sayohat qilmoq' so'zini inglizcha yozing:",
-    correctAnswer: "travel"
+    question: "PDF: 'Mustaqil' so'zini inglizcha yozing:",
+    correctAnswer: "independent"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "PDF: 'Tayyorlanmoq' so'zini inglizcha yozing:",
+    correctAnswer: "prepare"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "PDF: 'Oshirmoq' so'zini inglizcha yozing:",
+    correctAnswer: "increase"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "PDF: 'Tanlamoq' so'zini inglizcha yozing:",
+    correctAnswer: "choose"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "PDF: 'Nihoyat' so'zini inglizcha yozing:",
+    correctAnswer: "finally"
   }
 ];

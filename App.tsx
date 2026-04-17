@@ -209,13 +209,13 @@ export default function App() {
   };
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 overflow-hidden px-4 py-8">
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 overflow-x-hidden overflow-y-auto p-2 sm:p-6 md:p-12">
       <div className={`absolute inset-0 bg-gradient-to-br ${FIXED_THEME.mainGradient} opacity-50`}></div>
       <div className={`absolute top-0 left-0 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob1} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob`}></div>
       <div className={`absolute top-0 right-0 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob2} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000`}></div>
       <div className={`absolute bottom-0 left-1/4 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob3} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000`}></div>
       
-      <div className="z-10 w-full max-w-4xl flex items-center justify-center min-h-0">
+      <div className="z-10 w-full max-w-4xl flex items-center justify-center">
         {renderContent()}
       </div>
 

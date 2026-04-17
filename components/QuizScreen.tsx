@@ -135,14 +135,21 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   }
 
   const isLowTime = timeLeft < 20;
-  const timerTextColor = timeLeft <= 10 ? 'text-rose-500' : 'text-slate-200';
   
   let progressCircleColor = theme.timerCircle.base;
-  if (timeLeft <= QUIZ_DURATION_SECONDS * 0.25) {
-    progressCircleColor = theme.timerCircle.warn;
+  let timerTextColor = theme.timerCircle.base;
+
+  if (timeLeft <= 60) {
+    progressCircleColor = theme.timerCircle.warn; // Yellow
+    timerTextColor = 'text-yellow-400';
+  }
+  if (timeLeft <= 30) {
+    progressCircleColor = 'text-orange-500'; // Orange
+    timerTextColor = 'text-orange-500';
   }
   if (timeLeft <= 10) {
-    progressCircleColor = theme.timerCircle.danger;
+    progressCircleColor = theme.timerCircle.danger; // Red
+    timerTextColor = 'text-rose-500';
   }
 
   const minutes = Math.floor(timeLeft / 60);
@@ -154,32 +161,64 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
     <div className={`relative w-full transition-all duration-500 ${isPaused ? 'scale-95 blur-md pointer-events-none' : 'scale-100 blur-0'}`}>
       <div className="bg-[#1e293b]/40 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] overflow-hidden">
         
-        {/* Header Section */}
-        <div className="p-5 sm:p-8 border-b border-white/5 flex items-center justify-between">
-          <div className="space-y-1.5">
-            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-indigo-400 uppercase leading-none block">{questionNumber}-savol ({totalQuestions} dan)</span>
-            <div className="w-24 sm:w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
-               <div className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-1000`} style={{ width: `${quizProgress}%` }}></div>
+        {/* Header Section: Improved Responsiveness & Aesthetics */}
+        <div className="p-4 sm:p-8 border-b border-white/5 flex flex-col sm:flex-row items-center gap-6 sm:justify-between relative overflow-hidden group/header">
+          {/* Subtle reflection light for the entire header */}
+          <div className="absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 blur-3xl rounded-full group-hover/header:bg-indigo-500/20 transition-all duration-1000"></div>
+
+          <div className="flex flex-col items-center sm:items-start space-y-3 w-full sm:w-auto">
+            <div className="flex items-center gap-2">
+               <div className="w-1 h-4 bg-indigo-500 rounded-full"></div>
+               <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-indigo-400 uppercase leading-none block">
+                 {questionNumber} / {totalQuestions} Raund
+               </span>
+            </div>
+            <div className="relative w-full sm:w-48 md:w-64 h-2 bg-white/5 rounded-full overflow-hidden shadow-inner border border-white/5">
+               <div 
+                 className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-1000 relative shadow-[0_0_15px_rgba(99,102,241,0.3)]`} 
+                 style={{ width: `${quizProgress}%` }}
+               >
+                 <div className="absolute inset-0 bg-white/20 animate-pulse-slow"></div>
+               </div>
             </div>
           </div>
 
-          <div className="relative group">
-            <div className={`absolute inset-0 bg-current opacity-20 blur-xl rounded-full transition-colors duration-500 ${progressCircleColor}`}></div>
-            <div className="relative w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 72 72">
-                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="4" fill="transparent" className="text-white/5" />
-                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="4" fill="transparent"
+          <div className="relative group scale-95 sm:scale-100">
+            {/* Dynamic Atmospheric Glow */}
+            <div className={`absolute -inset-3 bg-current opacity-10 blur-xl rounded-full transition-all duration-700 ${progressCircleColor} group-hover:opacity-25 ${timeLeft <= 15 ? 'animate-pulse-slow' : ''}`}></div>
+            <div className={`absolute -inset-1 bg-current opacity-20 blur-md rounded-full transition-all duration-700 ${progressCircleColor} ${timeLeft <= 10 ? 'animate-pulse-fast' : ''}`}></div>
+            
+            <div className="relative w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center bg-slate-900/60 rounded-full backdrop-blur-xl border border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.5)] group-hover:border-white/20 transition-colors">
+              {/* High-Tech Rotators */}
+              <div className="absolute inset-1.5 rounded-full border border-dashed border-indigo-500/20 animate-spin-slow"></div>
+              <div className="absolute inset-3 rounded-full border border-dotted border-white/5 animate-spin-reverse-slower"></div>
+
+              <svg className="w-full h-full transform -rotate-90 p-1.5" viewBox="0 0 72 72">
+                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="3" fill="transparent" className="text-white/5" />
+                <circle cx="36" cy="36" r={CIRCLE_RADIUS - 4} stroke="currentColor" strokeWidth="1" fill="transparent" className="text-white/[0.02]" strokeDasharray="2 4" />
+                
+                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="3" fill="transparent"
                   strokeDasharray={CIRCUMFERENCE}
                   strokeDashoffset={progressOffset}
                   strokeLinecap="round"
-                  className={`${progressCircleColor} transition-all duration-1000 ease-linear`}
+                  className={`${progressCircleColor} transition-all duration-1000 ease-linear drop-shadow-[0_0_8px_currentColor]`}
                 />
+                
+                {timeLeft > 0 && (
+                  <g className="transition-all duration-1000 ease-linear" style={{
+                    transformOrigin: '36px 36px',
+                    transform: `rotate(${360 * progressPercentage}deg)`
+                  }}>
+                    <circle cx="36" cy={36 - CIRCLE_RADIUS} r="2.5" fill="white" className="shadow-[0_0_10px_rgba(255,255,255,1)]" />
+                  </g>
+                )}
               </svg>
+
               <div className="absolute flex flex-col items-center justify-center leading-none">
-                <span className={`text-base sm:text-xl font-bold tracking-tighter ${timerTextColor}`}>
+                <span className={`text-sm sm:text-xl font-black tracking-tighter ${timerTextColor} drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] font-mono`}>
                   {minutes}:{seconds.toString().padStart(2, '0')}
                 </span>
-                <span className="text-[8px] sm:text-[10px] uppercase font-black text-slate-500 mt-0.5">Vaqt</span>
+                <span className="text-[6px] sm:text-[8px] uppercase font-black text-slate-500 mt-0.5 tracking-[0.2em] font-sans">Vaqt</span>
               </div>
             </div>
           </div>
@@ -264,6 +303,26 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           25% { transform: translateX(-8px); }
           75% { transform: translateX(8px); }
         }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.15; transform: scale(1); filter: blur(12px); }
+          50% { opacity: 0.25; transform: scale(1.08); filter: blur(16px); }
+        }
+        @keyframes pulse-fast {
+          0%, 100% { opacity: 0.3; transform: scale(1); filter: blur(14px); }
+          50% { opacity: 0.5; transform: scale(1.15); filter: blur(20px); }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse-slower {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
+        }
+        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        .animate-pulse-fast { animation: pulse-fast 1s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-spin-reverse-slower { animation: spin-reverse-slower 35s linear infinite; }
         .animate-slide-in { animation: slide-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .animate-slide-out { animation: slide-out 0.4s cubic-bezier(0.4, 0, 1, 1) forwards; }
         .animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }

@@ -46,184 +46,246 @@ export const FIXED_THEME: Theme = {
   button: 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-indigo-500/20',
   progressBar: 'from-indigo-400 via-fuchsia-400 to-indigo-400',
   timerCircle: {
-    base: 'text-indigo-400',
-    warn: 'text-amber-400',
+    base: 'text-emerald-400',
+    warn: 'text-yellow-400',
     danger: 'text-rose-500',
   },
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- 20 Multiple Choice (Grammar Theory & Application) ---
+  // --- 20 Grammar Multiple Choice (Present, Past, Future Simple) ---
   {
     type: 'multiple-choice',
-    question: "Ingliz alifbosida nechta unli (vowel) harf bor?",
-    options: ["5 ta", "6 ta", "21 ta", "26 ta"],
-    correctAnswer: "5 ta"
+    question: "Present Simple: 'She ___ (drink) coffee every morning.'",
+    options: ["drinks", "drink", "drinking", "is drink"],
+    correctAnswer: "drinks"
   },
   {
     type: 'multiple-choice',
-    question: "'University' so'zi oldidan qaysi artikl ishlatiladi?",
-    options: ["a", "an", "the", "-"],
-    correctAnswer: "a"
+    question: "Past Simple: 'They ___ (visit) Paris last summer.'",
+    options: ["visited", "visit", "visiting", "have visited"],
+    correctAnswer: "visited"
   },
   {
     type: 'multiple-choice',
-    question: "'Mouse' (sichqon) so'zining ko'plik shakli qaysi?",
-    options: ["Mice", "Mouses", "Mices", "Mouse"],
-    correctAnswer: "Mice"
+    question: "Future Simple: 'I think it ___ (snow) tomorrow.'",
+    options: ["will snow", "snows", "is snowing", "snowed"],
+    correctAnswer: "will snow"
   },
   {
     type: 'multiple-choice',
-    question: "'They' olmoshining egalik (possessive adjective) shakli qaysi?",
-    options: ["Their", "Them", "Theirs", "They's"],
-    correctAnswer: "Their"
+    question: "Present Simple (Inkor): 'We ___ (not / have) a car.'",
+    options: ["don't have", "doesn't have", "not have", "haven't"],
+    correctAnswer: "don't have"
   },
   {
     type: 'multiple-choice',
-    question: "'There ___ some milk in the bottle.' (Bo'sh joyni to'ldiring)",
-    options: ["is", "are", "am", "be"],
-    correctAnswer: "is"
+    question: "Past Simple (So'roq): '___ you see the movie yesterday?'",
+    options: ["Did", "Do", "Does", "Have"],
+    correctAnswer: "Did"
   },
   {
     type: 'multiple-choice',
-    question: "'I ___ (be) born in 2005.' (O'tgan zamon shakli)",
-    options: ["was", "were", "am", "been"],
+    question: "Future Simple (Inkor): 'He ___ (not / come) to the party.'",
+    options: ["won't come", "will not coming", "doesn't come", "didn't come"],
+    correctAnswer: "won't come"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To Be (Present): 'They ___ my best friends.'",
+    options: ["are", "is", "am", "be"],
+    correctAnswer: "are"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To Be (Past): 'I ___ at home all day yesterday.'",
+    options: ["was", "were", "been", "am"],
     correctAnswer: "was"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple: 'We usually ___ (go) to school by bus.'",
-    options: ["go", "goes", "going", "went"],
-    correctAnswer: "go"
+    question: "Present Simple: 'He ___ (watch) TV in the evening.'",
+    options: ["watches", "watch", "watchs", "is watch"],
+    correctAnswer: "watches"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous: 'Look! The baby ___ (sleep).'",
-    options: ["is sleeping", "sleeps", "are sleeping", "sleeping"],
-    correctAnswer: "is sleeping"
+    question: "Past Simple: 'I ___ (buy) a new phone two days ago.'",
+    options: ["bought", "buyed", "buys", "buying"],
+    correctAnswer: "bought"
   },
   {
     type: 'multiple-choice',
-    question: "Present Perfect: 'I ___ (see) that movie three times.'",
-    options: ["have seen", "has seen", "saw", "see"],
-    correctAnswer: "have seen"
+    question: "Future Simple: 'Wait! I ___ (help) you with those bags.'",
+    options: ["will help", "help", "helping", "helped"],
+    correctAnswer: "will help"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple (Inkor): 'She ___ (not / work) on Saturdays.'",
-    options: ["doesn't work", "don't work", "isn't work", "not works"],
-    correctAnswer: "doesn't work"
+    question: "Present Simple: 'Birds ___ (fly) in the sky.'",
+    options: ["fly", "flies", "flying", "are fly"],
+    correctAnswer: "fly"
   },
   {
     type: 'multiple-choice',
-    question: "Future Simple: '___ you help me with my homework?'",
-    options: ["Will", "Do", "Are", "Have"],
+    question: "Past Simple: 'She ___ (go) to the doctor this morning.'",
+    options: ["went", "gone", "goed", "goes"],
+    correctAnswer: "went"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Simple (So'roq): '___ your brother play guitar?'",
+    options: ["Does", "Do", "Is", "Are"],
+    correctAnswer: "Does"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple (Inkor): 'I ___ (not / know) the answer.'",
+    options: ["didn't know", "don't know", "not knew", "wasn't know"],
+    correctAnswer: "didn't know"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Simple (So'roq): '___ you be at home tonight?'",
+    options: ["Will", "Do", "Are", "Shall"],
     correctAnswer: "Will"
   },
   {
     type: 'multiple-choice',
-    question: "Preposition: 'The book is ___ the shelf.' (Kitob tokchada)",
-    options: ["on", "in", "at", "under"],
-    correctAnswer: "on"
+    question: "'Every day', 'usually', 'often' qaysi zamonning kalit so'zlari?",
+    options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"],
+    correctAnswer: "Present Simple"
   },
   {
     type: 'multiple-choice',
-    question: "Preposition of time: 'I wake up ___ 7 o'clock.'",
-    options: ["at", "on", "in", "for"],
-    correctAnswer: "at"
+    question: "'Yesterday', 'last week', 'ago' qaysi zamonning kalit so'zlari?",
+    options: ["Past Simple", "Present Simple", "Future Simple", "Past Continuous"],
+    correctAnswer: "Past Simple"
   },
   {
     type: 'multiple-choice',
-    question: "Past Continuous: 'What ___ you doing when I called you?'",
-    options: ["were", "was", "are", "did"],
+    question: "'Tomorrow', 'next month', 'soon' qaysi zamonning kalit so'zlari?",
+    options: ["Future Simple", "Present Simple", "Past Simple", "Future Continuous"],
+    correctAnswer: "Future Simple"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple: 'We ___ (see) a great show last night.'",
+    options: ["saw", "seen", "seed", "sees"],
+    correctAnswer: "saw"
+  },
+
+  // --- 10 Grammar Fill-in-the-blank (Yozma) ---
+  {
+    type: 'fill-in-the-blank',
+    question: "'Sleep' fe'lining o'tgan zamon (Past Simple) shaklini yozing:",
+    correctAnswer: "slept"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "'Study' fe'liga Present Simple da 'he' uchun -s qo'shing:",
+    correctAnswer: "studies"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Future Simple: 'I am sure he ___ (win) the race.'",
+    correctAnswer: "will win"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "'Write' fe'lining o'tgan zamon (V2) shaklini yozing:",
+    correctAnswer: "wrote"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Present Simple (Inkor): 'I ___ (not / like) apples.'",
+    correctAnswer: "don't like"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Past Simple (So'roq): '___ you have breakfast today?'",
+    correctAnswer: "did"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "'To be' (Past) 'they' uchun mos shaklini yozing:",
     correctAnswer: "were"
   },
   {
-    type: 'multiple-choice',
-    question: "Past Simple: 'He ___ (finish) his work an hour ago.'",
-    options: ["finished", "finish", "has finished", "finishes"],
-    correctAnswer: "finished"
+    type: 'fill-in-the-blank',
+    question: "Future Simple (Inkor): 'I ___ (not / tell) anyone.'",
+    correctAnswer: "won't tell"
   },
   {
-    type: 'multiple-choice',
-    question: "Qaysi gap grammatik jihatdan to'g'ri?",
-    options: ["She doesn't like apples", "She don't like apples", "She not likes apples", "She isn't like apples"],
-    correctAnswer: "She doesn't like apples"
+    type: 'fill-in-the-blank',
+    question: "'Make' fe'lining o'tgan zamon (V2) shaklini yozing:",
+    correctAnswer: "made"
   },
   {
-    type: 'multiple-choice',
-    question: "'___ there any students in the classroom?'",
-    options: ["Are", "Is", "Am", "Be"],
-    correctAnswer: "Are"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Possessive Pronoun: 'This is my car. It is ___.'",
-    options: ["mine", "my", "me", "I"],
-    correctAnswer: "mine"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Comparison: 'He is ___ than his brother.'",
-    options: ["taller", "tallest", "more tall", "tall"],
-    correctAnswer: "taller"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Perfect: 'I ___ (never / be) to London.'",
-    options: ["have never been", "has never been", "never was", "never been"],
-    correctAnswer: "have never been"
+    type: 'fill-in-the-blank',
+    question: "'Have' fe'lining Present Simple 'she' uchun shaklini yozing:",
+    correctAnswer: "has"
   },
 
-  // --- 10 Fill-in-the-blank (Yozma savollar) ---
+  // --- 10 Vocabulary Multiple Choice ---
   {
-    type: 'fill-in-the-blank',
-    question: "'Child' (bola) so'zining ko'plik shaklini yozing:",
-    correctAnswer: "children"
+    type: 'multiple-choice',
+    question: "Ingliz tilida 'Imkoniyat' so'zi qanday bo'ladi?",
+    options: ["Opportunity", "Environment", "Experience", "Situation"],
+    correctAnswer: "Opportunity"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "'Go' fe'lining o'tgan zamon (V2) shaklini yozing:",
-    correctAnswer: "went"
+    type: 'multiple-choice',
+    question: "'Instead' so'zining tarjimasi nima?",
+    options: ["O'rniga", "Ammo", "Garchi", "Nihoyat"],
+    correctAnswer: "O'rniga"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "'She ___ (be) a doctor.' (Bo'sh joyni to'ldiring)",
-    correctAnswer: "is"
+    type: 'multiple-choice',
+    question: "'Reliable' so'zining ma'nosi nima?",
+    options: ["Ishonchli", "Boy", "Qiyin", "Yaqinda"],
+    correctAnswer: "Ishonchli"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Present Continuous: 'I ___ (write) a letter now.'",
-    correctAnswer: "am writing"
+    type: 'multiple-choice',
+    question: "Ingliz tilida 'Tushuntirmoq' so'zi qanday?",
+    options: ["Explain", "Develop", "Choose", "Reduce"],
+    correctAnswer: "Explain"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "'Eat' fe'lining V3 (Past Participle) shaklini yozing:",
-    correctAnswer: "eaten"
+    type: 'multiple-choice',
+    question: "'Postpone' so'zining tarjimasi qaysi?",
+    options: ["Keyinga qoldirmoq", "Tayyorlanmoq", "Erishmoq", "Oshirmoq"],
+    correctAnswer: "Keyinga qoldirmoq"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "So'roq shakli: '___ you like pizza?'",
-    correctAnswer: "do"
+    type: 'multiple-choice',
+    question: "'Environment' so'zining tarjimasi nima?",
+    options: ["Atrof-muhit", "Vaziyat", "Tajriba", "Maslahat"],
+    correctAnswer: "Atrof-muhit"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Past Simple (Inkor): 'They ___ (not / be) at home yesterday.'",
-    correctAnswer: ["were not", "weren't"]
+    type: 'multiple-choice',
+    question: "Ingliz tilida 'Muvaffaqiyatli' so'zi qanday bo'ladi?",
+    options: ["Successful", "Responsible", "Independent", "Possible"],
+    correctAnswer: "Successful"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Present Perfect: 'I have ___ (live) here for ten years.'",
-    correctAnswer: "lived"
+    type: 'multiple-choice',
+    question: "'Wealthy' so'zining sinonimi qaysi?",
+    options: ["Rich", "Poor", "Healthy", "Strong"],
+    correctAnswer: "Rich"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "'Knife' (pichoq) so'zining ko'plik shaklini yozing:",
-    correctAnswer: "knives"
+    type: 'multiple-choice',
+    question: "Ingliz tilida 'Tajriba' so'zi qanday bo'ladi?",
+    options: ["Experience", "Advice", "Decision", "Improvement"],
+    correctAnswer: "Experience"
   },
   {
-    type: 'fill-in-the-blank',
-    question: "Present Simple: 'He ___ (play) football every Sunday.'",
-    correctAnswer: "plays"
+    type: 'multiple-choice',
+    question: "'Choose' so'zining tarjimasi nima?",
+    options: ["Tanlamoq", "Tayyorlanmoq", "Qaror qilmoq", "Tushuntirmoq"],
+    correctAnswer: "Tanlamoq"
   }
 ];

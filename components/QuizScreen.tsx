@@ -162,7 +162,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
       <div className="bg-[#1e293b]/40 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] overflow-hidden">
         
         {/* Header Section: Improved Responsiveness & Aesthetics */}
-        <div className="p-4 sm:p-8 border-b border-white/5 flex flex-col sm:flex-row items-center gap-6 sm:justify-between relative overflow-hidden group/header">
+        <div className="p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between relative overflow-hidden group/header">
           {/* Subtle reflection light for the entire header */}
           <div className="absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 blur-3xl rounded-full group-hover/header:bg-indigo-500/20 transition-all duration-1000"></div>
 
@@ -225,27 +225,27 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
         </div>
 
         {/* Question Body */}
-        <div className="p-6 sm:p-10 md:p-12">
+        <div className="p-5 sm:p-8 md:p-10">
           <div key={question.question} className={isExiting ? 'animate-slide-out' : 'animate-slide-in'}>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 sm:mb-10 leading-tight tracking-tight min-h-[4rem] sm:min-h-[5rem]">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-6 sm:mb-8 leading-tight tracking-tight min-h-[3rem] sm:min-h-[4rem]">
               {question.question}
             </h2>
 
             {question.type === 'multiple-choice' && question.options && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {question.options.map((option, index) => (
                   <button
                     key={option}
                     onClick={() => handleSubmit(option)}
                     disabled={isAnswered || isPaused}
-                    className={`group relative p-4 sm:p-5 rounded-xl sm:rounded-2xl border text-left font-bold transition-all duration-300 transform active:scale-[0.98] animate-fade-up ${getOptionClasses(option)}`}
+                    className={`group relative p-3 sm:p-4 rounded-lg sm:rounded-xl border text-left font-bold transition-all duration-300 transform active:scale-[0.98] animate-fade-up ${getOptionClasses(option)}`}
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div className="flex items-center gap-3 sm:gap-4">
-                      <span className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] sm:text-xs text-slate-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-white/5 flex items-center justify-center text-[10px] sm:text-xs text-slate-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
                         {String.fromCharCode(65 + index)}
                       </span>
-                      <span className="text-base sm:text-lg">{option}</span>
+                      <span className="text-sm sm:text-base">{option}</span>
                     </div>
                   </button>
                 ))}

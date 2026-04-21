@@ -53,24 +53,36 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- 20 Grammar Multiple Choice (Present, Past, Future Simple) ---
+  // --- 30 Grammar Multiple Choice (Basics to Future in the Past) ---
+  {
+    type: 'multiple-choice',
+    question: "Ingliz alifbosida nechta unli (vowel) harf bor?",
+    options: ["5 ta", "6 ta", "21 ta", "26 ta"],
+    correctAnswer: "5 ta"
+  },
+  {
+    type: 'multiple-choice',
+    question: "'University' so'zi oldidan qaysi artikl ishlatiladi?",
+    options: ["a", "an", "the", "-"],
+    correctAnswer: "a"
+  },
+  {
+    type: 'multiple-choice',
+    question: "'Person' so'zining ko'plik shakli qaysi?",
+    options: ["People", "Persons", "Peoples", "Persones"],
+    correctAnswer: "People"
+  },
+  {
+    type: 'multiple-choice',
+    question: "'They' olmoshining egalik (possessive adjective) shakli qaysi?",
+    options: ["Their", "Them", "Theirs", "They's"],
+    correctAnswer: "Their"
+  },
   {
     type: 'multiple-choice',
     question: "Present Simple: 'She ___ (drink) coffee every morning.'",
     options: ["drinks", "drink", "drinking", "is drink"],
     correctAnswer: "drinks"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Simple: 'They ___ (visit) Paris last summer.'",
-    options: ["visited", "visit", "visiting", "have visited"],
-    correctAnswer: "visited"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Future Simple: 'I think it ___ (snow) tomorrow.'",
-    options: ["will snow", "snows", "is snowing", "snowed"],
-    correctAnswer: "will snow"
   },
   {
     type: 'multiple-choice',
@@ -80,9 +92,51 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
+    question: "Present Continuous: 'Look! The baby ___ (sleep) right now.'",
+    options: ["is sleeping", "sleeps", "are sleeping", "sleeping"],
+    correctAnswer: "is sleeping"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Simple: 'They ___ (visit) Paris last summer.'",
+    options: ["visited", "visit", "visiting", "have visited"],
+    correctAnswer: "visited"
+  },
+  {
+    type: 'multiple-choice',
     question: "Past Simple (So'roq): '___ you see the movie yesterday?'",
     options: ["Did", "Do", "Does", "Have"],
     correctAnswer: "Did"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Continuous: 'I ___ (read) a book when you called me.'",
+    options: ["was reading", "were reading", "read", "am reading"],
+    correctAnswer: "was reading"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Perfect: 'I ___ (see) that movie three times.'",
+    options: ["have seen", "has seen", "saw", "see"],
+    correctAnswer: "have seen"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Present Perfect: 'She ___ (just / leave) the office.'",
+    options: ["has just left", "have just left", "just left", "is just left"],
+    correctAnswer: "has just left"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Past Perfect: 'The train ___ (leave) before we arrived at the station.'",
+    options: ["had left", "has left", "leaves", "was left"],
+    correctAnswer: "had left"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Future Simple: 'I think it ___ (snow) tomorrow.'",
+    options: ["will snow", "snows", "is snowing", "snowed"],
+    correctAnswer: "will snow"
   },
   {
     type: 'multiple-choice',
@@ -92,69 +146,69 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "To Be (Present): 'They ___ my best friends.'",
-    options: ["are", "is", "am", "be"],
-    correctAnswer: "are"
+    question: "Future Continuous: 'This time tomorrow, I ___ (fly) to London.'",
+    options: ["will be flying", "will fly", "am flying", "shall fly"],
+    correctAnswer: "will be flying"
   },
   {
     type: 'multiple-choice',
-    question: "To Be (Past): 'I ___ at home all day yesterday.'",
-    options: ["was", "were", "been", "am"],
-    correctAnswer: "was"
+    question: "Future Perfect: 'By next month, we ___ (finish) the project.'",
+    options: ["will have finished", "will finish", "shall finished", "have finished"],
+    correctAnswer: "will have finished"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple: 'He ___ (watch) TV in the evening.'",
-    options: ["watches", "watch", "watchs", "is watch"],
-    correctAnswer: "watches"
+    question: "Present Perfect Continuous: 'I ___ (wait) for two hours.'",
+    options: ["have been waiting", "has been waiting", "am waiting", "wait"],
+    correctAnswer: "have been waiting"
   },
   {
     type: 'multiple-choice',
-    question: "Past Simple: 'I ___ (buy) a new phone two days ago.'",
-    options: ["bought", "buyed", "buys", "buying"],
-    correctAnswer: "bought"
+    question: "Past Perfect Continuous: 'They ___ (play) for an hour when it started to rain.'",
+    options: ["had been playing", "have been playing", "were playing", "played"],
+    correctAnswer: "had been playing"
   },
   {
     type: 'multiple-choice',
-    question: "Future Simple: 'Wait! I ___ (help) you with those bags.'",
-    options: ["will help", "help", "helping", "helped"],
-    correctAnswer: "will help"
+    question: "Future Perfect Continuous: 'By December, I ___ (work) here for five years.'",
+    options: ["will have been working", "will have worked", "shall be working", "am working"],
+    correctAnswer: "will have been working"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple: 'Birds ___ (fly) in the sky.'",
-    options: ["fly", "flies", "flying", "are fly"],
-    correctAnswer: "fly"
+    question: "Future in the Past: 'He said he ___ (come) to help me.'",
+    options: ["would come", "will come", "comes", "came"],
+    correctAnswer: "would come"
   },
   {
     type: 'multiple-choice',
-    question: "Past Simple: 'She ___ (go) to the doctor this morning.'",
-    options: ["went", "gone", "goed", "goes"],
-    correctAnswer: "went"
+    question: "Future in the Past: 'I knew that you ___ (pass) the exam.'",
+    options: ["would pass", "will pass", "pass", "passed"],
+    correctAnswer: "would pass"
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple (So'roq): '___ your brother play guitar?'",
-    options: ["Does", "Do", "Is", "Are"],
-    correctAnswer: "Does"
+    question: "Passive Voice (Present Simple): 'English ___ (speak) all over the world.'",
+    options: ["is spoken", "speaks", "are spoken", "was spoken"],
+    correctAnswer: "is spoken"
   },
   {
     type: 'multiple-choice',
-    question: "Past Simple (Inkor): 'I ___ (not / know) the answer.'",
-    options: ["didn't know", "don't know", "not knew", "wasn't know"],
-    correctAnswer: "didn't know"
+    question: "Passive Voice (Past Simple): 'The window ___ (break) yesterday.'",
+    options: ["was broken", "is broken", "broke", "were broken"],
+    correctAnswer: "was broken"
   },
   {
     type: 'multiple-choice',
-    question: "Future Simple (So'roq): '___ you be at home tonight?'",
-    options: ["Will", "Do", "Are", "Shall"],
-    correctAnswer: "Will"
+    question: "Zero Conditional: 'If you heat ice, it ___ (melt).'",
+    options: ["melts", "will melt", "melted", "is melting"],
+    correctAnswer: "melts"
   },
   {
     type: 'multiple-choice',
-    question: "'Every day', 'usually', 'often' qaysi zamonning kalit so'zlari?",
-    options: ["Present Simple", "Past Simple", "Future Simple", "Present Continuous"],
-    correctAnswer: "Present Simple"
+    question: "First Conditional: 'If it rains, we ___ (stay) at home.'",
+    options: ["will stay", "stay", "stayed", "would stay"],
+    correctAnswer: "will stay"
   },
   {
     type: 'multiple-choice',
@@ -167,6 +221,12 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     question: "'Tomorrow', 'next month', 'soon' qaysi zamonning kalit so'zlari?",
     options: ["Future Simple", "Present Simple", "Past Simple", "Future Continuous"],
     correctAnswer: "Future Simple"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Qaysi gap grammatik jihatdan to'g'ri?",
+    options: ["She doesn't like apples", "She don't like apples", "She not likes apples", "She isn't like apples"],
+    correctAnswer: "She doesn't like apples"
   },
   {
     type: 'multiple-choice',

@@ -18,44 +18,60 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit }) => {
   };
 
   return (
-    <div className={`w-full max-w-lg mx-auto transition-all duration-700 ${isExiting ? 'opacity-0 scale-95 -translate-y-4' : 'animate-mount'}`}>
-      <div className="relative group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-        <div className="relative p-6 sm:p-8 bg-slate-900/60 backdrop-blur-3xl rounded-3xl border border-white/10 shadow-2xl text-center">
-          
-          <div className="mb-4 sm:mb-6 inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-indigo-600/20 rounded-2xl border border-indigo-500/30 animate-float">
-             <svg className="w-7 h-7 sm:w-8 sm:h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-             </svg>
+    <div className={`w-full max-w-md mx-auto transition-all duration-700 ${isExiting ? 'opacity-0 scale-95 translate-x-20' : 'animate-mount'}`}>
+      <div className="relative">
+        <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-cyan-500 z-20"></div>
+        <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-cyan-500 z-20"></div>
+        <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-cyan-500 z-20"></div>
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-cyan-500 z-20"></div>
+
+        <div className="relative p-6 sm:p-10 bg-black/50 backdrop-blur-xl border border-cyan-500/30 overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+          <div className="absolute top-0 right-0 p-1.5 text-[7px] text-cyan-500/30 uppercase tracking-widest font-mono select-none">
+            TIZIM.v3 // TAYYOR
           </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-2 sm:mb-3 tracking-tighter text-white">
-            Ingliz Tili <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-violet-400">Bilimdoni</span>
-          </h1>
-          <p className="text-sm sm:text-base text-slate-400 mb-6 sm:mb-8 font-medium">
-            Grammatika va lug'at bilimingizni sinab ko'ring.
-          </p>
-
-          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-            <div className="relative">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Ismingizni kiriting"
-                className="w-full bg-slate-800/40 border border-white/10 rounded-xl py-3 sm:py-4 px-5 sm:px-6 text-white text-base sm:text-lg font-bold placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300 text-center"
-                required
-              />
+          
+          <div className="flex flex-col items-center">
+            <div className="mb-6 relative">
+              <div className="absolute inset-0 bg-cyan-500/10 blur-xl animate-pulse"></div>
+              <div className="relative w-12 h-12 border border-cyan-500/50 flex items-center justify-center rotate-45 group">
+                <svg className="w-6 h-6 text-cyan-400 -rotate-45 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
             </div>
 
-            <button
-              type="submit"
-              className={`${FIXED_THEME.button} w-full text-white text-sm sm:text-base font-black py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-2xl transform hover:scale-[1.02] active:scale-95 disabled:opacity-20 uppercase tracking-widest`}
-              disabled={!name.trim()}
-            >
-              Testni boshlash
-            </button>
-          </form>
+            <h1 className="text-3xl sm:text-4xl font-black mb-3 tracking-[-0.05em] text-white uppercase italic">
+              Test<span className="text-cyan-500">ify</span>
+            </h1>
+            
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mb-5"></div>
+
+            <p className="text-[10px] sm:text-xs text-cyan-200/40 mb-8 tracking-[0.2em] uppercase font-bold text-center leading-relaxed">
+              Grammatika // <span className="text-cyan-400">Asosiy</span>
+            </p>
+
+            <form onSubmit={handleSubmit} className="w-full space-y-5">
+              <div className="group relative">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="ISMINGIZ..."
+                  className="relative w-full bg-black/40 border border-cyan-500/30 py-3 sm:py-4 px-6 text-cyan-100 text-base sm:text-lg font-bold placeholder-cyan-900/60 focus:outline-none focus:border-cyan-400 transition-all duration-300 uppercase tracking-widest text-center"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className={`${FIXED_THEME.button} w-full py-4 text-sm font-black transition-all duration-300 transform active:scale-[0.98] disabled:opacity-20 uppercase tracking-[0.3em] relative overflow-hidden group`}
+                disabled={!name.trim()}
+              >
+                <span className="relative z-10">BOSHLASH</span>
+                <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-cyan-500/10 transition-all duration-300"></div>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 

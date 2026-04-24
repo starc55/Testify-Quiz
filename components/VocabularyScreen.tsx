@@ -1,6 +1,5 @@
 import React from 'react';
 import { QUIZ_VOCABULARY } from '../constants';
-import BookOpenIcon from './icons/BookOpenIcon';
 
 interface VocabularyScreenProps {
   onStartQuiz: () => void;
@@ -8,77 +7,60 @@ interface VocabularyScreenProps {
 
 const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
   return (
-    <div className="text-white p-6 md:p-8 bg-black/20 backdrop-blur-lg rounded-2xl border border-white/10 shadow-lg animate-fade-in-up">
-      <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-pink-400 animate-title-pop">
-        <BookOpenIcon className="w-8 h-8" />
-        Test Lug'atlari
-      </h2>
-      <p className="text-center text-gray-300 mb-6">Testni boshlashdan oldin unda uchraydigan ba'zi so'zlar bilan tanishib chiqing.</p>
-      
-      <div className="space-y-4 max-h-64 overflow-y-auto pr-4 mb-8 custom-scrollbar">
-        {QUIZ_VOCABULARY.map((item) => (
-          <div key={item.term} className="p-4 bg-white/5 rounded-lg border border-white/10 transition-colors hover:bg-white/10">
-            <h3 className="font-bold text-lg text-indigo-400">{item.term}</h3>
-            <p className="text-gray-200">{item.definition}</p>
+    <div className="w-full max-w-xl mx-auto animate-cyber-ready">
+      <div className="relative bg-black/40 backdrop-blur-3xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+        {/* Frame Accents */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500"></div>
+        
+        <div className="p-8 sm:p-10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-2 h-8 bg-cyan-500"></div>
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-[0.2em] uppercase italic">
+              LUG'AT_MA'LUMOTLARI
+            </h2>
           </div>
-        ))}
+          
+          <p className="text-[10px] font-bold text-cyan-500/60 uppercase tracking-[0.3em] mb-10 leading-relaxed border-b border-cyan-500/10 pb-6">
+            Testni boshlashdan oldin muhim terminologiyani ko'rib chiqing. Asosiy so'zlarga e'tibor bering.
+          </p>
+          
+          <div className="space-y-px bg-cyan-500/10 border border-cyan-500/20 max-h-80 overflow-y-auto custom-scrollbar mb-10">
+            {QUIZ_VOCABULARY.map((item) => (
+              <div key={item.term} className="p-6 bg-black/40 hover:bg-cyan-500/5 transition-all group border-b border-cyan-500/5 last:border-b-0">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-black text-cyan-400 uppercase tracking-widest text-sm mb-1">
+                      {item.term}
+                    </h3>
+                    <p className="text-xs font-bold text-white/70 uppercase">
+                      {item.definition}
+                    </p>
+                  </div>
+                  <div className="w-1 h-1 bg-cyan-500/30 group-hover:bg-cyan-500 group-hover:animate-ping transition-all"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={onStartQuiz}
+            className="w-full bg-cyan-500 py-5 text-black font-black uppercase tracking-[0.4em] text-sm hover:bg-cyan-400 active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+          >
+            ALOQANI_BOSHLASH
+          </button>
+        </div>
       </div>
 
-      <div className="text-center">
-        <button
-          onClick={onStartQuiz}
-          className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
-        >
-          Testni boshlash
-        </button>
-      </div>
       <style>{`
-        @keyframes fade-in-up {
-          from { 
-            opacity: 0; 
-            transform: translateY(20px) scale(0.95);
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0) scale(1);
-          }
+        @keyframes cyber-ready {
+          from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-        }
-
-        @keyframes title-pop {
-          0% { 
-            opacity: 0; 
-            transform: scale(0.8) translateY(-10px);
-          }
-          70% {
-            transform: scale(1.05) translateY(2px);
-          }
-          100% { 
-            opacity: 1; 
-            transform: scale(1) translateY(0);
-          }
-        }
-        .animate-title-pop {
-          animation: title-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
-          opacity: 0;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(192, 132, 252, 0.5);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(192, 132, 252, 0.7);
-        }
+        .animate-cyber-ready { animation: cyber-ready 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #000; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; }
       `}</style>
     </div>
   );

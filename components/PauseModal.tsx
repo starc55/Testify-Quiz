@@ -9,39 +9,53 @@ const PauseModal: React.FC<PauseModalProps> = ({ countdown, onResumeRequest }) =
   const isCountingDown = countdown !== null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in">
-      <div className="w-full max-w-md bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/50 shadow-2xl text-white p-8 text-center">
-        <div className="text-5xl mb-4">🛑</div>
-        <h2 className="text-2xl font-bold mb-4">
-          Siz test oynasidan chiqdingiz!
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[100] p-4">
+      <div className="relative w-full max-w-md bg-black/40 border-2 border-rose-500/50 shadow-[0_0_100px_rgba(244,63,94,0.2)] p-10 text-center animate-cyber-pulse">
+        {/* Warning Corners */}
+        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-rose-500"></div>
+        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-rose-500"></div>
+        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-rose-500"></div>
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-rose-500"></div>
+
+        <div className="mb-6 relative inline-block">
+          <div className="absolute inset-0 bg-rose-500 blur-2xl opacity-20 animate-pulse"></div>
+          <svg className="w-16 h-16 text-rose-500 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+
+        <h2 className="text-3xl font-black mb-4 text-white uppercase italic tracking-tighter">
+          Aloqa <span className="text-rose-500">Uzildi</span>
         </h2>
-        <p className="text-gray-300 mb-8">
-          Test vaqtincha pauzaga qo‘yildi. Iltimos, o‘qituvchiga murojaat qiling.
+        
+        <div className="w-full h-px bg-rose-500/20 mb-6"></div>
+
+        <p className="text-xs font-bold text-rose-200/60 uppercase tracking-[0.2em] mb-10 leading-relaxed">
+          Neyron aloqasi uzildi. Oyna diqqati yo'qoldi. Tashqi shovqin aniqlandi. Aloqani darhol tiklang.
         </p>
 
         {isCountingDown ? (
-          <div className="py-3 px-12 h-12 flex items-center justify-center">
-            <p className="text-lg font-bold text-green-400 animate-pulse">
-              Davom etilmoqda... {countdown}
+          <div className="py-4 bg-rose-500/10 border border-rose-500/30">
+            <p className="text-sm font-black text-rose-400 uppercase tracking-[0.4em] animate-pulse">
+              Sinxronizatsiya... {countdown}
             </p>
           </div>
         ) : (
           <button
             onClick={onResumeRequest}
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-12 rounded-lg transition-all duration-300 shadow-lg hover:shadow-green-500/50 transform hover:scale-105"
+            className="w-full bg-rose-500 py-5 text-black font-black uppercase tracking-[0.4em] text-sm hover:bg-rose-400 active:scale-95 transition-all shadow-[0_0_30px_rgba(244,63,94,0.3)]"
           >
-            Davom etish
+            QAYTA_ULANISH
           </button>
         )}
       </div>
-       <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
+
+      <style>{`
+        @keyframes cyber-pulse {
+          0%, 100% { transform: scale(1); filter: brightness(1); }
+          50% { transform: scale(1.02); filter: brightness(1.1); }
         }
-        .animate-fade-in {
-          animation: fade-in 0.5s ease-out forwards;
-        }
+        .animate-cyber-pulse { animation: cyber-pulse 2s ease-in-out infinite; }
       `}</style>
     </div>
   );

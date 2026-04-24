@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import type { QuizQuestion, Theme } from '../types';
-import ClockIcon from './icons/ClockIcon';
 import { QUIZ_DURATION_SECONDS } from '../constants';
 
 interface QuizScreenProps {
@@ -11,6 +10,7 @@ interface QuizScreenProps {
   timeLeft: number;
   isPaused: boolean;
   theme: Theme;
+  studentName: string;
 }
 
 const QuizScreen: React.FC<QuizScreenProps> = ({
@@ -21,6 +21,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   timeLeft,
   isPaused,
   theme,
+  studentName,
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [writtenAnswer, setWrittenAnswer] = useState('');
@@ -158,175 +159,140 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const charProgress = Math.min((writtenAnswer.length / MAX_CHAR_HINT) * 100, 100);
 
   return (
-    <div className={`relative w-full transition-all duration-500 ${isPaused ? 'scale-95 blur-md pointer-events-none' : 'scale-100 blur-0'}`}>
-      <div className="bg-[#1e293b]/40 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] overflow-hidden">
+    <div className={`relative w-full transition-all duration-500 ${isPaused ? 'scale-95 blur-xl pointer-events-none' : 'scale-100 blur-0'}`}>
+      <div className="relative bg-black/40 backdrop-blur-3xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]">
         
-        {/* Header Section: Improved Responsiveness & Aesthetics */}
-        <div className="p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row items-center gap-4 sm:justify-between relative overflow-hidden group/header">
-          {/* Subtle reflection light for the entire header */}
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 blur-3xl rounded-full group-hover/header:bg-indigo-500/20 transition-all duration-1000"></div>
+        {/* HUD Frame Corners */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-500"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-500"></div>
 
-          <div className="flex flex-col items-center sm:items-start space-y-3 w-full sm:w-auto">
-            <div className="flex items-center gap-2">
-               <div className="w-1 h-4 bg-indigo-500 rounded-full"></div>
-               <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-indigo-400 uppercase leading-none block">
-                 {questionNumber} / {totalQuestions} Raund
+        {/* Tactical Header */}
+        <div className="p-4 sm:p-6 border-b border-cyan-500/20 flex flex-col sm:flex-row items-center gap-4 sm:justify-between relative bg-cyan-500/[0.02]">
+          <div className="flex flex-col items-center sm:items-start space-y-2 w-full sm:w-auto">
+            <div className="flex items-center gap-3">
+               <div className="w-1.5 h-1.5 bg-cyan-500 animate-ping"></div>
+               <span className="text-[10px] font-black tracking-[0.4em] text-cyan-500 uppercase">
+                 SAVOL: {questionNumber} // {totalQuestions}
                </span>
             </div>
-            <div className="relative w-full sm:w-48 md:w-64 h-2 bg-white/5 rounded-full overflow-hidden shadow-inner border border-white/5">
+            <div className="relative w-full sm:w-48 h-1 bg-cyan-950/50">
                <div 
-                 className={`h-full bg-gradient-to-r ${theme.progressBar} transition-all duration-1000 relative shadow-[0_0_15px_rgba(99,102,241,0.3)]`} 
+                 className={`h-full bg-cyan-500 transition-all duration-1000 relative shadow-[0_0_10px_#06b6d4]`} 
                  style={{ width: `${quizProgress}%` }}
                >
-                 <div className="absolute inset-0 bg-white/20 animate-pulse-slow"></div>
+                 <div className="absolute top-0 right-0 w-1 h-3 bg-cyan-500 -mt-1 shadow-[0_0_15px_#06b6d4]"></div>
                </div>
             </div>
           </div>
 
-          <div className="relative group scale-95 sm:scale-100">
-            {/* Dynamic Atmospheric Glow */}
-            <div className={`absolute -inset-3 bg-current opacity-10 blur-xl rounded-full transition-all duration-700 ${progressCircleColor} group-hover:opacity-25 ${timeLeft <= 15 ? 'animate-pulse-slow' : ''}`}></div>
-            <div className={`absolute -inset-1 bg-current opacity-20 blur-md rounded-full transition-all duration-700 ${progressCircleColor} ${timeLeft <= 10 ? 'animate-pulse-fast' : ''}`}></div>
+          {/* HUD Timer */}
+          <div className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 group">
+            <div className={`absolute inset-0 border border-cyan-500/20 ${timeLeft <= 15 ? 'animate-pulse' : ''}`}></div>
+            <div className="absolute inset-2 border border-dashed border-cyan-500/10 animate-spin-slow"></div>
             
-            <div className="relative w-14 h-14 sm:w-20 sm:h-20 flex items-center justify-center bg-slate-900/60 rounded-full backdrop-blur-xl border border-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.5)] group-hover:border-white/20 transition-colors">
-              {/* High-Tech Rotators */}
-              <div className="absolute inset-1.5 rounded-full border border-dashed border-indigo-500/20 animate-spin-slow"></div>
-              <div className="absolute inset-3 rounded-full border border-dotted border-white/5 animate-spin-reverse-slower"></div>
-
-              <svg className="w-full h-full transform -rotate-90 p-1.5" viewBox="0 0 72 72">
-                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="3" fill="transparent" className="text-white/5" />
-                <circle cx="36" cy="36" r={CIRCLE_RADIUS - 4} stroke="currentColor" strokeWidth="1" fill="transparent" className="text-white/[0.02]" strokeDasharray="2 4" />
-                
-                <circle cx="36" cy="36" r={CIRCLE_RADIUS} stroke="currentColor" strokeWidth="3" fill="transparent"
-                  strokeDasharray={CIRCUMFERENCE}
-                  strokeDashoffset={progressOffset}
-                  strokeLinecap="round"
-                  className={`${progressCircleColor} transition-all duration-1000 ease-linear drop-shadow-[0_0_8px_currentColor]`}
-                />
-                
-                {timeLeft > 0 && (
-                  <g className="transition-all duration-1000 ease-linear" style={{
-                    transformOrigin: '36px 36px',
-                    transform: `rotate(${360 * progressPercentage}deg)`
-                  }}>
-                    <circle cx="36" cy={36 - CIRCLE_RADIUS} r="2.5" fill="white" className="shadow-[0_0_10px_rgba(255,255,255,1)]" />
-                  </g>
-                )}
-              </svg>
-
-              <div className="absolute flex flex-col items-center justify-center leading-none">
-                <span className={`text-sm sm:text-xl font-black tracking-tighter ${timerTextColor} drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] font-mono`}>
-                  {minutes}:{seconds.toString().padStart(2, '0')}
-                </span>
-                <span className="text-[6px] sm:text-[8px] uppercase font-black text-slate-500 mt-0.5 tracking-[0.2em] font-sans">Vaqt</span>
-              </div>
+            <svg className="absolute inset-0 w-full h-full -rotate-90 p-1" viewBox="0 0 100 100">
+               <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-cyan-900/20" />
+               <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" fill="transparent"
+                 strokeDasharray="282.7"
+                 strokeDashoffset={282.7 - (progressPercentage * 282.7)}
+                 strokeLinecap="square"
+                 className={`${progressCircleColor} transition-all duration-1000 ease-linear`}
+               />
+            </svg>
+            
+            <div className="relative flex flex-col items-center justify-center leading-none">
+              <span className={`text-base sm:text-lg font-black tracking-tighter ${timerTextColor} font-mono`}>
+                {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Question Body */}
-        <div className="p-5 sm:p-8 md:p-10">
-          <div key={question.question} className={isExiting ? 'animate-slide-out' : 'animate-slide-in'}>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-6 sm:mb-8 leading-tight tracking-tight min-h-[3rem] sm:min-h-[4rem]">
-              {question.question}
-            </h2>
-
+        {/* Tactical Body */}
+        <div className="p-4 sm:p-8 relative">
+          {/* Decorative HUD Lines */}
+          <div className="absolute top-0 right-0 w-20 h-20 border-r border-t border-cyan-500/10 -mr-10 -mt-10"></div>
+          
+          <div key={question.question} className={isExiting ? 'opacity-0 -translate-x-10 transition-all duration-500' : 'animate-cyber-slide'}>
+            <div className="mb-4 sm:mb-6 flex gap-2">
+               <div className="w-1 h-6 bg-cyan-500"></div>
+               <h2 className="text-lg sm:text-2xl font-black text-white uppercase italic tracking-tight">
+                 {question.question}
+               </h2>
+            </div>
+ 
             {question.type === 'multiple-choice' && question.options && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {question.options.map((option, index) => (
                   <button
                     key={option}
                     onClick={() => handleSubmit(option)}
                     disabled={isAnswered || isPaused}
-                    className={`group relative p-3 sm:p-4 rounded-lg sm:rounded-xl border text-left font-bold transition-all duration-300 transform active:scale-[0.98] animate-fade-up ${getOptionClasses(option)}`}
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    className={`group relative p-3 sm:p-4 border transition-all duration-200 text-left uppercase flex items-center justify-between ${getOptionClasses(option)}`}
                   >
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-white/5 flex items-center justify-center text-[10px] sm:text-xs text-slate-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
-                        {String.fromCharCode(65 + index)}
-                      </span>
-                      <span className="text-sm sm:text-base">{option}</span>
+                    <div className="flex items-center gap-4">
+                      <span className="text-[10px] sm:text-xs font-black text-cyan-500/50 group-hover:text-cyan-400">[{index + 1}]</span>
+                      <span className="text-xs sm:text-sm font-bold tracking-widest text-white">{option}</span>
                     </div>
+                    <div className="w-2 h-2 border border-cyan-500 group-hover:bg-cyan-500 transition-all"></div>
                   </button>
                 ))}
               </div>
             )}
 
             {question.type === 'fill-in-the-blank' && (
-              <div className="w-full max-w-xl mx-auto sm:mx-0">
-                <form onSubmit={handleWrittenSubmit} className="relative group">
+              <div className="w-full">
+                <form onSubmit={handleWrittenSubmit} className="relative">
+                   <div className="absolute top-0 left-0 w-2 h-full bg-cyan-500/20"></div>
                    <input
                     type="text"
                     value={writtenAnswer}
                     onChange={(e) => setWrittenAnswer(e.target.value)}
-                    placeholder="Javobni yozing..."
+                    placeholder="JAVOBNI_KIRITING..."
                     disabled={isAnswered || isPaused}
-                    className={`w-full bg-slate-800/40 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-lg sm:text-xl font-bold text-white placeholder-slate-500 border-2 transition-all outline-none ${getInputClasses()} ${isShaking ? 'animate-shake' : ''}`}
+                    className={`w-full bg-black/50 p-6 text-xl font-black text-cyan-400 placeholder-cyan-900 border-l border-cyan-500 focus:outline-none focus:bg-cyan-500/5 transition-all ${getInputClasses()} uppercase tracking-[0.2em]`}
                     autoFocus
                   />
-                  <div className="mt-4 flex items-center justify-between px-2">
-                    <div className="flex-grow max-w-[150px] sm:max-w-xs h-1 bg-white/5 rounded-full overflow-hidden">
-                       <div className="h-full bg-indigo-500 transition-all duration-300" style={{ width: `${charProgress}%` }}></div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex-grow max-w-xs h-0.5 bg-cyan-950">
+                       <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${charProgress}%` }}></div>
                     </div>
-                    <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">{writtenAnswer.length} belgi</span>
+                    <div className="text-[10px] font-black text-cyan-500/50">BITLAR: {writtenAnswer.length * 8}</div>
                   </div>
                   
                   <button
                     type="submit"
                     disabled={isAnswered || isPaused || !writtenAnswer.trim()}
-                    className={`mt-6 sm:mt-8 w-full ${theme.button} text-white font-black py-4 sm:py-5 px-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl disabled:opacity-30 transform hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm`}
+                    className={`mt-10 w-full py-6 bg-cyan-500 text-black font-black uppercase tracking-[0.4em] hover:bg-cyan-400 active:scale-95 transition-all disabled:opacity-20`}
                   >
-                    Tasdiqlash
+                    TASDIQLASH
                   </button>
                 </form>
               </div>
             )}
           </div>
         </div>
+
+        {/* Footer Technical Metadata */}
+        <div className="px-6 py-2 bg-cyan-500/5 border-t border-cyan-500/10 flex justify-between">
+           <span className="text-[8px] text-cyan-500/40 uppercase font-mono tracking-widest font-bold">Shifrlangan aloqa faol</span>
+           <span className="text-[8px] text-cyan-500/40 uppercase font-mono tracking-widest font-bold">Foydalanuvchi: {studentName.toUpperCase() || 'ANOM_USER'}</span>
+        </div>
       </div>
 
       <style>{`
-        @keyframes slide-in {
-          from { opacity: 0; transform: translateY(20px) scale(0.98); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes cyber-slide {
+          from { opacity: 0; transform: translateX(-20px); filter: skewX(-5deg); }
+          to { opacity: 1; transform: translateX(0); filter: skewX(0); }
         }
-        @keyframes slide-out {
-          from { opacity: 1; transform: translateY(0) scale(1); }
-          to { opacity: 0; transform: translateY(-20px) scale(0.95); }
-        }
-        @keyframes fade-up {
-          from { opacity: 0; transform: translateY(15px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-8px); }
-          75% { transform: translateX(8px); }
-        }
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.15; transform: scale(1); filter: blur(12px); }
-          50% { opacity: 0.25; transform: scale(1.08); filter: blur(16px); }
-        }
-        @keyframes pulse-fast {
-          0%, 100% { opacity: 0.3; transform: scale(1); filter: blur(14px); }
-          50% { opacity: 0.5; transform: scale(1.15); filter: blur(20px); }
-        }
+        .animate-cyber-slide { animation: cyber-slide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-        @keyframes spin-reverse-slower {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
-        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
-        .animate-pulse-fast { animation: pulse-fast 1s ease-in-out infinite; }
-        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-        .animate-spin-reverse-slower { animation: spin-reverse-slower 35s linear infinite; }
-        .animate-slide-in { animation: slide-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .animate-slide-out { animation: slide-out 0.4s cubic-bezier(0.4, 0, 1, 1) forwards; }
-        .animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
-        .animate-shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+        .animate-spin-slow { animation: spin-slow 15s linear infinite; }
       `}</style>
     </div>
   );

@@ -199,6 +199,7 @@ export default function App() {
             timeLeft={timeLeft}
             isPaused={isPaused}
             theme={FIXED_THEME}
+            studentName={studentName}
           />
         );
       case 'completed':
@@ -216,12 +217,16 @@ export default function App() {
   };
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 overflow-x-hidden overflow-y-auto p-4 sm:p-6">
-      <div className={`absolute inset-0 bg-gradient-to-br ${FIXED_THEME.mainGradient} opacity-50`}></div>
-      <div className={`absolute top-0 left-0 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob1} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob`}></div>
-      <div className={`absolute top-0 right-0 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob2} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000`}></div>
-      <div className={`absolute bottom-0 left-1/4 w-48 h-48 sm:w-72 sm:h-72 ${FIXED_THEME.blob3} rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000`}></div>
+    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#020617] overflow-x-hidden overflow-y-auto p-4 sm:p-6 font-mono">
+      {/* Cyber Grid Background */}
+      <div className="absolute inset-0 z-0 opacity-20" 
+           style={{ backgroundImage: 'radial-gradient(circle, #06b6d4 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#06b6d4]/5 to-transparent"></div>
       
+      {/* Scanline Effect */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
+           style={{ background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))', backgroundSize: '100% 2px, 3px 100%' }}></div>
+
       <div className="z-10 w-full max-w-2xl flex items-center justify-center">
         {renderContent()}
       </div>
@@ -229,15 +234,10 @@ export default function App() {
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
 
       <style>{`
-        .animate-blob { animation: blob 10s infinite; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
+        body { background-color: #020617; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
       `}</style>
     </main>
   );

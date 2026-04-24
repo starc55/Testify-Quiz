@@ -15,44 +15,53 @@ const RulesModal: React.FC<RulesModalProps> = ({ onAccept }) => {
   };
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6 transition-all duration-500 ${isExiting ? 'opacity-0 scale-110 blur-2xl' : 'opacity-100'}`}>
-      <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"></div>
+    <div className={`fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-6 transition-all duration-500 ${isExiting ? 'opacity-0 backdrop-blur-none' : 'opacity-100'}`}>
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-3xl"></div>
       
-      <div className={`relative w-full max-w-lg bg-slate-900/40 border border-white/10 rounded-2xl sm:rounded-[2.5rem] shadow-2xl p-8 sm:p-10 md:p-14 text-white transform transition-all duration-700 ${isExiting ? 'translate-y-10' : 'animate-popup'}`}>
-        <div className="mb-6 sm:mb-8 flex justify-center">
-           <div className="w-12 sm:w-16 h-1 bg-indigo-500 rounded-full opacity-50"></div>
+      <div className={`relative w-full max-w-lg bg-black/40 border border-cyan-500/30 overflow-hidden shadow-[0_0_100px_rgba(6,182,212,0.1)] p-10 sm:p-14 transform transition-all duration-700 ${isExiting ? 'scale-110 blur-xl translate-y-10' : 'animate-popup'}`}>
+        {/* HUD Frame Corners */}
+        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-cyan-500"></div>
+        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-cyan-500"></div>
+        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-cyan-500"></div>
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-cyan-500"></div>
+
+        <div className="mb-10 text-center">
+           <div className="text-[10px] font-black tracking-[0.6em] text-cyan-500 uppercase mb-4">BRIFING_RUXSATI</div>
+           <h2 className="text-4xl font-black text-white italic uppercase tracking-tighter">
+             TEST <span className="text-cyan-500">QOIDALARI</span>
+           </h2>
         </div>
         
-        <h2 className="text-3xl sm:text-4xl font-black mb-6 sm:mb-8 text-center tracking-tighter">
-          Asosiy Qoidalar
-        </h2>
-        
-        <div className="space-y-4 sm:space-y-6 mb-10 sm:mb-12">
+        <div className="space-y-6 mb-12">
           {[
-            "Barcha savollarga 40 daqiqa vaqt beriladi.",
-            "Har bir savol uchun bitta to'g'ri javob mavjud.",
-            "Tanlangan javobni o'zgartirib bo'lmaydi.",
-            "Natijalar yakunda avtomatik yuboriladi."
+            "Vaqt limiti: 50 daqiqa.",
+            "Bitta to'g'ri javob mavjudligi tasdiqlangan.",
+            "Javobni o'zgartirish bloki faol.",
+            "Natijalarni arxivlash tizimi ishlaydi."
           ].map((rule, i) => (
-            <div key={i} className="flex items-start gap-3 sm:gap-4 group">
-              <span className="mt-1.5 flex-shrink-0 w-2 h-2 rounded-full bg-indigo-500 group-hover:scale-150 transition-transform duration-300"></span>
-              <p className="text-base sm:text-lg text-slate-300 font-medium group-hover:text-white transition-colors">{rule}</p>
+            <div key={i} className="flex items-center gap-6 group">
+              <div className="w-2 h-2 bg-cyan-500 group-hover:animate-ping"></div>
+              <p className="text-sm sm:text-base text-cyan-100/70 font-bold uppercase tracking-widest">{rule}</p>
             </div>
           ))}
         </div>
 
         <button
           onClick={handleStart}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 sm:py-5 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-2xl shadow-indigo-500/20 transform hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs sm:text-sm"
+          className="w-full bg-cyan-500 py-6 text-black font-black uppercase tracking-[0.5em] text-sm hover:bg-cyan-400 active:scale-95 transition-all shadow-[0_0_30px_rgba(6,182,212,0.4)]"
         >
-          Tayyorman
+          RUXSAT_BERISH
         </button>
+        
+        <div className="mt-8 text-center">
+           <span className="text-[8px] font-black text-cyan-500/20 uppercase tracking-[0.4em]">XAVFSIZ PROTOKOL v9.0.2 YOQILGAN</span>
+        </div>
       </div>
 
       <style>{`
         @keyframes popup {
-          from { opacity: 0; transform: translateY(40px) scale(0.9); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
+          from { opacity: 0; transform: scale(0.9) skewX(-10deg); filter: blur(20px); }
+          to { opacity: 1; transform: scale(1) skewX(0); filter: blur(0); }
         }
         .animate-popup { animation: popup 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
       `}</style>

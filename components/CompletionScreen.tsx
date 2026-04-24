@@ -20,133 +20,119 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
   const [showDetails, setShowDetails] = useState(false);
   const percentage = Math.round((score / totalQuestions) * 100);
 
-  const getScoreMessage = () => {
-    if (percentage >= 90) return "Ajoyib natija! Siz haqiqiy bilimdonsiz!";
-    if (percentage >= 70) return "Yaxshi natija! Bilimingiz ancha mustahkam.";
-    if (percentage >= 50) return "Yomon emas, lekin hali o'rganish kerak bo'lgan narsalar bor.";
-    return "Xato va kamchiliklar ustida ko'proq ishlashingiz kerak.";
-  };
-
   return (
-    <div className="w-full max-w-xl mx-auto animate-container-fade-in-up">
-      <div className="text-center text-white p-6 sm:p-8 bg-slate-900/60 backdrop-blur-3xl rounded-[2rem] border border-white/10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden">
-        {/* Decorative Light Bubbles */}
-        <div className="absolute -top-24 -left-24 w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full"></div>
-        <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full"></div>
-
-        <div className="relative z-10">
-          <div className="flex justify-center mb-8">
-            <motion.div 
-              animate={{ 
-                scale: showDetails ? [1, 1.2, 1] : 1,
-                rotate: showDetails ? [0, 10, -10, 0] : 0
-              }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className={`p-1 rounded-full ${percentage >= 50 ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}
-            >
-              <svg className="w-20 h-20 sm:w-24 sm:h-24" viewBox="0 0 52 52">
-                <circle 
-                  className={`animate-stroke fill-none stroke-[3] ${percentage >= 50 ? 'stroke-emerald-500' : 'stroke-rose-500'}`} 
-                  cx="26" cy="26" r="25" 
-                  style={{ strokeDasharray: 166, strokeDashoffset: 166 }} 
-                />
-                <path 
-                  className="animate-stroke fill-none stroke-[3] stroke-white" 
-                  d={percentage >= 50 ? "M14.1 27.2l7.1 7.2 16.7-16.8" : "M16 16l20 20M36 16L16 36"} 
-                  style={{ strokeDasharray: 48, strokeDashoffset: 48 }} 
-                />
-              </svg>
-            </motion.div>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl font-black mb-3 tracking-tighter animate-text-fade-in" style={{ animationDelay: '0.8s' }}>
-            {percentage >= 50 ? 'Tabriklaymiz!' : 'Test yakunlandi'}
-          </h1>
-          
-          <p className="text-xl sm:text-2xl font-bold text-indigo-400 mb-1 animate-text-fade-in" style={{ animationDelay: '1s' }}>
-            {name}
-          </p>
-
-          <div className="grid grid-cols-2 gap-3 my-6 animate-text-fade-in" style={{ animationDelay: '1.2s' }}>
-            <div className="bg-white/5 rounded-xl p-4 border border-white/5 shadow-inner">
-               <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest block mb-1 text-[8px] sm:text-[10px]">To'g'ri javoblar</span>
-               <span className="text-2xl sm:text-3xl font-black text-emerald-400">{score}</span>
+    <div className="w-full max-w-lg mx-auto animate-cyber-ready">
+      <div className="relative bg-black/40 backdrop-blur-3xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+        {/* Decorative Grid Overlays */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#06b6d4 1px, transparent 1px), linear-gradient(90deg, #06b6d4 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+        
+        <div className="relative z-10 p-8 sm:p-12">
+          {/* Header Metadata */}
+          <div className="mb-10 flex justify-between items-start border-b border-cyan-500/20 pb-6">
+            <div>
+              <p className="text-[10px] font-black tracking-[0.4em] text-cyan-500 uppercase mb-2">DIAGNOSTIKA_NATIJASI // 100%</p>
+              <h1 className="text-3xl sm:text-4xl font-black text-white italic uppercase">{percentage >= 50 ? "Muvaffaqiyat" : "Mag'lubiyat"}</h1>
             </div>
-            <div className="bg-white/5 rounded-xl p-4 border border-white/5 shadow-inner">
-               <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest block mb-1 text-[8px] sm:text-[10px]">Natija</span>
-               <span className="text-2xl sm:text-3xl font-black text-indigo-400">{percentage}%</span>
+            <div className="text-right">
+              <p className="text-[10px] font-black text-white/40 uppercase mb-1 tracking-widest">Operator</p>
+              <p className="text-sm font-bold text-cyan-400 uppercase tracking-widest">{name}</p>
             </div>
           </div>
 
-          <p className="text-base text-slate-300 mb-6 font-medium animate-text-fade-in leading-relaxed" style={{ animationDelay: '1.4s' }}>
-            {getScoreMessage()}
-          </p>
+          {/* Results Metric */}
+          <div className="flex flex-col items-center mb-10">
+            <div className="relative w-40 h-40 flex items-center justify-center mb-6">
+               <div className={`absolute inset-0 border-2 rounded-full ${percentage >= 50 ? 'border-cyan-500' : 'border-rose-500'} animate-pulse`}></div>
+               <div className={`absolute inset-2 border border-dashed rounded-full ${percentage >= 50 ? 'border-cyan-500/30' : 'border-rose-500/30'} animate-spin-slow`}></div>
+               <div className="text-center">
+                  <span className={`text-5xl font-black italic tracking-tighter ${percentage >= 50 ? 'text-cyan-400' : 'text-rose-500'}`}>{percentage}%</span>
+                  <div className="text-[8px] font-black text-white/40 uppercase tracking-[0.3em] mt-1">Aniqlik</div>
+               </div>
+            </div>
+            <p className="text-center text-xs font-bold text-cyan-200/60 uppercase tracking-widest leading-relaxed max-w-sm">
+               {percentage >= 90 ? 'Tanqidiy tahlil yakunlandi. Til mahorati aniqlandi.' : 
+                percentage >= 50 ? 'Ma\'lumotlar tasdiqlandi. Tilning tarkibiy bilimi yetarli ekanligi tasdiqlandi.' :
+                'Qayta sozlash talab qilinadi. Til oqimida tarkibiy mantiqiy xatolar aniqlandi.'}
+            </p>
+          </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 animate-text-fade-in" style={{ animationDelay: '1.6s' }}>
+          <div className="grid grid-cols-2 gap-px bg-cyan-500/20 mb-10">
+            <div className="bg-black/60 p-6 flex flex-col items-center justify-center">
+               <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.4em] mb-2">NATIJA</span>
+               <span className="text-2xl font-black italic text-cyan-500">{score} / {totalQuestions}</span>
+            </div>
+            <div className="bg-black/60 p-6 flex flex-col items-center justify-center">
+               <span className="text-[8px] font-black text-white/40 uppercase tracking-[0.4em] mb-2">VAQT</span>
+               <span className="text-2xl font-black italic text-cyan-500">TASDIQLANGAN</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3">
             <motion.button 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setShowDetails(!showDetails)}
-              className="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-black py-3 px-6 rounded-xl transition-all duration-300 uppercase tracking-widest text-[10px] sm:text-xs"
+              className="w-full bg-cyan-500/10 border border-cyan-500/30 py-4 text-cyan-400 font-black uppercase tracking-[0.3em] text-xs hover:bg-cyan-500/20 transition-all"
             >
-              {showDetails ? 'Yopish' : 'Xatolarni ko\'rish'}
+              [ {showDetails ? 'JURNALNI_YOPISH' : "NATIJALARNI_KO'RISH"} ]
             </motion.button>
             <motion.button 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => window.location.reload()}
-              className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-black py-3 px-6 rounded-xl transition-all duration-300 shadow-xl shadow-indigo-600/20 uppercase tracking-widest text-[10px] sm:text-xs"
+              className="w-full bg-cyan-500 border border-cyan-500 py-4 text-black font-black uppercase tracking-[0.3em] text-xs transition-all"
             >
-              Qaytadan topshirish
+              QAYTA_BOSHLASH
             </motion.button>
           </div>
         </div>
       </div>
 
       {showDetails && (
-        <div className="mt-8 space-y-4 animate-fade-up">
-          <h3 className="text-xl font-black text-white px-4 flex items-center gap-3">
-             <div className="w-1 h-6 bg-indigo-600 rounded-full"></div>
-             Batafsil tahlil
-          </h3>
-          <div className="space-y-3">
+        <div className="mt-8 space-y-4 animate-cyber-ready">
+          <div className="flex items-center gap-3 px-4">
+             <div className="h-4 w-4 border border-cyan-500 rotate-45 flex items-center justify-center bg-cyan-500/20 animate-pulse">
+                <div className="w-1 h-1 bg-cyan-500"></div>
+             </div>
+             <h3 className="text-xs font-black text-cyan-500 uppercase tracking-[0.4em]">NATIJALAR_TARIXI</h3>
+          </div>
+          
+          <div className="space-y-4">
             {userAnswers.map((record, index) => (
               <div 
                 key={index} 
-                className={`p-6 rounded-3xl border transition-all duration-500 ${
+                className={`relative p-6 border-l-4 border-r border-t border-b bg-black/40 backdrop-blur-xl transition-all duration-500 ${
                   record.isCorrect 
-                    ? 'bg-emerald-500/5 border-emerald-500/20' 
-                    : 'bg-rose-500/5 border-rose-500/20'
+                    ? 'border-l-cyan-500 border-cyan-500/10' 
+                    : 'border-l-rose-500 border-rose-500/10'
                 }`}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`mt-1 flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center font-black text-sm ${
-                    record.isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
-                  }`}>
-                    {index + 1}
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-start">
+                    <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">SAVOL_ID: {index + 1}</span>
+                    <span className={`text-[10px] font-black uppercase px-2 py-0.5 ${record.isCorrect ? 'bg-cyan-500/20 text-cyan-400' : 'bg-rose-500/20 text-rose-500'}`}>
+                       {record.isCorrect ? "HOLAT: TO'G'RI" : 'HOLAT: XATO'}
+                    </span>
                   </div>
-                  <div className="space-y-4 w-full">
-                    <p className="text-white text-lg font-bold leading-tight">{record.question}</p>
+                  
+                  <p className="text-white text-lg font-bold tracking-tight uppercase italic">{record.question}</p>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-cyan-500/10 pt-4 mt-2">
+                    <div className="space-y-2">
+                      <span className="text-[8px] font-black text-white/40 uppercase tracking-widest">Sizning_javobingiz</span>
+                      <div className={`text-sm font-black italic tracking-widest ${record.isCorrect ? 'text-cyan-400' : 'text-rose-500'}`}>
+                        {record.selectedAnswer.toUpperCase()}
+                      </div>
+                    </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="space-y-1">
-                        <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Sizning javobingiz</span>
-                        <div className={`p-3 rounded-xl border font-bold text-sm ${
-                          record.isCorrect ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                        }`}>
-                          {record.selectedAnswer}
+                    {!record.isCorrect && (
+                      <div className="space-y-2">
+                        <span className="text-[8px] font-black text-white/40 uppercase tracking-widest">To'g'ri_javob</span>
+                        <div className="text-sm font-black italic tracking-widest text-cyan-400">
+                          {record.correctAnswer.toUpperCase()}
                         </div>
                       </div>
-                      
-                      {!record.isCorrect && (
-                        <div className="space-y-1">
-                          <span className="text-[10px] uppercase font-black text-slate-500 tracking-widest">To'g'ri javob</span>
-                          <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl font-bold text-sm text-emerald-400">
-                            {record.correctAnswer}
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -156,36 +142,11 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
       )}
 
       <style>{`
-        .animate-stroke {
-          animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        @keyframes cyber-ready {
+          from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-
-        .animate-container-fade-in-up {
-          animation: container-fade-in-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        
-        .animate-text-fade-in {
-          opacity: 0;
-          animation: text-fade-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        .animate-fade-up {
-          animation: text-fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        @keyframes stroke {
-          to { stroke-dashoffset: 0; }
-        }
-
-        @keyframes container-fade-in-up {
-          from { opacity: 0; transform: translateY(40px) scale(0.95); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        @keyframes text-fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
+        .animate-cyber-ready { animation: cyber-ready 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
       `}</style>
     </div>
   );

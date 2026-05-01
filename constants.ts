@@ -1,375 +1,229 @@
 
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 50 * 60; // 50 minutes
+export const QUIZ_DURATION_SECONDS = 30 * 60; // 30 minutes
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Improve", definition: "Yaxshilamoq" },
-  { term: "Decide", definition: "Qaror qilmoq" },
-  { term: "Explain", definition: "Tushuntirmoq" },
-  { term: "Continue", definition: "Davom etmoq" },
-  { term: "Prepare", definition: "Tayyorlanmoq" },
-  { term: "Increase", definition: "Oshirmoq" },
-  { term: "Reduce", definition: "Kamaytirmoq" },
-  { term: "Choose", definition: "Tanlamoq" },
-  { term: "Develop", definition: "Rivojlanmoq" },
-  { term: "Achieve", definition: "Erishmoq" },
-  { term: "Opportunity", definition: "Imkoniyat" },
-  { term: "Experience", definition: "Tajriba" },
-  { term: "Environment", definition: "Atrof-muhit" },
-  { term: "Situation", definition: "Vaziyat" },
-  { term: "Advice", definition: "Maslahat" },
-  { term: "Successful", definition: "Muvaffaqiyatli" },
-  { term: "Responsible", definition: "Mas'uliyatli" },
-  { term: "Independent", definition: "Mustaqil" },
-  { term: "Possible", definition: "Mumkin" },
-  { term: "Difficult", definition: "Qiyin" },
-  { term: "Instead", definition: "O'rniga" },
-  { term: "Although", definition: "Garchi bo'lsa ham" },
-  { term: "However", definition: "Ammo, biroq" },
-  { term: "Finally", definition: "Nihoyat" },
-  { term: "Recently", definition: "Yaqinda" },
-  { term: "Reliable", definition: "Ishonchli" },
-  { term: "Wealthy", definition: "Boy, badavlat" },
-  { term: "Postpone", definition: "Keyinga qoldirmoq" },
-  { term: "Sense of humor", definition: "Hazil-mutoyiba hissi" }
+  { term: "Can", definition: "Qila olmoq (Qobiliyat/Ruxsat)" },
+  { term: "Could", definition: "Qila olar edi (O'tgan zamon qobiliyati/Xushmuomalalik ruxsati)" },
+  { term: "Must", definition: "Kerak, shart (Majburiyat)" },
+  { term: "Should", definition: "Kerak (Maslahat)" },
+  { term: "May", definition: "Mumkin (Ehtimol/Ruxsat)" },
+  { term: "Might", definition: "Balki, ehtimol (Past ehtimollik)" },
+  { term: "Will", definition: "Qiladi (Kelajak/Iroda)" },
+  { term: "Would", definition: "Qilar edi (Faraziy/Xushmuomalalik)" },
+  { term: "Have to", definition: "To'g'ri keladi (Tashqi majburiyat)" },
+  { term: "Need to", definition: "Kerak, muhtoj bo'lmoq" },
+  { term: "Ought to", definition: "Kerak (Should bilan bir xil)" },
+  { term: "Had better", definition: "Yaxshisi (Qat'iy maslahat)" },
+  { term: "Mustn't", definition: "Taqiqlanadi" },
+  { term: "Don't have to", definition: "Kerak emas (Majburiyat yo'q)" },
+  { term: "Can't", definition: "Qila olmaydi / Bo'lishi mumkin emas (Ishonch)" }
 ];
 
 export const FIXED_THEME: Theme = {
-  id: 'cyberpunk',
-  name: 'Cyber Glass',
-  preview: 'bg-black border-cyan-500 border-2',
-  mainGradient: 'from-[#020617] via-[#0f172a] to-[#020617]',
-  blob1: 'bg-cyan-500',
-  blob2: 'bg-fuchsia-600',
-  blob3: 'bg-indigo-500',
-  button: 'bg-black border-2 border-cyan-500 hover:bg-cyan-500/10 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]',
-  progressBar: 'from-cyan-500 via-fuchsia-500 to-cyan-500',
+  id: 'student-modern',
+  name: 'Modern Study',
+  preview: 'bg-indigo-600',
+  mainGradient: 'from-slate-50 via-indigo-50 to-blue-50',
+  blob1: 'bg-indigo-300',
+  blob2: 'bg-blue-300',
+  blob3: 'bg-indigo-200',
+  button: 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-200',
+  progressBar: 'from-indigo-500 via-blue-500 to-indigo-500',
   timerCircle: {
-    base: 'text-cyan-400',
-    warn: 'text-amber-400',
+    base: 'text-indigo-600',
+    warn: 'text-amber-500',
     danger: 'text-rose-500',
   },
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- Nouns: Possessive Case & Plurals (1-5) ---
+  // --- Basic Theory ---
   {
     type: 'multiple-choice',
-    question: "Otlarning egalik shakli (Possessive Case): 'This is ___ (Ali) book.'",
-    options: ["Ali's", "Alis'", "Alis", "Ali of"],
-    correctAnswer: "Ali's"
+    question: "Modal fe'llardan keyin asosiy fe'l qanday ko'rinishda keladi?",
+    options: ["Infinitive (To-siz)", "Infinitive (To-li)", "V+ing", "V+ed"],
+    correctAnswer: "Infinitive (To-siz)"
   },
   {
     type: 'multiple-choice',
-    question: "Ko'plik shaklida to'g'ri yozilganini toping (Plural):",
-    options: ["Children", "Childs", "Childrens", "Childes"],
-    correctAnswer: "Children"
+    question: "Qaysi modal fe'l 3-shaxs birlikda (He/She/It) '-s' qo'shimchasini olmaydi?",
+    options: ["Barchasi", "Faqat 'can'", "Faqat 'must'", "Faqat 'should'"],
+    correctAnswer: "Barchasi"
   },
   {
     type: 'multiple-choice',
-    question: "O'yinchilarning to'pi: 'The ___ ball.'",
-    options: ["players'", "player's", "players", "players's"],
-    correctAnswer: "players'"
+    question: "Modal fe'llar bilan so'roq gap qanday yasaladi?",
+    options: ["Modal fe'l eganing oldiga o'tadi", "Do/Does yordamida", "Did yordamida", "Am/Is/Are yordamida"],
+    correctAnswer: "Modal fe'l eganing oldiga o'tadi"
   },
   {
     type: 'multiple-choice',
-    question: "'Wife' so'zining ko'plik shakli qaysi?",
-    options: ["Wives", "Wifes", "Wifey", "Wivess"],
-    correctAnswer: "Wives"
+    question: "Qaysi modal fe'l o'rnida hamisha 'to' predlogi bilan birga keladigan ibora ishlatiladi?",
+    options: ["Have to", "Must", "Can", "Will"],
+    correctAnswer: "Have to"
   },
   {
     type: 'multiple-choice',
-    question: "'Man' so'zining ko'plik shakli qaysi?",
-    options: ["Men", "Mans", "Mens", "Manes"],
-    correctAnswer: "Men"
-  },
-
-  // --- Pronouns (6-10) ---
-  {
-    type: 'multiple-choice',
-    question: "'Mening' olmoshi (Possessive): 'This pen is ___.'",
-    options: ["mine", "my", "me", "myself"],
-    correctAnswer: "mine"
-  },
-  {
-    type: 'multiple-choice',
-    question: "'O'zim' (Reflexive): 'I can do it by ___.'",
-    options: ["myself", "me", "mine", "my"],
-    correctAnswer: "myself"
-  },
-  {
-    type: 'multiple-choice',
-    question: "'Uning' (ayol kishi): 'That is ___ car.'",
-    options: ["her", "hers", "she", "herself"],
-    correctAnswer: "her"
-  },
-  {
-    type: 'multiple-choice',
-    question: "'Bizning' (egalik): 'It is ___ house.'",
-    options: ["our", "ours", "us", "ourselves"],
-    correctAnswer: "our"
-  },
-  {
-    type: 'multiple-choice',
-    question: "'Ularning' (faqat egalik): 'That classroom is ___.'",
-    options: ["theirs", "their", "them", "themselves"],
-    correctAnswer: "theirs"
+    question: "Maslahat (advice) berishda asosan qaysi modal fe'l ishlatiladi?",
+    options: ["Should", "Must", "May", "Can"],
+    correctAnswer: "Should"
   },
 
-  // --- To Be & There is/are (11-15) ---
+  // --- Ability & Permission ---
   {
     type: 'multiple-choice',
-    question: "To Be (Present): 'He ___ a doctor.'",
-    options: ["is", "am", "are", "be"],
-    correctAnswer: "is"
+    question: "Hozirgi zamon qobiliyati uchun qaysi fe'l ishlatiladi?",
+    options: ["Can", "Could", "Must", "Should"],
+    correctAnswer: "Can"
   },
   {
     type: 'multiple-choice',
-    question: "To Be (Past): 'We ___ at the cinema yesterday.'",
-    options: ["were", "was", "been", "are"],
-    correctAnswer: "were"
+    question: "Xushmuomalalik bilan ruxsat so'rashda qaysi biri to'g'riroq?",
+    options: ["Could I", "Can I", "Must I", "Will I"],
+    correctAnswer: "Could I"
   },
   {
     type: 'multiple-choice',
-    question: "There is/are: '___ a book on the table.'",
-    options: ["There is", "There are", "Is there", "Are there"],
-    correctAnswer: "There is"
+    question: "___ you help me with this bag, please? (Request)",
+    options: ["Can", "Must", "Should", "Shall"],
+    correctAnswer: "Can"
   },
   {
     type: 'multiple-choice',
-    question: "There is/are: '___ any students in the room?'",
-    options: ["Are there", "Is there", "There are", "There is"],
-    correctAnswer: "Are there"
+    question: "O'tgan zamondagi umumiy qobiliyat uchun nima ishlatiladi?",
+    options: ["Could", "Can", "May", "Will"],
+    correctAnswer: "Could"
   },
   {
     type: 'multiple-choice',
-    question: "Past To Be: '___ she happy at the party?'",
-    options: ["Was", "Were", "Is", "Did"],
-    correctAnswer: "Was"
-  },
-
-  // --- Quantifiers (16-20) ---
-  {
-    type: 'multiple-choice',
-    question: "Much/Many: 'How ___ milk do you want?'",
-    options: ["much", "many", "a lot", "little"],
-    correctAnswer: "much"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Much/Many: 'There are ___ apples in the basket.'",
-    options: ["many", "much", "any", "little"],
-    correctAnswer: "many"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Some/Any: 'Do you have ___ questions?'",
-    options: ["any", "some", "a", "an"],
-    correctAnswer: "any"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Little/Few: 'I have ___ friends.' (sanoqli)",
-    options: ["few", "little", "much", "many"],
-    correctAnswer: "few"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Little/Few: 'There is ___ water in the bottle.' (sanalmaydigan)",
-    options: ["little", "few", "many", "any"],
-    correctAnswer: "little"
+    question: "Specific (aniq bir vaziyatda) o'tgan zamon qobiliyati uchun nima afzal?",
+    options: ["Was able to", "Could", "Can", "Might"],
+    correctAnswer: "Was able to"
   },
 
-  // --- Adjectives (Comparative/Superlative) (21-25) ---
+  // --- Obligation & Necessity ---
   {
     type: 'multiple-choice',
-    question: "Comparative: 'Ali is ___ than Wali.'",
-    options: ["taller", "tall", "tallest", "more tall"],
-    correctAnswer: "taller"
+    question: "Qat'iy shaxsiy majburiyat uchun qaysi biri ishlatiladi?",
+    options: ["Must", "Should", "Can", "Could"],
+    correctAnswer: "Must"
   },
   {
     type: 'multiple-choice',
-    question: "Superlative: 'Tashkent is the ___ city in Uzbekistan.'",
-    options: ["biggest", "bigger", "big", "more big"],
-    correctAnswer: "biggest"
+    question: "Tashqi qoidalar yoki majburiyatlar uchun ko'proq nima ishlatiladi?",
+    options: ["Have to", "Must", "May", "Should"],
+    correctAnswer: "Have to"
   },
   {
     type: 'multiple-choice',
-    question: "Irragular Comparative: 'This book is ___ than that one.' (good)",
-    options: ["better", "gooder", "best", "more good"],
-    correctAnswer: "better"
+    question: "You ___ smoke in the hospital. (Prohibition)",
+    options: ["mustn't", "don't have to", "should", "can"],
+    correctAnswer: "mustn't"
   },
   {
     type: 'multiple-choice',
-    question: "Superlative: 'He is the ___ student in the class.' (good)",
-    options: ["best", "better", "goodest", "most good"],
-    correctAnswer: "best"
+    question: "Ertaga dam olish kuni, ishga borishim shart emas.",
+    options: ["I don't have to go", "I mustn't go", "I shouldn't go", "I can't go"],
+    correctAnswer: "I don't have to go"
   },
   {
     type: 'multiple-choice',
-    question: "Comparative (Long Adj): 'English is ___ than Math.' (difficult)",
-    options: ["more difficult", "difficulter", "most difficult", "difficult"],
-    correctAnswer: "more difficult"
-  },
-
-  // --- Present Simple (26-30) ---
-  {
-    type: 'multiple-choice',
-    question: "Present Simple: 'She ___ (like) ice cream.'",
-    options: ["likes", "like", "liking", "is like"],
-    correctAnswer: "likes"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple (Neg): 'They ___ (not / play) football.'",
-    options: ["don't play", "doesn't play", "not play", "isn't play"],
-    correctAnswer: "don't play"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple (Ques): '___ he live in London?'",
-    options: ["Does", "Do", "Is", "Are"],
-    correctAnswer: "Does"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple: 'I usually ___ (get up) at 7 o'clock.'",
-    options: ["get up", "gets up", "getting up", "am get up"],
-    correctAnswer: "get up"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Simple: 'My father ___ (work) in a bank.'",
-    options: ["works", "work", "is work", "working"],
-    correctAnswer: "works"
+    question: "Needn't iborasi qachon ishlatiladi?",
+    options: ["Majburiyat yo'qligida", "Taqiqda", "Kuchli ehtimolda", "Maslahatda"],
+    correctAnswer: "Majburiyat yo'qligida"
   },
 
-  // --- Present Continuous (31-35) ---
+  // --- Probability & Possibility ---
   {
     type: 'multiple-choice',
-    question: "Present Continuous: 'I ___ (watch) TV now.'",
-    options: ["am watching", "is watching", "are watching", "watch"],
-    correctAnswer: "am watching"
+    question: "Nimanidir yuz berish ehtimoli juda kam bo'lsa qaysi biri ishlatiladi?",
+    options: ["Might", "Must", "Can", "Should"],
+    correctAnswer: "Might"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous: '___ they (read) a book at the moment?'",
-    options: ["Are ... reading", "Is ... reading", "Do ... read", "Does ... read"],
-    correctAnswer: "Are ... reading"
+    question: "Inkor gapda biror narsaning bo'lishi mumkin emasligiga ishonch bildirishda:",
+    options: ["Can't", "Mustn't", "Might not", "Shouldn't"],
+    correctAnswer: "Can't"
   },
   {
     type: 'multiple-choice',
-    question: "Present Continuous (Neg): 'She ___ (not / study) right now.'",
-    options: ["isn't studying", "aren't studying", "don't study", "didn't study"],
-    correctAnswer: "isn't studying"
+    question: "Bo'lishi 100% aniq (logical deduction) bo'lgan narsaga ishlovchi modal:",
+    options: ["Must", "Can", "Should", "Might"],
+    correctAnswer: "Must"
   },
   {
     type: 'multiple-choice',
-    question: "Continuous usage: 'Look! The bird ___.'",
-    options: ["is flying", "flies", "fly", "flying"],
-    correctAnswer: "is flying"
+    question: "It ___ rain later, the sky is grey. (Probability)",
+    options: ["may", "must", "should", "will"],
+    correctAnswer: "may"
   },
   {
     type: 'multiple-choice',
-    question: "Continuous vs Simple: 'I ___ (live) in Tashkent.' (permanent)",
-    options: ["live", "am living", "lived", "living"],
-    correctAnswer: "live"
-  },
-
-  // --- Past Simple (36-40) ---
-  {
-    type: 'multiple-choice',
-    question: "Past Simple: 'I ___ (see) you yesterday.'",
-    options: ["saw", "see", "seed", "seen"],
-    correctAnswer: "saw"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Simple (Neg): 'He ___ (not / go) to school yesterday.'",
-    options: ["didn't go", "doesn't go", "wasn't go", "didn't went"],
-    correctAnswer: "didn't go"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Simple (Ques): '___ you finish the homework?'",
-    options: ["Did", "Do", "Were", "Was"],
-    correctAnswer: "Did"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Simple: 'We ___ (buy) a car last month.'",
-    options: ["bought", "buyed", "buys", "buying"],
-    correctAnswer: "bought"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Irregular Past: 'She ___ (write) a letter.'",
-    options: ["wrote", "writed", "write", "written"],
-    correctAnswer: "wrote"
+    question: "May fe'lining inkor shakli qaysi?",
+    options: ["May not", "Mayn't", "Not may", "Don't may"],
+    correctAnswer: "May not"
   },
 
-  // --- Future & Going to (41-45) ---
+  // --- Advice & Suggestions ---
   {
     type: 'multiple-choice',
-    question: "Future Simple: 'I think it ___ rain tomorrow.'",
-    options: ["will", "is going to", "is", "am"],
+    question: "Qaysi biri 'should' bilan deyarli bir xil ma'noda?",
+    options: ["Ought to", "Have to", "Must", "Could"],
+    correctAnswer: "Ought to"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Yaxshisi vaqtida borishing kerak (Had better):",
+    options: ["You had better go", "You would better go", "You should better go", "You have better go"],
+    correctAnswer: "You had better go"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Taklif (offer) berishda birinchi shaxsda qaysi biri ishlatiladi?",
+    options: ["Shall I", "Must I", "Should I", "Could I"],
+    correctAnswer: "Shall I"
+  },
+  {
+    type: 'multiple-choice',
+    question: "You ___ see a doctor if you feel ill. (Advice)",
+    options: ["should", "must", "can", "may"],
+    correctAnswer: "should"
+  },
+
+  // --- Mixed & Advanced Modal Theory ---
+  {
+    type: 'fill-in-the-blank',
+    question: "Modal fe'llardan keyin '___' (zarracha) ishlatilmaydi.",
+    correctAnswer: "to"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "'Can' fe'lining o'tgan zamon shaklini yozing.",
+    correctAnswer: "could"
+  },
+  {
+    type: 'fill-in-the-blank',
+    question: "Qaysi modal fe'l faqat kelajak zamonda ishlatiladi?",
     correctAnswer: "will"
   },
   {
     type: 'multiple-choice',
-    question: "To be going to: 'I ___ (visit) my grandmother tonight.'",
-    options: ["am going to visit", "will visit", "going to visit", "visit"],
-    correctAnswer: "am going to visit"
+    question: "Modal fe'llarning asosan nechta shakli bor? (Tuslanishi bo'yicha)",
+    options: ["Faqat bitta shakli", "Uchta (V1, V2, V3)", "Ikkita (Hozirgi va O'tgan)", "Har bir shaxs uchun alohida"],
+    correctAnswer: "Faqat bitta shakli"
   },
   {
     type: 'multiple-choice',
-    question: "Prediction: 'Look at those black clouds! It ___ rain.'",
-    options: ["is going to", "will", "does", "was"],
-    correctAnswer: "is going to"
+    question: "Could va Can farqi nimada?",
+    options: ["Could masofali/xushmuomalikni bildiradi", "Can faqat o'tmishda ishlatiladi", "Faqat imloda farq bor", "Must bilan bir xil"],
+    correctAnswer: "Could masofali/xushmuomalikni bildiradi"
   },
   {
-    type: 'multiple-choice',
-    question: "Future Simple (Neg): 'He ___ come to the party.' (not)",
-    options: ["won't", "don't", "isn't", "didn't"],
-    correctAnswer: "won't"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Plan: 'We ___ (have) a party on Saturday.'",
-    options: ["are going to have", "will have", "have", "had"],
-    correctAnswer: "are going to have"
-  },
-
-  // --- Modal Verbs & Had better (46-50) ---
-  {
-    type: 'multiple-choice',
-    question: "Ability: 'I ___ speak English well.'",
-    options: ["can", "must", "should", "could"],
-    correctAnswer: "can"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Obligation: 'You ___ wear a seatbelt.'",
-    options: ["must", "can", "could", "may"],
-    correctAnswer: "must"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Ability: 'He ___ swim when he was five.'",
-    options: ["could", "can", "should", "must"],
-    correctAnswer: "could"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Recommendation: 'You ___ study hard for the exam.' (had better)",
-    options: ["had better", "would better", "must", "have better"],
-    correctAnswer: "had better"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Permission: '___ I open the window?'",
-    options: ["Can", "Must", "Had better", "Should"],
-    correctAnswer: "Can"
+    type: 'fill-in-the-blank',
+    question: "Ehtimollikni (Possibility) anglatuvchi eng kuchsiz modal fe'lni yozing.",
+    correctAnswer: "might"
   }
 ];

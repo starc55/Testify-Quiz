@@ -7,37 +7,40 @@ interface VocabularyScreenProps {
 
 const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
   return (
-    <div className="w-full max-w-xl mx-auto animate-cyber-ready">
-      <div className="relative bg-black/40 backdrop-blur-3xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]">
-        {/* Frame Accents */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500"></div>
+    <div className="w-full max-w-xl mx-auto animate-fade-in">
+      <div className="bg-white p-8 sm:p-12 rounded-[2.5rem] shadow-2xl overflow-hidden relative border border-white">
+        {/* Soft accents */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -mr-10 -mt-10"></div>
         
-        <div className="p-8 sm:p-10">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-2 h-8 bg-cyan-500"></div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-[0.2em] uppercase italic">
-              LUG'AT_MA'LUMOTLARI
+        <div className="relative z-10">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-100">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.246 18.477 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
+              Test darsligi
             </h2>
           </div>
           
-          <p className="text-[10px] font-bold text-cyan-500/60 uppercase tracking-[0.3em] mb-10 leading-relaxed border-b border-cyan-500/10 pb-6">
-            Testni boshlashdan oldin muhim terminologiyani ko'rib chiqing. Asosiy so'zlarga e'tibor bering.
+          <p className="text-slate-500 font-medium mb-10 leading-relaxed">
+            Testni boshlashdan oldin ushbu qisqacha lug'at bilan tanishib chiqing. Savollarda aynan shu modal fe'llar ishlatilgan.
           </p>
           
-          <div className="space-y-px bg-cyan-500/10 border border-cyan-500/20 max-h-80 overflow-y-auto custom-scrollbar mb-10">
+          <div className="space-y-3 max-h-80 overflow-y-auto pr-4 custom-scrollbar mb-10">
             {QUIZ_VOCABULARY.map((item) => (
-              <div key={item.term} className="p-6 bg-black/40 hover:bg-cyan-500/5 transition-all group border-b border-cyan-500/5 last:border-b-0">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-black text-cyan-400 uppercase tracking-widest text-sm mb-1">
+              <div key={item.term} className="p-5 bg-slate-50 rounded-2xl hover:bg-indigo-50 transition-all group border border-slate-100 hover:border-indigo-100">
+                <div className="flex justify-between items-center">
+                  <div className="space-y-1">
+                    <h3 className="font-bold text-indigo-600 text-lg">
                       {item.term}
                     </h3>
-                    <p className="text-xs font-bold text-white/70 uppercase">
+                    <p className="text-sm font-medium text-slate-500">
                       {item.definition}
                     </p>
                   </div>
-                  <div className="w-1 h-1 bg-cyan-500/30 group-hover:bg-cyan-500 group-hover:animate-ping transition-all"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-indigo-400 group-hover:scale-125 transition-all"></div>
                 </div>
               </div>
             ))}
@@ -45,22 +48,26 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
 
           <button
             onClick={onStartQuiz}
-            className="w-full bg-cyan-500 py-5 text-black font-black uppercase tracking-[0.4em] text-sm hover:bg-cyan-400 active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+            className="w-full bg-indigo-600 py-5 text-white font-bold rounded-2xl text-lg hover:bg-indigo-700 active:scale-[0.98] transition-all shadow-xl shadow-indigo-100 flex items-center justify-center gap-3 group"
           >
-            ALOQANI_BOSHLASH
+            <span>Hammasi tushunarli</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </button>
         </div>
       </div>
 
       <style>{`
-        @keyframes cyber-ready {
-          from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
-          to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        .animate-cyber-ready { animation: cyber-ready 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .animate-fade-in { animation: fade-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #000; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #06b6d4; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f8fafc; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
       `}</style>
     </div>
   );

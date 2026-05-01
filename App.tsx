@@ -122,7 +122,7 @@ export default function App() {
         formData.append("access_key", accessKey);
         formData.append("student_name", studentName);
         formData.append("score", `${score} / ${shuffledQuestions.length}`);
-        formData.append("subject", `Yangi Quiz Natijasi: ${studentName}`);
+        formData.append("subject", `Yangi Modal Verbs Test Natijasi: ${studentName}`);
         formData.append("message", emailBody);
 
         try {
@@ -217,16 +217,14 @@ export default function App() {
   };
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#020617] overflow-x-hidden overflow-y-auto p-4 sm:p-6 font-mono">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 z-0 opacity-20" 
-           style={{ backgroundImage: 'radial-gradient(circle, #06b6d4 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-[#06b6d4]/5 to-transparent"></div>
+    <main className={`relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-50 overflow-x-hidden overflow-y-auto p-4 sm:p-6 font-sans`}>
+      {/* Soft Background Blobs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full blur-[100px] opacity-20 animate-blob ${FIXED_THEME.blob1}`}></div>
+        <div className={`absolute top-[20%] -right-[10%] w-[45%] h-[45%] rounded-full blur-[100px] opacity-20 animate-blob animation-delay-2000 ${FIXED_THEME.blob2}`}></div>
+        <div className={`absolute -bottom-[10%] left-[20%] w-[40%] h-[40%] rounded-full blur-[100px] opacity-20 animate-blob animation-delay-4000 ${FIXED_THEME.blob3}`}></div>
+      </div>
       
-      {/* Scanline Effect */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]"
-           style={{ background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))', backgroundSize: '100% 2px, 3px 100%' }}></div>
-
       <div className="z-10 w-full max-w-2xl flex items-center justify-center">
         {renderContent()}
       </div>
@@ -234,10 +232,19 @@ export default function App() {
       {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
 
       <style>{`
-        body { background-color: #020617; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite alternate; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+        body { background-color: #f8fafc; }
       `}</style>
     </main>
   );

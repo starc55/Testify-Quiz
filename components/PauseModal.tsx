@@ -9,53 +9,46 @@ const PauseModal: React.FC<PauseModalProps> = ({ countdown, onResumeRequest }) =
   const isCountingDown = countdown !== null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-3xl flex items-center justify-center z-[100] p-4">
-      <div className="relative w-full max-w-md bg-black/40 border-2 border-rose-500/50 shadow-[0_0_100px_rgba(244,63,94,0.2)] p-10 text-center animate-cyber-pulse">
-        {/* Warning Corners */}
-        <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-rose-500"></div>
-        <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-rose-500"></div>
-        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-rose-500"></div>
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-rose-500"></div>
-
-        <div className="mb-6 relative inline-block">
-          <div className="absolute inset-0 bg-rose-500 blur-2xl opacity-20 animate-pulse"></div>
-          <svg className="w-16 h-16 text-rose-500 relative" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-[100] p-4">
+      <div className="relative w-full max-w-md bg-white p-10 rounded-[2.5rem] shadow-2xl text-center animate-pop-in">
+        <div className="mb-6 flex justify-center">
+          <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center animate-bounce">
+            <svg className="w-10 h-10 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
         </div>
 
-        <h2 className="text-3xl font-black mb-4 text-white uppercase italic tracking-tighter">
-          Aloqa <span className="text-rose-500">Uzildi</span>
+        <h2 className="text-2xl font-extrabold mb-4 text-slate-800 tracking-tight">
+          Test <span className="text-amber-500">To'xtatildi</span>
         </h2>
         
-        <div className="w-full h-px bg-rose-500/20 mb-6"></div>
-
-        <p className="text-xs font-bold text-rose-200/60 uppercase tracking-[0.2em] mb-10 leading-relaxed">
-          Neyron aloqasi uzildi. Oyna diqqati yo'qoldi. Tashqi shovqin aniqlandi. Aloqani darhol tiklang.
+        <p className="text-slate-500 font-medium mb-10 leading-relaxed">
+          Oyna o'zgardi va test vaqtincha to'xtatildi. Davom etish uchun quyidagi tugmani bosing.
         </p>
 
         {isCountingDown ? (
-          <div className="py-4 bg-rose-500/10 border border-rose-500/30">
-            <p className="text-sm font-black text-rose-400 uppercase tracking-[0.4em] animate-pulse">
-              Sinxronizatsiya... {countdown}
+          <div className="py-5 bg-indigo-50 border-2 border-indigo-100 rounded-2xl">
+            <p className="text-lg font-black text-indigo-600 uppercase tracking-widest animate-pulse">
+              Boshlanmoqda... {countdown}
             </p>
           </div>
         ) : (
           <button
             onClick={onResumeRequest}
-            className="w-full bg-rose-500 py-5 text-black font-black uppercase tracking-[0.4em] text-sm hover:bg-rose-400 active:scale-95 transition-all shadow-[0_0_30px_rgba(244,63,94,0.3)]"
+            className="w-full bg-indigo-600 py-5 text-white font-bold rounded-2xl text-lg hover:bg-indigo-700 active:scale-95 transition-all shadow-xl shadow-indigo-100"
           >
-            QAYTA_ULANISH
+            Davom etish
           </button>
         )}
       </div>
 
       <style>{`
-        @keyframes cyber-pulse {
-          0%, 100% { transform: scale(1); filter: brightness(1); }
-          50% { transform: scale(1.02); filter: brightness(1.1); }
+        @keyframes pop-in {
+          0% { opacity: 0; transform: scale(0.9); }
+          100% { opacity: 1; transform: scale(1); }
         }
-        .animate-cyber-pulse { animation: cyber-pulse 2s ease-in-out infinite; }
+        .animate-pop-in { animation: pop-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
       `}</style>
     </div>
   );

@@ -33,10 +33,7 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const CIRCLE_RADIUS = 28;
   const CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
   const progressPercentage = timeLeft / QUIZ_DURATION_SECONDS;
-  const progressOffset = CIRCUMFERENCE - progressPercentage * CIRCUMFERENCE;
   
-  const MAX_CHAR_HINT = 40;
-
   useEffect(() => {
     setSelected(null);
     setWrittenAnswer('');
@@ -111,132 +108,98 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const getOptionClasses = (option: string) => {
     if (!isAnswered) {
-      return 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-indigo-500/50 hover:shadow-indigo-500/10 shadow-lg';
+      return 'bg-white border-slate-100 hover:border-indigo-200 hover:bg-indigo-50 active:scale-[0.99]';
     }
     if (option === selected) {
       return isCorrect
-        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]'
-        : 'bg-rose-500/20 border-rose-500 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.2)]';
+        ? 'bg-emerald-50 border-emerald-500 text-emerald-700 ring-2 ring-emerald-100 animate-correct'
+        : 'bg-rose-50 border-rose-500 text-rose-700 ring-2 ring-rose-100 animate-shake';
     }
     if (checkAnswer(option)) {
-        return 'bg-emerald-500/20 border-emerald-500 text-emerald-400';
+        return 'bg-emerald-50 border-emerald-300 text-emerald-600';
     }
-    return 'bg-white/5 border-white/5 text-slate-500 cursor-not-allowed';
+    return 'bg-slate-50 border-slate-50 text-slate-400 opacity-50 cursor-not-allowed';
   };
   
   const getInputClasses = () => {
     if (!isAnswered) {
       return isShaking 
-        ? 'bg-slate-800/50 border-rose-500 ring-2 ring-rose-500/20' 
-        : 'bg-slate-800/50 border-white/10 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10';
+        ? 'bg-rose-50 border-rose-500 ring-2 ring-rose-100' 
+        : 'bg-slate-50 border-slate-100 focus:border-indigo-500 focus:bg-white';
     }
     return isCorrect
-      ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400'
-      : 'bg-rose-500/10 border-rose-500 text-rose-400';
-  }
-
-  const isLowTime = timeLeft < 20;
-  
-  let progressCircleColor = theme.timerCircle.base;
-  let timerTextColor = theme.timerCircle.base;
-
-  if (timeLeft <= 60) {
-    progressCircleColor = theme.timerCircle.warn; // Yellow
-    timerTextColor = 'text-yellow-400';
-  }
-  if (timeLeft <= 30) {
-    progressCircleColor = 'text-orange-500'; // Orange
-    timerTextColor = 'text-orange-500';
-  }
-  if (timeLeft <= 10) {
-    progressCircleColor = theme.timerCircle.danger; // Red
-    timerTextColor = 'text-rose-500';
+      ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
+      : 'bg-rose-50 border-rose-500 text-rose-700';
   }
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   const quizProgress = (questionNumber / totalQuestions) * 100;
-  const charProgress = Math.min((writtenAnswer.length / MAX_CHAR_HINT) * 100, 100);
 
   return (
-    <div className={`relative w-full transition-all duration-500 ${isPaused ? 'scale-95 blur-xl pointer-events-none' : 'scale-100 blur-0'}`}>
-      <div className="relative bg-black/40 backdrop-blur-3xl border border-cyan-500/30 overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+    <div className={`relative w-full transition-all duration-700 cubic-bezier[0.16,1,0.3,1] ${isPaused ? 'scale-95 blur-xl pointer-events-none' : 'scale-100'}`}>
+      <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 overflow-hidden relative border border-white">
         
-        {/* HUD Frame Corners */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-500"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-500"></div>
-
-        {/* Tactical Header */}
-        <div className="p-4 sm:p-6 border-b border-cyan-500/20 flex flex-col sm:flex-row items-center gap-4 sm:justify-between relative bg-cyan-500/[0.02]">
-          <div className="flex flex-col items-center sm:items-start space-y-2 w-full sm:w-auto">
-            <div className="flex items-center gap-3">
-               <div className="w-1.5 h-1.5 bg-cyan-500 animate-ping"></div>
-               <span className="text-[10px] font-black tracking-[0.4em] text-cyan-500 uppercase">
-                 SAVOL: {questionNumber} // {totalQuestions}
-               </span>
+        {/* Progress and Timer Header */}
+        <div className="p-6 sm:p-8 flex items-center justify-between gap-4 bg-slate-50/50 border-b border-slate-100">
+          <div className="flex-grow max-w-xs">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                Savol {questionNumber} / {totalQuestions}
+              </span>
+              <span className="text-[10px] font-extrabold text-indigo-600">
+                {Math.round(quizProgress)}%
+              </span>
             </div>
-            <div className="relative w-full sm:w-48 h-1 bg-cyan-950/50">
+            <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
                <div 
-                 className={`h-full bg-cyan-500 transition-all duration-1000 relative shadow-[0_0_10px_#06b6d4]`} 
+                 className="h-full bg-indigo-600 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" 
                  style={{ width: `${quizProgress}%` }}
-               >
-                 <div className="absolute top-0 right-0 w-1 h-3 bg-cyan-500 -mt-1 shadow-[0_0_15px_#06b6d4]"></div>
-               </div>
+               />
             </div>
           </div>
 
-          {/* HUD Timer */}
-          <div className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 group">
-            <div className={`absolute inset-0 border border-cyan-500/20 ${timeLeft <= 15 ? 'animate-pulse' : ''}`}></div>
-            <div className="absolute inset-2 border border-dashed border-cyan-500/10 animate-spin-slow"></div>
-            
-            <svg className="absolute inset-0 w-full h-full -rotate-90 p-1" viewBox="0 0 100 100">
-               <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-cyan-900/20" />
-               <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="2" fill="transparent"
-                 strokeDasharray="282.7"
-                 strokeDashoffset={282.7 - (progressPercentage * 282.7)}
-                 strokeLinecap="square"
-                 className={`${progressCircleColor} transition-all duration-1000 ease-linear`}
-               />
-            </svg>
-            
-            <div className="relative flex flex-col items-center justify-center leading-none">
-              <span className={`text-base sm:text-lg font-black tracking-tighter ${timerTextColor} font-mono`}>
-                {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
-              </span>
-            </div>
+          <div className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] ${
+            timeLeft < 30 ? 'bg-rose-50 border-rose-200 text-rose-600 animate-pulse' : 
+            timeLeft < 60 ? 'bg-amber-50 border-amber-200 text-amber-600' : 
+            'bg-indigo-50 border-indigo-100 text-indigo-600'
+          }`}>
+            <span className="text-xs font-black uppercase leading-none mb-1">Vaqt</span>
+            <span className="text-xl sm:text-2xl font-black italic tracking-tighter tabular-nums leading-none">
+              {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+            </span>
           </div>
         </div>
 
-        {/* Tactical Body */}
-        <div className="p-4 sm:p-8 relative">
-          {/* Decorative HUD Lines */}
-          <div className="absolute top-0 right-0 w-20 h-20 border-r border-t border-cyan-500/10 -mr-10 -mt-10"></div>
-          
-          <div key={question.question} className={isExiting ? 'opacity-0 -translate-x-10 transition-all duration-500' : 'animate-cyber-slide'}>
-            <div className="mb-4 sm:mb-6 flex gap-2">
-               <div className="w-1 h-6 bg-cyan-500"></div>
-               <h2 className="text-lg sm:text-2xl font-black text-white uppercase italic tracking-tight">
+        {/* Question Area */}
+        <div className="p-6 sm:p-10">
+          <div key={question.question} className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isExiting ? 'opacity-0 -translate-x-16 blur-sm' : 'animate-slide-up'}`}>
+            <div className="mb-8">
+               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
                  {question.question}
                </h2>
             </div>
  
             {question.type === 'multiple-choice' && question.options && (
-              <div className="grid grid-cols-1 gap-2 sm:gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:gap-4">
                 {question.options.map((option, index) => (
                   <button
                     key={option}
                     onClick={() => handleSubmit(option)}
                     disabled={isAnswered || isPaused}
-                    className={`group relative p-3 sm:p-4 border transition-all duration-200 text-left uppercase flex items-center justify-between ${getOptionClasses(option)}`}
+                    className={`group relative p-5 bg-white border-2 rounded-2.5xl transition-all duration-300 cubic-bezier[0.16,1,0.3,1] text-left flex items-center gap-4 ${getOptionClasses(option)}`}
                   >
-                    <div className="flex items-center gap-4">
-                      <span className="text-[10px] sm:text-xs font-black text-cyan-500/50 group-hover:text-cyan-400">[{index + 1}]</span>
-                      <span className="text-xs sm:text-sm font-bold tracking-widest text-white">{option}</span>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all duration-300 ${
+                      selected === option ? 'bg-white border-transparent' : 'bg-slate-100 border-transparent text-slate-400 group-hover:bg-indigo-600 group-hover:text-white'
+                    }`}>
+                      {String.fromCharCode(65 + index)}
                     </div>
-                    <div className="w-2 h-2 border border-cyan-500 group-hover:bg-cyan-500 transition-all"></div>
+                    <span className="text-base font-bold flex-grow">{option}</span>
+                    {isAnswered && checkAnswer(option) && (
+                      <svg className="w-5 h-5 text-emerald-500 animate-in zoom-in duration-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    )}
                   </button>
                 ))}
               </div>
@@ -244,30 +207,26 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
 
             {question.type === 'fill-in-the-blank' && (
               <div className="w-full">
-                <form onSubmit={handleWrittenSubmit} className="relative">
-                   <div className="absolute top-0 left-0 w-2 h-full bg-cyan-500/20"></div>
+                <form onSubmit={handleWrittenSubmit} className="space-y-6">
                    <input
                     type="text"
                     value={writtenAnswer}
                     onChange={(e) => setWrittenAnswer(e.target.value)}
-                    placeholder="JAVOBNI_KIRITING..."
+                    placeholder="Javobni yozing..."
                     disabled={isAnswered || isPaused}
-                    className={`w-full bg-black/50 p-6 text-xl font-black text-cyan-400 placeholder-cyan-900 border-l border-cyan-500 focus:outline-none focus:bg-cyan-500/5 transition-all ${getInputClasses()} uppercase tracking-[0.2em]`}
+                    className={`w-full py-5 px-8 text-xl font-bold rounded-2.5xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] outline-none ${getInputClasses()}`}
                     autoFocus
                   />
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex-grow max-w-xs h-0.5 bg-cyan-950">
-                       <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${charProgress}%` }}></div>
-                    </div>
-                    <div className="text-[10px] font-black text-cyan-500/50">BITLAR: {writtenAnswer.length * 8}</div>
-                  </div>
                   
                   <button
                     type="submit"
                     disabled={isAnswered || isPaused || !writtenAnswer.trim()}
-                    className={`mt-10 w-full py-6 bg-cyan-500 text-black font-black uppercase tracking-[0.4em] hover:bg-cyan-400 active:scale-95 transition-all disabled:opacity-20`}
+                    className="w-full py-5 bg-indigo-600 text-white font-bold rounded-2.5xl hover:bg-indigo-700 active:scale-[0.98] transition-all duration-500 cubic-bezier[0.16,1,0.3,1] shadow-xl shadow-indigo-100 disabled:opacity-30 flex items-center justify-center gap-3 group"
                   >
-                    TASDIQLASH
+                    <span>Tasdiqlash</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
                   </button>
                 </form>
               </div>
@@ -275,24 +234,33 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
           </div>
         </div>
 
-        {/* Footer Technical Metadata */}
-        <div className="px-6 py-2 bg-cyan-500/5 border-t border-cyan-500/10 flex justify-between">
-           <span className="text-[8px] text-cyan-500/40 uppercase font-mono tracking-widest font-bold">Shifrlangan aloqa faol</span>
-           <span className="text-[8px] text-cyan-500/40 uppercase font-mono tracking-widest font-bold">Foydalanuvchi: {studentName.toUpperCase() || 'ANOM_USER'}</span>
+        {/* Footer User Info */}
+        <div className="px-10 py-4 bg-slate-50 border-t border-slate-100 flex items-center gap-2">
+           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{studentName} o'quvchi testi</span>
         </div>
       </div>
 
       <style>{`
-        @keyframes cyber-slide {
-          from { opacity: 0; transform: translateX(-20px); filter: skewX(-5deg); }
-          to { opacity: 1; transform: translateX(0); filter: skewX(0); }
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(30px) scale(0.98); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .animate-cyber-slide { animation: cyber-slide 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        .animate-slide-up { animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .rounded-2.5xl { border-radius: 1.25rem; }
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20%, 60% { transform: translateX(-6px); }
+          40%, 80% { transform: translateX(6px); }
         }
-        .animate-spin-slow { animation: spin-slow 15s linear infinite; }
+        .animate-shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+        @keyframes correct {
+          0% { transform: scale(1); }
+          40% { transform: scale(1.04); }
+          60% { transform: scale(1.02); }
+          100% { transform: scale(1); }
+        }
+        .animate-correct { animation: correct 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
       `}</style>
     </div>
   );

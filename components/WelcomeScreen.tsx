@@ -18,74 +18,76 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit }) => {
   };
 
   return (
-    <div className={`w-full max-w-md mx-auto transition-all duration-700 ${isExiting ? 'opacity-0 scale-95 translate-x-20' : 'animate-mount'}`}>
-      <div className="relative">
-        <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-cyan-500 z-20"></div>
-        <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-cyan-500 z-20"></div>
-        <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-cyan-500 z-20"></div>
-        <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-cyan-500 z-20"></div>
+    <div className={`w-full max-w-lg mx-auto transition-all duration-800 cubic-bezier[0.16,1,0.3,1] ${isExiting ? 'opacity-0 scale-95 -translate-y-12 blur-sm' : 'animate-mount'}`}>
+      <div className="bg-white/80 backdrop-blur-xl border border-white p-8 sm:p-12 rounded-[2rem] shadow-2xl shadow-indigo-100/50 overflow-hidden relative">
+        {/* Soft decorative circles */}
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-blue-100 rounded-full blur-3xl opacity-50"></div>
 
-        <div className="relative p-6 sm:p-10 bg-black/50 backdrop-blur-xl border border-cyan-500/30 overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.1)]">
-          <div className="absolute top-0 right-0 p-1.5 text-[7px] text-cyan-500/30 uppercase tracking-widest font-mono select-none">
-            TIZIM.v3 // TAYYOR
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="w-20 h-20 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-200 mb-8 transform -rotate-6 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:rotate-0 hover:scale-110">
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.246 18.477 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
           </div>
-          
-          <div className="flex flex-col items-center">
-            <div className="mb-6 relative">
-              <div className="absolute inset-0 bg-cyan-500/10 blur-xl animate-pulse"></div>
-              <div className="relative w-12 h-12 border border-cyan-500/50 flex items-center justify-center rotate-45 group">
-                <svg className="w-6 h-6 text-cyan-400 -rotate-45 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
+
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-2 text-slate-800 text-center tracking-tight">
+            English <span className="text-indigo-600">Mastery</span>
+          </h1>
+          <p className="text-slate-500 font-medium mb-10 text-center">
+            Modal fe'llar bo'yicha bilimingizni sinab ko'ring
+          </p>
+
+          <form onSubmit={handleSubmit} className="w-full space-y-6">
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Ismingizni kiriting</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Masalan: Azizbek"
+                className="w-full bg-slate-50 border-2 border-slate-100 py-4 px-6 rounded-2xl text-slate-700 text-lg font-semibold placeholder-slate-300 focus:outline-none focus:border-indigo-400 focus:bg-white transition-all duration-500 cubic-bezier[0.16,1,0.3,1]"
+                required
+              />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-black mb-3 tracking-[-0.05em] text-white uppercase italic">
-              Test<span className="text-cyan-500">ify</span>
-            </h1>
-            
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent mb-5"></div>
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-5 rounded-2xl text-lg font-bold shadow-xl shadow-indigo-100 transform active:scale-[0.98] transition-all duration-500 cubic-bezier[0.16,1,0.3,1] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+              disabled={!name.trim()}
+            >
+              <span>Testni boshlash</span>
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </form>
 
-            <p className="text-[10px] sm:text-xs text-cyan-200/40 mb-8 tracking-[0.2em] uppercase font-bold text-center leading-relaxed">
-              Grammatika // <span className="text-cyan-400">Asosiy</span>
-            </p>
-
-            <form onSubmit={handleSubmit} className="w-full space-y-5">
-              <div className="group relative">
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="ISMINGIZ..."
-                  className="relative w-full bg-black/40 border border-cyan-500/30 py-3 sm:py-4 px-6 text-cyan-100 text-base sm:text-lg font-bold placeholder-cyan-900/60 focus:outline-none focus:border-cyan-400 transition-all duration-300 uppercase tracking-widest text-center"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className={`${FIXED_THEME.button} w-full py-4 text-sm font-black transition-all duration-300 transform active:scale-[0.98] disabled:opacity-20 uppercase tracking-[0.3em] relative overflow-hidden group`}
-                disabled={!name.trim()}
-              >
-                <span className="relative z-10">BOSHLASH</span>
-                <div className="absolute inset-x-0 bottom-0 h-0 group-hover:h-full bg-cyan-500/10 transition-all duration-300"></div>
-              </button>
-            </form>
+          <div className="mt-10 flex items-center gap-6">
+            <div className="flex flex-col items-center">
+              <span className="text-indigo-600 font-bold text-lg">30</span>
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Savollar</span>
+            </div>
+            <div className="w-px h-8 bg-slate-100"></div>
+            <div className="flex flex-col items-center">
+              <span className="text-indigo-600 font-bold text-lg">30m</span>
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Vaqt</span>
+            </div>
+            <div className="w-px h-8 bg-slate-100"></div>
+            <div className="flex flex-col items-center">
+              <span className="text-indigo-600 font-bold text-lg">Modal</span>
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Mavzu</span>
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
         @keyframes mount {
-          from { opacity: 0; transform: translateY(30px) scale(0.95); }
+          from { opacity: 0; transform: translateY(40px) scale(0.98); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-mount { animation: mount 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-mount { animation: mount 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       `}</style>
     </div>
   );

@@ -137,21 +137,21 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
   const quizProgress = (questionNumber / totalQuestions) * 100;
 
   return (
-    <div className={`relative w-full transition-all duration-700 cubic-bezier[0.16,1,0.3,1] ${isPaused ? 'scale-95 blur-xl pointer-events-none' : 'scale-100'}`}>
-      <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 overflow-hidden relative border border-white">
+    <div className={`relative w-full max-w-2xl mx-auto transition-all duration-700 cubic-bezier[0.16,1,0.3,1] ${isPaused ? 'scale-95 blur-xl pointer-events-none' : 'scale-100'}`}>
+      <div className="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 overflow-hidden relative border border-white">
         
         {/* Progress and Timer Header */}
-        <div className="p-6 sm:p-8 flex items-center justify-between gap-4 bg-slate-50/50 border-b border-slate-100">
-          <div className="flex-grow max-w-xs">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+        <div className="p-4 sm:p-6 flex items-center justify-between gap-4 bg-slate-50/50 border-b border-slate-100">
+          <div className="flex-grow max-w-[200px]">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                 Savol {questionNumber} / {totalQuestions}
               </span>
-              <span className="text-[10px] font-extrabold text-indigo-600">
+              <span className="text-[9px] font-extrabold text-indigo-600">
                 {Math.round(quizProgress)}%
               </span>
             </div>
-            <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
                <div 
                  className="h-full bg-indigo-600 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" 
                  style={{ width: `${quizProgress}%` }}
@@ -159,42 +159,42 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
             </div>
           </div>
 
-          <div className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] ${
+          <div className={`flex flex-col items-center justify-center py-2 px-4 rounded-xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] ${
             timeLeft < 30 ? 'bg-rose-50 border-rose-200 text-rose-600 animate-pulse' : 
             timeLeft < 60 ? 'bg-amber-50 border-amber-200 text-amber-600' : 
             'bg-indigo-50 border-indigo-100 text-indigo-600'
           }`}>
-            <span className="text-xs font-black uppercase leading-none mb-1">Vaqt</span>
-            <span className="text-xl sm:text-2xl font-black italic tracking-tighter tabular-nums leading-none">
+            <span className="text-[9px] font-black uppercase leading-none mb-0.5">Vaqt</span>
+            <span className="text-lg sm:text-xl font-black italic tracking-tighter tabular-nums leading-none">
               {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
             </span>
           </div>
         </div>
 
         {/* Question Area */}
-        <div className="p-6 sm:p-10">
+        <div className="p-5 sm:p-8">
           <div key={question.question} className={`transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isExiting ? 'opacity-0 -translate-x-16 blur-sm' : 'animate-slide-up'}`}>
-            <div className="mb-8">
-               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight leading-tight">
+            <div className="mb-6">
+               <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 tracking-tight leading-tight">
                  {question.question}
                </h2>
             </div>
  
             {question.type === 'multiple-choice' && question.options && (
-              <div className="grid grid-cols-1 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
                 {question.options.map((option, index) => (
                   <button
                     key={option}
                     onClick={() => handleSubmit(option)}
                     disabled={isAnswered || isPaused}
-                    className={`group relative p-5 bg-white border-2 rounded-2.5xl transition-all duration-300 cubic-bezier[0.16,1,0.3,1] text-left flex items-center gap-4 ${getOptionClasses(option)}`}
+                    className={`group relative p-3.5 sm:p-4 bg-white border-2 rounded-2xl transition-all duration-300 cubic-bezier[0.16,1,0.3,1] text-left flex items-center gap-3.5 ${getOptionClasses(option)}`}
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all duration-300 ${
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black border-2 transition-all duration-300 ${
                       selected === option ? 'bg-white border-transparent' : 'bg-slate-100 border-transparent text-slate-400 group-hover:bg-indigo-600 group-hover:text-white'
                     }`}>
                       {String.fromCharCode(65 + index)}
                     </div>
-                    <span className="text-base font-bold flex-grow">{option}</span>
+                    <span className="text-sm font-bold flex-grow">{option}</span>
                     {isAnswered && checkAnswer(option) && (
                       <svg className="w-5 h-5 text-emerald-500 animate-in zoom-in duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -207,24 +207,24 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
 
             {question.type === 'fill-in-the-blank' && (
               <div className="w-full">
-                <form onSubmit={handleWrittenSubmit} className="space-y-6">
+                <form onSubmit={handleWrittenSubmit} className="space-y-4">
                    <input
                     type="text"
                     value={writtenAnswer}
                     onChange={(e) => setWrittenAnswer(e.target.value)}
                     placeholder="Javobni yozing..."
                     disabled={isAnswered || isPaused}
-                    className={`w-full py-5 px-8 text-xl font-bold rounded-2.5xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] outline-none ${getInputClasses()}`}
+                    className={`w-full py-4 px-6 text-lg font-bold rounded-2xl border-2 transition-all duration-500 cubic-bezier[0.16,1,0.3,1] outline-none ${getInputClasses()}`}
                     autoFocus
                   />
                   
                   <button
                     type="submit"
                     disabled={isAnswered || isPaused || !writtenAnswer.trim()}
-                    className="w-full py-5 bg-indigo-600 text-white font-bold rounded-2.5xl hover:bg-indigo-700 active:scale-[0.98] transition-all duration-500 cubic-bezier[0.16,1,0.3,1] shadow-xl shadow-indigo-100 disabled:opacity-30 flex items-center justify-center gap-3 group"
+                    className="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 active:scale-[0.98] transition-all duration-500 cubic-bezier[0.16,1,0.3,1] shadow-xl shadow-indigo-100 disabled:opacity-30 flex items-center justify-center gap-3 group"
                   >
                     <span>Tasdiqlash</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </button>
@@ -235,9 +235,9 @@ const QuizScreen: React.FC<QuizScreenProps> = ({
         </div>
 
         {/* Footer User Info */}
-        <div className="px-10 py-4 bg-slate-50 border-t border-slate-100 flex items-center gap-2">
-           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{studentName} o'quvchi testi</span>
+        <div className="px-6 sm:px-8 py-3 bg-slate-50 border-t border-slate-100 flex items-center gap-2">
+           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+           <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{studentName} o'quvchi testi</span>
         </div>
       </div>
 

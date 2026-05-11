@@ -1,15 +1,15 @@
 
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 75 * 60; // 75 minutes (50 questions * 1.5 min)
+export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes (40 questions * 1.5 min)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Possessive", definition: "Egalik shakli ('s)" },
+  { term: "Nouns", definition: "Otlarning egalik shakli" },
   { term: "Articles", definition: "Artikllar (a, an, the)" },
   { term: "Pronouns", definition: "Olmoshlar (I, me, my...)" },
-  { term: "Tenses", definition: "Zamonlar (Present, Past, Future)" },
-  { term: "Modals", definition: "Modal fe'llar (can, must...)" },
-  { term: "Numbers", definition: "Sonlar (one, first...)" }
+  { term: "Tenses", definition: "Zamonlar nazariyasi" },
+  { term: "To be", definition: "To be fe'li shakllari" },
+  { term: "Numbers", definition: "Sonlar nazariyasi" }
 ];
 
 export const FIXED_THEME: Theme = {
@@ -30,7 +30,7 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- Nouns & Possessives Theory (1-8) ---
+  // --- Possessives & Nouns Theory (1-6) ---
   {
     type: 'multiple-choice',
     question: "Otlarning egalik shakli (-'s) asosan nima uchun ishlatiladi?",
@@ -45,15 +45,9 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Ko'plik shakli noto'g'ri yasalgan otni toping:",
-    options: ["Childs", "Children", "Mice", "Leaves"],
-    correctAnswer: "Childs"
-  },
-  {
-    type: 'multiple-choice',
     question: "Sanalmaydigan otlarning ko'plik shakli qanday yasaladi?",
-    options: ["Ular ko'plikda ishlatilmaydi", "-s qo'shish orqali", "-es qo'shish orqali", "O'zagi o'zgaradi"],
-    correctAnswer: "Ular ko'plikda ishlatilmaydi"
+    options: ["Ular odatda ko'plikda ishlatilmaydi", "-s qo'shish orqali", "-es qo'shish orqali", "O'zagi o'zgaradi"],
+    correctAnswer: "Ular odatda ko'plikda ishlatilmaydi"
   },
   {
     type: 'multiple-choice',
@@ -63,30 +57,18 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Jonli mavjudotlar uchun egalik shakli asosan qanday yasaladi?",
-    options: ["-'s yordamida", "of predlogi bilan", "the artikli bilan", "Hech qanday qo'shimchasiz"],
-    correctAnswer: "-'s yordamida"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Jonsiz narsalar uchun egalik shakli asosan qanday yasaladi?",
+    question: "Jonsiz narsalar uchun egalik shakli asosan nima orqali ifodalanadi?",
     options: ["of predlogi orqali", "-'s orqali", "-es orqali", "-ies orqali"],
     correctAnswer: "of predlogi orqali"
   },
   {
     type: 'multiple-choice',
-    question: "Abstract (mavhum) otlar sanaladimi?",
-    options: ["Odatda sanalmaydi", "Hamisha sanaladi", "Faqat ko'plikda", "-s bilan sanaladi"],
+    question: "Abstract (mavhum) otlar (misol: Love, Freedom) sanaladimi?",
+    options: ["Odatda sanalmaydi", "Hamisha sanaladi", "Faqat birlikda", "-s bilan sanaladi"],
     correctAnswer: "Odatda sanalmaydi"
   },
 
-  // --- Articles Theory (9-16) ---
-  {
-    type: 'multiple-choice',
-    question: "Noaniq artikllar (a/an) qaysi turdagi otlar bilan ishlatiladi?",
-    options: ["Birlikdagi sanaladigan otlar", "Ko'plikdagi otlar", "Sanalmaydigan otlar", "Xususiy otlar"],
-    correctAnswer: "Birlikdagi sanaladigan otlar"
-  },
+  // --- Articles Theory (7-12) ---
   {
     type: 'multiple-choice',
     question: "Artikl 'an' qachon ishlatiladi?",
@@ -101,7 +83,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Dunyo miqyosidagi yagona narsalar (Sun, Moon) oldidan qaysi artikl ishlatiladi?",
+    question: "Dunyo miqyosidagi yagona narsalar (Sun, Moon) bilan qaysi artikl ishlatiladi?",
     options: ["The", "A", "An", "Artikl ishlatilmaydi"],
     correctAnswer: "The"
   },
@@ -119,18 +101,12 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Geografik nomlar (okean, dengiz) oldidan qaysi artikl ishlatiladi?",
+    question: "Okeanlar, daryolar va tog' tizmalari nomlari oldidan qaysi artikl ishlatiladi?",
     options: ["The", "A", "An", "Artikl qo'yilmaydi"],
     correctAnswer: "The"
   },
-  {
-    type: 'multiple-choice',
-    question: "Mamlakat nomlari tarkibida 'Republic' yoki 'Kingdom' bo'lsa, qaysi artikl qo'yiladi?",
-    options: ["The", "A", "An", "Hech biri"],
-    correctAnswer: "The"
-  },
 
-  // --- Pronouns Theory (17-24) ---
+  // --- Pronouns Theory (13-18) ---
   {
     type: 'multiple-choice',
     question: "Egalik olmoshlari (Possessive Pronouns - mine, yours) dan keyin ot ishlatiladimi?",
@@ -139,15 +115,9 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Kishilik olmoshlari gapda asosan qanday vazifada keladi?",
-    options: ["Ega yoki to'ldiruvchi", "Faqat aniqlovchi", "Faqat hol", "Sifatdosh"],
-    correctAnswer: "Ega yoki to'ldiruvchi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "O'zlik olmoshlari (Reflexive Pronouns) qachon ishlatiladi?",
-    options: ["Ega va to'ldiruvchi bir shaxs bo'lsa", "Egalikni bildirish uchun", "Savol berish uchun", "Ko'rsatish uchun"],
-    correctAnswer: "Ega va to'ldiruvchi bir shaxs bo'lsa"
+    question: "O'zlik olmoshlari (Reflexive Pronouns - myself, himself) qachon ishlatiladi?",
+    options: ["Ega va to'ldiruvchi bir xil bo'lsa", "Egalikni bildirish uchun", "Savol berish uchun", "Ko'rsatish uchun"],
+    correctAnswer: "Ega va to'ldiruvchi bir xil bo'lsa"
   },
   {
     type: 'multiple-choice',
@@ -157,30 +127,24 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Belgisiz olmoshlar (some, any) ning farqi nimada?",
-    options: ["Some tasdiq, any so'roq/inkor", "Some inkor, any tasdiq", "Faqat artikllarda farq", "Farqi yo'q"],
-    correctAnswer: "Some tasdiq, any so'roq/inkor"
+    question: "Belgisiz olmoshlar (some, any) haqida qaysi qoida to'g'ri?",
+    options: ["Some tasdiqda, any so'roq/inkorda", "Some inkor, any tasdiq", "Faqat artikllarda farq", "Farqi yo'q"],
+    correctAnswer: "Some tasdiqda, any so'roq/inkorda"
   },
   {
     type: 'multiple-choice',
-    question: "Egalik sifatlari (Possessive Adjectives - my, your) dan keyin ot ishlatiladimi?",
-    options: ["Ha, hamisha ot keladi", "Yo'q, hech qachon", "Faqat kishilik ismlari", "Faqat birlikda"],
-    correctAnswer: "Ha, hamisha ot keladi"
+    question: "Egalik sifatlari (Possessive Adjectives - my, your) dan keyin nima keladi?",
+    options: ["Ot (Noun)", "Fe'l (Verb)", "Ravish (Adverb)", "Hech narsa"],
+    correctAnswer: "Ot (Noun)"
   },
   {
     type: 'multiple-choice',
-    question: "Shaxsi noma'lum gaplarda qaysi olmosh 'one' o'rnida keng ishlatiladi?",
-    options: ["You", "I", "He", "Me"],
-    correctAnswer: "You"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Sanaladigan otlar bilan miqdorni bildirish uchun nima ishlatiladi?",
-    options: ["Many / Few", "Much / Little", "A lot / Bit", "Any / Much"],
-    correctAnswer: "Many / Few"
+    question: "Sanalmaydigan otlar bilan miqdorni bildirish uchun nima ishlatiladi?",
+    options: ["Much / Little", "Many / Few", "A lot / Bit", "Any / Much"],
+    correctAnswer: "Much / Little"
   },
 
-  // --- Numbers Theory (25-30) ---
+  // --- Numerals Theory (19-24) ---
   {
     type: 'multiple-choice',
     question: "Miqdor sonlar (Cardinal numbers) nimanini bildiradi?",
@@ -189,7 +153,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Tartib sonlar (Ordinal numbers) qanday artikl bilan ishlatiladi?",
+    question: "Tartib sonlar (Ordinal numbers) qaysi artikl bilan birga keladi?",
     options: ["The", "A", "An", "Artikl ishlatilmaydi"],
     correctAnswer: "The"
   },
@@ -201,24 +165,62 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "'Zero' so'zi o'rniga telefon raqamlarda nima deyilishi mumkin?",
-    options: ["Oh", "Nil", "Naught", "Love"],
-    correctAnswer: "Oh"
+    question: "Tartib son yasashda -th qo'shimchasi qaysi sonlardan boshqa barchasiga qo'shiladi?",
+    options: ["1, 2, 3", "1, 5, 10", "11, 12, 13", "0, 1, 2"],
+    correctAnswer: "1, 2, 3"
   },
   {
     type: 'multiple-choice',
-    question: "Yuzliklarda (hundreds) 'hundred' so'ziga 's' qo'shiladimi (masalan 200)?",
-    options: ["Yo'q, qo'shilmaydi", "Ha, qo'shiladi", "Faqat inkor gapda", "Faqat birinchi sonda"],
-    correctAnswer: "Yo'q, qo'shilmaydi"
+    question: "Yuzliklarda (hundreds) 'hundred' so'ziga qachon -s qo'shiladi?",
+    options: ["Noaniq ko'plik bo'lganda (hundreds of)", "Har doim", "Hech qachon", "Faqat birlikda"],
+    correctAnswer: "Noaniq ko'plik bo'lganda (hundreds of)"
   },
   {
     type: 'multiple-choice',
-    question: "O'nli kasrlar (decimals) da nuqta qanday o'qiladi?",
+    question: "O'nli kasrlarda (decimals) nuqta qanday o'qiladi?",
     options: ["Point", "Comma", "Dot", "Full stop"],
     correctAnswer: "Point"
   },
 
-  // --- Tenses Theory (31-42) ---
+  // --- To Be Theory (25-30) ---
+  {
+    type: 'multiple-choice',
+    question: "To be fe'lining hozirgi zamon shakllari qaysilar?",
+    options: ["am, is, are", "was, were", "been, being", "do, does"],
+    correctAnswer: "am, is, are"
+  },
+  {
+    type: 'multiple-choice',
+    question: "He, She, It uchun to be ning qaysi shakli ishlatiladi?",
+    options: ["is", "am", "are", "was"],
+    correctAnswer: "is"
+  },
+  {
+    type: 'multiple-choice',
+    question: "We, You, They uchun to be ning hozirgi zamon shakli qaysi?",
+    options: ["are", "am", "is", "were"],
+    correctAnswer: "are"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To be fe'lining o'tgan zamon (Past Simple) shakllari nima?",
+    options: ["was, were", "am, is, are", "been, being", "did, done"],
+    correctAnswer: "was, were"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To be fe'lining kelajak zamon shakli qaysi?",
+    options: ["will be", "am be", "was be", "is be"],
+    correctAnswer: "will be"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To be fe'li asosan qanday maqsadlarda ishlatiladi?",
+    options: ["Holat va kimlikni bildirishda", "Harakatni bildirishda", "Faqat so'roq gapda", "Majburiyatda"],
+    correctAnswer: "Holat va kimlikni bildirishda"
+  },
+
+  // --- Tenses Theory (31-40) ---
   {
     type: 'multiple-choice',
     question: "Present Simple qachon ishlatiladi?",
@@ -227,33 +229,21 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Present Simple dagi 3-shaxs birlik fe'liga nima qo'shiladi?",
-    options: ["-s / -es", "-ing", "-ed", "-en"],
-    correctAnswer: "-s / -es"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Present Continuous ning asosiy formulasi qaysi?",
+    question: "Present Continuous ning asosiy formulasi nima?",
     options: ["am/is/are + V-ing", "do/does + V", "have/has + V3", "was/were + V"],
     correctAnswer: "am/is/are + V-ing"
   },
   {
     type: 'multiple-choice',
-    question: "Past Simple da noto'g'ri fe'llar (Irregular verbs) qaysi shakli ishlatiladi?",
+    question: "Past Simple da noto'g'ri fe'llarning (Irregular verbs) nechanchi shakli ishlatiladi?",
     options: ["2-shakli (V2)", "1-shakli (V1)", "3-shakli (V3)", "Ing-shakli"],
     correctAnswer: "2-shakli (V2)"
   },
   {
     type: 'multiple-choice',
-    question: "Present Perfect asosan nimaga urg'u beradi?",
-    options: ["Ish-harakatning natijasiga", "Vaqtning aniqligiga", "Jarayon davomiyligiga", "Kelajak orzusiga"],
+    question: "Present Perfect asosan nimaga e'tibor qaratadi?",
+    options: ["Ish-harakatning natijasiga", "Vaqtning aniqligiga", "Jarayon davomiyligiga", "O'tmish odatiga"],
     correctAnswer: "Ish-harakatning natijasiga"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Continuous qanday vaziyatni ifodalaydi?",
-    options: ["O'tmishdagi jarayonni", "Hozirgi natijani", "O'tmishdagi odatni", "Kelajak niyatini"],
-    correctAnswer: "O'tmishdagi jarayonni"
   },
   {
     type: 'multiple-choice',
@@ -263,82 +253,32 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     type: 'multiple-choice',
-    question: "Kelajakda kutilmagan/shoshilinch qarorlar uchun nima ishlatiladi?",
-    options: ["Will", "Going to", "Present Simple", "Past Simple"],
-    correctAnswer: "Will"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Oldindan rejalashtirilgan ishlar uchun kelajakda nima qo'llaniladi?",
+    question: "Kelajakda oldindan rejalashtirilgan ishlar uchun nima ishlatiladi?",
     options: ["Be going to", "Will", "Shall", "Would"],
     correctAnswer: "Be going to"
   },
   {
     type: 'multiple-choice',
-    question: "Zamonlar moslashuvida (Sequence of tenses) bosh gap o'tgan zamonda bo'lsa, ergash gap odatda qaysi guruhda bo'ladi?",
-    options: ["O'tgan zamon guruhida", "Hozirgi zamon guruhida", "Kelajak zamon guruhida", "Farqi yo'q"],
-    correctAnswer: "O'tgan zamon guruhida"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Harakat davom etib biror natija bermayotgan bo'lsa, qaysi zamon ishlatiladi?",
+    question: "Harakatning o'zi muhim bo'lmay, jarayon davom etayotganida qaysi guruh qo'llaniladi?",
     options: ["Continuous guruhlari", "Simple guruhlari", "Perfect guruhlari", "Hammasi bir xil"],
     correctAnswer: "Continuous guruhlari"
   },
   {
     type: 'multiple-choice',
-    question: "State verbs (his-tuyg'u, fikrlash fe'llari) asosan qaysi zamonlarda ishlatilmaydi?",
-    options: ["Continuous zamonlarda", "Simple zamonlarda", "Perfect zamonlarda", "Future zamonlarda"],
-    correctAnswer: "Continuous zamonlarda"
-  },
-
-  // --- Modal Verbs Theory (43-50) ---
-  {
-    type: 'multiple-choice',
-    question: "Modal fe'llardan keyin asosiy fe'l qanday shaklda keladi?",
-    options: ["Bare Infinitive (to-siz)", "Full Infinitive (to-li)", "V-ing", "V-ed"],
-    correctAnswer: "Bare Infinitive (to-siz)"
+    question: "State verbs (his-tuyg'u fe'llari) odatda Continuous zamonlarda ishlatiladimi?",
+    options: ["Yo'q, ishlatilmaydi", "Ha, har doim", "Faqat o'tgan zamonda", "Faqat birinchi shaxsda"],
+    correctAnswer: "Yo'q, ishlatilmaydi"
   },
   {
     type: 'multiple-choice',
-    question: "Juda kuchli majburiyat (qoida/qonun) uchun qaysi fe'l ishlatiladi?",
-    options: ["Must", "Should", "Can", "May"],
-    correctAnswer: "Must"
+    question: "Zamonlar moslashuvida bosh gap o'tgan zamonda bo'lsa, ergash gap qaysi guruhda bo'lishi kerak?",
+    options: ["O'tgan zamon guruhida", "Hozirgi zamon guruhida", "Kelajak zamon guruhida", "Erkin bo'ladi"],
+    correctAnswer: "O'tgan zamon guruhida"
   },
   {
     type: 'multiple-choice',
-    question: "Maslahat berishda eng keng tarqalgan modal fe'l qaysi?",
-    options: ["Should", "Must", "Will", "Could"],
-    correctAnswer: "Should"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Taqiqni (prohibition) bildirish uchun nima ishlatiladi?",
-    options: ["Mustn't", "Don't have to", "Shouldn't", "Might not"],
-    correctAnswer: "Mustn't"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Oto'nalgan o'tgan zamon qobiliyati uchun nima qo'llaniladi?",
-    options: ["Could", "Can", "Will", "Should"],
-    correctAnswer: "Could"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Ruxsat so'rashda eng rasmiy (formal) shakl qaysi?",
-    options: ["May I", "Can I", "Will I", "Should I"],
-    correctAnswer: "May I"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Majburiyat yo'qligini (lack of necessity) bildirish uchun nima ishlatiladi?",
-    options: ["Don't have to / Needn't", "Mustn't", "Can't", "Shouldn't"],
-    correctAnswer: "Don't have to / Needn't"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Ehtimollikni (Possibility) bildirishda 'may' va 'might' farqi nimada?",
-    options: ["Might kuchsizroq ehtimol", "May o'tgan zamon", "Farqi faqat imloda", "Might rasmiyroq"],
-    correctAnswer: "Might kuchsizroq ehtimol"
+    question: "Perfect Continuous zamonlari nimanini bildiradi?",
+    options: ["Boshlangan va hali davom etayotgan ishni", "Tugallangan natijani", "Kelajakdagi tasodifni", "O'tmishdagi qisqa ishni"],
+    correctAnswer: "Boshlangan va hali davom etayotgan ishni"
   }
 ];

@@ -1,7 +1,7 @@
 
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 45 * 60; // 45 minutes (30 questions * 1.5 min)
+export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes (40 questions * 1.5 min)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
   { term: "Possessives ('s & of)", definition: "'s va of egalik qoidalari" },
@@ -9,7 +9,8 @@ export const QUIZ_VOCABULARY: VocabularyItem[] = [
   { term: "Articles (a/an)", definition: "Noaniq artikl qoidalari" },
   { term: "Numerals", definition: "Sonlar va ularning turlari" },
   { term: "To Be Verb", definition: "To be fe'lining grammatik shakllari" },
-  { term: "V1, V2, V3, V4", definition: "Fe'l shakllari nazariyasi" }
+  { term: "V1, V2, V3, V4", definition: "Fe'l shakllari nazariyasi" },
+  { term: "Tenses & Actions", definition: "Zamonlar va ish-harakatlar nazariyasi" }
 ];
 
 export const FIXED_THEME: Theme = {
@@ -30,7 +31,7 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- Category 1: 's va of (Nazariya - 5ta) ---
+  // --- Category 1: 's va of (Egalik Nazariyasi - 5ta) ---
   {
     type: 'multiple-choice',
     question: "Insonlar va jonli mavjudotlarga egalik asosan qaysi qo'shimcha bilan ifodalanadi?",
@@ -62,7 +63,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     correctAnswer: "Faqat oxirgi ismga"
   },
 
-  // --- Category 2: Compound Nouns (Nazariya - 4ta) ---
+  // --- Category 2: Compound Nouns (Murakkab Otlar Nazariyasi - 5ta) ---
   {
     type: 'multiple-choice',
     question: "Murakkab otlar (Compound Nouns) nima?",
@@ -87,8 +88,14 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["Birlik shaklida", "Ko'plik shaklida", "Egalik shaklida", "Sifatdosh shaklida"],
     correctAnswer: "Birlik shaklida"
   },
+  {
+    type: 'multiple-choice',
+    question: "'Noun + Noun' tipli murakkab otlarda (masalan: tennis ball) birinchi ot qanday grammatik vazifani bajaradi?",
+    options: ["Sifatlovchi (aniqlovchi)", "Ega (subject)", "Fe'l", "Ravish"],
+    correctAnswer: "Sifatlovchi (aniqlovchi)"
+  },
 
-  // --- Category 3: Article a, an (Nazariya - 4ta) ---
+  // --- Category 3: Article a, an (Noaniq Artikl Nazariyasi - 6ta) ---
   {
     type: 'multiple-choice',
     question: "Noaniq artikldagi 'a' va 'an' ning farqi nimada?",
@@ -113,8 +120,20 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["a artikli", "an artikli", "the artikli", "artikl ishlatilmaydi"],
     correctAnswer: "a artikli"
   },
+  {
+    type: 'multiple-choice',
+    question: "'Such' (shunday) so'zidan keyin birlikdagi sanaladigan ot kelsa, qaysi artikl ishlatiladi?",
+    options: ["a yoki an", "the", "some", "Hech qanday artikl qo'yilmaydi"],
+    correctAnswer: "a yoki an"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Unli tovush bilan boshlanadigan qisqartmalar (masalan: MP, SMS /em pi/, /es em es/) oldidan qaysi noaniq artikl ishlatiladi?",
+    options: ["an", "a", "the", "Artikl ishlatilmaydi"],
+    correctAnswer: "an"
+  },
 
-  // --- Category 4: Numeral (Nazariya - 4ta) ---
+  // --- Category 4: Numeral (Sonlar Nazariyasi - 6ta) ---
   {
     type: 'multiple-choice',
     question: "Miqdor sonlar (Cardinal Numerals) va Tartib sonlar (Ordinal Numerals) farqi nimada?",
@@ -139,8 +158,20 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["point", "comma", "dot", "period"],
     correctAnswer: "point"
   },
+  {
+    type: 'multiple-choice',
+    question: "Tartib son yasashda -th qo'shimchasi qaysi sonlardan boshqa barchasiga qo'shiladi?",
+    options: ["1, 2, 3", "1, 5, 10", "11, 12, 13", "0, 1, 2"],
+    correctAnswer: "1, 2, 3"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Yuzliklarda (hundreds) 'hundred' so'ziga qachon -s qo'shiladi?",
+    options: ["Noaniq ko'plik bo'lganda (hundreds of)", "Har doim", "Hech qachon", "Faqat birlikda"],
+    correctAnswer: "Noaniq ko'plik bo'lganda (hundreds of)"
+  },
 
-  // --- Category 5: To Be (Nazariya - 4ta) ---
+  // --- Category 5: To Be (Nazariya - 6ta) ---
   {
     type: 'multiple-choice',
     question: "To be fe'lining hozirgi, o'tgan va kelajak zamondagi asosiy shakllari qaysilar?",
@@ -165,8 +196,20 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["Ot va sifatlarni bog'lovchi bo'g'in yoki ko'makchi fe'l bo'lish", "Faqat kelajak zamonda harakatni ifodalash", "Faqat jismoniy harakat va egallashni ko'rsatish", "Sifatlardan ravishlar yasash"],
     correctAnswer: "Ot va sifatlarni bog'lovchi bo'g'in yoki ko'makchi fe'l bo'lish"
   },
+  {
+    type: 'multiple-choice',
+    question: "Qaysi kishilik olmoshlari bilan To be fe'lining 'are' yoki 'were' ko'plik shakllari ishlatiladi?",
+    options: ["We, You, They", "I, He, She", "It, He, You", "She, It, We"],
+    correctAnswer: "We, You, They"
+  },
+  {
+    type: 'multiple-choice',
+    question: "To be fe'lining past participle (V3 - uchinchi shakli) qanday yoziladi?",
+    options: ["been", "being", "was", "were"],
+    correctAnswer: "been"
+  },
 
-  // --- Category 6: V1 V2 V3 V4 (Nazariya - 4ta) ---
+  // --- Category 6: V1 V2 V3 V4 (Fe'l Shakllari Nazariyasi - 6ta) ---
   {
     type: 'multiple-choice',
     question: "Fe'lning to'rtta asosiy shakllari (V1, V2, V3, V4) deganda mos ravishda nimalar tushuniladi?",
@@ -191,36 +234,54 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     options: ["-ing qo'shimchasini", "-ed qo'shimchasini", "-ly qo'shimchasini", "-s qo'shimchasini"],
     correctAnswer: "-ing qo'shimchasini"
   },
+  {
+    type: 'multiple-choice',
+    question: "Past Participle (V3) shakli asosan ingliz tili grammatikasining qaysi bo'limlarida ishlatilmaydi?",
+    options: ["Continuous (davomiy) zamon guruhida", "Perfect (tugallangan) zamon guruhida", "Majhul nisbatda (Passive Voice)", "Sifatdosh iboralarida"],
+    correctAnswer: "Continuous (davomiy) zamon guruhida"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Fe'lning noaniq shakli (Infinitive / V1) oldidan 'to' predlogi olib tashlansa, bu fe'l qanday nomlanadi?",
+    options: ["Bare Infinitive (to-siz infinitiv)", "Full Infinitive", "Gerund", "Participle"],
+    correctAnswer: "Bare Infinitive (to-siz infinitiv)"
+  },
 
-  // --- Category 7: Gapli / Sentence Completion (Gapli - 5ta) ---
+  // --- Category 7: All Tenses & Actions Theory (Zamonlar va Harakatlar Nazariyasi - 6ta) ---
   {
     type: 'multiple-choice',
-    question: "\"The leg ___ the chair is broken.\" gapidagi bo'sh joyga qaysi shakl mos keladi?",
-    options: ["of", "'s", "s'", "- (hech narsa)"],
-    correctAnswer: "of"
+    question: "Present Simple zamoni asosan qanday harakatlar uchun qo'llaniladi?",
+    options: ["Doimiy, takrorlanuvchi yoki tabiiy qonuniyatlar uchun", "Ayni so'zlashuv momentida davom etayotgan", "Kelajakda rejalashtirilgan ish-harakat", "O'tmishda tugallangan narsa"],
+    correctAnswer: "Doimiy, takrorlanuvchi yoki tabiiy qonuniyatlar uchun"
   },
   {
     type: 'multiple-choice',
-    question: "\"They went on a two-___ holiday to Egypt.\" gapida qaysi so'z to'g'ri qo'llanilgan?",
-    options: ["week", "weeks", "week's", "weeks'"],
-    correctAnswer: "week"
+    question: "Davomiy (Continuous) zamonlar guruhining eng asosiy ma'nosi nimadan iborat?",
+    options: ["Harakatning ma'lum bir vaqtda jarayon sifatida davom etayotganligi", "Harakatning tugallanib natija berganligi", "Doimiy odatlar va an'analar", "Kelajakdagi noaniq taxminlar"],
+    correctAnswer: "Harakatning ma'lum bir vaqtda jarayon sifatida davom etayotganligi"
   },
   {
     type: 'multiple-choice',
-    question: "\"It was ___ unusual event but ___ great experience.\" gapidagi bo'shliqlarga qaysi artikllar mos keladi?",
-    options: ["an / a", "a / an", "the / the", "a / a"],
-    correctAnswer: "an / a"
+    question: "Tugallangan (Perfect) zamonlar guruhi har qanday vaziyatda nimaga asosiy urg'u beradi?",
+    options: ["Harakatning tugallanganligi va uning natijasiga", "Harakatning vaqt davomiyligiga", "Tez-tez takrorlanishiga", "Hali boshlanmaganligiga"],
+    correctAnswer: "Harakatning tugallanganligi va uning natijasiga"
   },
   {
     type: 'multiple-choice',
-    question: "\"Yesterday at 5 PM, neither my brother nor my parents ___ at home.\" gapida bo'sh joyga qaysi To be shakli qo'yiladi?",
-    options: ["were", "was", "are", "been"],
-    correctAnswer: "were"
+    question: "Past Perfect zamoni qachon qo'llaniladi?",
+    options: ["O'tmishdagi ma'lum bir harakatdan ham oldin sodir bo'lgan ish uchun", "Hozirgina tugallangan ish uchun", "Kelajakda ma'lum muddatgacha tugaydigan ishga", "Doimiy o'tmish odatlari uchun"],
+    correctAnswer: "O'tmishdagi ma'lum bir harakatdan ham oldin sodir bo'lgan ish uchun"
   },
   {
     type: 'multiple-choice',
-    question: "\"She has ___ all her exams successfully this semester.\" gapida bo'sh joyga 'pass' (imtihondan o'tish) fe'lining mos shaklini qo'ying:",
-    options: ["passed", "pass", "passing", "passes"],
-    correctAnswer: "passed"
+    question: "Davomiy zamonlarda (Continuous) umuman ishlatilmaydigan, his-tuyg'u, fikrlash va egalikni ifodalovchi fe'llar nima deb ataladi?",
+    options: ["State/Stative Verbs (Holat fe'llari)", "Action/Dynamic Verbs", "Irregular Verbs", "Modal Verbs"],
+    correctAnswer: "State/Stative Verbs (Holat fe'llari)"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Perfect Continuous (Perfect-davomiy) zamonlarining asosiy ma'no yuklamasi nima?",
+    options: ["Harakatning o'tmishda yoki hozirgacha ma'lum muddat davom etib kelayotganligi", "Harakatning qisqa va bir lahzada tugaganligi", "Kelajakdagi rejali uchrashuvlarni bildirish", "Hozirgi paytdagi umumiy haqiqatni aytish"],
+    correctAnswer: "Harakatning o'tmishda yoki hozirgacha ma'lum muddat davom etib kelayotganligi"
   }
 ];

@@ -42,17 +42,17 @@ export default function App() {
   }, []);
 
   const startQuiz = useCallback(() => {
-    const questionsWithRandomizedOptions = QUIZ_QUESTIONS.map(q => {
+    const questionsWithOriginalOptions = QUIZ_QUESTIONS.map(q => {
       if (q.type === 'multiple-choice' && q.options) {
         return {
           ...q,
-          options: shuffleArray(q.options)
+          options: [...q.options]
         };
       }
       return q;
     });
 
-    setShuffledQuestions(shuffleArray(questionsWithRandomizedOptions));
+    setShuffledQuestions(questionsWithOriginalOptions);
     
     setTimeLeft(QUIZ_DURATION_SECONDS);
     setCurrentQuestionIndex(0);

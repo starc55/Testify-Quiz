@@ -1,16 +1,13 @@
-
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes (40 questions * 1.5 min)
+export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes (30 questions as per DTM standard)
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Possessives ('s & of)", definition: "'s va of egalik qoidalari" },
-  { term: "Compound Nouns", definition: "Murakkab otlar nazariyasi" },
-  { term: "Articles (a/an)", definition: "Noaniq artikl qoidalari" },
-  { term: "Numerals", definition: "Sonlar va ularning turlari" },
-  { term: "To Be Verb", definition: "To be fe'lining grammatik shakllari" },
-  { term: "V1, V2, V3, V4", definition: "Fe'l shakllari nazariyasi" },
-  { term: "Tenses & Actions", definition: "Zamonlar va ish-harakatlar nazariyasi" }
+  { term: "Grammar Rules", definition: "Ingliz tili asosiy grammatik qoidalari" },
+  { term: "Conditionals", definition: "Shart mayli (If-clauses) turlari" },
+  { term: "Reported Speech", definition: "O'zlashtirma gap qoidalari" },
+  { term: "Numerals", definition: "Sonlar va ularning o'qilishi" },
+  { term: "Reading Comprehension", definition: "Matnni o'qib tushunish va tahlil qilish" }
 ];
 
 export const FIXED_THEME: Theme = {
@@ -31,257 +28,218 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // --- Category 1: 's va of (Egalik Nazariyasi - 5ta) ---
   {
     type: 'multiple-choice',
-    question: "Insonlar va jonli mavjudotlarga egalik asosan qaysi qo'shimcha bilan ifodalanadi?",
-    options: ["-'s orqali", "of predlogi orqali", "-es orqali", "-ies orqali"],
-    correctAnswer: "-'s orqali"
+    question: "Stop . . . this terrible noise at once!",
+    options: ["to make", "to making", "make", "making"],
+    correctAnswer: "making"
   },
   {
     type: 'multiple-choice',
-    question: "Jonsiz narsalarning qismi yoki bo'lagini ifodalash uchun asosan qaysi grammatik vositadan foydalaniladi?",
-    options: ["of predlogidan", "-'s qo'shimchasidan", "faqat apostrofdan (')", "hech qanday vositasiz"],
-    correctAnswer: "of predlogidan"
+    question: "You . . . smoke in the hotel. It is forbidden.",
+    options: ["needn't", "have to", "can", "can't"],
+    correctAnswer: "can't"
   },
   {
     type: 'multiple-choice',
-    question: "Oxiri '-s' harfi bilan tugaydigan ko'plikdagi otlarga (masalan, students) egalik shakli qanday qo'shiladi?",
-    options: ["Faqat apostrof (') belgisini qo'yish bilan", "-'s qo'shimchasini yozish bilan", "of predlogini qo'llash bilan", "hech qanday qo'shimcha o'zgarishsiz"],
-    correctAnswer: "Faqat apostrof (') belgisini qo'yish bilan"
+    question: "He seems to be . . . .",
+    options: ["more honester", "honestly", "most honest", "honest"],
+    correctAnswer: "honest"
   },
   {
     type: 'multiple-choice',
-    question: "Egalik bildiruvchi 'of' predlogli iboralarni 'Noun + of + Noun' formulasida birinchi ot odatda qaysi artikl bilan keladi?",
-    options: ["the artikli bilan", "a/an artikllari bilan", "artiklsiz (zero article)", "some olmoshi bilan"],
-    correctAnswer: "the artikli bilan"
+    question: "The main . . . of this meeting is to decide what we should do about the problem of noise.",
+    options: ["purpose", "device", "habit", "behaviour"],
+    correctAnswer: "purpose"
   },
   {
     type: 'multiple-choice',
-    question: "Agar narsa ikki yoki undan ortiq odamga birgalikda tegishli bo'lsa (birgalikdagi egalik), -'s qo'shimchasi kimga qo'shiladi?",
-    options: ["Faqat oxirgi ismga", "Faqat birinchi ismga", "Har bir ismga alohida", "Hech biriga qo'shilmaydi"],
-    correctAnswer: "Faqat oxirgi ismga"
-  },
-
-  // --- Category 2: Compound Nouns (Murakkab Otlar Nazariyasi - 5ta) ---
-  {
-    type: 'multiple-choice',
-    question: "Murakkab otlar (Compound Nouns) nima?",
-    options: ["Ikki yoki undan ortiq so'zdan tashkil topgan bitta ot", "Faqat sifat va fe'ldan yasalgan ot", "Sanalmaydigan va mavhum otlar yig'indisi", "O'zbek tiliga tarjima qilinmaydigan so'zlar"],
-    correctAnswer: "Ikki yoki undan ortiq so'zdan tashkil topgan bitta ot"
+    question: "The importance . . . washing one’s hands is that it prevents infection.",
+    options: ["to", "on", "against", "of"],
+    correctAnswer: "of"
   },
   {
     type: 'multiple-choice',
-    question: "Ko'p so'zli murakkab otlarni (Compound Nouns) ko'plikda yasashda -s/-es qo'shimchasi odatda qayerga qo'shiladi?",
-    options: ["Asosiy (ma'no tashuvchi) so'zga", "Hamisha oxirgi so'zga", "Hamisha birinchi so'zga", "Har bir so'zga alohida"],
-    correctAnswer: "Asosiy (ma'no tashuvchi) so'zga"
+    question: "If I . . . better, I would go to the cinema with you.",
+    options: ["would feel", "felt", "will feel", "fell"],
+    correctAnswer: "felt"
   },
   {
     type: 'multiple-choice',
-    question: "Murakkab otlarda (masalan: mother-in-law) egalik shakli (-'s) qayerga qo'shiladi?",
-    options: ["Eng oxirgi so'zga", "Birinchi bosh so'zga", "Har bir tarkibiy so'zga", "of predlogi bilan boshiga"],
-    correctAnswer: "Eng oxirgi so'zga"
+    question: "− Gavhar has her lunch at 12 o’clock.\n− . . . .",
+    options: ["So did Peter", "So had Mike", "So does Anvar", "Neither has Jane"],
+    correctAnswer: "So does Anvar"
   },
   {
     type: 'multiple-choice',
-    question: "Defis (-) orqali yoziladigan va miqdoriy sifat vazifasidagi murakkab otlarda (masalan: a ten-minute break) miqdor bildiruvchi otdan keyingi so'z qanday shaklda bo'ladi?",
-    options: ["Birlik shaklida", "Ko'plik shaklida", "Egalik shaklida", "Sifatdosh shaklida"],
-    correctAnswer: "Birlik shaklida"
+    question: "Sorry I’m late. It took me . . . to get here than I expected.",
+    options: ["longest", "as long", "longer", "long"],
+    correctAnswer: "longer"
   },
   {
     type: 'multiple-choice',
-    question: "'Noun + Noun' tipli murakkab otlarda (masalan: tennis ball) birinchi ot qanday grammatik vazifani bajaradi?",
-    options: ["Sifatlovchi (aniqlovchi)", "Ega (subject)", "Fe'l", "Ravish"],
-    correctAnswer: "Sifatlovchi (aniqlovchi)"
-  },
-
-  // --- Category 3: Article a, an (Noaniq Artikl Nazariyasi - 6ta) ---
-  {
-    type: 'multiple-choice',
-    question: "Noaniq artikldagi 'a' va 'an' ning farqi nimada?",
-    options: ["'a' undosh tovushdan, 'an' unli tovushdan oldin keladi", "'a' unli harfdan, 'an' undosh harfdan oldin keladi", "'a' shaxslarga, 'an' narsalarga nisbatan ishlatiladi", "'a' birlikda, 'an' ko'plikda ishlatiladi"],
-    correctAnswer: "'a' undosh tovushdan, 'an' unli tovushdan oldin keladi"
+    question: "If she had listened to me, she . . . any problems now.",
+    options: ["would not have", "will not have had", "would not have had", "will not have"],
+    correctAnswer: "would not have"
   },
   {
     type: 'multiple-choice',
-    question: "Noaniq artikllar qaysi turdagi otlar bilan qo'llaniladi?",
-    options: ["Sanaladigan birlikdagi otlar bilan", "Ko'plikdagi barcha otlar bilan", "Sanalmaydigan mavhum otlar bilan", "Xususiy va atoqli otlar bilan"],
-    correctAnswer: "Sanaladigan birlikdagi otlar bilan"
+    question: "Choose the right expression of the underlined numeral.\nYou filed a complaint 2 1/2 weeks ago.",
+    options: ["two and a half", "two point one two", "one second", "two halves"],
+    correctAnswer: "two and a half"
   },
   {
     type: 'multiple-choice',
-    question: "'Hour' (soat) yoki 'honest' (halol) kabi h-harfi o'qilmaydigan so'zlar oldidan qaysi noaniq artikl qo'yiladi?",
-    options: ["an artikli", "a artikli", "the artikli", "hech qanday artikl qo'yilmaydi"],
-    correctAnswer: "an artikli"
+    question: "He stood glancing . . . the picture for a long time.",
+    options: ["after", "at", "for", "to"],
+    correctAnswer: "at"
   },
   {
     type: 'multiple-choice',
-    question: "Unli harf bilan boshlanib, ammo undosh tovush beradigan so'zlar (masalan: unit, university /jʊː/) oldidan qaysi artikl qo'yiladi?",
-    options: ["a artikli", "an artikli", "the artikli", "artikl ishlatilmaydi"],
-    correctAnswer: "a artikli"
+    question: "The dentist asked the little boy, “How much chocolate do you eat every day?”.",
+    options: [
+      "The dentist asked the little boy how much chocolate will he eat every day.",
+      "The dentist asked the little boy how much chocolate he eat every day.",
+      "How much chocolate he eats every day asked the dentist to little boy.",
+      "The dentist asked the little boy how much chocolate he ate every day."
+    ],
+    correctAnswer: "The dentist asked the little boy how much chocolate he ate every day."
   },
   {
     type: 'multiple-choice',
-    question: "'Such' (shunday) so'zidan keyin birlikdagi sanaladigan ot kelsa, qaysi artikl ishlatiladi?",
-    options: ["a yoki an", "the", "some", "Hech qanday artikl qo'yilmaydi"],
-    correctAnswer: "a yoki an"
+    question: ". . . Mary last month?",
+    options: ["How many times have you seen", "Have you seen", "Were you seeing", "Did you see"],
+    correctAnswer: "Did you see"
   },
   {
     type: 'multiple-choice',
-    question: "Unli tovush bilan boshlanadigan qisqartmalar (masalan: MP, SMS /em pi/, /es em es/) oldidan qaysi noaniq artikl ishlatiladi?",
-    options: ["an", "a", "the", "Artikl ishlatilmaydi"],
-    correctAnswer: "an"
-  },
-
-  // --- Category 4: Numeral (Sonlar Nazariyasi - 6ta) ---
-  {
-    type: 'multiple-choice',
-    question: "Miqdor sonlar (Cardinal Numerals) va Tartib sonlar (Ordinal Numerals) farqi nimada?",
-    options: ["Miqdor son narsaning sonini, tartib son uning ketma-ketlikdagi o'rnini bildiradi", "Miqdor son faqat hisobda, tartib son faqat vaqtda qo'llaniladi", "Miqdor sonlar oldiga har doim 'the' qo'shiladi", "Ular butunlay bir xil ma'noga ega"],
-    correctAnswer: "Miqdor son narsaning sonini, tartib son uning ketma-ketlikdagi o'rnini bildiradi"
+    question: "Develop your personal plan, . . . ?",
+    options: ["shall you", "shan’t", "will you", "don’t you"],
+    correctAnswer: "will you"
   },
   {
     type: 'multiple-choice',
-    question: "Tartib sonlar yozuvda (-th) qo'shimchasidan tashqari qaysi o'ziga xos shakllarga ega?",
-    options: ["-st, -nd, -rd (1st, 2nd, 3rd kabi)", "-lt, -mt, -nt", "-ed, -ing, -ly", "-s, -es, -ies"],
-    correctAnswer: "-st, -nd, -rd (1st, 2nd, 3rd kabi)"
+    question: "I saw her . . . but I don’t remember where.",
+    options: ["nowhere", "somewhere", "everywhere", "anywhere"],
+    correctAnswer: "somewhere"
   },
   {
     type: 'multiple-choice',
-    question: "Yuzlik (hundred), minglik (thousand) va millionlik sonlar miqdor sifatlari sifatida aniq sonlardan keyin kelganda -s ko'plik qo'shimchasini oladimi?",
-    options: ["Yo'q, olmaydi (masalan: three hundred)", "Ha, har doim oladi", "Faqat so'roq gaplarda oladi", "Faqat birinchi shaxsdan keyin oladi"],
-    correctAnswer: "Yo'q, olmaydi (masalan: three hundred)"
+    question: "The teacher . . . some questions.",
+    options: ["is asking", "were asked", "ask", "have asked"],
+    correctAnswer: "is asking"
   },
   {
     type: 'multiple-choice',
-    question: "O'nli kasrlar (decimals) ingliz tilida o'qilganda nuqta (.) belgisi qanday ataladi?",
-    options: ["point", "comma", "dot", "period"],
-    correctAnswer: "point"
+    question: "I’ve just heard the weather forecast on the radio and . . . say it will rain today.",
+    options: ["we", "they", "he", "it"],
+    correctAnswer: "they"
   },
   {
     type: 'multiple-choice',
-    question: "Tartib son yasashda -th qo'shimchasi qaysi sonlardan boshqa barchasiga qo'shiladi?",
-    options: ["1, 2, 3", "1, 5, 10", "11, 12, 13", "0, 1, 2"],
-    correctAnswer: "1, 2, 3"
+    question: "It is . . . hit. I like such songs.",
+    options: ["his thirds", "the third his", "his third", "his the third"],
+    correctAnswer: "his third"
+  },
+  // --- Reading Comprehension Passage 1 (Mansur's Hunt) ---
+  {
+    type: 'multiple-choice',
+    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
+    question: "According to the passage, why did Mansur want to go to the mountains?",
+    options: ["to have a fine holiday", "to shoot at somebody", "to watch some animals", "to practice at shooting"],
+    correctAnswer: "to practice at shooting"
   },
   {
     type: 'multiple-choice',
-    question: "Yuzliklarda (hundreds) 'hundred' so'ziga qachon -s qo'shiladi?",
-    options: ["Noaniq ko'plik bo'lganda (hundreds of)", "Har doim", "Hech qachon", "Faqat birlikda"],
-    correctAnswer: "Noaniq ko'plik bo'lganda (hundreds of)"
-  },
-
-  // --- Category 5: To Be (Nazariya - 6ta) ---
-  {
-    type: 'multiple-choice',
-    question: "To be fe'lining hozirgi, o'tgan va kelajak zamondagi asosiy shakllari qaysilar?",
-    options: ["am/is/are, was/were, will be", "do/does, did, will do", "have/has, had, will have", "be, been, being"],
-    correctAnswer: "am/is/are, was/were, will be"
+    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
+    question: "According to the passage, what was the reason that Mansur and Usmon went to the judge?",
+    options: ["Somebody had shot them in their legs.", "Usmon had called Mansur an animal.", "Mansur had shot Usmon by accident.", "They had wanted to shoot each other."],
+    correctAnswer: "Mansur had shot Usmon by accident."
   },
   {
     type: 'multiple-choice',
-    question: "Kishilik olmoshlaridan 'I' bilan hozirgi zamonda To be ning qaysi shakli birga ishlatiladi?",
-    options: ["am", "is", "are", "be"],
-    correctAnswer: "am"
+    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
+    question: "According to the passage, Mansur would not have made such a mistake if . . . .",
+    options: ["he had seen well", "he had worn his glasses", "he had gone on a rainy day", "he had talked to the judge before"],
+    correctAnswer: "he had seen well"
   },
   {
     type: 'multiple-choice',
-    question: "O'tgan zamonda (Past Simple) To be fe'lining 'was' shakli qaysi shaxslar uchun ishlatiladi?",
-    options: ["I, He, She, It uchun", "We, You, They uchun", "Faqat uchinchi shaxs ko'plik uchun", "Faqat birinchi shaxs ko'plik uchun"],
-    correctAnswer: "I, He, She, It uchun"
+    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
+    question: "All of the following statements are TRUE, EXCEPT . . . .",
+    options: [
+      "Mansur had trouble with his wet glasses that day.",
+      "It rained that day when Mansur went to the mountains.",
+      "Usmon was shot by Mansur by accident that day.",
+      "Mansur was sure that he was shooting at Usmon."
+    ],
+    correctAnswer: "Mansur was sure that he was shooting at Usmon."
+  },
+  // --- Reading Comprehension Passage 2 (Yawning) ---
+  {
+    type: 'multiple-choice',
+    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
+    question: "According to the passage, when do people want to yawn?",
+    options: ["When they have lots of problems to solve.", "When they want to eat something delicious.", "When they are in bad mood conditions.", "When they see other people yawning."],
+    correctAnswer: "When they see other people yawning."
   },
   {
     type: 'multiple-choice',
-    question: "Ingliz tilida To be fe'lining asosiy grammatik vazifasi nima?",
-    options: ["Ot va sifatlarni bog'lovchi bo'g'in yoki ko'makchi fe'l bo'lish", "Faqat kelajak zamonda harakatni ifodalash", "Faqat jismoniy harakat va egallashni ko'rsatish", "Sifatlardan ravishlar yasash"],
-    correctAnswer: "Ot va sifatlarni bog'lovchi bo'g'in yoki ko'makchi fe'l bo'lish"
+    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
+    question: "According to the passage, what cause of yawning is mentioned?",
+    options: ["Seeing animals’ yawning makes people yawn.", "Reading about yawning makes people yawn.", "Watching a horror movie makes people yawn.", "Going to bed early makes people yawn strongly."],
+    correctAnswer: "Reading about yawning makes people yawn."
   },
   {
     type: 'multiple-choice',
-    question: "Qaysi kishilik olmoshlari bilan To be fe'lining 'are' yoki 'were' ko'plik shakllari ishlatiladi?",
-    options: ["We, You, They", "I, He, She", "It, He, You", "She, It, We"],
-    correctAnswer: "We, You, They"
+    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
+    question: "All of the following statements are TRUE, EXCEPT . . .",
+    options: [
+      "A university in the UK did some research on yawning.",
+      "Researchers say reading about yawning stops us from yawning.",
+      "Researchers say people yawn more if they try to stop yawning.",
+      "The volunteers looked at videos and were videoed."
+    ],
+    correctAnswer: "Researchers say reading about yawning stops us from yawning."
   },
   {
     type: 'multiple-choice',
-    question: "To be fe'lining past participle (V3 - uchinchi shakli) qanday yoziladi?",
-    options: ["been", "being", "was", "were"],
-    correctAnswer: "been"
+    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
+    question: "According to the passage, why is yawning being studied?",
+    options: ["It will help to monitor the brain.", "It will help to treat some diseases.", "It will help people sleep more.", "It will help researchers yawn more."],
+    correctAnswer: "It will help to treat some diseases."
   },
-
-  // --- Category 6: V1 V2 V3 V4 (Fe'l Shakllari Nazariyasi - 6ta) ---
+  // --- Reading Comprehension Passage 3 (Salima's Letter to Manager) ---
   {
     type: 'multiple-choice',
-    question: "Fe'lning to'rtta asosiy shakllari (V1, V2, V3, V4) deganda mos ravishda nimalar tushuniladi?",
-    options: ["Infinitive, Past Simple, Past Participle, Present Participle (-ing)", "Noun, Pronoun, Adjective, Adverb", "Present, Past, Future, Perfect", "Active, Passive, Modal, Auxiliary"],
-    correctAnswer: "Infinitive, Past Simple, Past Participle, Present Participle (-ing)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "To'g'ri fe'llarning (Regular verbs) V2 (Past Simple) va V3 (Past Participle) shakllari qanday yasaladi?",
-    options: ["Fe'l oxiriga -ed/d qo'shish orqali", "Fe'l oxiriga -ing qo'shish bilan", "O'zakdagi unlilarni o'zgartirish orqali", "Mutlaqo o'zgarmasdan qoladi"],
-    correctAnswer: "Fe'l oxiriga -ed/d qo'shish orqali"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Noto'g'ri fe'llarning (Irregular verbs) V2 va V3 shakllarini aniqlashning asosiy usuli qaysi?",
-    options: ["Maxsus jadval bo'yicha yodlash kerak", "Har doim -ing qo'shimchasini qo'shish", "Faqat tobe ko'rinishida yozish", "Har doim oxiriga -s qo'shish"],
-    correctAnswer: "Maxsus jadval bo'yicha yodlash kerak"
+    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
+    question: "According to the passage, Salima is writing to the manager because she wants to . . .",
+    options: [
+      "tell the manager how she was enjoying the job.",
+      "say that “The Navruz Hotel” had a good service.",
+      "speak about her work experience and hard life.",
+      "say that what happened is not her fault."
+    ],
+    correctAnswer: "say that what happened is not her fault."
   },
   {
     type: 'multiple-choice',
-    question: "Fe'lning V4 shakli (Present Participle yoki Gerund) qaysi qo'shimchnai olish bilan shakllanadi?",
-    options: ["-ing qo'shimchasini", "-ed qo'shimchasini", "-ly qo'shimchasini", "-s qo'shimchasini"],
-    correctAnswer: "-ing qo'shimchasini"
+    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
+    question: "According to the passage, “The Navruz Hotel” couldn’t receive the guests because . . . .",
+    options: ["there weren’t any free rooms", "it had an international conference", "it was too late and they were hungry", "the manager didn’t like the guide"],
+    correctAnswer: "there weren’t any free rooms"
   },
   {
     type: 'multiple-choice',
-    question: "Past Participle (V3) shakli asosan ingliz tili grammatikasining qaysi bo'limlarida ishlatilmaydi?",
-    options: ["Continuous (davomiy) zamon guruhida", "Perfect (tugallangan) zamon guruhida", "Majhul nisbatda (Passive Voice)", "Sifatdosh iboralarida"],
-    correctAnswer: "Continuous (davomiy) zamon guruhida"
+    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
+    question: "According to the passage, who found the rooms for the tourists in the end?",
+    options: ["The manager of “The Navruz Hotel”.", "The tourists themselves.", "The manager of “The Sheraton Hotel”.", "The guide herself."],
+    correctAnswer: "The manager of “The Navruz Hotel”."
   },
   {
     type: 'multiple-choice',
-    question: "Fe'lning noaniq shakli (Infinitive / V1) oldidan 'to' predlogi olib tashlansa, bu fe'l qanday nomlanadi?",
-    options: ["Bare Infinitive (to-siz infinitiv)", "Full Infinitive", "Gerund", "Participle"],
-    correctAnswer: "Bare Infinitive (to-siz infinitiv)"
-  },
-
-  // --- Category 7: All Tenses & Actions Theory (Zamonlar va Harakatlar Nazariyasi - 6ta) ---
-  {
-    type: 'multiple-choice',
-    question: "Present Simple zamoni asosan qanday harakatlar uchun qo'llaniladi?",
-    options: ["Doimiy, takrorlanuvchi yoki tabiiy qonuniyatlar uchun", "Ayni so'zlashuv momentida davom etayotgan", "Kelajakda rejalashtirilgan ish-harakat", "O'tmishda tugallangan narsa"],
-    correctAnswer: "Doimiy, takrorlanuvchi yoki tabiiy qonuniyatlar uchun"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Davomiy (Continuous) zamonlar guruhining eng asosiy ma'nosi nimadan iborat?",
-    options: ["Harakatning ma'lum bir vaqtda jarayon sifatida davom etayotganligi", "Harakatning tugallanib natija berganligi", "Doimiy odatlar va an'analar", "Kelajakdagi noaniq taxminlar"],
-    correctAnswer: "Harakatning ma'lum bir vaqtda jarayon sifatida davom etayotganligi"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Tugallangan (Perfect) zamonlar guruhi har qanday vaziyatda nimaga asosiy urg'u beradi?",
-    options: ["Harakatning tugallanganligi va uning natijasiga", "Harakatning vaqt davomiyligiga", "Tez-tez takrorlanishiga", "Hali boshlanmaganligiga"],
-    correctAnswer: "Harakatning tugallanganligi va uning natijasiga"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Past Perfect zamoni qachon qo'llaniladi?",
-    options: ["O'tmishdagi ma'lum bir harakatdan ham oldin sodir bo'lgan ish uchun", "Hozirgina tugallangan ish uchun", "Kelajakda ma'lum muddatgacha tugaydigan ishga", "Doimiy o'tmish odatlari uchun"],
-    correctAnswer: "O'tmishdagi ma'lum bir harakatdan ham oldin sodir bo'lgan ish uchun"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Davomiy zamonlarda (Continuous) umuman ishlatilmaydigan, his-tuyg'u, fikrlash va egalikni ifodalovchi fe'llar nima deb ataladi?",
-    options: ["State/Stative Verbs (Holat fe'llari)", "Action/Dynamic Verbs", "Irregular Verbs", "Modal Verbs"],
-    correctAnswer: "State/Stative Verbs (Holat fe'llari)"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Perfect Continuous (Perfect-davomiy) zamonlarining asosiy ma'no yuklamasi nima?",
-    options: ["Harakatning o'tmishda yoki hozirgacha ma'lum muddat davom etib kelayotganligi", "Harakatning qisqa va bir lahzada tugaganligi", "Kelajakdagi rejali uchrashuvlarni bildirish", "Hozirgi paytdagi umumiy haqiqatni aytish"],
-    correctAnswer: "Harakatning o'tmishda yoki hozirgacha ma'lum muddat davom etib kelayotganligi"
+    passage: "According to the passage, what is the writer trying to do in her letter?",
+    options: ["argue", "entertain", "inquire", "apologize"],
+    correctAnswer: "apologize"
   }
 ];

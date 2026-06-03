@@ -25,7 +25,7 @@ const VocabularyScreen: React.FC<VocabularyScreenProps> = ({ onStartQuiz }) => {
           </div>
           
           <p className="text-slate-500 font-medium mb-10 leading-relaxed">
-            Testni boshlashdan oldin ushbu qisqacha lug'at bilan tanishib chiqing. Savollarda aynan shu modal fe'llar ishlatilgan.
+            Testni boshlashdan oldin ushbu qisqacha ma'lumotlar bilan tanishib chiqing. Savollar aynan shu mavzular va bo'limlar atrofida shakllantirilgan.
           </p>
           
           <div className="space-y-3 max-h-80 overflow-y-auto pr-4 custom-scrollbar mb-10">

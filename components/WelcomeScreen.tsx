@@ -65,7 +65,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNameSubmit }) => {
 
           <div className="mt-8 flex items-center gap-5">
             <div className="flex flex-col items-center">
-              <span className="text-indigo-600 font-bold text-base">40</span>
+              <span className="text-indigo-600 font-bold text-base">30</span>
               <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Savollar</span>
             </div>
             <div className="w-px h-6 bg-slate-100"></div>

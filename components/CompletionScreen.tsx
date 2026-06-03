@@ -1,6 +1,15 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from 'recharts';
 
 interface AnswerRecord {
   question: string;
@@ -16,9 +25,107 @@ interface CompletionScreenProps {
   userAnswers: AnswerRecord[];
 }
 
+const TOPICS = {
+  verbs: "Fe'llar va Zamonlar (Verbs & Tenses)",
+  nouns: "Ot va Olmoshlar (Nouns & Pronouns)",
+  adjectives: "Sifat va Predloglar (Adj & Prep)",
+  structures: "Tuzilmalar va Modallar (Structures & Modals)",
+  reading: "Matn tushunish (Reading Comprehension)"
+};
+
+const mapQuestionToTopicKey = (qText: string): keyof typeof TOPICS => {
+  if (qText.includes("terrible noise")) return "verbs";
+  if (qText.includes("smoke in the hotel")) return "structures";
+  if (qText.includes("He seems to be")) return "adjectives";
+  if (qText.includes("main . . . of this meeting")) return "nouns";
+  if (qText.includes("importance . . . washing")) return "adjectives";
+  if (qText.includes("If I . . . better")) return "structures";
+  if (qText.includes("Gavhar has her lunch")) return "structures";
+  if (qText.includes("Sorry I’m late")) return "adjectives";
+  if (qText.includes("had listened to me")) return "structures";
+  if (qText.includes("numeral") || qText.includes("2 1/2")) return "nouns";
+  if (qText.includes("glancing . . . the picture")) return "adjectives";
+  if (qText.includes("dentist asked")) return "structures";
+  if (qText.includes("Mary last month")) return "verbs";
+  if (qText.includes("Develop your personal plan")) return "structures";
+  if (qText.includes("I saw her . . . but I do")) return "nouns";
+  if (qText.includes("teacher . . . some questions") || qText.includes("is asking")) return "verbs";
+  if (qText.includes("weather forecast")) return "nouns";
+  if (qText.includes("It is . . . hit")) return "nouns";
+  
+  if (
+    qText.includes("Mansur") || 
+    qText.includes("Usmon") || 
+    qText.includes("mountains") || 
+    qText.includes("yawn") || 
+    qText.includes("Salima") || 
+    qText.includes("Navruz") || 
+    qText.includes("Sheraton") || 
+    qText.includes("writer trying to do in her letter") || 
+    qText.includes("passage") || 
+    qText.includes("According to the passage") ||
+    qText.includes("dentist asked")
+  ) {
+    if (qText.includes("dentist asked")) {
+      return "structures"; // Specific override
+    }
+    return "reading";
+  }
+  
+  return "verbs";
+};
+
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQuestions, userAnswers }) => {
   const [showDetails, setShowDetails] = useState(false);
   const percentage = Math.round((score / totalQuestions) * 100);
+
+  // Group and compile stats for Recharts
+  const topicStatsMap: Record<keyof typeof TOPICS, { correct: number; incorrect: number; total: number }> = {
+    verbs: { correct: 0, incorrect: 0, total: 0 },
+    nouns: { correct: 0, incorrect: 0, total: 0 },
+    adjectives: { correct: 0, incorrect: 0, total: 0 },
+    structures: { correct: 0, incorrect: 0, total: 0 },
+    reading: { correct: 0, incorrect: 0, total: 0 },
+  };
+
+  userAnswers.forEach((ans, index) => {
+    let key = mapQuestionToTopicKey(ans.question);
+    
+    // Safety index-based categorizer if string matching misses
+    if (key === "verbs" && !ans.question.includes("terrible noise") && !ans.question.includes("Mary last month") && !ans.question.includes("questions")) {
+      if (index >= 18) {
+        key = "reading";
+      } else if (index === 1 || index === 5 || index === 6 || index === 8 || index === 11 || index === 13) {
+        key = "structures";
+      } else if (index === 2 || index === 4 || index === 7 || index === 10) {
+        key = "adjectives";
+      } else if (index === 3 || index === 9 || index === 14 || index === 16 || index === 17) {
+        key = "nouns";
+      } else {
+        key = "verbs";
+      }
+    }
+
+    topicStatsMap[key].total += 1;
+    if (ans.isCorrect) {
+      topicStatsMap[key].correct += 1;
+    } else {
+      topicStatsMap[key].incorrect += 1;
+    }
+  });
+
+  const chartData = Object.keys(TOPICS).map((key) => {
+    const k = key as keyof typeof TOPICS;
+    const stats = topicStatsMap[k];
+    const successRate = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+    return {
+      name: TOPICS[k],
+      "To'g'ri": stats.correct,
+      "Noto'g'ri": stats.incorrect,
+      total: stats.total,
+      rate: successRate
+    };
+  });
 
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-up">
@@ -68,6 +175,75 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
                 percentage >= 60 ? "Yaxshi natija! Ba'zi kichik xatolar bor, lekin umumiy tushunchangiz juda yaxshi." :
                 "Natijangiz yomonmas, lekin grammatika mavzularini yana bir bor takrorlab olishingizni tavsiya qilamiz."}
             </p>
+          </div>
+
+          {/* Progress Chart Panel */}
+          <div className="bg-slate-50 border border-slate-100/80 rounded-3xl p-5 mb-8">
+            <h3 className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
+              <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+              </svg>
+              Mavzular bo'yicha tahlil (Progress Chart)
+            </h3>
+            
+            <div className="h-[240px] w-full mt-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={chartData}
+                  layout="vertical"
+                  margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" horizontal={true} vertical={false} />
+                  <XAxis type="number" stroke="#94a3b8" fontSize={9} tickLine={false} />
+                  <YAxis 
+                    dataKey="name" 
+                    type="category" 
+                    stroke="#475569" 
+                    fontSize={10} 
+                    width={110} 
+                    tickLine={false}
+                    tickFormatter={(value) => {
+                      return value.split(" (")[0];
+                    }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                      borderRadius: '16px', 
+                      border: '1px solid #e2e8f0',
+                      boxShadow: '0 4px 12px -2px rgb(0 0 0 / 0.05)',
+                      fontSize: '11px',
+                      fontFamily: 'Inter, sans-serif'
+                    }}
+                    cursor={{ fill: 'rgba(99, 102, 241, 0.03)' }}
+                  />
+                  <Legend 
+                    verticalAlign="bottom" 
+                    height={32} 
+                    iconType="circle"
+                    iconSize={8}
+                    wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', paddingTop: '8px' }}
+                  />
+                  <Bar dataKey="To'g'ri" stackId="a" fill="#10b981" radius={[0, 4, 4, 0]} maxBarSize={14} />
+                  <Bar dataKey="Noto'g'ri" stackId="a" fill="#f43f5e" radius={[0, 4, 4, 0]} maxBarSize={14} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            
+            {/* Custom mini-table with percentage success rates */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-4 pt-4 border-t border-slate-100">
+              {chartData.map((item, idx) => (
+                <div key={idx} className="bg-white px-2.5 py-1.5 rounded-xl border border-slate-100 text-center flex flex-col justify-between">
+                  <div className="truncate text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5" title={item.name}>
+                    {item.name.split(" (")[0]}
+                  </div>
+                  <div className="text-[11px] font-black text-slate-700">
+                    {item.rate}% <span className="text-[8px] font-medium text-slate-400">({item["To'g'ri"]}/{item.total})</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">

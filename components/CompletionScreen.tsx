@@ -16,6 +16,7 @@ interface AnswerRecord {
   selectedAnswer: string;
   correctAnswer: string;
   isCorrect: boolean;
+  category?: string;
 }
 
 interface CompletionScreenProps {
@@ -26,53 +27,11 @@ interface CompletionScreenProps {
 }
 
 const TOPICS = {
-  verbs: "Fe'llar va Zamonlar (Verbs & Tenses)",
-  nouns: "Ot va Olmoshlar (Nouns & Pronouns)",
-  adjectives: "Sifat va Predloglar (Adj & Prep)",
-  structures: "Tuzilmalar va Modallar (Structures & Modals)",
-  reading: "Matn tushunish (Reading Comprehension)"
-};
-
-const mapQuestionToTopicKey = (qText: string): keyof typeof TOPICS => {
-  if (qText.includes("terrible noise")) return "verbs";
-  if (qText.includes("smoke in the hotel")) return "structures";
-  if (qText.includes("He seems to be")) return "adjectives";
-  if (qText.includes("main . . . of this meeting")) return "nouns";
-  if (qText.includes("importance . . . washing")) return "adjectives";
-  if (qText.includes("If I . . . better")) return "structures";
-  if (qText.includes("Gavhar has her lunch")) return "structures";
-  if (qText.includes("Sorry I’m late")) return "adjectives";
-  if (qText.includes("had listened to me")) return "structures";
-  if (qText.includes("numeral") || qText.includes("2 1/2")) return "nouns";
-  if (qText.includes("glancing . . . the picture")) return "adjectives";
-  if (qText.includes("dentist asked")) return "structures";
-  if (qText.includes("Mary last month")) return "verbs";
-  if (qText.includes("Develop your personal plan")) return "structures";
-  if (qText.includes("I saw her . . . but I do")) return "nouns";
-  if (qText.includes("teacher . . . some questions") || qText.includes("is asking")) return "verbs";
-  if (qText.includes("weather forecast")) return "nouns";
-  if (qText.includes("It is . . . hit")) return "nouns";
-  
-  if (
-    qText.includes("Mansur") || 
-    qText.includes("Usmon") || 
-    qText.includes("mountains") || 
-    qText.includes("yawn") || 
-    qText.includes("Salima") || 
-    qText.includes("Navruz") || 
-    qText.includes("Sheraton") || 
-    qText.includes("writer trying to do in her letter") || 
-    qText.includes("passage") || 
-    qText.includes("According to the passage") ||
-    qText.includes("dentist asked")
-  ) {
-    if (qText.includes("dentist asked")) {
-      return "structures"; // Specific override
-    }
-    return "reading";
-  }
-  
-  return "verbs";
+  possessives: "Egalik ('s / of) (Possessives)",
+  numerals: "Sonlar (Numerals)",
+  articles: "Artikllar (Articles)",
+  pronouns: "Olmoshlar (Pronouns)",
+  tenses: "Zamonlar (Tenses & Verbs)"
 };
 
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQuestions, userAnswers }) => {
@@ -81,29 +40,24 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
 
   // Group and compile stats for Recharts
   const topicStatsMap: Record<keyof typeof TOPICS, { correct: number; incorrect: number; total: number }> = {
-    verbs: { correct: 0, incorrect: 0, total: 0 },
-    nouns: { correct: 0, incorrect: 0, total: 0 },
-    adjectives: { correct: 0, incorrect: 0, total: 0 },
-    structures: { correct: 0, incorrect: 0, total: 0 },
-    reading: { correct: 0, incorrect: 0, total: 0 },
+    possessives: { correct: 0, incorrect: 0, total: 0 },
+    numerals: { correct: 0, incorrect: 0, total: 0 },
+    articles: { correct: 0, incorrect: 0, total: 0 },
+    pronouns: { correct: 0, incorrect: 0, total: 0 },
+    tenses: { correct: 0, incorrect: 0, total: 0 },
   };
 
   userAnswers.forEach((ans, index) => {
-    let key = mapQuestionToTopicKey(ans.question);
-    
-    // Safety index-based categorizer if string matching misses
-    if (key === "verbs" && !ans.question.includes("terrible noise") && !ans.question.includes("Mary last month") && !ans.question.includes("questions")) {
-      if (index >= 18) {
-        key = "reading";
-      } else if (index === 1 || index === 5 || index === 6 || index === 8 || index === 11 || index === 13) {
-        key = "structures";
-      } else if (index === 2 || index === 4 || index === 7 || index === 10) {
-        key = "adjectives";
-      } else if (index === 3 || index === 9 || index === 14 || index === 16 || index === 17) {
-        key = "nouns";
-      } else {
-        key = "verbs";
-      }
+    let key: keyof typeof TOPICS = 'tenses';
+    if (ans.category && ans.category in TOPICS) {
+      key = ans.category as keyof typeof TOPICS;
+    } else {
+      // Fallback
+      if (index < 8) key = 'possessives';
+      else if (index < 16) key = 'numerals';
+      else if (index < 24) key = 'articles';
+      else if (index < 32) key = 'pronouns';
+      else key = 'tenses';
     }
 
     topicStatsMap[key].total += 1;

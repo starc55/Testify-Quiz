@@ -6,6 +6,7 @@ export interface QuizQuestion {
   options?: string[];
   correctAnswer: string | string[];
   passage?: string;
+  category?: string;
 }
 
 export interface VocabularyItem {

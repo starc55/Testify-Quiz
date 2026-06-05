@@ -1,13 +1,13 @@
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes (30 questions as per DTM standard)
+export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "Grammar Rules", definition: "Ingliz tili asosiy grammatik qoidalari" },
-  { term: "Conditionals", definition: "Shart mayli (If-clauses) turlari" },
-  { term: "Reported Speech", definition: "O'zlashtirma gap qoidalari" },
-  { term: "Numerals", definition: "Sonlar va ularning o'qilishi" },
-  { term: "Reading Comprehension", definition: "Matnni o'qib tushunish va tahlil qilish" }
+  { term: "'s and of (Possessives)", definition: "Egalik ko'rsatkichlari va 'of' predlogi orqali tegishlilikni ifodalash qoidalari." },
+  { term: "Numeral (Sonlar)", definition: "Sanoq va tartib sonlar, kasr sonlar hamda o'nli kasrlarning to'g'ri o'qilishi va yozilishi." },
+  { term: "Article (Artikllar)", definition: "Noaniq (a, an) va aniq (the) artikllar, hamda artiklsiz holatlar (zero article)." },
+  { term: "Pronoun (Olmoshlar)", definition: "Kishilik, egalik, o'zlik va nisbiy olmoshlarning grammatik vazifalari." },
+  { term: "Tenses (Zamonlar)", definition: "Faol va majhul nisbatdagi zamon guruhlari hamda if-clauses shart mayllari." }
 ];
 
 export const FIXED_THEME: Theme = {
@@ -28,218 +28,298 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
+  // === TOPIK: 's and of (Possessives) ===
   {
     type: 'multiple-choice',
-    question: "Stop . . . this terrible noise at once!",
-    options: ["to make", "to making", "make", "making"],
-    correctAnswer: "making"
+    question: "Choose the correct possessive form:\nThis is ... laptop.",
+    options: ["my brother's", "my brothers of", "my brother", "my brothers's"],
+    correctAnswer: "my brother's",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "You . . . smoke in the hotel. It is forbidden.",
-    options: ["needn't", "have to", "can", "can't"],
-    correctAnswer: "can't"
+    question: "Choose the correct answer:\nWe usually visit ... house on Sundays.",
+    options: ["the parents of mine's", "our parents'", "our parents's", "parent of us"],
+    correctAnswer: "our parents'",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "He seems to be . . . .",
-    options: ["more honester", "honestly", "most honest", "honest"],
-    correctAnswer: "honest"
+    question: "Choose the correct possessive form:\nThe ... are very clean now.",
+    options: ["hotel's rooms", "rooms of the hotel", "hotel's room", "room of hotels"],
+    correctAnswer: "rooms of the hotel",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "The main . . . of this meeting is to decide what we should do about the problem of noise.",
-    options: ["purpose", "device", "habit", "behaviour"],
-    correctAnswer: "purpose"
+    question: "Choose the correct answer:\nThis is ... car.",
+    options: ["Mr. Smith's", "Mr. Smiths", "of Mr. Smith", "Mr. Smiths's"],
+    correctAnswer: "Mr. Smith's",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "The importance . . . washing one’s hands is that it prevents infection.",
-    options: ["to", "on", "against", "of"],
-    correctAnswer: "of"
+    question: "Choose the correct form:\nI am going to the ... to buy some bread.",
+    options: ["baker's", "bakers", "of baker", "bakers's"],
+    correctAnswer: "baker's",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "If I . . . better, I would go to the cinema with you.",
-    options: ["would feel", "felt", "will feel", "fell"],
-    correctAnswer: "felt"
+    question: "Choose the correct answer:\nHe liked the ... of the house better than the kitchen.",
+    options: ["roof", "roof's house", "house's roof", "roof of the house"],
+    correctAnswer: "roof of the house",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "− Gavhar has her lunch at 12 o’clock.\n− . . . .",
-    options: ["So did Peter", "So had Mike", "So does Anvar", "Neither has Jane"],
-    correctAnswer: "So does Anvar"
+    question: "Choose the correct form:\n... grandmother is very kind.",
+    options: ["Mary's and Jane's", "Mary and Jane's", "Mary and Jane", "Mary's and Jane"],
+    correctAnswer: "Mary and Jane's",
+    category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Sorry I’m late. It took me . . . to get here than I expected.",
-    options: ["longest", "as long", "longer", "long"],
-    correctAnswer: "longer"
-  },
-  {
-    type: 'multiple-choice',
-    question: "If she had listened to me, she . . . any problems now.",
-    options: ["would not have", "will not have had", "would not have had", "will not have"],
-    correctAnswer: "would not have"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the right expression of the underlined numeral.\nYou filed a complaint 2 1/2 weeks ago.",
-    options: ["two and a half", "two point one two", "one second", "two halves"],
-    correctAnswer: "two and a half"
-  },
-  {
-    type: 'multiple-choice',
-    question: "He stood glancing . . . the picture for a long time.",
-    options: ["after", "at", "for", "to"],
-    correctAnswer: "at"
-  },
-  {
-    type: 'multiple-choice',
-    question: "The dentist asked the little boy, “How much chocolate do you eat every day?”.",
+    question: "Choose the correct sentence regarding the possessive noun usage:",
     options: [
-      "The dentist asked the little boy how much chocolate will he eat every day.",
-      "The dentist asked the little boy how much chocolate he eat every day.",
-      "How much chocolate he eats every day asked the dentist to little boy.",
-      "The dentist asked the little boy how much chocolate he ate every day."
+      "The leg of the table is broken.",
+      "The table's leg is broken.",
+      "The tables leg is broken.",
+      "The of table's leg is broken."
     ],
-    correctAnswer: "The dentist asked the little boy how much chocolate he ate every day."
+    correctAnswer: "The leg of the table is broken.",
+    category: "possessives"
+  },
+
+  // === TOPIK: Numeral (Sonlar) ===
+  {
+    type: 'multiple-choice',
+    question: "Choose the right spelling and expression of the fraction 2/3:",
+    options: ["two third", "two thirds", "second three", "two three"],
+    correctAnswer: "two thirds",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: ". . . Mary last month?",
-    options: ["How many times have you seen", "Have you seen", "Were you seeing", "Did you see"],
-    correctAnswer: "Did you see"
+    question: "Choose the right expression of the underlined numeral:\nShe was born in 1998.",
+    options: ["nineteen ninety-eight", "nineteen hundred ninety-eight", "one thousand nine hundred ninety-eight", "ninety-nine eight"],
+    correctAnswer: "nineteen ninety-eight",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Develop your personal plan, . . . ?",
-    options: ["shall you", "shan’t", "will you", "don’t you"],
-    correctAnswer: "will you"
+    question: "Choose the correct spelling of the ordinal number for 12 (12-):",
+    options: ["twelveth", "twelfth", "twelve", "twelft"],
+    correctAnswer: "twelfth",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "I saw her . . . but I don’t remember where.",
-    options: ["nowhere", "somewhere", "everywhere", "anywhere"],
-    correctAnswer: "somewhere"
+    question: "Choose the correct grammatical expression of the number 3,500:",
+    options: ["three thousands and five hundred", "three thousand five hundreds", "three thousand five hundred", "three thousands five hundred"],
+    correctAnswer: "three thousand five hundred",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "The teacher . . . some questions.",
-    options: ["is asking", "were asked", "ask", "have asked"],
-    correctAnswer: "is asking"
+    question: "Choose the correct oral expression of the decimal fraction 4.5:",
+    options: ["four fifths", "four points five", "four point five", "four and five"],
+    correctAnswer: "four point five",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "I’ve just heard the weather forecast on the radio and . . . say it will rain today.",
-    options: ["we", "they", "he", "it"],
-    correctAnswer: "they"
+    question: "Which abbreviation of the ordinal number is grammatically correct for the 'first'?",
+    options: ["1rd", "1st", "1th", "1nd"],
+    correctAnswer: "1st",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "It is . . . hit. I like such songs.",
-    options: ["his thirds", "the third his", "his third", "his the third"],
-    correctAnswer: "his third"
-  },
-  // --- Reading Comprehension Passage 1 (Mansur's Hunt) ---
-  {
-    type: 'multiple-choice',
-    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
-    question: "According to the passage, why did Mansur want to go to the mountains?",
-    options: ["to have a fine holiday", "to shoot at somebody", "to watch some animals", "to practice at shooting"],
-    correctAnswer: "to practice at shooting"
+    question: "Choose the correct common expression of the fraction 1/2:",
+    options: ["a half", "one points two", "first second", "one second"],
+    correctAnswer: "a half",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
-    question: "According to the passage, what was the reason that Mansur and Usmon went to the judge?",
-    options: ["Somebody had shot them in their legs.", "Usmon had called Mansur an animal.", "Mansur had shot Usmon by accident.", "They had wanted to shoot each other."],
-    correctAnswer: "Mansur had shot Usmon by accident."
+    question: "Choose the correct indefinite numeral modifier:\nThere are ... students in the classroom.",
+    options: ["hundred", "hundreds of", "hundreds", "a hundred"],
+    correctAnswer: "a hundred",
+    category: "numerals"
+  },
+
+  // === TOPIK: Articles (Artikllar) ===
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct article for the phonetics of the noun phrase:\nHe is ... honest man.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "an",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
-    question: "According to the passage, Mansur would not have made such a mistake if . . . .",
-    options: ["he had seen well", "he had worn his glasses", "he had gone on a rainy day", "he had talked to the judge before"],
-    correctAnswer: "he had seen well"
+    question: "Choose the correct article combination:\n... Nile is the longest river in ... world.",
+    options: ["The / the", "A / the", "The / a", "- / the"],
+    correctAnswer: "The / the",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Mansur liked hunting very much but he wanted to get much practice at shooting animals in the mountains as he wasn’t very good at it. His trouble was that his eyes weren’t very good and he had to wear glasses. When it rained and his glasses often became wet, he could not see very well. One day Mansur was invited to go out for hunting animals in the mountains. It was a rainy day, unfortunately and by mistake, Mansur shot at Usmon, and he was injured in the leg. They went to the judge and when he was asked, \"Why did you shoot at Usmon?\". Mansur answered, \"I thought he was an animal.\" \"When did you find out that you were wrong?\", the judge asked. \"When the animal began to shoot back at me,\" Mansur answered.",
-    question: "All of the following statements are TRUE, EXCEPT . . . .",
-    options: [
-      "Mansur had trouble with his wet glasses that day.",
-      "It rained that day when Mansur went to the mountains.",
-      "Usmon was shot by Mansur by accident that day.",
-      "Mansur was sure that he was shooting at Usmon."
-    ],
-    correctAnswer: "Mansur was sure that he was shooting at Usmon."
-  },
-  // --- Reading Comprehension Passage 2 (Yawning) ---
-  {
-    type: 'multiple-choice',
-    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
-    question: "According to the passage, when do people want to yawn?",
-    options: ["When they have lots of problems to solve.", "When they want to eat something delicious.", "When they are in bad mood conditions.", "When they see other people yawning."],
-    correctAnswer: "When they see other people yawning."
+    question: "Choose the correct article for musical instruments:\nShe plays ... piano very beautifully.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "the",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
-    question: "According to the passage, what cause of yawning is mentioned?",
-    options: ["Seeing animals’ yawning makes people yawn.", "Reading about yawning makes people yawn.", "Watching a horror movie makes people yawn.", "Going to bed early makes people yawn strongly."],
-    correctAnswer: "Reading about yawning makes people yawn."
+    question: "Choose the correct article for general meals:\nWe had ... lunch at a nice restaurant yesterday.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "- (no article)",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
-    question: "All of the following statements are TRUE, EXCEPT . . .",
-    options: [
-      "A university in the UK did some research on yawning.",
-      "Researchers say reading about yawning stops us from yawning.",
-      "Researchers say people yawn more if they try to stop yawning.",
-      "The volunteers looked at videos and were videoed."
-    ],
-    correctAnswer: "Researchers say reading about yawning stops us from yawning."
+    question: "Identify the correct articles (introducing vs referring back):\nHe bought ... new book. ... book is very interesting.",
+    options: ["a / The", "the / A", "a / A", "the / The"],
+    correctAnswer: "a / The",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Do you ever wonder why we yawn? A new study from Nottingham University in the UK has done research on this. Researchers found that yawning is contagious which means spreading or affecting others. It is impossible to stop this reaction. People automatically want to yawn when they see other people yawning. The researchers said people actually yawn more when they try to stop yawning. Even reading about yawning could be enough to make people yawn. You might even want to yawn right now. The researchers studied the reactions and brain activity of 36 adult volunteers. The volunteers looked at video clips of other people yawning. They had two choices: either to stop themselves yawning or to allow themselves to do it. The volunteers were videoed as they yawned or tried not to yawn. The researchers also monitored the brain activity of the volunteers and checked how strong their feelings to want to yawn were. Understanding more about yawning will help to treat some diseases.",
-    question: "According to the passage, why is yawning being studied?",
-    options: ["It will help to monitor the brain.", "It will help to treat some diseases.", "It will help people sleep more.", "It will help researchers yawn more."],
-    correctAnswer: "It will help to treat some diseases."
-  },
-  // --- Reading Comprehension Passage 3 (Salima's Letter to Manager) ---
-  {
-    type: 'multiple-choice',
-    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
-    question: "According to the passage, Salima is writing to the manager because she wants to . . .",
-    options: [
-      "tell the manager how she was enjoying the job.",
-      "say that “The Navruz Hotel” had a good service.",
-      "speak about her work experience and hard life.",
-      "say that what happened is not her fault."
-    ],
-    correctAnswer: "say that what happened is not her fault."
+    question: "Choose the correct article for designated specific context:\n... water in this bottle is cold.",
+    options: ["A", "An", "The", "- (no article)"],
+    correctAnswer: "The",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
-    question: "According to the passage, “The Navruz Hotel” couldn’t receive the guests because . . . .",
-    options: ["there weren’t any free rooms", "it had an international conference", "it was too late and they were hungry", "the manager didn’t like the guide"],
-    correctAnswer: "there weren’t any free rooms"
+    question: "Choose the correct article based on vowel sounds:\nHe wants to buy ... umbrella because it is raining.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "an",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    passage: "Dear Manager,\nYou know that I work for your company as a guide. It’s my job to make everything go well for the tourists. But something unpleasant happened last weekend. Last Saturday I met a group of tourists at the airport. I normally take our tourists to “The Sheraton Hotel”, but this time it was hosting an international conference. So I took them to another hotel “The Navruz Hotel”. I hadn’t used the service of “The Navruz Hotel” before and didn’t quite know what kind of service they had. When we arrived at the reception, they said the hotel was full and didn’t have any free room. Although I had booked rooms beforehand, the manager said that somebody phoned a day before and said that we wouldn’t need the rooms. The manager insisted it was I who made that phone call. I was very annoyed but the manager phoned other hotels and found rooms but in four different hotels. I don’t know who made that phone call. I hope you will understand and won’t blame me for what happened that day.\nSincerely, Salima Anvarovna.",
-    question: "According to the passage, who found the rooms for the tourists in the end?",
-    options: ["The manager of “The Navruz Hotel”.", "The tourists themselves.", "The manager of “The Sheraton Hotel”.", "The guide herself."],
-    correctAnswer: "The manager of “The Navruz Hotel”."
+    question: "Choose the correct article for separate single mountain peaks:\n... Mount Everest is the highest mountain in Asia.",
+    options: ["A", "An", "The", "- (no article)"],
+    correctAnswer: "- (no article)",
+    category: "articles"
+  },
+
+  // === TOPIK: Pronouns (Olmoshlar) ===
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct reflexive pronoun:\nThey enjoyed ... at the party last night.",
+    options: ["themselves", "theirselves", "themself", "theirs"],
+    correctAnswer: "themselves",
+    category: "pronouns"
   },
   {
     type: 'multiple-choice',
-    passage: "According to the passage, what is the writer trying to do in her letter?",
-    options: ["argue", "entertain", "inquire", "apologize"],
-    correctAnswer: "apologize"
+    question: "Choose the correct possessive pronoun:\nIs this book ... or yours?",
+    options: ["my", "me", "mine", "myself"],
+    correctAnswer: "mine",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct relative pronoun as subject of the clause:\nThe man ... lives next door is a famous doctor.",
+    options: ["which", "whose", "whom", "who"],
+    correctAnswer: "who",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct pronouns sequence:\nAlthough ... was late, nobody helped ... with ... bags.",
+    options: ["she / her / her", "her / her / hers", "she / she / her", "she / her / hers"],
+    correctAnswer: "she / her / her",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct indefinite pronoun for questions / negatives:\nAre there ... apples left in the basket?",
+    options: ["some", "any", "no", "anything"],
+    correctAnswer: "any",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct affirmative indefinite pronoun:\nI can't find my keys. ... has taken them.",
+    options: ["Someone", "Anyone", "Nobody", "Something"],
+    correctAnswer: "Someone",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct relative pronoun for things:\nThis is the house ... my grandfather built.",
+    options: ["who", "which", "whose", "whom"],
+    correctAnswer: "which",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct objective personal pronoun:\nShe invited ... to her birthday party.",
+    options: ["he", "him", "his", "himself"],
+    correctAnswer: "him",
+    category: "pronouns"
+  },
+
+  // === TOPIK: Tenses (Zamonlar) ===
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct past tense aspect (interrupted action):\nShe ... her homework when I called her.",
+    options: ["did", "was doing", "is doing", "has done"],
+    correctAnswer: "was doing",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct present perfect duration form:\nWe ... in Tashkent for ten years now.",
+    options: ["live", "are living", "have lived", "lived"],
+    correctAnswer: "have lived",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct form for the First Conditional clause:\nIf he ... hard, he will pass the exam.",
+    options: ["studies", "will study", "studied", "would study"],
+    correctAnswer: "studies",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct present simple frequency form:\nShe usually ... to school by bus.",
+    options: ["go", "goes", "is going", "went"],
+    correctAnswer: "goes",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct future expression with standard will-future:\nThey ... football tomorrow afternoon.",
+    options: ["played", "have played", "are played", "will play"],
+    correctAnswer: "will play",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct past perfect form for relative order of past events:\nBy the time we arrived at the cinema, the movie ... .",
+    options: ["already started", "has already started", "had already started", "starteed"],
+    correctAnswer: "had already started",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct passive voice present simple form:\nEnglish ... all over the world.",
+    options: ["is spoken", "speaks", "is speaking", "has spoken"],
+    correctAnswer: "is spoken",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct past continuous form for specific point in past time:\nAt 5 o'clock yesterday afternoon, they ... tea.",
+    options: ["drank", "were drinking", "have drunk", "had drunk"],
+    correctAnswer: "were drinking",
+    category: "tenses"
   }
 ];

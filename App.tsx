@@ -13,6 +13,7 @@ interface AnswerRecord {
   selectedAnswer: string;
   correctAnswer: string;
   isCorrect: boolean;
+  category?: string;
 }
 
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -170,6 +171,7 @@ export default function App() {
             ? currentQuestion.correctAnswer.join(' / ') 
             : currentQuestion.correctAnswer,
         isCorrect: isCorrect,
+        category: currentQuestion.category,
       },
     ]);
 

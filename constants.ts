@@ -31,295 +31,295 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   // === TOPIK: 's and of (Possessives) ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct possessive form:\nThis is ... laptop.",
-    options: ["my brother's", "my brothers of", "my brother", "my brothers's"],
-    correctAnswer: "my brother's",
+    question: "Identify the correct possessive form to specify joint ownership:\nJack and Jill are siblings. We visited ...",
+    options: ["Jack's and Jill's house", "Jack and Jill's house", "Jack and Jills' house", "the house of Jack's and Jill"],
+    correctAnswer: "Jack and Jill's house",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct answer:\nWe usually visit ... house on Sundays.",
-    options: ["the parents of mine's", "our parents'", "our parents's", "parent of us"],
-    correctAnswer: "our parents'",
+    question: "Choose the correct option for classical/historical names ending in -s:\nMany philosophers study ...",
+    options: ["Socrates' teachings", "Socrates's teachings", "the teachings of Socrates", "teachings of Socrates's"],
+    correctAnswer: "Socrates' teachings",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct possessive form:\nThe ... are very clean now.",
-    options: ["hotel's rooms", "rooms of the hotel", "hotel's room", "room of hotels"],
-    correctAnswer: "rooms of the hotel",
+    question: "Select the most natural phrasing for an inanimate object's parts:\nWe could not find the ...",
+    options: ["book's index", "index's book", "index of the book", "index of book's"],
+    correctAnswer: "index of the book",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct answer:\nThis is ... car.",
-    options: ["Mr. Smith's", "Mr. Smiths", "of Mr. Smith", "Mr. Smiths's"],
-    correctAnswer: "Mr. Smith's",
+    question: "Choose the correct double-possessive construction:\nHe is an old friend of ...",
+    options: ["my father", "my father's", "of my father", "my fathers"],
+    correctAnswer: "my father's",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct form:\nI am going to the ... to buy some bread.",
-    options: ["baker's", "bakers", "of baker", "bakers's"],
-    correctAnswer: "baker's",
+    question: "Choose the correct possessive for plural nouns ending in -s:\nThis is the ...",
+    options: ["ladies' room", "ladies's room", "lady's room", "rooms of ladies"],
+    correctAnswer: "ladies' room",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct answer:\nHe liked the ... of the house better than the kitchen.",
-    options: ["roof", "roof's house", "house's roof", "roof of the house"],
-    correctAnswer: "roof of the house",
+    question: "Complete the sentence with the correct possessive phrase:\n... achievements were highly praised in the local newspaper.",
+    options: ["The women's association", "The womens' association", "The association's women", "The women association's"],
+    correctAnswer: "The women's association",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct form:\n... grandmother is very kind.",
-    options: ["Mary's and Jane's", "Mary and Jane's", "Mary and Jane", "Mary's and Jane"],
-    correctAnswer: "Mary and Jane's",
-    category: "possessives"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct sentence regarding the possessive noun usage:",
+    question: "Which of the following sentences utilizes the possessive case correctly?",
     options: [
-      "The leg of the table is broken.",
-      "The table's leg is broken.",
-      "The tables leg is broken.",
-      "The of table's leg is broken."
+      "The page of the book was torn.",
+      "The book's page was torn.",
+      "The torned page of book.",
+      "The book page was torn."
     ],
-    correctAnswer: "The leg of the table is broken.",
+    correctAnswer: "The page of the book was torn.",
+    category: "possessives"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct expression for time/measure relationship:\nAfter ... delay, the flight finally took off.",
+    options: ["an hour's", "an hours", "of an hour", "an hour of"],
+    correctAnswer: "an hour's",
     category: "possessives"
   },
 
   // === TOPIK: Numeral (Sonlar) ===
   {
     type: 'multiple-choice',
-    question: "Choose the right spelling and expression of the fraction 2/3:",
-    options: ["two third", "two thirds", "second three", "two three"],
-    correctAnswer: "two thirds",
+    question: "Translate the fraction 3/4 correctly into formal English:",
+    options: ["three fourth", "three quarters", "third fourths", "three over fourth"],
+    correctAnswer: "three quarters",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the right expression of the underlined numeral:\nShe was born in 1998.",
-    options: ["nineteen ninety-eight", "nineteen hundred ninety-eight", "one thousand nine hundred ninety-eight", "ninety-nine eight"],
-    correctAnswer: "nineteen ninety-eight",
+    question: "Choose the correct written expression for the phone number part '007':",
+    options: ["zero zero seven", "double oh seven", "two zero seven", "double zero and seven"],
+    correctAnswer: "double oh seven",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct spelling of the ordinal number for 12 (12-):",
-    options: ["twelveth", "twelfth", "twelve", "twelft"],
-    correctAnswer: "twelfth",
+    question: "Choose the correct written expression for the mathematical decimal '12.05':",
+    options: ["twelve point zero five", "twelve point five", "twelve and five cent", "twelve point nought fifteen"],
+    correctAnswer: "twelve point zero five",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct grammatical expression of the number 3,500:",
-    options: ["three thousands and five hundred", "three thousand five hundreds", "three thousand five hundred", "three thousands five hundred"],
-    correctAnswer: "three thousand five hundred",
+    question: "Choose the correct spelling of the ordinal number representing position 90 (90-):",
+    options: ["ninetieth", "ninetyth", "nintieth", "nineteth"],
+    correctAnswer: "ninetieth",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct oral expression of the decimal fraction 4.5:",
-    options: ["four fifths", "four points five", "four point five", "four and five"],
-    correctAnswer: "four point five",
+    question: "Select the grammatically correct noun modified by a compound numeral:\nThey lived in a ...",
+    options: ["five-stories building", "five-story building", "five story's building", "five-stories buildings"],
+    correctAnswer: "five-story building",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Which abbreviation of the ordinal number is grammatically correct for the 'first'?",
-    options: ["1rd", "1st", "1th", "1nd"],
-    correctAnswer: "1st",
+    question: "Choose the correct written form for the year or number '1800' in spoken text:",
+    options: ["eighteen hundred", "one thousand eight hundred", "eighteen zero zero", "eighteen mill"],
+    correctAnswer: "eighteen hundred",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct common expression of the fraction 1/2:",
-    options: ["a half", "one points two", "first second", "one second"],
-    correctAnswer: "a half",
+    question: "How is the mixed fraction '3 1/3' spoken or spelled out correctly in technical English?",
+    options: ["three and a third", "three point one third", "three and one three", "three first third"],
+    correctAnswer: "three and a third",
     category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct indefinite numeral modifier:\nThere are ... students in the classroom.",
-    options: ["hundred", "hundreds of", "hundreds", "a hundred"],
-    correctAnswer: "a hundred",
+    question: "Which ordinal suffix is correctly applied to the year or position '102nd'?",
+    options: ["102st", "102nd", "102rd", "102th"],
+    correctAnswer: "102nd",
     category: "numerals"
   },
 
-  // === TOPIK: Articles (Artikllar) ===
+  // === TOPIK: Article (Artikllar) ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct article for the phonetics of the noun phrase:\nHe is ... honest man.",
-    options: ["a", "an", "the", "- (no article)"],
-    correctAnswer: "an",
+    question: "Choose the correct article for unique nouns and geographic properties:\n... Sahara Desert is located in the northern part of ... Africa.",
+    options: ["The / - (no article)", "A / the", "The / the", "- / - (no article)"],
+    correctAnswer: "The / - (no article)",
     category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct article combination:\n... Nile is the longest river in ... world.",
-    options: ["The / the", "A / the", "The / a", "- / the"],
-    correctAnswer: "The / the",
+    question: "Compare pronunciation-based article rules:\nHe finished his project in ... hour, which was ... unique challenge.",
+    options: ["an / a", "a / an", "an / an", "a / a"],
+    correctAnswer: "an / a",
     category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct article for musical instruments:\nShe plays ... piano very beautifully.",
+    question: "Select the correct combination for institutions when used for their primary purpose:\nShe was sent to ... prison for her crimes, so her mother went to ... prison to visit her last week.",
+    options: ["- (no article) / the", "the / the", "- (no article) / - (no article)", "the / - (no article)"],
+    correctAnswer: "- (no article) / the",
+    category: "articles"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct article for titles accompanied by the person's name:\nYesterday, ... President Biden gave a speech, while ... president of our company was absent.",
+    options: ["- (no article) / the", "the / the", "the / - (no article)", "- (no article) / - (no article)"],
+    correctAnswer: "- (no article) / the",
+    category: "articles"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Select the correct articles for public transport and travel directions:\nThey decided to travel to ... South by ... train.",
+    options: ["the / - (no article)", "the / the", "- / - (no article)", "- / a"],
+    correctAnswer: "the / - (no article)",
+    category: "articles"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Determine the correct articles for specific relative clauses:\nThis is ... book I was telling you about yesterday.",
     options: ["a", "an", "the", "- (no article)"],
     correctAnswer: "the",
     category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct article for general meals:\nWe had ... lunch at a nice restaurant yesterday.",
-    options: ["a", "an", "the", "- (no article)"],
-    correctAnswer: "- (no article)",
+    question: "Identify the correct article pattern for plural general nouns vs specific ones:\n... cats are independent animals, but ... cats we saw at the shelter were very friendly.",
+    options: ["- (no article) / the", "The / the", "A / the", "- / - (no article)"],
+    correctAnswer: "- (no article) / the",
     category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Identify the correct articles (introducing vs referring back):\nHe bought ... new book. ... book is very interesting.",
-    options: ["a / The", "the / A", "a / A", "the / The"],
-    correctAnswer: "a / The",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct article for designated specific context:\n... water in this bottle is cold.",
-    options: ["A", "An", "The", "- (no article)"],
-    correctAnswer: "The",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct article based on vowel sounds:\nHe wants to buy ... umbrella because it is raining.",
-    options: ["a", "an", "the", "- (no article)"],
-    correctAnswer: "an",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct article for separate single mountain peaks:\n... Mount Everest is the highest mountain in Asia.",
-    options: ["A", "An", "The", "- (no article)"],
-    correctAnswer: "- (no article)",
+    question: "Choose the correct articles for double parallel structures:\n... more you practice, ... better your English will become.",
+    options: ["The / the", "A / the", "The / a", "- / - (no article)"],
+    correctAnswer: "The / the",
     category: "articles"
   },
 
-  // === TOPIK: Pronouns (Olmoshlar) ===
+  // === TOPIK: Pronoun (Olmoshlar) ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct reflexive pronoun:\nThey enjoyed ... at the party last night.",
-    options: ["themselves", "theirselves", "themself", "theirs"],
-    correctAnswer: "themselves",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct possessive pronoun:\nIs this book ... or yours?",
-    options: ["my", "me", "mine", "myself"],
-    correctAnswer: "mine",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct relative pronoun as subject of the clause:\nThe man ... lives next door is a famous doctor.",
-    options: ["which", "whose", "whom", "who"],
-    correctAnswer: "who",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct pronouns sequence:\nAlthough ... was late, nobody helped ... with ... bags.",
-    options: ["she / her / her", "her / her / hers", "she / she / her", "she / her / hers"],
-    correctAnswer: "she / her / her",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct indefinite pronoun for questions / negatives:\nAre there ... apples left in the basket?",
-    options: ["some", "any", "no", "anything"],
-    correctAnswer: "any",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct affirmative indefinite pronoun:\nI can't find my keys. ... has taken them.",
-    options: ["Someone", "Anyone", "Nobody", "Something"],
-    correctAnswer: "Someone",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct relative pronoun for things:\nThis is the house ... my grandfather built.",
-    options: ["who", "which", "whose", "whom"],
+    question: "Choose the correct relative pronoun for a non-defining relative clause:\nMy new laptop, ... I bought only last week, has already stopped working.",
+    options: ["which", "that", "what", "whose"],
     correctAnswer: "which",
     category: "pronouns"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct objective personal pronoun:\nShe invited ... to her birthday party.",
-    options: ["he", "him", "his", "himself"],
-    correctAnswer: "him",
+    question: "Identify the correct combination of subjective and objective pronouns:\nBetween you and ..., there are no secrets. Let's keep this conversation strictly confidential.",
+    options: ["me", "I", "myself", "we"],
+    correctAnswer: "me",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Select the correct indefinite pronoun with singular verb agreement:\nIf ... has any questions, they should raise their hand.",
+    options: ["anyone", "anybody's", "all", "some people"],
+    correctAnswer: "anyone",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct possessive determiner/pronoun combination:\nThat car parked outside isn't ..., it belongs to our neighbours. ... color is completely different.",
+    options: ["ours / Its", "our / Its'", "ours / It's", "our / It is"],
+    correctAnswer: "ours / Its",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Select the correct pronoun for emphatic/intensive usage:\nThe children cooked the entire meal ...",
+    options: ["themselves", "theirselves", "by themself", "themself"],
+    correctAnswer: "themselves",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct pronoun for gender-neutral singular references:\nEvery student must bring ... own dictionary to the exam.",
+    options: ["their", "his", "her", "its"],
+    correctAnswer: "their",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Identify the correct relative pronoun indicating possession:\nHe is the engineer ... design won the national architecture award.",
+    options: ["whose", "who", "which", "whom"],
+    correctAnswer: "whose",
+    category: "pronouns"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Complete using the correct distributive pronoun:\nI tried both options, but ... of them worked.",
+    options: ["neither", "either", "none", "no one"],
+    correctAnswer: "neither",
     category: "pronouns"
   },
 
   // === TOPIK: Tenses (Zamonlar) ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct past tense aspect (interrupted action):\nShe ... her homework when I called her.",
-    options: ["did", "was doing", "is doing", "has done"],
-    correctAnswer: "was doing",
+    question: "Choose the correct form for the Future in the Past:\nHe said he ... us as soon as he arrived, but he forgot.",
+    options: ["would call", "will call", "calls", "is going to call"],
+    correctAnswer: "would call",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct present perfect duration form:\nWe ... in Tashkent for ten years now.",
-    options: ["live", "are living", "have lived", "lived"],
-    correctAnswer: "have lived",
+    question: "Choose the correct conditional form (Mixed Second & Third):\nIf you ... your map, we wouldn't be lost right now.",
+    options: ["hadn't lost", "didn't lose", "wouldn't lose", "haven't lost"],
+    correctAnswer: "hadn't lost",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct form for the First Conditional clause:\nIf he ... hard, he will pass the exam.",
-    options: ["studies", "will study", "studied", "would study"],
-    correctAnswer: "studies",
+    question: "Select the correct tense for a state persisting up to the present:\nHow long ... each other before they got married?",
+    options: ["had they known", "have they known", "did they know", "were they knowing"],
+    correctAnswer: "had they known",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct present simple frequency form:\nShe usually ... to school by bus.",
-    options: ["go", "goes", "is going", "went"],
-    correctAnswer: "goes",
+    question: "Choose the correct present continuous aspect for a temporary situation:\nI usually work in London, but this month I ... in Berlin.",
+    options: ["am working", "work", "worked", "have worked"],
+    correctAnswer: "am working",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct future expression with standard will-future:\nThey ... football tomorrow afternoon.",
-    options: ["played", "have played", "are played", "will play"],
-    correctAnswer: "will play",
+    question: "Choose the correct form after time conjunctions in the future time frame:\nWe will start the meeting as soon as the manager ... .",
+    options: ["arrives", "will arrive", "is arriving", "has been arrived"],
+    correctAnswer: "arrives",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct past perfect form for relative order of past events:\nBy the time we arrived at the cinema, the movie ... .",
-    options: ["already started", "has already started", "had already started", "starteed"],
-    correctAnswer: "had already started",
+    question: "Select the correct passive voice construction for a completed action:\nAll the windows ... before the storm began yesterday.",
+    options: ["had been closed", "were closed", "have been closed", "are closed"],
+    correctAnswer: "had been closed",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct passive voice present simple form:\nEnglish ... all over the world.",
-    options: ["is spoken", "speaks", "is speaking", "has spoken"],
-    correctAnswer: "is spoken",
+    question: "Choose the correct subjunctive or modal tense aspect with 'wish':\nI wish I ... more attention to the lecture yesterday.",
+    options: ["had paid", "paid", "would pay", "have paid"],
+    correctAnswer: "had paid",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct past continuous form for specific point in past time:\nAt 5 o'clock yesterday afternoon, they ... tea.",
-    options: ["drank", "were drinking", "have drunk", "had drunk"],
-    correctAnswer: "were drinking",
+    question: "Choose the correct tense aspect for a future plan with fixed timetable/schedule:\nOur train ... at 9:15 tomorrow morning, so please don't be late.",
+    options: ["leaves", "is leaving", "will leave", "is going to leave"],
+    correctAnswer: "leaves",
     category: "tenses"
   }
 ];

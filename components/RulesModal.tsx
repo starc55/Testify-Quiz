@@ -28,8 +28,8 @@ const RulesModal: React.FC<RulesModalProps> = ({ onAccept }) => {
         
         <div className="space-y-6 mb-12">
           {[
-            { text: "Vaqt limiti: 60 daqiqa.", icon: "🕒" },
-            { text: "Savollar soni: 40 ta.", icon: "📝" },
+            { text: "Vaqt limiti: 45 daqiqa.", icon: "🕒" },
+            { text: "Savollar soni: 30 ta.", icon: "📝" },
             { text: "Har bir savolda bitta to'g'ri javob.", icon: "✅" },
             { text: "Fokusni yo'qotmang (oyinani tark etmang).", icon: "⚠️" }
           ].map((rule, i) => (

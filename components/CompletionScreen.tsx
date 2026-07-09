@@ -28,10 +28,10 @@ interface CompletionScreenProps {
 
 const TOPICS = {
   possessives: "Egalik ('s / of) (Possessives)",
-  numerals: "Sonlar (Numerals)",
   articles: "Artikllar (Articles)",
-  pronouns: "Olmoshlar (Pronouns)",
-  tenses: "Zamonlar (Tenses & Verbs)"
+  numerals: "Sonlar (Numerals)",
+  compounds: "Murakkab otlar va To Be",
+  tenses: "Zamonlar (Tenses to Perfect)"
 };
 
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQuestions, userAnswers }) => {
@@ -41,9 +41,9 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
   // Group and compile stats for Recharts
   const topicStatsMap: Record<keyof typeof TOPICS, { correct: number; incorrect: number; total: number }> = {
     possessives: { correct: 0, incorrect: 0, total: 0 },
-    numerals: { correct: 0, incorrect: 0, total: 0 },
     articles: { correct: 0, incorrect: 0, total: 0 },
-    pronouns: { correct: 0, incorrect: 0, total: 0 },
+    numerals: { correct: 0, incorrect: 0, total: 0 },
+    compounds: { correct: 0, incorrect: 0, total: 0 },
     tenses: { correct: 0, incorrect: 0, total: 0 },
   };
 
@@ -53,10 +53,10 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
       key = ans.category as keyof typeof TOPICS;
     } else {
       // Fallback
-      if (index < 8) key = 'possessives';
-      else if (index < 16) key = 'numerals';
-      else if (index < 24) key = 'articles';
-      else if (index < 32) key = 'pronouns';
+      if (index < 6) key = 'possessives';
+      else if (index < 12) key = 'articles';
+      else if (index < 18) key = 'numerals';
+      else if (index < 24) key = 'compounds';
       else key = 'tenses';
     }
 

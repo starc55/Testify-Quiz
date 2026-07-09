@@ -1,13 +1,13 @@
 import type { QuizQuestion, Theme, ThemeName, VocabularyItem } from './types';
 
-export const QUIZ_DURATION_SECONDS = 60 * 60; // 60 minutes
+export const QUIZ_DURATION_SECONDS = 45 * 60; // 45 minutes for 30 questions
 
 export const QUIZ_VOCABULARY: VocabularyItem[] = [
-  { term: "'s and of (Possessives)", definition: "Egalik ko'rsatkichlari va 'of' predlogi orqali tegishlilikni ifodalash qoidalari." },
-  { term: "Numeral (Sonlar)", definition: "Sanoq va tartib sonlar, kasr sonlar hamda o'nli kasrlarning to'g'ri o'qilishi va yozilishi." },
-  { term: "Article (Artikllar)", definition: "Noaniq (a, an) va aniq (the) artikllar, hamda artiklsiz holatlar (zero article)." },
-  { term: "Pronoun (Olmoshlar)", definition: "Kishilik, egalik, o'zlik va nisbiy olmoshlarning grammatik vazifalari." },
-  { term: "Tenses (Zamonlar)", definition: "Faol va majhul nisbatdagi zamon guruhlari hamda if-clauses shart mayllari." }
+  { term: "Possessives ('s & of)", definition: "Jonli va jonsiz otlarning egalik shakllari va tegishlilik ko'rsatkichlari." },
+  { term: "Articles (a, an, the)", definition: "Noaniq va aniq artikllar, ularning tovush va umumlashtirish bo'yicha ishlatilishi." },
+  { term: "Numerals (Sonlar)", definition: "Sanoq, tartib va kasr sonlarning to'g'ri ifodalanishi." },
+  { term: "Compound Nouns", definition: "Ikki yoki undan ortiq so'zdan tashkil topgan murakkab otlar yasash." },
+  { term: "To Be & Tenses", definition: "To be fe'li shakllari hamda Simple, Continuous va Present Perfect zamonlari." }
 ];
 
 export const FIXED_THEME: Theme = {
@@ -28,298 +28,223 @@ export const FIXED_THEME: Theme = {
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
-  // === TOPIK: 's and of (Possessives) ===
+  // === 1. Otlarning egalik shakli ('s & of) - 6ta ===
   {
     type: 'multiple-choice',
-    question: "Identify the correct possessive form to specify joint ownership:\nJack and Jill are siblings. We visited ...",
-    options: ["Jack's and Jill's house", "Jack and Jill's house", "Jack and Jills' house", "the house of Jack's and Jill"],
-    correctAnswer: "Jack and Jill's house",
+    question: "Choose the correct possessive form for a shared possession:\nTom and Lily are siblings. This is ... bedroom.",
+    options: ["Tom's and Lily's", "Tom and Lily's", "Tom and Lilys'", "Tom's and Lily"],
+    correctAnswer: "Tom and Lily's",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct option for classical/historical names ending in -s:\nMany philosophers study ...",
-    options: ["Socrates' teachings", "Socrates's teachings", "the teachings of Socrates", "teachings of Socrates's"],
-    correctAnswer: "Socrates' teachings",
+    question: "Choose the correct possessive form for singular nouns ending in -s:\n... new bicycle was stolen yesterday.",
+    options: ["Charles's", "Charle's", "Charles'", "A and C are both correct"],
+    correctAnswer: "A and C are both correct",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Select the most natural phrasing for an inanimate object's parts:\nWe could not find the ...",
-    options: ["book's index", "index's book", "index of the book", "index of book's"],
-    correctAnswer: "index of the book",
+    question: "Select the grammatically correct phrase for an inanimate object:",
+    options: ["The leg of the table is broken.", "The table's leg is broken.", "The tables leg is broken.", "The table of leg is broken."],
+    correctAnswer: "The leg of the table is broken.",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct double-possessive construction:\nHe is an old friend of ...",
-    options: ["my father", "my father's", "of my father", "my fathers"],
-    correctAnswer: "my father's",
+    question: "Choose the correct possessive form for irregular plural nouns:\nThis shop sells high-quality ... shoes.",
+    options: ["children's", "childrens'", "childrens's", "child's"],
+    correctAnswer: "children's",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct possessive for plural nouns ending in -s:\nThis is the ...",
-    options: ["ladies' room", "ladies's room", "lady's room", "rooms of ladies"],
-    correctAnswer: "ladies' room",
+    question: "Complete the sentence with the correct possessive form:\nI am staying at my ... house this weekend.",
+    options: ["aunt's and uncle's", "aunt and uncle's", "aunt's and uncle", "aunts and uncles"],
+    correctAnswer: "aunt and uncle's",
     category: "possessives"
   },
   {
     type: 'multiple-choice',
-    question: "Complete the sentence with the correct possessive phrase:\n... achievements were highly praised in the local newspaper.",
-    options: ["The women's association", "The womens' association", "The association's women", "The women association's"],
-    correctAnswer: "The women's association",
-    category: "possessives"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Which of the following sentences utilizes the possessive case correctly?",
-    options: [
-      "The page of the book was torn.",
-      "The book's page was torn.",
-      "The torned page of book.",
-      "The book page was torn."
-    ],
-    correctAnswer: "The page of the book was torn.",
-    category: "possessives"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct expression for time/measure relationship:\nAfter ... delay, the flight finally took off.",
-    options: ["an hour's", "an hours", "of an hour", "an hour of"],
-    correctAnswer: "an hour's",
+    question: "Choose the correct possessive for regular plural nouns:\nAll the ... uniforms must be clean for the ceremony.",
+    options: ["officers's", "officer's", "officers'", "officer"],
+    correctAnswer: "officers'",
     category: "possessives"
   },
 
-  // === TOPIK: Numeral (Sonlar) ===
+  // === 2. Artikllar (a, an, the, zero article) - 6ta ===
   {
     type: 'multiple-choice',
-    question: "Translate the fraction 3/4 correctly into formal English:",
-    options: ["three fourth", "three quarters", "third fourths", "three over fourth"],
-    correctAnswer: "three quarters",
-    category: "numerals"
+    question: "Choose the correct article based on pronunciation:\nThey hired ... university graduate for the job.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "a",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct written expression for the phone number part '007':",
-    options: ["zero zero seven", "double oh seven", "two zero seven", "double zero and seven"],
-    correctAnswer: "double oh seven",
-    category: "numerals"
+    question: "Choose the correct combination of articles:\n... Amazon is ... longest river in South America.",
+    options: ["The / the", "A / the", "The / a", "- / the"],
+    correctAnswer: "The / the",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct written expression for the mathematical decimal '12.05':",
-    options: ["twelve point zero five", "twelve point five", "twelve and five cent", "twelve point nought fifteen"],
-    correctAnswer: "twelve point zero five",
-    category: "numerals"
+    question: "Choose the correct article for general activities vs specific ones:\nI usually listen to ... music to relax, but ... music of this film is awful.",
+    options: ["- (no article) / the", "the / the", "a / the", "- (no article) / - (no article)"],
+    correctAnswer: "- (no article) / the",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct spelling of the ordinal number representing position 90 (90-):",
-    options: ["ninetieth", "ninetyth", "nintieth", "nineteth"],
-    correctAnswer: "ninetieth",
-    category: "numerals"
+    question: "Choose the correct article for singular countable exclamation:\nWhat ... unusual design! I have never seen anything like this before.",
+    options: ["a", "an", "the", "- (no article)"],
+    correctAnswer: "an",
+    category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Select the grammatically correct noun modified by a compound numeral:\nThey lived in a ...",
-    options: ["five-stories building", "five-story building", "five story's building", "five-stories buildings"],
-    correctAnswer: "five-story building",
-    category: "numerals"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct written form for the year or number '1800' in spoken text:",
-    options: ["eighteen hundred", "one thousand eight hundred", "eighteen zero zero", "eighteen mill"],
-    correctAnswer: "eighteen hundred",
-    category: "numerals"
-  },
-  {
-    type: 'multiple-choice',
-    question: "How is the mixed fraction '3 1/3' spoken or spelled out correctly in technical English?",
-    options: ["three and a third", "three point one third", "three and one three", "three first third"],
-    correctAnswer: "three and a third",
-    category: "numerals"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Which ordinal suffix is correctly applied to the year or position '102nd'?",
-    options: ["102st", "102nd", "102rd", "102th"],
-    correctAnswer: "102nd",
-    category: "numerals"
-  },
-
-  // === TOPIK: Article (Artikllar) ===
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct article for unique nouns and geographic properties:\n... Sahara Desert is located in the northern part of ... Africa.",
-    options: ["The / - (no article)", "A / the", "The / the", "- / - (no article)"],
+    question: "Choose the correct article for individual mountain peaks vs mountain ranges:\n... Alps are situated in Europe, but ... Mount Blanc is the highest peak.",
+    options: ["The / - (no article)", "The / the", "- / - (no article)", "- / the"],
     correctAnswer: "The / - (no article)",
     category: "articles"
   },
   {
     type: 'multiple-choice',
-    question: "Compare pronunciation-based article rules:\nHe finished his project in ... hour, which was ... unique challenge.",
-    options: ["an / a", "a / an", "an / an", "a / a"],
-    correctAnswer: "an / a",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Select the correct combination for institutions when used for their primary purpose:\nShe was sent to ... prison for her crimes, so her mother went to ... prison to visit her last week.",
-    options: ["- (no article) / the", "the / the", "- (no article) / - (no article)", "the / - (no article)"],
-    correctAnswer: "- (no article) / the",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct article for titles accompanied by the person's name:\nYesterday, ... President Biden gave a speech, while ... president of our company was absent.",
-    options: ["- (no article) / the", "the / the", "the / - (no article)", "- (no article) / - (no article)"],
-    correctAnswer: "- (no article) / the",
-    category: "articles"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Select the correct articles for public transport and travel directions:\nThey decided to travel to ... South by ... train.",
-    options: ["the / - (no article)", "the / the", "- / - (no article)", "- / a"],
+    question: "Select the correct article combination:\nMy brother plays ... violin, but he is not very good at ... basketball.",
+    options: ["the / - (no article)", "the / the", "- / - (no article)", "a / the"],
     correctAnswer: "the / - (no article)",
     category: "articles"
   },
+
+  // === 3. Sonlar (Numerals) - 6ta ===
   {
     type: 'multiple-choice',
-    question: "Determine the correct articles for specific relative clauses:\nThis is ... book I was telling you about yesterday.",
-    options: ["a", "an", "the", "- (no article)"],
-    correctAnswer: "the",
-    category: "articles"
+    question: "Choose the correct expression for the fraction 3/4:",
+    options: ["three quarters", "three fourth", "third fourths", "three points four"],
+    correctAnswer: "three quarters",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Identify the correct article pattern for plural general nouns vs specific ones:\n... cats are independent animals, but ... cats we saw at the shelter were very friendly.",
-    options: ["- (no article) / the", "The / the", "A / the", "- / - (no article)"],
-    correctAnswer: "- (no article) / the",
-    category: "articles"
+    question: "Choose the correct written form of the ordinal number for 43 (43-):",
+    options: ["forty-third", "fourty-third", "forty-three", "forty-threeth"],
+    correctAnswer: "forty-third",
+    category: "numerals"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct articles for double parallel structures:\n... more you practice, ... better your English will become.",
-    options: ["The / the", "A / the", "The / a", "- / - (no article)"],
-    correctAnswer: "The / the",
-    category: "articles"
+    question: "Select the correct expression of the decimal fraction 7.02:",
+    options: ["seven point zero two", "seven point two", "seven points zero two", "seven and two"],
+    correctAnswer: "seven point zero two",
+    category: "numerals"
+  },
+  {
+    type: 'multiple-choice',
+    question: "How is the year '1905' pronounced in spoken English?",
+    options: ["nineteen zero five", "nineteen hundred and five", "nineteen oh five", "one thousand nine hundred and five"],
+    correctAnswer: "nineteen oh five",
+    category: "numerals"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct spelling of the ordinal number for 20 (20-):",
+    options: ["twentieth", "twentyth", "twenteth", "twentiethy"],
+    correctAnswer: "twentieth",
+    category: "numerals"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Which of the following expressions is grammatically correct for indefinite large numbers?",
+    options: ["Five thousands people attended.", "Five thousand people attended.", "Five thousand of people attended.", "Five thousands of people attended."],
+    correctAnswer: "Five thousand people attended.",
+    category: "numerals"
   },
 
-  // === TOPIK: Pronoun (Olmoshlar) ===
+  // === 4. Compound Nouns & To Be Verb - 6ta ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct relative pronoun for a non-defining relative clause:\nMy new laptop, ... I bought only last week, has already stopped working.",
-    options: ["which", "that", "what", "whose"],
-    correctAnswer: "which",
-    category: "pronouns"
+    question: "Choose the correct plural form of the compound noun 'sister-in-law':",
+    options: ["sisters-in-law", "sister-in-laws", "sisters-in-laws", "sister-ins-law"],
+    correctAnswer: "sisters-in-law",
+    category: "compounds"
   },
   {
     type: 'multiple-choice',
-    question: "Identify the correct combination of subjective and objective pronouns:\nBetween you and ..., there are no secrets. Let's keep this conversation strictly confidential.",
-    options: ["me", "I", "myself", "we"],
-    correctAnswer: "me",
-    category: "pronouns"
+    question: "In the compound noun 'apple tree', what grammatical function does 'apple' perform?",
+    options: ["It acts as an adjective (noun adjunct) modifying tree.", "It acts as the primary subject.", "It is a plural possessive form.", "It is a conjunction link."],
+    correctAnswer: "It acts as an adjective (noun adjunct) modifying tree.",
+    category: "compounds"
   },
   {
     type: 'multiple-choice',
-    question: "Select the correct indefinite pronoun with singular verb agreement:\nIf ... has any questions, they should raise their hand.",
-    options: ["anyone", "anybody's", "all", "some people"],
-    correctAnswer: "anyone",
-    category: "pronouns"
+    question: "Choose the correct compound noun to describe an event duration:",
+    options: ["a two-hour meeting", "a two-hours meeting", "a two hour's meeting", "two hours meeting"],
+    correctAnswer: "a two-hour meeting",
+    category: "compounds"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct possessive determiner/pronoun combination:\nThat car parked outside isn't ..., it belongs to our neighbours. ... color is completely different.",
-    options: ["ours / Its", "our / Its'", "ours / It's", "our / It is"],
-    correctAnswer: "ours / Its",
-    category: "pronouns"
+    question: "Choose the correct form of 'to be' for plural agreement with collective nouns in specific context:\nThe jury ... divided in their opinions.",
+    options: ["was", "were", "been", "being"],
+    correctAnswer: "were",
+    category: "compounds"
   },
   {
     type: 'multiple-choice',
-    question: "Select the correct pronoun for emphatic/intensive usage:\nThe children cooked the entire meal ...",
-    options: ["themselves", "theirselves", "by themself", "themself"],
-    correctAnswer: "themselves",
-    category: "pronouns"
+    question: "Choose the correct 'to be' verb form for compound subjects:\nNeither the teacher nor the students ... present in the hall yesterday.",
+    options: ["was", "were", "is", "been"],
+    correctAnswer: "were",
+    category: "compounds"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct pronoun for gender-neutral singular references:\nEvery student must bring ... own dictionary to the exam.",
-    options: ["their", "his", "her", "its"],
-    correctAnswer: "their",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Identify the correct relative pronoun indicating possession:\nHe is the engineer ... design won the national architecture award.",
-    options: ["whose", "who", "which", "whom"],
-    correctAnswer: "whose",
-    category: "pronouns"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Complete using the correct distributive pronoun:\nI tried both options, but ... of them worked.",
-    options: ["neither", "either", "none", "no one"],
-    correctAnswer: "neither",
-    category: "pronouns"
+    question: "Complete the sentence with the correct subjunctive 'to be' form:\nIf I ... you, I would take that opportunity immediately.",
+    options: ["was", "were", "am", "be"],
+    correctAnswer: "were",
+    category: "compounds"
   },
 
-  // === TOPIK: Tenses (Zamonlar) ===
+  // === 5. Zamonlar perfectgacha (Simple, Continuous, Perfect) - 6ta ===
   {
     type: 'multiple-choice',
-    question: "Choose the correct form for the Future in the Past:\nHe said he ... us as soon as he arrived, but he forgot.",
-    options: ["would call", "will call", "calls", "is going to call"],
-    correctAnswer: "would call",
+    question: "Choose the correct present continuous aspect for temporary actions:\nMy dad usually works in an office, but this week he ... from home.",
+    options: ["works", "is working", "worked", "has worked"],
+    correctAnswer: "is working",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct conditional form (Mixed Second & Third):\nIf you ... your map, we wouldn't be lost right now.",
-    options: ["hadn't lost", "didn't lose", "wouldn't lose", "haven't lost"],
-    correctAnswer: "hadn't lost",
+    question: "Choose the correct present perfect form emphasizing present result:\nI can't open the door. I ... my key.",
+    options: ["lost", "was losing", "have lost", "lose"],
+    correctAnswer: "have lost",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Select the correct tense for a state persisting up to the present:\nHow long ... each other before they got married?",
-    options: ["had they known", "have they known", "did they know", "were they knowing"],
-    correctAnswer: "had they known",
+    question: "Choose the correct past continuous aspect (interrupted action):\nWhile she ... dinner, the doorbell rang.",
+    options: ["cooked", "was cooking", "is cooking", "has cooked"],
+    correctAnswer: "was cooking",
     category: "tenses"
   },
   {
     type: 'multiple-choice',
-    question: "Choose the correct present continuous aspect for a temporary situation:\nI usually work in London, but this month I ... in Berlin.",
-    options: ["am working", "work", "worked", "have worked"],
-    correctAnswer: "am working",
-    category: "tenses"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct form after time conjunctions in the future time frame:\nWe will start the meeting as soon as the manager ... .",
-    options: ["arrives", "will arrive", "is arriving", "has been arrived"],
-    correctAnswer: "arrives",
-    category: "tenses"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Select the correct passive voice construction for a completed action:\nAll the windows ... before the storm began yesterday.",
-    options: ["had been closed", "were closed", "have been closed", "are closed"],
-    correctAnswer: "had been closed",
-    category: "tenses"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct subjunctive or modal tense aspect with 'wish':\nI wish I ... more attention to the lecture yesterday.",
-    options: ["had paid", "paid", "would pay", "have paid"],
-    correctAnswer: "had paid",
-    category: "tenses"
-  },
-  {
-    type: 'multiple-choice',
-    question: "Choose the correct tense aspect for a future plan with fixed timetable/schedule:\nOur train ... at 9:15 tomorrow morning, so please don't be late.",
-    options: ["leaves", "is leaving", "will leave", "is going to leave"],
+    question: "Choose the correct present simple form for scheduled future events:\nThe train to Samarkand ... at 8:00 AM tomorrow morning.",
+    options: ["leaves", "is leaving", "will leave", "leave"],
     correctAnswer: "leaves",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Complete the sentence with the correct tense:\nWe ... each other since we were children.",
+    options: ["know", "are knowing", "have known", "knew"],
+    correctAnswer: "have known",
+    category: "tenses"
+  },
+  {
+    type: 'multiple-choice',
+    question: "Choose the correct past simple form for finished past actions:\nLast year, they ... all the way to Bukhara by car.",
+    options: ["travelled", "have travelled", "were travelling", "travels"],
+    correctAnswer: "travelled",
     category: "tenses"
   }
 ];

@@ -27,11 +27,11 @@ interface CompletionScreenProps {
 }
 
 const TOPICS = {
-  possessives: "Egalik ('s / of) (Possessives)",
-  articles: "Artikllar (Articles)",
-  numerals: "Sonlar (Numerals)",
-  compounds: "Murakkab otlar va To Be",
-  tenses: "Zamonlar (Tenses to Perfect)"
+  possessives: "Egalik shakllari (Advanced Possessives)",
+  articles: "Artikllar (Advanced Articles)",
+  numerals: "Sonlar va Miqdorlar (Advanced Numerals)",
+  compounds: "Murakkab otlar va Nominalizatsiya",
+  tenses: "Zamonlar, Shart va Mayllar (Advanced Tenses)"
 };
 
 const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQuestions, userAnswers }) => {
@@ -53,10 +53,10 @@ const CompletionScreen: React.FC<CompletionScreenProps> = ({ name, score, totalQ
       key = ans.category as keyof typeof TOPICS;
     } else {
       // Fallback
-      if (index < 6) key = 'possessives';
-      else if (index < 12) key = 'articles';
-      else if (index < 18) key = 'numerals';
-      else if (index < 24) key = 'compounds';
+      if (index < 8) key = 'possessives';
+      else if (index < 16) key = 'articles';
+      else if (index < 24) key = 'numerals';
+      else if (index < 32) key = 'compounds';
       else key = 'tenses';
     }
 

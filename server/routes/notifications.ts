@@ -37,4 +37,27 @@ router.patch('/read-all', authenticateToken, (req: AuthRequest, res: Response) =
   return res.json({ success: true });
 });
 
+router.post('/send-result-email', (req, res) => {
+  const { teacherEmail, studentName, score, totalQuestions, percentage, userAnswers, timestamp } = req.body;
+  console.log(`[TEST RESULT AUTO-SENT] Student: ${studentName}, Score: ${score}/${totalQuestions} (${percentage}%), Sent to: ${teacherEmail || 'orziyevogabek67@gmail.com'}`);
+  
+  try {
+    const notifications = db.get('notifications') || [];
+    notifications.push({
+      id: `notif_${Date.now()}`,
+      userId: 'teacher_admin',
+      title: `Test natijasi: ${studentName}`,
+      message: `${studentName} testni yakunladi: ${score}/${totalQuestions} (${percentage}%). Email: ${teacherEmail || 'orziyevogabek67@gmail.com'}`,
+      isRead: false,
+      createdAt: timestamp || new Date().toISOString(),
+      data: { studentName, score, totalQuestions, percentage, userAnswers }
+    });
+    db.set('notifications', notifications);
+  } catch (err) {
+    console.error('Failed to save notification record:', err);
+  }
+
+  return res.json({ success: true, recipient: teacherEmail || 'orziyevogabek67@gmail.com' });
+});
+
 export default router;

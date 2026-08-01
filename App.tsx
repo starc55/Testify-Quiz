@@ -1,253 +1,214 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import WelcomeScreen from './components/WelcomeScreen';
 import RulesModal from './components/RulesModal';
+import VocabularyScreen from './components/VocabularyScreen';
 import QuizScreen from './components/QuizScreen';
 import CompletionScreen from './components/CompletionScreen';
 import PauseModal from './components/PauseModal';
-import VocabularyScreen from './components/VocabularyScreen';
-import { QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS, FIXED_THEME } from './constants';
-import type { GameState, QuizQuestion } from './types';
+import { FIXED_THEME, QUIZ_QUESTIONS, QUIZ_DURATION_SECONDS } from './constants';
+import { GameState, QuizQuestion } from './types';
 
-interface AnswerRecord {
-  question: string;
-  selectedAnswer: string;
-  correctAnswer: string;
-  isCorrect: boolean;
-  category?: string;
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-};
-
-export default function App() {
-  const [gameState, setGameState] = useState<GameState>('welcome');
+export function App() {
   const [studentName, setStudentName] = useState<string>('');
+  const [gameState, setGameState] = useState<GameState>('welcome');
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
+  const [userAnswers, setUserAnswers] = useState<
+    Array<{
+      question: string;
+      selectedAnswer: string;
+      correctAnswer: string;
+      isCorrect: boolean;
+      category?: string;
+    }>
+  >([]);
   const [timeLeft, setTimeLeft] = useState<number>(QUIZ_DURATION_SECONDS);
-  const [isQuizActive, setIsQuizActive] = useState<boolean>(false);
-  const [userAnswers, setUserAnswers] = useState<AnswerRecord[]>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [countdown, setCountdown] = useState<number | null>(null);
-  const [shuffledQuestions, setShuffledQuestions] = useState<QuizQuestion[]>([]);
-  const [resultsSubmitted, setResultsSubmitted] = useState<boolean>(false);
+  const [pauseCountdown, setPauseCountdown] = useState<number | null>(null);
 
-  const handleAcceptRules = useCallback(() => {
-    setGameState('vocabulary');
-  }, []);
-
-  const startQuiz = useCallback(() => {
-    const questionsWithOriginalOptions = QUIZ_QUESTIONS.map(q => {
-      if (q.type === 'multiple-choice' && q.options) {
-        return {
-          ...q,
-          options: [...q.options]
-        };
-      }
-      return q;
-    });
-
-    setShuffledQuestions(questionsWithOriginalOptions);
-    
-    setTimeLeft(QUIZ_DURATION_SECONDS);
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setUserAnswers([]);
-    setResultsSubmitted(false);
-    setGameState('quiz');
-    setIsQuizActive(true);
-  }, []);
-
-  const handleNameSubmit = useCallback((name: string) => {
-    if (name.trim()) {
-      setStudentName(name.trim());
-      setGameState('rules');
-    }
-  }, []);
-
-  const finishQuiz = useCallback(() => {
-    setIsQuizActive(false);
-    setGameState('completed');
-  }, []);
-
+  // Timer effect
   useEffect(() => {
-    const handleBlur = () => {
-      if (gameState === 'quiz' && !isPaused) {
+    if (gameState !== 'quiz' || isPaused) return;
+
+    if (timeLeft <= 0) {
+      setGameState('completed');
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setGameState('completed');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [gameState, isPaused, timeLeft]);
+
+  // Tab blur/focus pause mechanism
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && gameState === 'quiz') {
         setIsPaused(true);
       }
     };
-    window.addEventListener('blur', handleBlur);
-    return () => window.removeEventListener('blur', handleBlur);
-  }, [gameState, isPaused]);
 
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [gameState]);
+
+  // Pause countdown
   useEffect(() => {
-    if (countdown === null) return;
-    if (countdown === 0) {
+    if (pauseCountdown === null) return;
+
+    if (pauseCountdown <= 0) {
+      setPauseCountdown(null);
       setIsPaused(false);
-      setCountdown(null);
       return;
     }
-    const timerId = setTimeout(() => {
-      setCountdown(prev => (prev !== null ? prev - 1 : null));
+
+    const timer = setInterval(() => {
+      setPauseCountdown((prev) => (prev !== null ? prev - 1 : null));
     }, 1000);
-    return () => clearTimeout(timerId);
-  }, [countdown]);
-  
-  const handleResumeRequest = useCallback(() => {
-    setCountdown(3);
-  }, []);
 
-  useEffect(() => {
-    if (gameState === 'completed' && !resultsSubmitted) {
-      const submitResults = async () => {
-        const accessKey = '4938d15a-c907-4b5b-9b76-9229d8a0f47c'; 
-        const submissionEndpoint = 'https://api.web3forms.com/submit';
+    return () => clearInterval(timer);
+  }, [pauseCountdown]);
 
-        const detailedReport = userAnswers.map((answer, index) => (
-          `Savol ${index + 1}: ${answer.question}\n` +
-          `Sizning javobingiz: ${answer.selectedAnswer} ${answer.isCorrect ? '(To\'g\'ri)' : '(Noto\'g\'ri)'}\n` +
-          `To'g'ri javob: ${answer.correctAnswer}`
-        )).join('\n\n----------------------------------------\n\n');
+  const handleNameSubmit = (name: string) => {
+    setStudentName(name);
+    setGameState('rules');
+  };
 
-        const emailBody = `O'quvchi ismi: ${studentName}\n` +
-                          `Yakuniy natija: ${score} / ${shuffledQuestions.length}\n\n` +
-                          detailedReport;
+  const handleRulesAccept = () => {
+    setGameState('vocabulary');
+  };
 
-        const formData = new FormData();
-        formData.append("access_key", accessKey);
-        formData.append("student_name", studentName);
-        formData.append("score", `${score} / ${shuffledQuestions.length}`);
-        formData.append("subject", `Yangi Modal Verbs Test Natijasi: ${studentName}`);
-        formData.append("message", emailBody);
+  const startQuiz = () => {
+    const preparedQuestions = QUIZ_QUESTIONS.map((q) => {
+      if (q.type === 'multiple-choice' && q.options) {
+        return {
+          ...q,
+          options: shuffleArray(q.options),
+        };
+      }
+      return { ...q };
+    });
 
-        try {
-          await fetch(submissionEndpoint, { method: 'POST', body: formData });
-        } catch (error) {
-          console.error('Yuborishda xatolik:', error);
-        }
-      };
-      setResultsSubmitted(true);
-      submitResults();
-    }
-  }, [gameState, studentName, score, userAnswers, shuffledQuestions.length, resultsSubmitted]);
+    const shuffledQuestions = shuffleArray(preparedQuestions);
+    setQuestions(shuffledQuestions);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setUserAnswers([]);
+    setTimeLeft(QUIZ_DURATION_SECONDS);
+    setIsPaused(false);
+    setGameState('quiz');
+  };
 
-  useEffect(() => {
-    if (!isQuizActive || isPaused) return;
-    if (timeLeft === 0) {
-      finishQuiz();
-      return;
-    }
-    const timerId = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - 1);
-    }, 1000);
-    return () => clearInterval(timerId);
-  }, [isQuizActive, timeLeft, finishQuiz, isPaused]);
+  const handleAnswer = (selectedOption: string) => {
+    const currentQuestion = questions[currentQuestionIndex];
+    const processedAnswer = selectedOption.trim().toLowerCase();
 
-  const handleAnswer = useCallback((userAnswer: string) => {
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    const processedUserAnswer = userAnswer.trim().toLowerCase();
     let isCorrect = false;
-
     if (Array.isArray(currentQuestion.correctAnswer)) {
-      isCorrect = currentQuestion.correctAnswer.map(ans => ans.toLowerCase()).includes(processedUserAnswer);
+      isCorrect = currentQuestion.correctAnswer.map((ans) => ans.toLowerCase()).includes(processedAnswer);
     } else {
-      isCorrect = processedUserAnswer === (currentQuestion.correctAnswer as string).toLowerCase();
+      isCorrect = processedAnswer === (currentQuestion.correctAnswer as string).toLowerCase();
     }
-    
-    if (isCorrect) setScore(prevScore => prevScore + 1);
 
-    setUserAnswers(prevAnswers => [
-      ...prevAnswers,
-      {
-        question: currentQuestion.question,
-        selectedAnswer: userAnswer,
-        correctAnswer: Array.isArray(currentQuestion.correctAnswer) 
-            ? currentQuestion.correctAnswer.join(' / ') 
-            : currentQuestion.correctAnswer,
-        isCorrect: isCorrect,
-        category: currentQuestion.category,
-      },
-    ]);
+    const answerRecord = {
+      question: currentQuestion.question,
+      selectedAnswer: selectedOption,
+      correctAnswer: Array.isArray(currentQuestion.correctAnswer)
+        ? currentQuestion.correctAnswer.join(' / ')
+        : currentQuestion.correctAnswer,
+      isCorrect,
+      category: currentQuestion.category,
+    };
 
-    if (currentQuestionIndex === shuffledQuestions.length - 1) {
-      finishQuiz();
+    setUserAnswers((prev) => [...prev, answerRecord]);
+    if (isCorrect) {
+      setScore((prev) => prev + 1);
+    }
+
+    if (currentQuestionIndex + 1 < questions.length) {
+      setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setGameState('completed');
     }
-  }, [currentQuestionIndex, finishQuiz, shuffledQuestions]);
+  };
 
-  const renderContent = () => {
-    switch (gameState) {
-      case 'welcome':
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
-      case 'rules':
-        return <RulesModal onAccept={handleAcceptRules} />;
-      case 'vocabulary':
-        return <VocabularyScreen onStartQuiz={startQuiz} />;
-      case 'quiz':
-        if (shuffledQuestions.length === 0) return null;
-        return (
+  const handleResumeRequest = () => {
+    setPauseCountdown(3);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-100 text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden flex flex-col justify-between p-4 sm:p-6 md:p-8">
+      {/* Background Orbs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className={`absolute top-0 left-1/4 w-[500px] h-[500px] ${FIXED_THEME.blob1} rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-pulse`} />
+        <div className={`absolute top-1/3 right-1/4 w-[400px] h-[400px] ${FIXED_THEME.blob2} rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-pulse delay-1000`} />
+        <div className={`absolute bottom-10 left-1/3 w-[450px] h-[450px] ${FIXED_THEME.blob3} rounded-full mix-blend-multiply filter blur-[120px] opacity-30 animate-pulse delay-700`} />
+      </div>
+
+      <div className="relative z-10 w-full max-w-4xl mx-auto flex-1 flex flex-col justify-center my-auto py-6">
+        {gameState === 'welcome' && (
+          <WelcomeScreen onNameSubmit={handleNameSubmit} />
+        )}
+
+        {gameState === 'rules' && (
+          <RulesModal onAccept={handleRulesAccept} />
+        )}
+
+        {gameState === 'vocabulary' && (
+          <VocabularyScreen onStartQuiz={startQuiz} />
+        )}
+
+        {gameState === 'quiz' && questions.length > 0 && (
           <QuizScreen
-            question={shuffledQuestions[currentQuestionIndex]}
+            question={questions[currentQuestionIndex]}
             questionNumber={currentQuestionIndex + 1}
-            totalQuestions={shuffledQuestions.length}
+            totalQuestions={questions.length}
             onAnswer={handleAnswer}
             timeLeft={timeLeft}
             isPaused={isPaused}
             theme={FIXED_THEME}
             studentName={studentName}
           />
-        );
-      case 'completed':
-        return (
-          <CompletionScreen 
-            name={studentName} 
-            score={score} 
-            totalQuestions={shuffledQuestions.length} 
-            userAnswers={userAnswers} 
+        )}
+
+        {gameState === 'completed' && (
+          <CompletionScreen
+            name={studentName}
+            score={score}
+            totalQuestions={questions.length}
+            userAnswers={userAnswers}
           />
-        );
-      default:
-        return <WelcomeScreen onNameSubmit={handleNameSubmit} />;
-    }
-  };
-
-  return (
-    <main className={`relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-50 overflow-x-hidden overflow-y-auto p-4 sm:p-6 font-sans`}>
-      {/* Soft Background Blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full blur-[100px] opacity-20 animate-blob ${FIXED_THEME.blob1}`}></div>
-        <div className={`absolute top-[20%] -right-[10%] w-[45%] h-[45%] rounded-full blur-[100px] opacity-20 animate-blob animation-delay-2000 ${FIXED_THEME.blob2}`}></div>
-        <div className={`absolute -bottom-[10%] left-[20%] w-[40%] h-[40%] rounded-full blur-[100px] opacity-20 animate-blob animation-delay-4000 ${FIXED_THEME.blob3}`}></div>
-      </div>
-      
-      <div className="z-10 w-full max-w-2xl flex items-center justify-center">
-        {renderContent()}
+        )}
       </div>
 
-      {isPaused && <PauseModal countdown={countdown} onResumeRequest={handleResumeRequest} />}
+      {isPaused && (
+        <PauseModal
+          countdown={pauseCountdown}
+          onResumeRequest={handleResumeRequest}
+        />
+      )}
 
-      <style>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob { animation: blob 7s infinite alternate; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
-        body { background-color: #f8fafc; }
-      `}</style>
-    </main>
+    </div>
   );
 }
+
+export default App;

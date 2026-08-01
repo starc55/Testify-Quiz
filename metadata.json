@@ -1,5 +1,6 @@
 {
-  "name": "Testify Quiz",
-  "description": "A visually stunning and interactive quiz application designed to test knowledge with a timed, animated interface. Features include a pre-quiz rules modal, one-by-one question display, and a sleek, modern UI with blur and gradient effects.",
-  "requestFramePermissions": []
+  "name": "EduLinguist - English Assessment & Self-Study Platform",
+  "description": "Savolini Advanced English Assessment Platform with 40 advanced C1/C2 level test questions, timer, auto-pause feature, and detailed answer analytics.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
